@@ -13,12 +13,13 @@ public enum NavigationActivity
 public class AnimalController : MonoBehaviour, IBehaviorTree
 {
     //--- PUBLIC INSPECTOR
-    public NavMeshAgent MyNavMesh;
+    protected NavMeshAgent MyNavMesh;
+    protected Animator animator;
     public Transform Target;
     public Transform player;
     public List<Transform> TargetsMove = new List<Transform>();
     public float rangerFollowPlayer;
-    public Animator animator;
+    
     //--- USING LOCAL
     public NodeBase BehaviorTree { get; set; }
     private Coroutine m_BehaviorTreeRoutine;
@@ -28,18 +29,27 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     //--- CONFIG CONTROLLER
     private ConfigAnimal configAnimal;
     public PointInteract pointInteract;
-    private void Start()
+    private void Awake()
     {
         //Get Component
+        animator = GetComponent<Animator>();
         MyNavMesh = GetComponent<NavMeshAgent>();
         configAnimal = GetComponent<ConfigAnimal>();
+        //set event
+        pointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger;
+        pointInteract.OnExitTrigger += PointInteract_OnExitTrigger;
+        //referene
+        configAnimal.animator = animator;
+        configAnimal.agent = MyNavMesh;
+    }
+    private void Start()
+    {
+       
        
 
         //Init Function
-            GenerateBehaviorTree();
-        pointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger;
-        pointInteract.OnExitTrigger += PointInteract_OnExitTrigger;
-
+        GenerateBehaviorTree();
+       
         //Other
         if (m_BehaviorTreeRoutine == null && BehaviorTree != null)
         {
@@ -47,10 +57,6 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         }
 
     }
-
-    
-
-
     #region SET UP NODE FOR BEHAVIOR TREE
     private void GenerateBehaviorTree()
     {
@@ -61,15 +67,15 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                 new CheckPointNode(configAnimal),
                 new Selector("MOVE",
                     new Sequence("CHECK ARRIVED",
-                        new GoToTargetNode(MyNavMesh, TargetsMove[0]),
-                            new AnimationNode(animator, "idle")),
-                    new AnimationNode(animator, "walk_forward"))),
+                        new GoToTargetNode(configAnimal, TargetsMove[2])
+                            ))),
+                    
 
         //MOVE TO PLAYER IF IN RANGE || GO AROUND 
             new Sequence("MOVE TO PLAYER",
                     new InRangeNode(rangerFollowPlayer, this, player),
-                    new GoToTargetNode(MyNavMesh, player)),
-            new GoAroundNode(TargetsMove, this));
+                    new GoToTargetNode(configAnimal, player)),
+            new GoAroundNode(TargetsMove, configAnimal));
 
 
 

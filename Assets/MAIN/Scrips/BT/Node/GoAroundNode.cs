@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.AI;
 using WUG.BehaviorTreeVisualizer;
@@ -10,20 +9,21 @@ public class GoAroundNode : Node
     //----parameter
     private List<Transform> targets;
     private AnimalController animalController;
+    private ConfigAnimal config;
     //----local
     protected NavMeshAgent agen;
     protected int indexTargets = 0;
     protected Transform transAnimal;
-    public GoAroundNode(List<Transform> targets, AnimalController animalController)
+    public GoAroundNode(List<Transform> targets, ConfigAnimal config)
     {
         this.targets = targets;
-        this.animalController = animalController;
+        this.config = config;
         Init();
     }
     protected void Init()
     {
-        transAnimal = animalController.gameObject.transform;
-        agen = animalController.MyNavMesh;
+        transAnimal = config.gameObject.transform;
+        agen = config.agent;
     }
 
     protected override void OnReset() { 
@@ -35,12 +35,14 @@ public class GoAroundNode : Node
         {
             return NodeStatus.Failure;
         }
+        Debug.Log(indexTargets);
         Transform target = targets[indexTargets];
         agen.SetDestination(targets[indexTargets].position);
+        config.animator.Play("Walk");
         float distance = Vector3.Distance(target.position, transAnimal.position);//distane from now - targets[i]
         if (distance <= agen.stoppingDistance)
         {
-            indexTargets++;
+            indexTargets++; 
             if (indexTargets >= targets.Count)
             {
                 indexTargets = 0;
