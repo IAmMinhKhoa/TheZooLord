@@ -38,7 +38,7 @@ public class GoAroundNode : Node
         Debug.Log(indexTargets);
         Transform target = targets[indexTargets];
         agen.SetDestination(targets[indexTargets].position);
-        config.animator.Play("Walk");
+        config.animator.SetBool("Walk", true);
         float distance = Vector3.Distance(target.position, transAnimal.position);//distane from now - targets[i]
         if (distance <= agen.stoppingDistance)
         {

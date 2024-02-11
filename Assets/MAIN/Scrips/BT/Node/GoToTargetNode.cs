@@ -25,12 +25,13 @@ public class GoToTargetNode : Node
         
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
-            config.animator.Play("Idle");
+            config.animator.SetBool("Walk", false) ;
             Debug.Log("Object has reached the destination.");
             return NodeStatus.Success;
         }
         else
         {
+            config.animator.SetBool("Walk", true);
             agent.SetDestination(target.position);
             return NodeStatus.Running;
         }
