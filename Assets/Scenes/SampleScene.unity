@@ -780,7 +780,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390275043448860}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.083444, y: 0.25082994, z: -2.9378593}
+  m_LocalPosition: {x: -5.78, y: 0.25082994, z: -4.07}
   m_LocalScale: {x: 2.5441592, y: 2.5441592, z: 2.5441592}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1943,7 +1943,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb857f545da8c49458ce32aa1370a56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyNavMesh: {fileID: 195741366755271844}
   Target: {fileID: 70374107}
   player: {fileID: 2151323170429566694}
   TargetsMove:
@@ -1951,7 +1950,6 @@ MonoBehaviour:
   - {fileID: 1852474382}
   - {fileID: 525050018}
   rangerFollowPlayer: 5
-  animator: {fileID: 95710899148266790}
   pointInteract: {fileID: 1541679601}
 --- !u!114 &195741366755271846
 MonoBehaviour:
@@ -1965,9 +1963,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a30bf1997ff6024bb0d89ffbcce912d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stateAnimal: 0
+  stateAnimal: 1
+  animator: {fileID: 0}
+  agent: {fileID: 0}
   foodIndex: 100
-  CanInteract: 0
+  CanInteract: 1
+  EatingAction: 0
 --- !u!4 &220391555385176941
 Transform:
   m_ObjectHideFlags: 0

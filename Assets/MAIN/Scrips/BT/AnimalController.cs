@@ -55,27 +55,36 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         {
             m_BehaviorTreeRoutine = StartCoroutine(RunBehaviorTree());
         }
-
+        ForceDrawingOfTree();
     }
     #region SET UP NODE FOR BEHAVIOR TREE
     private void GenerateBehaviorTree()
     {
+
+
         BehaviorTree = new Selector("ROOT ANIMAL",
 
-            // COMTO PLAYER -> IDLE ANIMATION
-            new Sequence("COME TO PLAYER",
-                new CheckPointNode(configAnimal),
-                new Selector("MOVE",
-                    new Sequence("CHECK ARRIVED",
-                        new GoToTargetNode(configAnimal, TargetsMove[2])
-                            ))),
-                    
+            
+            //GO TO TARGET WHEN PLAYER TOUCH POIN-INTERACT
+           /* new Sequence("GO TO TARGET INTERACT ",
+              *//*  new GoToTargetNode(configAnimal, TargetsMove[1]), //GO TO TARGET TO idle interact
+                //sau nay them 1 node active button "eat" (KHONG DUOC XOA DONG COMMENT NAY)*//*
+                new Sequence("DO EAT",
+                    new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Eat),//CHECK PLAYER CLICK FOR ANIMAL EAT
+                    new GoToTargetNode(configAnimal, TargetsMove[2]), //GO TO TARGET TO EAT
+                    new EatNode(configAnimal))
+                ),*/
+            //DO ACTION EAT
+            
 
-        //MOVE TO PLAYER IF IN RANGE || GO AROUND 
+            //MOVE TO PLAYER IF IN RANGE 
             new Sequence("MOVE TO PLAYER",
                     new InRangeNode(rangerFollowPlayer, this, player),
                     new GoToTargetNode(configAnimal, player)),
-            new GoAroundNode(TargetsMove, configAnimal));
+
+
+            //MOVE AROUND MAP
+            new GoAroundNode(TargetsMove, configAnimal)) ;
 
 
 

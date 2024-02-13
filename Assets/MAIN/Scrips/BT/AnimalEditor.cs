@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using WUG.BehaviorTreeVisualizer;
@@ -16,6 +17,8 @@ public class AnimalEditor : UnityEditor.Editor
         m_NPC = target as AnimalController;
 
         EditorApplication.update += RedrawView;
+
+       
     }
 
     void RedrawView()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97748ca66d1b7b3448e205f8a48a42e1, type: 3}
   m_Name: settings
   m_EditorClassIdentifier: 
-  DimLevel: 146.4
+  DimLevel: 153.2
   BorderHighlightColor: {r: 0, g: 1, b: 0, a: 1}
   EnableMiniMap: 0
   LastRunTimeStamp: 1
@@ -21,8 +21,8 @@ MonoBehaviour:
   FailureIcon: {fileID: 21300000, guid: a12f0f96f8cacf0408b24a9bb943d66b, type: 3}
   DefaultStyleProperties:
     Script: {fileID: 0}
-    TitleBarColor: {r: 1, g: 0.764541, b: 0, a: 1}
-    Icon: {fileID: 0}
+    TitleBarColor: {r: 0, g: 0.7565031, b: 1, a: 1}
+    Icon: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
     IsDecorator: 0
     InvertResult: 0
   MainStyleProperties: []

@@ -35,7 +35,7 @@ public class GoAroundNode : Node
         {
             return NodeStatus.Failure;
         }
-        Debug.Log(indexTargets);
+
         Transform target = targets[indexTargets];
         agen.SetDestination(targets[indexTargets].position);
         config.animator.SetBool("Walk", true);
