@@ -11,7 +11,7 @@ public class ConfigAnimal : MonoBehaviour
         Hungry, //foodIndex <100
         NotHungry, //foodIndex = 100
         Sleep,
-        Eat,
+        FeedAnimal,
 
 
 
