@@ -20,18 +20,15 @@ public class CheckPointNode : Node
 
     protected override NodeStatus OnRun()
     {
-        if (configAnimal.CanInteract)
-        {
-            Debug.Log(configAnimal.stateAnimal);
-            /*if (configAnimal.stateAnimal == compareStateAnimal)
-            {
-                return NodeStatus.Success;
-            }*/
+       /* if (configAnimal.CanInteract)
+        {*/
+            //Debug.Log(configAnimal.stateAnimal);
+           
             if (configAnimal.stateAnimal == compareStateAnimal)
             {
                 return NodeStatus.Success;
             }
-        }
+        //}
           
         
         return NodeStatus.Failure;

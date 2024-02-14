@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using WUG.BehaviorTreeVisualizer;
 using Node = WUG.BehaviorTreeVisualizer.Node;
 
-public enum NavigationActivity
-{
-    goToTarget
-}
+
 public class AnimalController : MonoBehaviour, IBehaviorTree
 {
     //--- PUBLIC INSPECTOR
@@ -19,6 +17,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     public Transform player;
     public List<Transform> TargetsMove = new List<Transform>();
     public float rangerFollowPlayer;
+    public GameObject objectStatus;
     
     //--- USING LOCAL
     public NodeBase BehaviorTree { get; set; }
@@ -53,7 +52,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         //Other
         if (m_BehaviorTreeRoutine == null && BehaviorTree != null)
         {
-            m_BehaviorTreeRoutine = StartCoroutine(RunBehaviorTree());
+            m_BehaviorTreeRoutine = StartCoroutine(RunBehaviorTree());  
         }
         ForceDrawingOfTree();
     }
@@ -61,26 +60,53 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     private void GenerateBehaviorTree()
     {
 
-
         BehaviorTree = new Selector("ROOT ANIMAL",
 
-            
-            //GO TO TARGET WHEN PLAYER TOUCH POIN-INTERACT
-           /* new Sequence("GO TO TARGET INTERACT ",
-              *//*  new GoToTargetNode(configAnimal, TargetsMove[1]), //GO TO TARGET TO idle interact
-                //sau nay them 1 node active button "eat" (KHONG DUOC XOA DONG COMMENT NAY)*//*
-                new Sequence("DO EAT",
-                    new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Eat),//CHECK PLAYER CLICK FOR ANIMAL EAT
-                    new GoToTargetNode(configAnimal, TargetsMove[2]), //GO TO TARGET TO EAT
-                    new EatNode(configAnimal))
-                ),*/
+
+
+
+
+            //CHECK BEHAVIOR WHEN INTERACT ANIMAL (EAT)
+
+
+
+            new Sequence("CHECK STATUS EAT INTERACT",
+                new CheckInteractNode(configAnimal),
+                new Selector("CHECK STATUS",
+                    new Sequence("CHECK STATUS NO HUNGRY",
+
+                        new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.NotHungry),
+                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.NotHungry, 2f, objectStatus),
+                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
+
+                    new Sequence("CHECK STATUS HUNGRY",
+
+                        new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
+                        new GoToTargetNode(configAnimal, TargetsMove[2]),
+                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 2f, objectStatus),
+                        new EatNode(configAnimal),
+                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)
+                ))),
+
+
+             new Sequence("ANIMAL HUNGRING",
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
+                new GoToTargetNode(configAnimal, TargetsMove[2]),
+                new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 3f, objectStatus)),
             //DO ACTION EAT
-            
+
+            /* new Sequence("DO EAT",
+                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),//CHECK PLAYER CLICK FOR ANIMAL EAT
+                 new GoToTargetNode(configAnimal, TargetsMove[2]), //GO TO TARGET TO EAT
+                 new EatNode(configAnimal) //DO STATE EAT
+             ),*/
+
+
 
             //MOVE TO PLAYER IF IN RANGE 
-            new Sequence("MOVE TO PLAYER",
+            /*new Sequence("MOVE TO PLAYER",
                     new InRangeNode(rangerFollowPlayer, this, player),
-                    new GoToTargetNode(configAnimal, player)),
+                    new GoToTargetNode(configAnimal, player)),*/
 
 
             //MOVE AROUND MAP

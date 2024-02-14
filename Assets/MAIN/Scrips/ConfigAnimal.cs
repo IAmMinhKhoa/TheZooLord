@@ -8,7 +8,9 @@ public class ConfigAnimal : MonoBehaviour
     #region ENUM
     public enum STATE_ANIMAL
     {
-        PoinInteract,
+        Hungry, //foodIndex <100
+        NotHungry, //foodIndex = 100
+        Sleep,
         Eat,
 
 
@@ -28,7 +30,7 @@ public class ConfigAnimal : MonoBehaviour
 
     #region BOOLEAN
     public bool CanInteract = false;
-    public bool EatingAction = false;
+    public bool EatAction = false;
     #endregion
 
 

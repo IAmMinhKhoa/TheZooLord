@@ -11,7 +11,6 @@ public class EatNode : Node
     private ConfigAnimal config;
     private enum EatState
     {
-
         Emoji_EAT,
         Emoji_NOTEAT,
         
@@ -26,13 +25,13 @@ public class EatNode : Node
     }
 
     protected override void OnReset()
-    {
-    }
+    {    }
 
     protected override NodeStatus OnRun()
     {
+        Debug.Log("logic eat");
         /*NEU CHI SO DOI >=100 THI CHI SHOW EMOJI NOT EAT
-         NGUOC LAI NEU <100 THI THUC HIEN QUY TRINH : ANIMATION EAT-> EMOJI_EAT*/
+         NGUOC LAI NEU <100 THI THUC HIEN QUY TRINH : ANIMATION EAT-> EMOJI_EAT*//*
         if (eatState!= EatState.Nothing)
         {
             if (config.foodIndex >= 100)
@@ -41,9 +40,7 @@ public class EatNode : Node
                 config.foodIndex = 100;
             }
             else
-            {
                 eatState = EatState.Emoji_EAT;
-            }
         }
 
         switch (eatState)
@@ -64,7 +61,7 @@ public class EatNode : Node
            
             default:
                 break;
-        }
+        }*/
         return NodeStatus.Success;
     }
 }

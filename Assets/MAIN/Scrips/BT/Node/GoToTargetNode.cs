@@ -40,7 +40,7 @@ public class GoToTargetNode : Node
         else if (distance <= agent.stoppingDistance)
         {
             config.animator.SetBool("Walk", false);
-            Debug.Log("Object has reached the destination.");
+            //Debug.Log("Object has reached the destination.");
             status = NodeStatus.Success;
         }
         else
