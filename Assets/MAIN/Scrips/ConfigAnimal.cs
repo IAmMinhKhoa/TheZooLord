@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ConfigAnimal : MonoBehaviour
 {
@@ -13,9 +14,6 @@ public class ConfigAnimal : MonoBehaviour
         Sleep,
         FeedAnimal,
 
-
-
-
         Other
     }
     public STATE_ANIMAL stateAnimal;
@@ -25,13 +23,47 @@ public class ConfigAnimal : MonoBehaviour
     public NavMeshAgent agent;
     #endregion
     #region PARAMETER OF ANIMAL
-    public int foodIndex = 100;
-    #endregion
+    public int FoodIndex=90;
+    public int foodIndex
+    {
+        get { return FoodIndex; }
+        set
+        {
+            if (value > 100) FoodIndex = 100;
+            else FoodIndex = value;
 
+           // if (value > 50 || value <= 100) stateAnimal = STATE_ANIMAL.NotHungry;
+           // else stateAnimal = STATE_ANIMAL.Hungry  ;
+        }
+    }
+    #endregion
     #region BOOLEAN
     public bool CanInteract = false;
-    public bool EatAction = false;
     #endregion
+
+    public STATE_ANIMAL getStateAnimal()
+    {
+        if(foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
+        else return stateAnimal = STATE_ANIMAL.Hungry;
+    }
+    #region LIFE CYCLE GAMEOBJECT
+
+    private void Start()
+    {
+        foodIndex = 90;
+    }
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -22,7 +22,7 @@ public class ShowStatusNode : Node
 
 
         _textMeshPro = GetText(this.showStatus);
-        Debug.Log(_textMeshPro);
+      //  Debug.Log(_textMeshPro);
         DefaultTimeDelay = timeDelay;
         
     }
@@ -34,7 +34,7 @@ public class ShowStatusNode : Node
 
     protected override NodeStatus OnRun()
     {
-        Debug.Log(timeDelay);
+      //  Debug.Log(timeDelay);
         if (timeDelay > 0)
         {
             timeDelay -= Time.deltaTime*5;

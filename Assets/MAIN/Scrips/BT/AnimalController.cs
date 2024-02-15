@@ -16,6 +16,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     protected Animator animator;
     public Transform Target;
     public Transform player;
+    public Transform foodStorage;
     public List<Transform> TargetsMove = new List<Transform>();
     public float rangerFollowPlayer;
     public GameObject objectStatus;
@@ -58,6 +59,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
 
     private void Update()
     {
+        //show state ra text cho de xem thoi
         switch (configAnimal.stateAnimal)
         {
             case ConfigAnimal.STATE_ANIMAL.Hungry:
@@ -97,9 +99,9 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                     new Sequence("CHECK STATUS PLAYER FEED ANIMAL",
 
                         new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal),
-                        new GoToTargetNode(configAnimal, TargetsMove[2]),
+                        new GoToTargetNode(configAnimal, foodStorage),
                         new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
-                        new EatNode(configAnimal),
+                        new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)
                 ))),
 

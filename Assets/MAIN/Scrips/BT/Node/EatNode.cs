@@ -9,18 +9,19 @@ using WUG.BehaviorTreeVisualizer;
 public class EatNode : Node
 {
     private ConfigAnimal config;
+    private Transform foodStorage;
     private enum EatState
     {
-        Emoji_EAT,
-        Emoji_NOTEAT,
-        
-        Nothing
+       AnimationEat,
+       LogicValue,
+
     }
     private EatState eatState;
 
-    public EatNode(ConfigAnimal config)
+    public EatNode(ConfigAnimal config, Transform foodStorage)
     {
         this.config = config;
+        this.foodStorage = foodStorage;
         //eatState = EatState.AnimationEat;
     }
 
@@ -29,39 +30,14 @@ public class EatNode : Node
 
     protected override NodeStatus OnRun()
     {
-        Debug.Log("logic eat");
-        /*NEU CHI SO DOI >=100 THI CHI SHOW EMOJI NOT EAT
-         NGUOC LAI NEU <100 THI THUC HIEN QUY TRINH : ANIMATION EAT-> EMOJI_EAT*//*
-        if (eatState!= EatState.Nothing)
-        {
-            if (config.foodIndex >= 100)
-            {
-                eatState = EatState.Emoji_NOTEAT;
-                config.foodIndex = 100;
-            }
-            else
-                eatState = EatState.Emoji_EAT;
-        }
+        Debug.Log("t---------------Start logic eat---------------");
 
-        switch (eatState)
-        {
-          
-            case EatState.Emoji_EAT:
-                Debug.Log("Show ANIMATION EAT");
-                Debug.Log("Show Emoji EAT");
-                config.foodIndex += 10;
-                eatState = EatState.Nothing;
-                return NodeStatus.Success;
+        Debug.Log("ANIMATION EAT");
 
-            //CASE ANIMAL FULL FOODINDEX (DONG VAT KHONG CO DOI)
-            case EatState.Emoji_NOTEAT:
-                Debug.Log("Show Emoji NOT EAT");
-                eatState = EatState.Nothing;
-                return NodeStatus.Success;
-           
-            default:
-                break;
-        }*/
+        config.foodIndex += 10; //add value eat (max =100)
+
+        Debug.Log("t---------------End logic eat---------------");
+
         return NodeStatus.Success;
     }
 }

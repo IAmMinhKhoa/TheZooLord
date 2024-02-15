@@ -12,6 +12,8 @@ public class Interactor : MonoBehaviour
     private readonly Collider[] _collider = new Collider[3];
     [SerializeField] private int _numFound;
 
+    //[HideInInspector]
+    public ConfigAnimal configAnimal;
 
     private void Update()
     {
@@ -28,6 +30,20 @@ public class Interactor : MonoBehaviour
         }
     }
 
+    //function set in button interact when feed for animal
+    public void FeedAnimalInteract()
+    {
+        if (configAnimal != null)
+        {
+            //check value food, if hungry -> state.FEEDANIMAL else noHungry->default state
+            if (configAnimal.getStateAnimal()==ConfigAnimal.STATE_ANIMAL.Hungry) configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.FeedAnimal;
+            else if (configAnimal.getStateAnimal() == ConfigAnimal.STATE_ANIMAL.NotHungry) configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.NotHungry;
+
+        }
+        else Debug.Log("Null : " + configAnimal);   
+
+
+    }
 
     private void OnDrawGizmos()
     {
