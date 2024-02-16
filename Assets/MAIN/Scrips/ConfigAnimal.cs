@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.UI;
 using static UnityEngine.Rendering.DebugUI;
 
-public class ConfigAnimal : MonoBehaviour
+public class ConfigAnimal :  MonoBehaviour
 {
     #region ENUM
     public enum STATE_ANIMAL
@@ -39,8 +40,13 @@ public class ConfigAnimal : MonoBehaviour
     #endregion
     #region BOOLEAN
     public bool CanInteract = false;
-    #endregion
 
+    #endregion
+    private void Update()
+    {
+        if(foodIndex<50 && stateAnimal!= STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
+
+    }
     public STATE_ANIMAL getStateAnimal()
     {
         if(foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
@@ -51,7 +57,16 @@ public class ConfigAnimal : MonoBehaviour
     private void Start()
     {
         foodIndex = 90;
+        ZooManager.SetStateDayNight += ZooManager_SetStateDayNight;
     }
+
+    private void ZooManager_SetStateDayNight(bool day)
+    {
+        if (!day) stateAnimal = STATE_ANIMAL.Sleep;
+        else stateAnimal = STATE_ANIMAL.Other;
+    }
+
+
     #endregion
 
 

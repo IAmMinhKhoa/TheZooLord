@@ -90,11 +90,11 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
             new Sequence("CHECK STATUS WHEN PLAYER INTERACT",
                 new CheckInteractNode(configAnimal),
                 new Selector("CHECK STATUS",
-                    new Sequence("CHECK STATUS NO HUNGRY",
+                   /* new Sequence("CHECK STATUS NO HUNGRY",
 
                         new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.NotHungry),
                         new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.NotHungry, 2f, objectStatus),
-                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
+                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),*/
 
                     new Sequence("CHECK STATUS PLAYER FEED ANIMAL",
 
@@ -109,7 +109,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
              new Sequence("ANIMAL ARE HUNGRY",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
                 new GoToTargetNode(configAnimal, TargetsMove[2]),
-                new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 3f, objectStatus)),
+                new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 0.5f, objectStatus)),
 
 
               new Sequence("ANIMAL ARE SLEEP",
