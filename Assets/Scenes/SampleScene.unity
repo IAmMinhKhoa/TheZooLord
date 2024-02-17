@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 552170327}
   - component: {fileID: 552170326}
   - component: {fileID: 552170325}
+  - component: {fileID: 552170328}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -428,8 +429,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552170323}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.37, y: 0.59, z: 13.65}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 10.9954, y: 0.0434, z: 14.8816}
+  m_LocalScale: {x: 4.251003, y: 0.4534, z: 3.46314}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1200034391}
@@ -499,6 +500,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552170323}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &552170328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552170323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b10ed8f0a0aff445804e21acef10197, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Foods:
+  - {fileID: 525050017}
 --- !u!1 &680354887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1812,7 +1827,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DAY: 1
-  TimeLoop: 20
+  TimeLoopDayNight: 5
 --- !u!4 &1907950730
 Transform:
   m_ObjectHideFlags: 0
@@ -3094,7 +3109,7 @@ MonoBehaviour:
   stateAnimal: 4
   animator: {fileID: 0}
   agent: {fileID: 0}
-  FoodIndex: 100
+  FoodIndex: 10
   CanInteract: 0
 --- !u!4 &220391555385176941
 Transform:

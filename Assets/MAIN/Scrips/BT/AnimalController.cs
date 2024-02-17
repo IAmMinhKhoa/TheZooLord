@@ -86,36 +86,59 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     {
 
         BehaviorTree = new Selector("ROOT ANIMAL",
-            //CHECK BEHAVIOR WHEN INTERACT ANIMAL (EAT)
-            new Sequence("CHECK STATUS WHEN PLAYER INTERACT",
-                new CheckInteractNode(configAnimal),
-                new Selector("CHECK STATUS",
-                   /* new Sequence("CHECK STATUS NO HUNGRY",
 
-                        new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.NotHungry),
-                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.NotHungry, 2f, objectStatus),
-                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),*/
-
-                    new Sequence("CHECK STATUS PLAYER FEED ANIMAL",
-
-                        new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal),
-                        new GoToTargetNode(configAnimal, foodStorage),
-                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
-                        new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
-                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)
-                ))),
-
-
-             new Sequence("ANIMAL ARE HUNGRY",
-                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
-                new GoToTargetNode(configAnimal, TargetsMove[2]),
-                new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 0.5f, objectStatus)),
-
-
-              new Sequence("ANIMAL ARE SLEEP",
+             new Sequence("ANIMAL ARE SLEEP",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep),
                 new GoToTargetNode(configAnimal, TargetsMove[0]),
                 new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Sleep, 3f, objectStatus)),
+
+
+
+
+
+              //CHECK BEHAVIOR WHEN INTERACT ANIMAL (EAT)
+              /* new Sequence("CHECK STATUS WHEN PLAYER INTERACT",
+                   new CheckInteractNode(configAnimal),
+                   new Selector("CHECK STATUS",
+                       new Sequence("CHECK STATUS NO HUNGRY",
+
+                           new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.NotHungry),
+                           new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.NotHungry, 2f, objectStatus),
+                           new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
+
+                       new Sequence("CHECK STATUS PLAYER FEED ANIMAL",
+
+                           new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal),
+                           new GoToTargetNode(configAnimal, foodStorage),
+                           new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
+                           new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
+                           new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)
+                   ))),*/
+
+
+              new Sequence("SEQUENCE WHEN HUNGRY OF ANIMAL",
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
+
+                new Selector("SELECTOR IF HAVE FOOD IN STORAGE OR NOT",
+
+                    new Sequence("ANIMAL HUNGRY AND HAVE FOOD IN STORAGE",
+                        new StatusFoodStorge(foodStorage.GetComponent<FoodStorage>()),
+                        new GoToTargetNode(configAnimal, foodStorage),
+                        new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
+                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
+                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
+
+                    new Sequence("ANIMAL HUNGRY AND NOT HAVE FOOD",
+                        new GoToTargetNode(configAnimal, TargetsMove[2]),
+                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 0.5f, objectStatus))
+                   )
+              ),
+
+
+
+               
+
+
             //DO ACTION EAT
 
             /* new Sequence("DO EAT",
