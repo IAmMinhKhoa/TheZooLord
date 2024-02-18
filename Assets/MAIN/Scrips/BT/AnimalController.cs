@@ -14,7 +14,6 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     //--- PUBLIC INSPECTOR
     protected NavMeshAgent MyNavMesh;
     protected Animator animator;
-    public Transform Target;
     public Transform player;
     public Transform foodStorage;
     public List<Transform> TargetsMove = new List<Transform>();
