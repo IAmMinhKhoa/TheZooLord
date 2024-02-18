@@ -22,6 +22,7 @@ public class ConfigAnimal :  MonoBehaviour
     #region COMPONENTS CONTROL
     public Animator animator;
     public NavMeshAgent agent;
+    public FoodStorage foodStorage;
     #endregion
     #region PARAMETER OF ANIMAL
     public int FoodIndex=90;

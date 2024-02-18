@@ -31,18 +31,18 @@ public class Interactor : MonoBehaviour
     }
 
     //function set in button interact when feed for animal
-    public void FeedAnimalInteract()
+    public void FeedAnimalInteract(string index)
     {
         if (configAnimal != null)
         {
-            //check value food, if hungry -> state.FEEDANIMAL else noHungry->default state
-            if (configAnimal.getStateAnimal()==ConfigAnimal.STATE_ANIMAL.Hungry) configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.FeedAnimal;
-            else if (configAnimal.getStateAnimal() == ConfigAnimal.STATE_ANIMAL.NotHungry) configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.NotHungry;
-
+            int parsedIndex;
+            if (int.TryParse(index, out parsedIndex)) configAnimal.foodStorage.SpamwnFood(parsedIndex);
+            else  Debug.Log("Invalid index: " + index);
         }
-        else Debug.Log("Null : " + configAnimal);   
-
-
+        else
+        {
+            Debug.Log("Null: " + configAnimal);
+        }
     }
 
     private void OnDrawGizmos()

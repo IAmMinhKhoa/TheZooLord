@@ -43,6 +43,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         //referene
         configAnimal.animator = animator;
         configAnimal.agent = MyNavMesh;
+        configAnimal.foodStorage = foodStorage.GetComponent<FoodStorage>();
     }
     private void Start()
     {
@@ -93,36 +94,13 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                 new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Sleep, 3f, objectStatus)),
 
 
-
-
-
-              //CHECK BEHAVIOR WHEN INTERACT ANIMAL (EAT)
-              /* new Sequence("CHECK STATUS WHEN PLAYER INTERACT",
-                   new CheckInteractNode(configAnimal),
-                   new Selector("CHECK STATUS",
-                       new Sequence("CHECK STATUS NO HUNGRY",
-
-                           new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.NotHungry),
-                           new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.NotHungry, 2f, objectStatus),
-                           new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
-
-                       new Sequence("CHECK STATUS PLAYER FEED ANIMAL",
-
-                           new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal),
-                           new GoToTargetNode(configAnimal, foodStorage),
-                           new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
-                           new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
-                           new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)
-                   ))),*/
-
-
               new Sequence("SEQUENCE WHEN HUNGRY OF ANIMAL",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
 
                 new Selector("SELECTOR IF HAVE FOOD IN STORAGE OR NOT",
 
                     new Sequence("ANIMAL HUNGRY AND HAVE FOOD IN STORAGE",
-                        new StatusFoodStorge(foodStorage.GetComponent<FoodStorage>()),
+                        new StatusFoodStorge(configAnimal), //CHECK IN FOOD  STORAGE ? NULL
                         new GoToTargetNode(configAnimal, foodStorage),
                         new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
                         new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
@@ -133,26 +111,6 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                         new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 0.5f, objectStatus))
                    )
               ),
-
-
-
-               
-
-
-            //DO ACTION EAT
-
-            /* new Sequence("DO EAT",
-                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),//CHECK PLAYER CLICK FOR ANIMAL EAT
-                 new GoToTargetNode(configAnimal, TargetsMove[2]), //GO TO TARGET TO EAT
-                 new EatNode(configAnimal) //DO STATE EAT
-             ),*/
-
-
-
-            //MOVE TO PLAYER IF IN RANGE 
-            /*new Sequence("MOVE TO PLAYER",
-                    new InRangeNode(rangerFollowPlayer, this, player),
-                    new GoToTargetNode(configAnimal, player)),*/
 
 
             //MOVE AROUND MAP

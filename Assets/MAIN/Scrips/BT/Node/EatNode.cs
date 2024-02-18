@@ -34,6 +34,7 @@ public class EatNode : Node
 
         Debug.Log("ANIMATION EAT");
 
+        config.foodStorage.ReduceFood(1);
         config.foodIndex += 10; //add value eat (max =100)
 
         Debug.Log("t---------------End logic eat---------------");

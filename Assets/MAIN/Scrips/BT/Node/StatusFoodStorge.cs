@@ -4,13 +4,16 @@ using UnityEngine;
 using WUG.BehaviorTreeVisualizer;
 
 public class StatusFoodStorge : Node
-
 {
+    private ConfigAnimal config;
     private FoodStorage foodStorage;
 
-    public StatusFoodStorge(FoodStorage foodStorage)
+    public StatusFoodStorge(ConfigAnimal config)
     {
-        this.foodStorage = foodStorage;
+        this.config = config;
+
+        //set reference
+        this.foodStorage = config.foodStorage;
     }
 
     protected override void OnReset()
