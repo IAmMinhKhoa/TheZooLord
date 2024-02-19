@@ -20,12 +20,12 @@ public class ConfigAnimal :  MonoBehaviour
     public STATE_ANIMAL stateAnimal;
     #endregion
     #region COMPONENTS CONTROL
-    public Animator animator;
-    public NavMeshAgent agent;
-    public FoodStorage foodStorage;
+    [HideInInspector] public Animator animator;
+    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public FoodStorage foodStorage;
     #endregion
     #region PARAMETER OF ANIMAL
-    public int FoodIndex=90;
+    public int FoodIndex;
     public int foodIndex
     {
         get { return FoodIndex; }
@@ -33,32 +33,28 @@ public class ConfigAnimal :  MonoBehaviour
         {
             if (value > 100) FoodIndex = 100;
             else FoodIndex = value;
-
-           // if (value > 50 || value <= 100) stateAnimal = STATE_ANIMAL.NotHungry;
-           // else stateAnimal = STATE_ANIMAL.Hungry  ;
         }
     }
+    public float rangerInteractWithAnimal;
+    public LayerMask layerAnimalInteract;
     #endregion
     #region BOOLEAN
     public bool CanInteract = false;
 
     #endregion
-    private void Update()
-    {
-        if(foodIndex<50 && stateAnimal!= STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
+    #region List
+    public List<GameObject> AnimalInRange = new List<GameObject>();
+    #endregion
 
-    }
-    public STATE_ANIMAL getStateAnimal()
-    {
-        if(foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
-        else return stateAnimal = STATE_ANIMAL.Hungry;
-    }
-    #region LIFE CYCLE GAMEOBJECT
-
+    #region LIFE CYCLE & FUNCTION
     private void Start()
     {
-        foodIndex = 90;
         ZooManager.SetStateDayNight += ZooManager_SetStateDayNight;
+    }
+    private void Update()
+    {
+        if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
+        CheckInRangeAnimals(layerAnimalInteract);
     }
 
     private void ZooManager_SetStateDayNight(bool day)
@@ -66,12 +62,30 @@ public class ConfigAnimal :  MonoBehaviour
         if (!day) stateAnimal = STATE_ANIMAL.Sleep;
         else stateAnimal = STATE_ANIMAL.Other;
     }
+    public STATE_ANIMAL getStateAnimal()
+    {
+        if (foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
+        else return stateAnimal = STATE_ANIMAL.Hungry;
+    }
+    private void CheckInRangeAnimals(LayerMask layerAnimal)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, rangerInteractWithAnimal, layerAnimal);
 
-
+        foreach (Collider collider in hitColliders)
+        {
+            AnimalInRange.Add(collider.gameObject);
+        }
+    }
     #endregion
 
 
-
+    #region DrawRanger
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, rangerInteractWithAnimal); //Gizmos ranger
+    }
+    #endregion
 
 
 

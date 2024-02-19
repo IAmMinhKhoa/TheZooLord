@@ -17,7 +17,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     public Transform player;
     public Transform foodStorage;
     public List<Transform> TargetsMove = new List<Transform>();
-    public float rangerFollowPlayer;
+    
     public GameObject objectStatus;
 
     public TextMeshProUGUI _textNotiLogger;
@@ -160,13 +160,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     }
     #endregion
 
-    #region DrawRanger
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, rangerFollowPlayer);
-    }
-    #endregion
+  
 
     #region Template
     #endregion
