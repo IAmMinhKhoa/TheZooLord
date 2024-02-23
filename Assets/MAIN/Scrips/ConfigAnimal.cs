@@ -14,7 +14,7 @@ public class ConfigAnimal :  MonoBehaviour
         NotHungry, //foodIndex = 100
         Sleep,
         FeedAnimal,
-
+        Meeting,
         Other
     }
     public STATE_ANIMAL stateAnimal;
@@ -69,11 +69,15 @@ public class ConfigAnimal :  MonoBehaviour
     }
     private void CheckInRangeAnimals(LayerMask layerAnimal)
     {
+        if (AnimalInRange.Count > 0) return;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, rangerInteractWithAnimal, layerAnimal);
-
+        stateAnimal= STATE_ANIMAL.Meeting;
         foreach (Collider collider in hitColliders)
         {
-            AnimalInRange.Add(collider.gameObject);
+            if (collider.gameObject != gameObject)
+            {
+                AnimalInRange.Add(collider.gameObject);
+            }
         }
     }
     #endregion

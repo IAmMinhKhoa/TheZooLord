@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Disguise.Behaviors.Decorators;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -90,7 +91,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
              new Sequence("ANIMAL ARE SLEEP",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep),
                 new GoToTargetNode(configAnimal, TargetsMove[0]),
-                new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Sleep, 3f, objectStatus)),
+               new Timer(2f, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus))),
 
 
               new Sequence("SEQUENCE WHEN HUNGRY OF ANIMAL",
@@ -102,15 +103,20 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                         new StatusFoodStorge(configAnimal), //CHECK IN FOOD  STORAGE ? NULL
                         new GoToTargetNode(configAnimal, foodStorage),
                         new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
-                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.FeedAnimal, 2f, objectStatus),
+                        new Timer(3, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.FeedAnimal, objectStatus)),
                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
 
                     new Sequence("ANIMAL HUNGRY AND NOT HAVE FOOD",
                         new GoToTargetNode(configAnimal, TargetsMove[2]),
-                        new ShowStatusNode(ConfigAnimal.STATE_ANIMAL.Hungry, 0.5f, objectStatus))
+                        new Timer(2, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus)))
                    )
               ),
 
+              new Sequence("MEETING OTHER ANIMAL",
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? NULL
+                new Delay(5f,new Sequence("MEETING OTHER ANIMAL",
+                         new Timer(1, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
+                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)))),
 
             //MOVE AROUND MAP
             new GoAroundNode(TargetsMove, configAnimal)) ;
