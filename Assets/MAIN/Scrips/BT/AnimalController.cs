@@ -15,7 +15,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     //--- PUBLIC INSPECTOR
     protected NavMeshAgent MyNavMesh;
     protected Animator animator;
-    public Transform player;
+    public Transform otherAnimal;
     public Transform foodStorage;
     public List<Transform> TargetsMove = new List<Transform>();
     
@@ -113,10 +113,11 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
               ),
 
               new Sequence("MEETING OTHER ANIMAL",
-                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? NULL
-                new Delay(5f,new Sequence("MEETING OTHER ANIMAL",
+                new InRangeNode(configAnimal,otherAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? NULL
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting),
+                new Sequence("MEETING OTHER ANIMAL",
                          new Timer(1, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
-                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)))),
+                         new Timer(3f, new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)))),
 
             //MOVE AROUND MAP
             new GoAroundNode(TargetsMove, configAnimal)) ;

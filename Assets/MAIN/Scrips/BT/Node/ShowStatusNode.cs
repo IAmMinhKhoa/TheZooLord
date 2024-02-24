@@ -55,7 +55,6 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "MEETING";
-            config.AnimalInRange.Clear();
         }
         return NodeStatus.Running;
         

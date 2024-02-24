@@ -10,12 +10,13 @@ public class ConfigAnimal :  MonoBehaviour
     #region ENUM
     public enum STATE_ANIMAL
     {
+        Other,
         Hungry, //foodIndex <100
         NotHungry, //foodIndex = 100
         Sleep,
         FeedAnimal,
-        Meeting,
-        Other
+        Meeting
+        
     }
     public STATE_ANIMAL stateAnimal;
     #endregion
@@ -43,7 +44,7 @@ public class ConfigAnimal :  MonoBehaviour
 
     #endregion
     #region List
-    public List<GameObject> AnimalInRange = new List<GameObject>();
+
     #endregion
 
     #region LIFE CYCLE & FUNCTION
@@ -54,7 +55,7 @@ public class ConfigAnimal :  MonoBehaviour
     private void Update()
     {
         if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
-        CheckInRangeAnimals(layerAnimalInteract);
+
     }
 
     private void ZooManager_SetStateDayNight(bool day)
@@ -67,19 +68,7 @@ public class ConfigAnimal :  MonoBehaviour
         if (foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
         else return stateAnimal = STATE_ANIMAL.Hungry;
     }
-    private void CheckInRangeAnimals(LayerMask layerAnimal)
-    {
-        if (AnimalInRange.Count > 0) return;
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, rangerInteractWithAnimal, layerAnimal);
-        stateAnimal= STATE_ANIMAL.Meeting;
-        foreach (Collider collider in hitColliders)
-        {
-            if (collider.gameObject != gameObject)
-            {
-                AnimalInRange.Add(collider.gameObject);
-            }
-        }
-    }
+
     #endregion
 
 
