@@ -113,11 +113,15 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
               ),
 
               new Sequence("MEETING OTHER ANIMAL",
+                new MeetingNode(configAnimal,otherAnimal),
                 new InRangeNode(configAnimal,otherAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? NULL
-                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting),
+               // new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting),
+                new GoToTargetNode(configAnimal, otherAnimal),
                 new Sequence("MEETING OTHER ANIMAL",
-                         new Timer(1, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
-                         new Timer(3f, new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)))),
+                         new Timer(3f, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
+                        // new Timer(3f, new GoAroundNode(TargetsMove, configAnimal)),
+                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other))),
+
 
             //MOVE AROUND MAP
             new GoAroundNode(TargetsMove, configAnimal)) ;

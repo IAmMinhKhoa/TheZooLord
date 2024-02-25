@@ -23,6 +23,7 @@ public class ShowStatusNode : Node
 
     protected override void OnReset()
     {
+        showStatus.SetActive(false);
     }
 
     protected override NodeStatus OnRun()
@@ -55,8 +56,9 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "MEETING";
+            config.CanMeeting = false;
         }
-        return NodeStatus.Running;
+        return NodeStatus.Success;
         
     }
 

@@ -41,7 +41,7 @@ public class ConfigAnimal :  MonoBehaviour
     #endregion
     #region BOOLEAN
     public bool CanInteract = false;
-
+    public bool CanMeeting=true;
     #endregion
     #region List
 
