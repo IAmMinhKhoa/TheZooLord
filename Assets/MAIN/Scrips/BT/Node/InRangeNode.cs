@@ -24,10 +24,8 @@ public class InRangeNode : Node
     {
         Vector3 tempTarget = new Vector3(target.position.x, target.gameObject.transform.position.y, target.position.z);
         float distance = Vector3.Distance(tempTarget, config.transform.position);
-        Debug.Log("distance"+target+":"+ distance);
         if (distance<= config.rangerInteractWithAnimal)
         {
-            Debug.Log("da vao area");
             config.stateAnimal = setState;
             return NodeStatus.Success;
         }

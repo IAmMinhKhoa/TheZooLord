@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,9 @@ public class ConfigAnimal :  MonoBehaviour
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public FoodStorage foodStorage;
     #endregion
+    #region ACTION
+    public event Action OnHandleCoolDown;
+    #endregion
     #region PARAMETER OF ANIMAL
     public int FoodIndex;
     public int foodIndex
@@ -36,7 +40,10 @@ public class ConfigAnimal :  MonoBehaviour
             else FoodIndex = value;
         }
     }
+
+
     public float rangerInteractWithAnimal;
+    public int TimeCDMeeting;
     public LayerMask layerAnimalInteract;
     #endregion
     #region BOOLEAN
@@ -51,11 +58,22 @@ public class ConfigAnimal :  MonoBehaviour
     private void Start()
     {
         ZooManager.SetStateDayNight += ZooManager_SetStateDayNight;
+        OnHandleCoolDown += ConfigAnimal_OnHandleCoolDown;
     }
+
+    private void ConfigAnimal_OnHandleCoolDown()
+    {
+        StartCoroutine(CDToTime(TimeCDMeeting, !CanMeeting));
+    }
+    public void CallEventOnHandleCoolDown()
+    {
+        OnHandleCoolDown?.Invoke();
+    }
+
     private void Update()
     {
         if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
-
+       
     }
 
     private void ZooManager_SetStateDayNight(bool day)
@@ -68,7 +86,11 @@ public class ConfigAnimal :  MonoBehaviour
         if (foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
         else return stateAnimal = STATE_ANIMAL.Hungry;
     }
-
+   protected IEnumerator CDToTime(int timeCD,bool setBool)
+    {
+        yield return new WaitForSeconds(timeCD);
+        CanMeeting = setBool;
+    }
     #endregion
 
 

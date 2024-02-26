@@ -57,6 +57,7 @@ public class ShowStatusNode : Node
             showStatus.SetActive(true);
             _textMeshPro.text = "MEETING";
             config.CanMeeting = false;
+            config.CallEventOnHandleCoolDown();
         }
         return NodeStatus.Success;
         
