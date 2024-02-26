@@ -34,8 +34,6 @@ public class GoToTargetNode : Node
             config.animator.SetBool("Walk", true);
             agent.SetDestination(target.position);
             status = NodeStatus.Running;
-
-           
         }
         else if (distance <= agent.stoppingDistance)
         {
