@@ -78,8 +78,10 @@ public class ConfigAnimal :  MonoBehaviour
 
     private void ZooManager_SetStateDayNight(bool day)
     {
+
         if (!day) stateAnimal = STATE_ANIMAL.Sleep;
         else stateAnimal = STATE_ANIMAL.Other;
+        Debug.Log("kh"+stateAnimal);
     }
     public STATE_ANIMAL getStateAnimal()
     {

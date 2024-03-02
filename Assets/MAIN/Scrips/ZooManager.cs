@@ -18,13 +18,13 @@ public class ZooManager : MonoBehaviour
     }
     private void Update()
     {
-/*        TimeLoopDayNight -= Time.deltaTime;
+        TimeLoopDayNight -= Time.deltaTime;
         if (TimeLoopDayNight < 0)
         {
             TimeLoopDayNight = SaveTimeLoopDefault;
             DAY = !DAY;
             SetStateDayNight?.Invoke(DAY);
-        }*/
+        }
     }
 
     [ProButton]
@@ -32,11 +32,14 @@ public class ZooManager : MonoBehaviour
     {
         SaveTimeLoopDefault = TimeLoopDayNight;
         DAY = true;
+        SetStateDayNight?.Invoke(DAY);
     }
     [ProButton]
     public void ChangeToNight()
     {
         SaveTimeLoopDefault = TimeLoopDayNight;
         DAY = false;
+        SetStateDayNight?.Invoke(DAY); 
     }
+
 }

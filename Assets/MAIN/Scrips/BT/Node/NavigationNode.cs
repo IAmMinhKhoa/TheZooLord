@@ -6,13 +6,19 @@ using static ConfigAnimal;
 
 public class NavigationNode : Node
 {
-    private STATE_ANIMAL setState;
-
+    private STATE_ANIMAL current_State=STATE_ANIMAL.Other;
+    private STATE_ANIMAL next_State = STATE_ANIMAL.Other;
     private ConfigAnimal config;
 
-    public NavigationNode( ConfigAnimal config,STATE_ANIMAL setState)
+    public NavigationNode( ConfigAnimal config,STATE_ANIMAL current_State, STATE_ANIMAL next_State)
     {
-        this.setState = setState;
+        this.current_State = current_State;
+        this.next_State = next_State;
+        this.config = config;
+    }
+    public NavigationNode(ConfigAnimal config, STATE_ANIMAL next_State)
+    {
+        this.next_State = next_State;
         this.config = config;
     }
 
@@ -22,7 +28,16 @@ public class NavigationNode : Node
 
     protected override NodeStatus OnRun()
     {
-        config.stateAnimal = setState;
+        if (current_State == STATE_ANIMAL.Meeting)
+        {
+            config.CanMeeting = false;
+            config.CallEventOnHandleCoolDown();
+            config.stateAnimal = next_State;
+        }
+        else
+        {
+            config.stateAnimal = next_State;
+        }
         return NodeStatus.Success;
     }
 

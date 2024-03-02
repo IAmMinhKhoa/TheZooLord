@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.Collections;
 using UnityEngine;
+
 
 public class DayAndNight : MonoBehaviour
 {
@@ -19,7 +22,14 @@ public class DayAndNight : MonoBehaviour
     [SerializeField] private float rotationSpeed = 1f;
 
     private float currentTime = 0;
-
+    float sunPosition = 0;
+    private ZooManager zooManager;
+    private void Start()
+    {
+        zooManager = GetComponent<ZooManager>();
+        dayDurationInSeconds = zooManager.TimeLoopDayNight;
+        
+    }
     private void Update()
     {
         UpdateTime();
@@ -31,12 +41,18 @@ public class DayAndNight : MonoBehaviour
     {
         currentTime += Time.deltaTime / dayDurationInSeconds;
         currentTime = Mathf.Repeat(currentTime, 1f);
-    }
+        Debug.Log(currentTime);
 
+    }
     private void UpdateDayNightCycle()
     {
-        float sunPosition = Mathf.Repeat(currentTime + 0.25f, 1f);
+       
+     
+      
+        sunPosition = Mathf.Repeat(currentTime + 0.25f, 1f);
+    
         directionalLight.transform.rotation = Quaternion.Euler(sunPosition * 360f, 0f, 0f);
+
 
         RenderSettings.fogColor = fogGradient.Evaluate(currentTime);
         RenderSettings.ambientLight = ambientGradient.Evaluate(currentTime);

@@ -89,9 +89,9 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         BehaviorTree = new Selector("ROOT ANIMAL",
 
              new Sequence("ANIMAL ARE SLEEP",
-                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep),
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep), //CHECK CURRENT STATE OF ANIMAL EQUAL SOME STATE_ANIMAL 
                 new GoToTargetNode(configAnimal, TargetsMove[0]),
-               new Timer(2f, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus))),
+                new Timer(2f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus))),
 
 
               new Sequence("SEQUENCE WHEN HUNGRY OF ANIMAL",
@@ -103,26 +103,28 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                         new StatusFoodStorge(configAnimal), //CHECK IN FOOD  STORAGE ? NULL
                         new GoToTargetNode(configAnimal, foodStorage),
                         new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
-                        new Timer(3, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.FeedAnimal, objectStatus)),
+                        new Timer(3, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal, objectStatus)),
                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
 
                     new Sequence("ANIMAL HUNGRY AND NOT HAVE FOOD",
                         new GoToTargetNode(configAnimal, TargetsMove[2]),
-                        new Timer(2, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus)))
+                        new Timer(2, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus)))
                    )
               ),
 
               new Sequence("MEETING OTHER ANIMAL",
-                new MeetingNode(configAnimal,otherAnimal),
-                new InRangeNode(configAnimal,otherAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? NULL
+                new MeetingNode(configAnimal, otherAnimal),//CHECK IN ANIMAL CAN MEETING ?
+                new InRangeNode(configAnimal, otherAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? 
                 new GoToTargetNode(configAnimal, otherAnimal),
                 new Sequence("MEETING OTHER ANIMAL",
-                         new Timer(3f, new ShowStatusNode(configAnimal,ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
-                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other))),
+                         new Timer(3f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
+                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, ConfigAnimal.STATE_ANIMAL.Other))),
 
 
-            //MOVE AROUND MAP
-            new GoAroundNode(TargetsMove, configAnimal)) ;
+           //MOVE AROUND MAP
+           new Sequence ("GO AROUND", 
+                new GoAroundNode(TargetsMove, configAnimal),
+                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other, objectStatus)));
 
 
 
