@@ -6,8 +6,8 @@ using static ConfigAnimal;
 
 public class NavigationNode : Node
 {
-    private STATE_ANIMAL current_State=STATE_ANIMAL.Other;
-    private STATE_ANIMAL next_State = STATE_ANIMAL.Other;
+    private STATE_ANIMAL current_State=STATE_ANIMAL.None;
+    private STATE_ANIMAL next_State = STATE_ANIMAL.None;
     private ConfigAnimal config;
 
     public NavigationNode( ConfigAnimal config,STATE_ANIMAL current_State, STATE_ANIMAL next_State)
@@ -28,7 +28,7 @@ public class NavigationNode : Node
 
     protected override NodeStatus OnRun()
     {
-        if (current_State == STATE_ANIMAL.Meeting)
+        if (current_State == STATE_ANIMAL.Meeting) //if from state.meet -> input next state -> need reset value count meeting
         {
             config.CanMeeting = false;
             config.CallEventOnHandleCoolDown();

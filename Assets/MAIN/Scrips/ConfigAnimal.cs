@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.UI;
@@ -11,7 +12,9 @@ public class ConfigAnimal :  MonoBehaviour
     #region ENUM
     public enum STATE_ANIMAL
     {
-        Other,
+        None,
+        MoveAround,
+        Idle,
         Hungry, //foodIndex <100
         NotHungry, //foodIndex = 100
         Sleep,
@@ -57,10 +60,24 @@ public class ConfigAnimal :  MonoBehaviour
     #region LIFE CYCLE & FUNCTION
     private void Start()
     {
+        StartCoroutine(AutoDecreaseFood());
         ZooManager.SetStateDayNight += ZooManager_SetStateDayNight;
         OnHandleCoolDown += ConfigAnimal_OnHandleCoolDown;
     }
 
+    protected IEnumerator AutoDecreaseFood()
+    {
+        yield return new WaitForSeconds(1f);
+      
+
+        while (true)
+        {
+            yield return new WaitForSeconds(1f); 
+
+            if (foodIndex < 0) foodIndex = 0;
+            else foodIndex -= 1;
+        }
+    }
     private void ConfigAnimal_OnHandleCoolDown()
     {
         StartCoroutine(CDToTime(TimeCDMeeting, !CanMeeting));
@@ -69,19 +86,18 @@ public class ConfigAnimal :  MonoBehaviour
     {
         OnHandleCoolDown?.Invoke();
     }
-
+    
     private void Update()
     {
+        
         if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
        
     }
 
-    private void ZooManager_SetStateDayNight(bool day)
+    private void ZooManager_SetStateDayNight(bool isday)
     {
 
-        if (!day) stateAnimal = STATE_ANIMAL.Sleep;
-        else stateAnimal = STATE_ANIMAL.Other;
-        Debug.Log("kh"+stateAnimal);
+        if (!isday) stateAnimal = STATE_ANIMAL.Sleep;
     }
     public STATE_ANIMAL getStateAnimal()
     {

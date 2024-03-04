@@ -64,12 +64,20 @@ public class ShowStatusNode : Node
           
             return NodeStatus.Success;
         }
-        if (Compare_stateAnimal == STATE_ANIMAL.Other
+        if (Compare_stateAnimal == STATE_ANIMAL.MoveAround
             )
         {
             showStatus.SetActive(true);
-            _textMeshPro.text = "other";
-            Debug.Log("other");
+            _textMeshPro.text = "moveAround";
+            Debug.Log("movearound");
+            return NodeStatus.Success;
+        }
+        if (Compare_stateAnimal == STATE_ANIMAL.Idle
+           )
+        {
+            showStatus.SetActive(true);
+            _textMeshPro.text = "idle";
+            Debug.Log("idle");
             return NodeStatus.Success;
         }
         return NodeStatus.Success;

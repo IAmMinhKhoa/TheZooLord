@@ -75,7 +75,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
             case ConfigAnimal.STATE_ANIMAL.FeedAnimal:
                 _textNotiLogger.text = "PLAEYR STAND INTERACT ->CLICK FEED -> LOGIC EAT";
                 break;
-            case ConfigAnimal.STATE_ANIMAL.Other:
+            case ConfigAnimal.STATE_ANIMAL.MoveAround:
                 _textNotiLogger.text = "NOTHING -> GO AROUND";
                 break;
             default:
@@ -91,7 +91,8 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
              new Sequence("ANIMAL ARE SLEEP",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep), //CHECK CURRENT STATE OF ANIMAL EQUAL SOME STATE_ANIMAL 
                 new GoToTargetNode(configAnimal, TargetsMove[0]),
-                new Timer(2f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus))),
+                new Timer(2f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus)),
+                new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None)),
 
 
               new Sequence("SEQUENCE WHEN HUNGRY OF ANIMAL",
@@ -104,7 +105,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                         new GoToTargetNode(configAnimal, foodStorage),
                         new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
                         new Timer(3, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal, objectStatus)),
-                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other)),
+                        new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None)),
 
                     new Sequence("ANIMAL HUNGRY AND NOT HAVE FOOD",
                         new GoToTargetNode(configAnimal, TargetsMove[2]),
@@ -118,13 +119,20 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                 new GoToTargetNode(configAnimal, otherAnimal),
                 new Sequence("MEETING OTHER ANIMAL",
                          new Timer(3f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
-                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, ConfigAnimal.STATE_ANIMAL.Other))),
+                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, ConfigAnimal.STATE_ANIMAL.None))),
 
 
            //MOVE AROUND MAP
-           new Sequence ("GO AROUND", 
-                new GoAroundNode(TargetsMove, configAnimal),
-                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Other, objectStatus)));
+           new Sequence("STATE NONE",
+                    new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None), //CHECK CURRENT STATE OF ANIMAL EQUAL SOME STATE_ANIMAL 
+                    new RandomSelector("RANDOM MOVING",
+                        new Sequence("GO AROUND",
+                            new GoAroundNode(TargetsMove, configAnimal),
+                            new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround, objectStatus)),
+                        new Sequence("GO TO TARGET IDLE",
+                            new GoToTargetNode(configAnimal, foodStorage),
+                            new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Idle, objectStatus)))));
+
 
 
 
