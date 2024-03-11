@@ -30,16 +30,13 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
 
     //--- CONFIG CONTROLLER
     private ConfigAnimal configAnimal;
-    public PointInteract pointInteract;
     private void Awake()
     {
         //Get Component
         animator = GetComponent<Animator>();
         MyNavMesh = GetComponent<NavMeshAgent>();
         configAnimal = GetComponent<ConfigAnimal>();
-        //set event
-        pointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger;
-        pointInteract.OnExitTrigger += PointInteract_OnExitTrigger;
+
         //referene
         configAnimal.animator = animator;
         configAnimal.agent = MyNavMesh;
@@ -140,15 +137,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     #endregion
 
     #region Event Action
-    private void PointInteract_OnExitTrigger()
-    {
-        configAnimal.CanInteract = false;
-    }
 
-    private void PointInteract_OnEnterTrigger()
-    {
-        configAnimal.CanInteract = true;
-    }
     #endregion
 
     #region Default Behavior Tree

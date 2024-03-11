@@ -12,8 +12,25 @@ public class Interactor : MonoBehaviour
     private readonly Collider[] _collider = new Collider[3];
     [SerializeField] private int _numFound;
 
-    //[HideInInspector]
+    [HideInInspector]
     public ConfigAnimal configAnimal;
+    private void Start()
+    {
+        PointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger1; ;
+        PointInteract.OnExitTrigger += PointInteract_OnExitTrigger; ;
+    }
+
+    private void PointInteract_OnEnterTrigger1(ConfigAnimal obj)
+    {
+        configAnimal = obj;
+    }
+
+    private void PointInteract_OnExitTrigger()
+    {
+        configAnimal = null;
+    }
+
+
 
     private void Update()
     {
