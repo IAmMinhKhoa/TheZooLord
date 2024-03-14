@@ -1,25 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+[System.Serializable]
+public class DataButton
+{
+    public Button btn;
+    public Image icon;
+}
 public class Manager_UI : MonoBehaviour
 {
-    public GameObject groupButtonFood;
+    public GameObject groupInteractCage;
+    public List<DataButton> dataButtons;    
 
-    private void Start()
+    public void OpenModalInteract()
     {
-
-        PointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger;
-        PointInteract.OnExitTrigger += PointInteract_OnExitTrigger;
+        groupInteractCage.SetActive(true);
     }
-
-    private void PointInteract_OnExitTrigger()
+    public void CloseModalInteract()
     {
-        groupButtonFood.SetActive(false);
-    }
-
-    private void PointInteract_OnEnterTrigger()
-    {
-        groupButtonFood.SetActive(true);
+        groupInteractCage.SetActive(false);
     }
 }

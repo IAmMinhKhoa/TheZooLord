@@ -10,24 +10,39 @@ public class Interactor : MonoBehaviour
     [SerializeField] private LayerMask _interactableMask;
 
     private readonly Collider[] _collider = new Collider[3];
+    //-----------
+    private Manager_UI managerUI;
+
     [SerializeField] private int _numFound;
 
     [HideInInspector]
     public ConfigAnimal configAnimal;
     private void Start()
     {
-        PointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger1; ;
+        managerUI =GetComponent<Manager_UI>();
+        PointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger ;
         PointInteract.OnExitTrigger += PointInteract_OnExitTrigger; ;
+
+       
+       
+        
     }
 
-    private void PointInteract_OnEnterTrigger1(ConfigAnimal obj)
+    private void PointInteract_OnEnterTrigger(ConfigAnimal obj)
     {
         configAnimal = obj;
+        managerUI.OpenModalInteract();
+        for (int i = 0; i < managerUI.dataButtons.Count; i++)
+        {
+            Debug.Log(i + "/" + managerUI.dataButtons.Count);
+            managerUI.dataButtons[i].btn.onClick.AddListener(() => FeedAnimalInteract(i));
+        }
     }
 
     private void PointInteract_OnExitTrigger()
     {
         configAnimal = null;
+        managerUI.CloseModalInteract();
     }
 
 
@@ -48,13 +63,13 @@ public class Interactor : MonoBehaviour
     }
 
     //function set in button interact when feed for animal
-    public void FeedAnimalInteract(string index)
+    public void FeedAnimalInteract(int index)
     {
         if (configAnimal != null)
         {
-            int parsedIndex;
-            if (int.TryParse(index, out parsedIndex)) configAnimal.foodStorage.SpamwnFood(parsedIndex);
-            else  Debug.Log("Invalid index: " + index);
+            Debug.Log("eat di");
+             configAnimal.foodStorage.SpamwnFood(index);
+         
         }
         else
         {
