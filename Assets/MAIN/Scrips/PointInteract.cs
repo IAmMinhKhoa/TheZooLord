@@ -6,8 +6,8 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class PointInteract : MonoBehaviour
 {
-    public ConfigAnimal config;
-    public static event Action<ConfigAnimal> OnEnterTrigger;
+    public ConfigCage config;
+    public static event Action<ConfigCage> OnEnterTrigger;
     public static event Action OnExitTrigger;
     private void OnTriggerEnter(Collider other)
     {

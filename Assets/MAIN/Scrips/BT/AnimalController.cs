@@ -16,7 +16,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     protected NavMeshAgent MyNavMesh;
     protected Animator animator;
     public Transform otherAnimal;
-    public Transform foodStorage;
+    public FoodStorage foodStorage;
     public List<Transform> TargetsMove = new List<Transform>();
     
     public GameObject objectStatus;
@@ -40,7 +40,6 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         //referene
         configAnimal.animator = animator;
         configAnimal.agent = MyNavMesh;
-        configAnimal.foodStorage = foodStorage.GetComponent<FoodStorage>();
     }
     private void Start()
     {
@@ -98,8 +97,8 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                 new Selector("SELECTOR IF HAVE FOOD IN STORAGE OR NOT",
 
                     new Sequence("ANIMAL HUNGRY AND HAVE FOOD IN STORAGE",
-                        new StatusFoodStorge(configAnimal), //CHECK IN FOOD  STORAGE ? NULL
-                        new GoToTargetNode(configAnimal, foodStorage),
+                        new StatusFoodStorge(foodStorage), //CHECK IN FOOD  STORAGE ? NULL
+                        new GoToTargetNode(configAnimal, foodStorage.transform),
                         new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
                         new Timer(3, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal, objectStatus)),
                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None)),
@@ -127,7 +126,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                             new GoAroundNode(TargetsMove, configAnimal),
                             new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround, objectStatus)),
                         new Sequence("GO TO TARGET IDLE",
-                            new GoToTargetNode(configAnimal, foodStorage),
+                            new GoToTargetNode(configAnimal, foodStorage.transform),
                             new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Idle, objectStatus)))));
 
 

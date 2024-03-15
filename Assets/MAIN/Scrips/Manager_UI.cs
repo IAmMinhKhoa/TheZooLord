@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 [System.Serializable]
 public class DataButton
 {
@@ -12,7 +13,9 @@ public class DataButton
 public class Manager_UI : MonoBehaviour
 {
     public GameObject groupInteractCage;
-    public List<DataButton> dataButtons;    
+    public List<DataButton> dataButtons;
+
+    public Button BtnObseverCage;
 
     public void OpenModalInteract()
     {

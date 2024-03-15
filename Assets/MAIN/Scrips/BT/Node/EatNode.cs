@@ -9,16 +9,10 @@ using WUG.BehaviorTreeVisualizer;
 public class EatNode : Node
 {
     private ConfigAnimal config;
-    private Transform foodStorage;
-    private enum EatState
-    {
-       AnimationEat,
-       LogicValue,
+    private FoodStorage foodStorage;
 
-    }
-    private EatState eatState;
 
-    public EatNode(ConfigAnimal config, Transform foodStorage)
+    public EatNode(ConfigAnimal config, FoodStorage foodStorage)
     {
         this.config = config;
         this.foodStorage = foodStorage;
@@ -34,7 +28,7 @@ public class EatNode : Node
 
         Debug.Log("ANIMATION EAT");
 
-        config.foodStorage.ReduceFood(1);
+        foodStorage.ReduceFood(1);
         config.foodIndex += 10; //add value eat (max =100)
 
         Debug.Log("t---------------End logic eat---------------");

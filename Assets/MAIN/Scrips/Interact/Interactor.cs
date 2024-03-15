@@ -16,33 +16,44 @@ public class Interactor : MonoBehaviour
     [SerializeField] private int _numFound;
 
     [HideInInspector]
-    public ConfigAnimal configAnimal;
+    public ConfigCage configCage;
     private void Start()
     {
         managerUI =GetComponent<Manager_UI>();
         PointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger ;
         PointInteract.OnExitTrigger += PointInteract_OnExitTrigger; ;
 
-       
-       
-        
     }
 
-    private void PointInteract_OnEnterTrigger(ConfigAnimal obj)
+    protected void ViewAnimals()
     {
-        configAnimal = obj;
+        managerUI.groupInteractCage.SetActive(false);
+        configCage.ObserveCage();
+    }
+
+    private void PointInteract_OnEnterTrigger(ConfigCage obj)
+    {
+        configCage = obj;
         managerUI.OpenModalInteract();
         for (int i = 0; i < managerUI.dataButtons.Count; i++)
         {
             Debug.Log(i + "/" + managerUI.dataButtons.Count);
             managerUI.dataButtons[i].btn.onClick.AddListener(() => FeedAnimalInteract(i));
         }
+
+        managerUI.BtnObseverCage.onClick.AddListener(ViewAnimals);
     }
 
     private void PointInteract_OnExitTrigger()
     {
-        configAnimal = null;
+        configCage = null;
         managerUI.CloseModalInteract();
+        managerUI.BtnObseverCage.onClick.RemoveAllListeners();
+        for (int i = 0; i < managerUI.dataButtons.Count; i++)
+        {
+          
+            managerUI.dataButtons[i].btn.onClick.RemoveAllListeners();
+        }
     }
 
 
@@ -65,15 +76,15 @@ public class Interactor : MonoBehaviour
     //function set in button interact when feed for animal
     public void FeedAnimalInteract(int index)
     {
-        if (configAnimal != null)
+        if (configCage != null)
         {
             Debug.Log("eat di");
-             configAnimal.foodStorage.SpamwnFood(index);
+            configCage.foodStorage.SpamwnFood(index);
          
         }
         else
         {
-            Debug.Log("Null: " + configAnimal);
+            Debug.Log("Null: " + configCage );
         }
     }
 

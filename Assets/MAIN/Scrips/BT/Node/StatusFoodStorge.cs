@@ -5,15 +5,12 @@ using WUG.BehaviorTreeVisualizer;
 
 public class StatusFoodStorge : Node
 {
-    private ConfigAnimal config;
     private FoodStorage foodStorage;
 
-    public StatusFoodStorge(ConfigAnimal config)
+    public StatusFoodStorge(FoodStorage foodStorage)
     {
-        this.config = config;
-
         //set reference
-        this.foodStorage = config.foodStorage;
+        this.foodStorage = foodStorage;
     }
 
     protected override void OnReset()
