@@ -19,7 +19,6 @@ public class Interactor : MonoBehaviour
 
     [HideInInspector]
     public ConfigCage configCage;
-    public ViewAnimals viewAnimals;
 
     private void Start()
     {
@@ -34,12 +33,12 @@ public class Interactor : MonoBehaviour
     public void OpenViewAnimals()
     {
         managerUI.OpenModalViewAnimals();
-        viewAnimals.OpenViewAnimals();
+        configCage.OpenViewCage();
     }
     public void CloseViewAnimals()
     {
         managerUI.CloseModalViewAnimals();
-        viewAnimals.CloseViewAnimals();
+        configCage.CloseViewCage();
     }
 
     private void PointInteract_OnEnterTrigger(ConfigCage obj)
@@ -52,11 +51,13 @@ public class Interactor : MonoBehaviour
             Debug.Log(managerUI.dataButtons[i]);
             managerUI.dataButtons[i].btn.onClick.AddListener(() => FeedAnimalInteract(i));
         }
-        viewAnimals.configCage = configCage;
+
+        configCage.PLayerInteractor = this;
     }
 
     private void PointInteract_OnExitTrigger()
     {
+        configCage.PLayerInteractor = null;
         configCage = null;
 
         managerUI.CloseModalInteract();
@@ -65,7 +66,7 @@ public class Interactor : MonoBehaviour
           
             managerUI.dataButtons[i].btn.onClick.RemoveAllListeners();
         }
-        viewAnimals.configCage = null;
+       
     }
 
 
