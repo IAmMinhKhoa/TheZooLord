@@ -16,7 +16,9 @@
         {
             if(Foods.Count<maxQuanlityFoodInStorage)
             {
-                GameObject foodObj = Instantiate(SOFoods[index].prefab, poinSpawn.position, Quaternion.identity);
+            Debug.Log("khoa:" + index);
+            Debug.Log("khoa2:" + SOFoods[index].name);
+            GameObject foodObj = Instantiate(SOFoods[index].prefab, poinSpawn.position, Quaternion.identity);
                 foodObj.transform.parent = poinSpawn;
                 Foods.Add(foodObj);
             }    

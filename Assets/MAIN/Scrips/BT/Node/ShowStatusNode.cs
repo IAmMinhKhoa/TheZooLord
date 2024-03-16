@@ -39,7 +39,7 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "NEED FEED,I HUNGRY";
-             Debug.Log("show emoji HUNGRY");
+            // Debug.Log("show emoji HUNGRY");
             return NodeStatus.Success;
         }
         if (Compare_stateAnimal == STATE_ANIMAL.FeedAnimal)
@@ -60,7 +60,7 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "MEETING";
-            Debug.Log("show metting");
+            //Debug.Log("show metting");
           
             return NodeStatus.Success;
         }
@@ -69,7 +69,7 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "moveAround";
-            Debug.Log("movearound");
+           // Debug.Log("movearound");
             return NodeStatus.Success;
         }
         if (Compare_stateAnimal == STATE_ANIMAL.Idle
@@ -77,7 +77,7 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "idle";
-            Debug.Log("idle");
+           // Debug.Log("idle");
             return NodeStatus.Success;
         }
         return NodeStatus.Success;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,14 @@ public class Interactor : MonoBehaviour
 
     private readonly Collider[] _collider = new Collider[3];
     //-----------
-    private Manager_UI managerUI;
+    [HideInInspector]
+    public Manager_UI managerUI;
 
     [SerializeField] private int _numFound;
 
     [HideInInspector]
     public ConfigCage configCage;
+
     private void Start()
     {
         managerUI =GetComponent<Manager_UI>();
@@ -25,10 +28,13 @@ public class Interactor : MonoBehaviour
 
     }
 
+   
+
     protected void ViewAnimals()
     {
-        managerUI.groupInteractCage.SetActive(false);
-        configCage.ObserveCage();
+        managerUI.groupInteractCageUI.SetActive(false);
+        managerUI.groupOverlayUI.SetActive(false);
+        configCage.OpenViewCage();
     }
 
     private void PointInteract_OnEnterTrigger(ConfigCage obj)
@@ -37,16 +43,20 @@ public class Interactor : MonoBehaviour
         managerUI.OpenModalInteract();
         for (int i = 0; i < managerUI.dataButtons.Count; i++)
         {
-            Debug.Log(i + "/" + managerUI.dataButtons.Count);
+            //Debug.Log(i + "/" + managerUI.dataButtons.Count);
+            Debug.Log(managerUI.dataButtons[i]);
             managerUI.dataButtons[i].btn.onClick.AddListener(() => FeedAnimalInteract(i));
         }
 
         managerUI.BtnObseverCage.onClick.AddListener(ViewAnimals);
+        configCage.PLayerInteractor = this;
     }
 
     private void PointInteract_OnExitTrigger()
     {
+        configCage.PLayerInteractor = null;
         configCage = null;
+
         managerUI.CloseModalInteract();
         managerUI.BtnObseverCage.onClick.RemoveAllListeners();
         for (int i = 0; i < managerUI.dataButtons.Count; i++)
@@ -54,6 +64,7 @@ public class Interactor : MonoBehaviour
           
             managerUI.dataButtons[i].btn.onClick.RemoveAllListeners();
         }
+       
     }
 
 
@@ -76,6 +87,7 @@ public class Interactor : MonoBehaviour
     //function set in button interact when feed for animal
     public void FeedAnimalInteract(int index)
     {
+        
         if (configCage != null)
         {
             Debug.Log("eat di");

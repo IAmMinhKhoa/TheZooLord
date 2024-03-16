@@ -11,14 +11,23 @@ public class ConfigCage : MonoBehaviour
     public FoodStorage foodStorage;
     public GameObject objCanvas;
     private int currentTargetIndex = 0;
+    public Interactor PLayerInteractor;
 
-    public void ObserveCage()
+    public void OpenViewCage()
     {
         objCanvas.SetActive(true);
         cameraCage.gameObject.SetActive(true);
-        SwitchToNextTarget();
     }
+    public void CloseViewCage()
+    {
+        objCanvas.SetActive(false);
+        cameraCage.gameObject.SetActive(false);
 
+        //open canvas overlay of player
+        PLayerInteractor.managerUI.groupOverlayUI.SetActive(true);
+
+
+    }
 
     #region Switch Camera to Animals
     [ProButton]

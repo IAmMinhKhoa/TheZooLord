@@ -15,8 +15,6 @@ public class PointInteract : MonoBehaviour
         {
             //call event to ANIMAL CONTROLLER -> check CanInteract=TRUE in configAnimal
             OnEnterTrigger?.Invoke(config);
-
-           
         }
     }
     private void OnTriggerExit(Collider other)

@@ -12,17 +12,18 @@ public class DataButton
 }
 public class Manager_UI : MonoBehaviour
 {
-    public GameObject groupInteractCage;
+    public GameObject groupInteractCageUI;
+    public GameObject groupOverlayUI;
     public List<DataButton> dataButtons;
 
     public Button BtnObseverCage;
 
     public void OpenModalInteract()
     {
-        groupInteractCage.SetActive(true);
+        groupInteractCageUI.SetActive(true);
     }
     public void CloseModalInteract()
     {
-        groupInteractCage.SetActive(false);
+        groupInteractCageUI.SetActive(false);
     }
 }
