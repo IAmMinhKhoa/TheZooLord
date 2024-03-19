@@ -1,6 +1,6 @@
     using System.Collections;
     using System.Collections.Generic;
-    using UnityEngine;
+using UnityEngine;
 
     public class FoodStorage : MonoBehaviour
     {
@@ -16,8 +16,7 @@
         {
             if(Foods.Count<maxQuanlityFoodInStorage)
             {
-            Debug.Log("khoa:" + index);
-            Debug.Log("khoa2:" + SOFoods[index].name);
+            Debug.Log("khoa:" + index);                                                                         
             GameObject foodObj = Instantiate(SOFoods[index].prefab, poinSpawn.position, Quaternion.identity);
                 foodObj.transform.parent = poinSpawn;
                 Foods.Add(foodObj);
@@ -26,6 +25,7 @@
 
         public void ReduceFood(int index)
         {
+
             for (int i = 0; i < index; i++)
             {
                 GameObject foodObj = Foods[0];

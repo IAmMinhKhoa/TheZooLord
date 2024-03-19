@@ -12,64 +12,30 @@ public class Interactor : MonoBehaviour
 
     private readonly Collider[] _collider = new Collider[3];
     //-----------
-    [HideInInspector]
+
     public Manager_UI managerUI;
 
     [SerializeField] private int _numFound;
 
     [HideInInspector]
     public ConfigCage configCage;
-
     private void Start()
     {
-        managerUI =GetComponent<Manager_UI>();
-        PointInteract.OnEnterTrigger += PointInteract_OnEnterTrigger ;
-        PointInteract.OnExitTrigger += PointInteract_OnExitTrigger; ;
-
+        this.Register(EventID.OpenInteractCage, OnTriggerEnterCage);
+        this.Register(EventID.CloseInteractCage, OnTriggerExitCage);
     }
 
-   
 
-    public void OpenViewAnimals()
+    public void OnTriggerEnterCage(object data)
     {
-        managerUI.OpenModalViewAnimals();
-        configCage.OpenViewCage();
-    }
-    public void CloseViewAnimals()
-    {
-        managerUI.CloseModalViewAnimals();
-        configCage.CloseViewCage();
-    }
-
-    private void PointInteract_OnEnterTrigger(ConfigCage obj)
-    {
-        configCage = obj;
+        configCage = (ConfigCage)data;
         managerUI.OpenModalInteract();
-        for (int i = 0; i < managerUI.dataButtons.Count; i++)
-        {
-            //Debug.Log(i + "/" + managerUI.dataButtons.Count);
-            Debug.Log(managerUI.dataButtons[i]);
-            managerUI.dataButtons[i].btn.onClick.AddListener(() => FeedAnimalInteract(i));
-        }
-
-        configCage.PLayerInteractor = this;
     }
-
-    private void PointInteract_OnExitTrigger()
+    public void OnTriggerExitCage(object data = null)
     {
-        configCage.PLayerInteractor = null;
         configCage = null;
-
         managerUI.CloseModalInteract();
-        for (int i = 0; i < managerUI.dataButtons.Count; i++)
-        {
-          
-            managerUI.dataButtons[i].btn.onClick.RemoveAllListeners();
-        }
-       
     }
-
-
 
     private void Update()
     {
@@ -92,9 +58,7 @@ public class Interactor : MonoBehaviour
         
         if (configCage != null)
         {
-            Debug.Log("eat di");
             configCage.foodStorage.SpamwnFood(index);
-         
         }
         else
         {

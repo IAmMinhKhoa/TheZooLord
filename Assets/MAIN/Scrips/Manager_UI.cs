@@ -17,6 +17,7 @@ public class Manager_UI : MonoBehaviour
     public GameObject groupOverlayUI;
     public List<DataButton> dataButtons;
 
+   
 
     public void OpenModalInteract()
     {

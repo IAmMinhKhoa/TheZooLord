@@ -10,7 +10,6 @@ public class ConfigCage : MonoBehaviour
     public List<ConfigAnimal> objAnimals;
     public FoodStorage foodStorage;
     private int currentTargetIndex = 0;
-    public Interactor PLayerInteractor;
 
     public void OpenViewCage()
     {

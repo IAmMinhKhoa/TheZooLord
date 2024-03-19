@@ -13,5 +13,6 @@ public class Object_To_Interact : MonoBehaviour, IInteractTable
     {
         Debug.Log(_prompt);
         return true;    
+
     }
 }
