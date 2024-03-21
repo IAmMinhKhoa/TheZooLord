@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -121,9 +122,28 @@ public class ConfigAnimal :  MonoBehaviour
 
 
 
-
-
-
+    [ProButton]
+    public void chanegStateHungry()
+    {
+        stateAnimal = ConfigAnimal.STATE_ANIMAL.Hungry;
+    }
+    [ProButton]
+    public void chanegStateSleep()
+    {
+        stateAnimal = ConfigAnimal.STATE_ANIMAL.Sleep;
+    }
+    [ProButton]
+    public void chanegStateWalkAround()
+    {
+        stateAnimal = ConfigAnimal.STATE_ANIMAL.MoveAround;
+    }
+    [ProButton]
+    public void chanegStateMeeting()
+    {
+        stateAnimal = ConfigAnimal.STATE_ANIMAL.Meeting;
+    }
+   
+    
 
 
 

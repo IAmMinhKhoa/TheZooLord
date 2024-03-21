@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
 using Disguise.Behaviors.Decorators;
 using TMPro;
 using UnityEditor;
@@ -134,7 +135,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
 
     }
     #endregion
-
+    
     #region Event Action
 
     #endregion

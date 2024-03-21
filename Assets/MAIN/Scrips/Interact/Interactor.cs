@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,7 +37,25 @@ public class Interactor : MonoBehaviour
         configCage = null;
         managerUI.CloseModalInteract();
     }
-
+    #region Event UI Interact Cage
+    public void OpenViewAnimals()
+    {
+        managerUI.OpenModalViewAnimals();
+        configCage.OpenViewCage();
+    }
+    #endregion
+    #region Event UI View Animals
+    public void SwitchNextAnimal() {
+        configCage.SwitchToNextTarget();
+    }
+    public void SwitchPreviousAnimal() {
+        configCage.SwitchToPreviousTarget();
+    }
+    public void OutViewAnimal() {
+        managerUI.CloseModalViewAnimals();
+        configCage.CloseViewCage();
+    }
+    #endregion
     private void Update()
     {
         _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _collider, _interactableMask);
@@ -64,6 +83,14 @@ public class Interactor : MonoBehaviour
         {
             Debug.Log("Null: " + configCage );
         }
+    }
+
+    [ProButton]
+    public void EatFoodAnimal()
+    {
+        
+           configCage.foodStorage.SpamwnFood(1);
+        
     }
 
     private void OnDrawGizmos()
