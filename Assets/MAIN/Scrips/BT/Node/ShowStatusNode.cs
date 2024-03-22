@@ -53,7 +53,7 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "SLEEP";
-            //Debug.Log("show emoji SLEEP");
+           Debug.Log("show emoji SLEEP");
             return NodeStatus.Success;
         }
         if (Compare_stateAnimal == STATE_ANIMAL.Meeting)
@@ -69,7 +69,7 @@ public class ShowStatusNode : Node
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "moveAround";
-           // Debug.Log("movearound");
+            Debug.Log("movearound");
             return NodeStatus.Success;
         }
         if (Compare_stateAnimal == STATE_ANIMAL.Idle
