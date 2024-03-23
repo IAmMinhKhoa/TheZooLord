@@ -19,7 +19,7 @@ public class ConfigAnimal :  MonoBehaviour
         Hungry, //foodIndex <100
         NotHungry, //foodIndex = 100
         Sleep,
-        FeedAnimal,
+        Eat,
         Meeting
         
     }
@@ -90,7 +90,7 @@ public class ConfigAnimal :  MonoBehaviour
     private void Update()
     {
         
-        if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.FeedAnimal) stateAnimal = STATE_ANIMAL.Hungry;
+        if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.Eat) stateAnimal = STATE_ANIMAL.Hungry;
        
     }
 

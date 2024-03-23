@@ -69,7 +69,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
             case ConfigAnimal.STATE_ANIMAL.Sleep:
                 _textNotiLogger.text = "GO TARGET -> SHOW STATE SLEEP";
                 break;
-            case ConfigAnimal.STATE_ANIMAL.FeedAnimal:
+            case ConfigAnimal.STATE_ANIMAL.Eat:
                 _textNotiLogger.text = "PLAEYR STAND INTERACT ->CLICK FEED -> LOGIC EAT";
                 break;
             case ConfigAnimal.STATE_ANIMAL.MoveAround:
@@ -135,17 +135,65 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                  new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep), 
                  new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus),
                  new GoToTargetNode(configAnimal, TargetsMove[0])),
-                 
+
+
+             new Sequence("HUNGRY",
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
+
+                new Selector("ACTION HUNGRY",
+                    new Sequence("HAVE FOOD IN STORAGE",
+                        new StatusFoodStorge(foodStorage),
+                        new GoToTargetNode(configAnimal, foodStorage.transform),
+                        new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Eat, objectStatus),
+                        new EatNode(configAnimal, foodStorage)),
+
+                    new Sequence("NOT FOOD IN STORAGE",
+                        new GoToTargetNode(configAnimal, TargetsMove[2]),
+                        new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus))
+                    )
+                ),
+                        
+
+
+
+
+            new Sequence("MEETING",
+                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting),
+                 new GoToTargetNode(configAnimal, otherAnimal),
+                 new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
+            //need node show status
+
             new Sequence("MOVE AROUND",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround   ),
-                new  GoAroundNode(TargetsMove, configAnimal),
+                new GoAroundNode(TargetsMove, configAnimal),
                 new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround, objectStatus))
             );
 
 
     }
+
+
     #endregion
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Animal"))
+        {
+            Debug.Log("khoa cham");
+           // otherAnimal = other.gameObject.transform;
+            configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.Meeting;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Animal"))
+        {
+           // otherAnimal = null;
+            configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.None;
+        }
+    }
+
+
     #region Event Action
 
     #endregion

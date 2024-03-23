@@ -11,28 +11,40 @@ public class EatNode : Node
     private ConfigAnimal config;
     private FoodStorage foodStorage;
 
-
+    float waitingTimeEat = 0.2f;
+    float tempTime;
     public EatNode(ConfigAnimal config, FoodStorage foodStorage)
     {
         this.config = config;
         this.foodStorage = foodStorage;
-        //eatState = EatState.AnimationEat;
+        tempTime = waitingTimeEat;
     }
 
     protected override void OnReset()
-    {    }
+    {
+        tempTime = waitingTimeEat;
+    }
 
     protected override NodeStatus OnRun()
     {
-        Debug.Log("t---------------Start logic eat---------------");
+        tempTime -= Time.deltaTime;
+        Debug.Log(tempTime);
+        if (tempTime <= 0)
+        {
+            Debug.Log("t---------------Start logic eat---------------");
 
-        Debug.Log("ANIMATION EAT");
+            Debug.Log("ANIMATION EAT");
 
-        foodStorage.ReduceFood(1);
-        config.foodIndex += 10; //add value eat (max =100)
+            foodStorage.ReduceFood(1);
+            config.foodIndex += 10; //add value eat (max =100)
 
-        Debug.Log("t---------------End logic eat---------------");
+            Debug.Log("t---------------End logic eat---------------");
 
-        return NodeStatus.Success;
+            return NodeStatus.Success;
+        }
+        else
+            return NodeStatus.Running;
+
+
     }
 }

@@ -42,7 +42,7 @@ public class ShowStatusNode : Node
             // Debug.Log("show emoji HUNGRY");
             return NodeStatus.Success;
         }
-        if (Compare_stateAnimal == STATE_ANIMAL.FeedAnimal)
+        if (Compare_stateAnimal == STATE_ANIMAL.Eat)
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "EATING";
