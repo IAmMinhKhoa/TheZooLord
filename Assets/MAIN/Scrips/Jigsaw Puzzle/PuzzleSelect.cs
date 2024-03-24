@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class PuzzleSelect : MonoBehaviour
 {
     [SerializeField] GameObject startPanel;
+    [SerializeField] GameObject puzzleImage;
     public void SetPuzzlePhoto(Image photo)
     {
-        GameObject[] pieces;
-        for (int i = 1; i <= 36 ; i++)
+        for (int i = 1; i <= 9 ; i++)
         {
             GameObject.Find("Piece (" + i + ")").transform.Find("Puzzle").GetComponent<SpriteRenderer>().sprite = photo.sprite;
+            puzzleImage.GetComponent<SpriteRenderer>().sprite = photo.sprite;
         }
         startPanel.SetActive(false);
     }

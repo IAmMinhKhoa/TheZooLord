@@ -7,6 +7,19 @@ public class DragAndDrop : MonoBehaviour
 {
     [SerializeField] GameObject selectedPiece;
     int OIL = 1;
+
+    [SerializeField] int pieces;
+
+    ScoreKeeper scoreKeeper;
+    Hint hint;
+
+    public bool isComplete = false;
+
+    private void Awake()
+    {
+        scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        hint = FindObjectOfType<Hint>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +29,12 @@ public class DragAndDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(scoreKeeper.GetCorrectPieces() == pieces)
+        {
+            isComplete = true;
+            return;
+        }
+        if(Input.GetMouseButtonDown(0) && !isComplete && !hint.isHintActive)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if(hit.transform.CompareTag("Puzzle"))
@@ -45,5 +63,6 @@ public class DragAndDrop : MonoBehaviour
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             selectedPiece.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
         }
+
     }
 }

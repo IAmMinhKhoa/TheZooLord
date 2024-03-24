@@ -46,3 +46,6 @@ TagManager:
   - name: Pieces
     uniqueID: 1232492715
     locked: 0
+  - name: Puzzle Image
+    uniqueID: 3484500163
+    locked: 0
