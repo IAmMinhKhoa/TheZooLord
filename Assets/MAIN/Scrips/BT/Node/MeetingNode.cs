@@ -22,7 +22,7 @@ public class MeetingNode : Node
 
     protected override NodeStatus OnRun()
     {
-        if (config.CanMeeting && otherConfigAnimal.CanMeeting)
+        if (config.CanMeetingAnimal && otherConfigAnimal.CanMeetingAnimal)
         {
             return NodeStatus.Success;
         }else { return NodeStatus.Failure; }

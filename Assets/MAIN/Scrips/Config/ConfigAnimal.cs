@@ -20,7 +20,8 @@ public class ConfigAnimal :  MonoBehaviour
         NotHungry, //foodIndex = 100
         Sleep,
         Eat,
-        Meeting
+        MeetingAnimal,
+        MeetingPlayer
         
     }
     public STATE_ANIMAL stateAnimal;
@@ -30,7 +31,7 @@ public class ConfigAnimal :  MonoBehaviour
     [HideInInspector] public NavMeshAgent agent;
     #endregion
     #region ACTION
-    public event Action OnHandleCoolDown;
+
     #endregion
     #region PARAMETER OF ANIMAL
     public int FoodIndex;
@@ -50,8 +51,8 @@ public class ConfigAnimal :  MonoBehaviour
     public LayerMask layerAnimalInteract;
     #endregion
     #region BOOLEAN
-    public bool CanInteract = false;
-    public bool CanMeeting=true;
+
+    public bool CanMeetingAnimal = true;
     #endregion
     #region List
 
@@ -61,8 +62,7 @@ public class ConfigAnimal :  MonoBehaviour
     private void Start()
     {
         StartCoroutine(AutoDecreaseFood());
-        ZooManager.SetStateDayNight += ZooManager_SetStateDayNight;
-        OnHandleCoolDown += ConfigAnimal_OnHandleCoolDown;
+
     }
 
     protected IEnumerator AutoDecreaseFood()
@@ -74,44 +74,60 @@ public class ConfigAnimal :  MonoBehaviour
         {
             yield return new WaitForSeconds(1f); 
 
-            if (foodIndex < 0) foodIndex = 0;
+            if (foodIndex <= 0) foodIndex = 0;
             else foodIndex -= 1;
         }
     }
-    private void ConfigAnimal_OnHandleCoolDown()
+  
+    public void ToogleCanMeetingAnimal(int time)
     {
-        StartCoroutine(CDToTime(TimeCDMeeting, !CanMeeting));
+        StartCoroutine(CoroutineToogleCanMeetingAnimal(time));
     }
-    public void CallEventOnHandleCoolDown()
+    private IEnumerator CoroutineToogleCanMeetingAnimal(int time)
     {
-        OnHandleCoolDown?.Invoke();
+        CanMeetingAnimal = false;
+        yield return new WaitForSeconds(time);
+        CanMeetingAnimal = true;
     }
     
     private void Update()
     {
-        
-        if (foodIndex < 50 && stateAnimal != STATE_ANIMAL.Eat) stateAnimal = STATE_ANIMAL.Hungry;
-       
+        UpdateStateAnimal();
     }
 
-    private void ZooManager_SetStateDayNight(bool isday)
-    {
-
-        if (!isday) stateAnimal = STATE_ANIMAL.Sleep;
-    }
-    public STATE_ANIMAL getStateAnimal()
-    {
-        if (foodIndex > 50 && foodIndex <= 100) return stateAnimal = STATE_ANIMAL.NotHungry;
-        else return stateAnimal = STATE_ANIMAL.Hungry;
-    }
    protected IEnumerator CDToTime(int timeCD,bool setBool)
     {
         yield return new WaitForSeconds(timeCD);
-        CanMeeting = setBool;
+        CanMeetingAnimal = setBool;
     }
     #endregion
 
 
+
+    public void UpdateStateAnimal()
+    {
+       // Debug.Log(ZooManager.isDay);
+        if (!ZooManager.isDay) stateAnimal = STATE_ANIMAL.Sleep;
+        else if (foodIndex <= 50) stateAnimal = STATE_ANIMAL.Hungry;
+        else if (CanMeetingAnimal) stateAnimal = STATE_ANIMAL.MeetingAnimal;
+        else stateAnimal = STATE_ANIMAL.MoveAround;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Animal"))
+        {
+            Debug.Log("khoa cham");
+            CanMeetingAnimal = true;
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Animal"))
+        {
+            CanMeetingAnimal = false;
+        }
+    }
     #region DrawRanger
     private void OnDrawGizmos()
     {
@@ -140,7 +156,7 @@ public class ConfigAnimal :  MonoBehaviour
     [ProButton]
     public void chanegStateMeeting()
     {
-        stateAnimal = ConfigAnimal.STATE_ANIMAL.Meeting;
+        stateAnimal = ConfigAnimal.STATE_ANIMAL.MeetingAnimal;
     }
    
     

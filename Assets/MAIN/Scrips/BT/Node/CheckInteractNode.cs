@@ -17,7 +17,7 @@ public class CheckInteractNode : Node
 
     protected override NodeStatus OnRun()
     {
-        if (config.CanInteract) return NodeStatus.Success;
+
         return NodeStatus.Failure;
     }
 

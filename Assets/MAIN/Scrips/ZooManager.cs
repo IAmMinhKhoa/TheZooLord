@@ -8,10 +8,7 @@ using UnityEngine;
 
 public class ZooManager : MonoBehaviour
 {
-    public  bool isDay=true;
-    public static event Action<bool> SetStateDayNight;
-
-
+    public static bool isDay=true;
     public float TimeLoopDayNight = 60f;
 
     private float currentTime = 0;
@@ -43,16 +40,12 @@ public class ZooManager : MonoBehaviour
         if(currentTime>=0.25f &&currentTime<0.7f)
         {
             isDay = false;
-            SetStateDayNight?.Invoke(isDay);
         }
         else if(currentTime>0.7f)
         { 
             isDay = true;
-            SetStateDayNight?.Invoke(isDay);
         }
         if (!isDay) currentTime += Time.deltaTime / 20;
-       // Debug.Log(currentTime);
-
     }
     private void UpdateDayNightCycle()
     {

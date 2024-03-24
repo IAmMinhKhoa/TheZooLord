@@ -56,7 +56,7 @@ public class ShowStatusNode : Node
            Debug.Log("show emoji SLEEP");
             return NodeStatus.Success;
         }
-        if (Compare_stateAnimal == STATE_ANIMAL.Meeting)
+        if (Compare_stateAnimal == STATE_ANIMAL.MeetingAnimal)
         {
             showStatus.SetActive(true);
             _textMeshPro.text = "MEETING";

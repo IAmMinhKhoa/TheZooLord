@@ -152,16 +152,16 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                         new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus))
                     )
                 ),
-                        
 
 
+         
 
 
-            new Sequence("MEETING",
-                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting),
-                 new GoToTargetNode(configAnimal, otherAnimal),
-                 new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
-            //need node show status
+            new Sequence("MEETING ANIMAL",
+                new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal),
+                new GoToTargetNode(configAnimal, otherAnimal),
+                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, objectStatus),
+                new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, ConfigAnimal.STATE_ANIMAL.None)),
 
             new Sequence("MOVE AROUND",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround   ),
@@ -175,23 +175,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
 
     #endregion
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Animal"))
-        {
-            Debug.Log("khoa cham");
-           // otherAnimal = other.gameObject.transform;
-            configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.Meeting;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Animal"))
-        {
-           // otherAnimal = null;
-            configAnimal.stateAnimal = ConfigAnimal.STATE_ANIMAL.None;
-        }
-    }
+   
 
 
     #region Event Action

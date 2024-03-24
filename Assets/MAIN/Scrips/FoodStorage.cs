@@ -1,5 +1,6 @@
     using System.Collections;
     using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
     public class FoodStorage : MonoBehaviour
@@ -9,29 +10,36 @@ using UnityEngine;
 
         public List<SOFood> SOFoods =new List<SOFood>();
 
-    [HideInInspector]
+   // [HideInInspector]
         public List<GameObject> Foods = new List<GameObject>();
 
         public void SpamwnFood(int index)
         {
             if(Foods.Count<maxQuanlityFoodInStorage)
-            {
-            Debug.Log("khoa:" + index);                                                                         
+            {                                                                       
             GameObject foodObj = Instantiate(SOFoods[index].prefab, poinSpawn.position, Quaternion.identity);
                 foodObj.transform.parent = poinSpawn;
                 Foods.Add(foodObj);
             }    
         }
 
-        public void ReduceFood(int index)
+        public void ReduceFood()
         {
-
-            for (int i = 0; i < index; i++)
+        if (Foods.Count > 0)
+        {
+            try
             {
-                GameObject foodObj = Foods[0];
+                Destroy(Foods[0]);
                 Foods.RemoveAt(0);
-                Destroy(foodObj);
+            }
+            catch
+            {
+                ReduceFood();
             }
         }
+        
+
+
+    }
 
     }

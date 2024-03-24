@@ -28,17 +28,21 @@ public class NavigationNode : Node
 
     protected override NodeStatus OnRun()
     {
-        if (current_State == STATE_ANIMAL.Meeting) //if from state.meet -> input next state -> need reset value count meeting
+        if (current_State == STATE_ANIMAL.MeetingAnimal) //if from state.meet -> input next state -> need reset value count meeting
         {
-            config.CanMeeting = false;
-            config.CallEventOnHandleCoolDown();
+            /*config.CanMeetingAnimal = false;
+            config.CallEventOnHandleCoolDown();*/
+            config.ToogleCanMeetingAnimal(5);
+            Debug.Log("met");
             config.stateAnimal = next_State;
+            return NodeStatus.Success;
         }
         else
         {
+            Debug.Log("deo met");
             config.stateAnimal = next_State;
+            return NodeStatus.Success;
         }
-        return NodeStatus.Success;
     }
 
    

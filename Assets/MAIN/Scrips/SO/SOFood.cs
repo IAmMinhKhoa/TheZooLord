@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SOFood : ScriptableObject
 {
     public string nameFood;
+
     public Sprite iconFood;
     public GameObject prefab;   
 }

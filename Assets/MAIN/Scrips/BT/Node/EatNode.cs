@@ -28,14 +28,14 @@ public class EatNode : Node
     protected override NodeStatus OnRun()
     {
         tempTime -= Time.deltaTime;
-        Debug.Log(tempTime);
+       
         if (tempTime <= 0)
         {
             Debug.Log("t---------------Start logic eat---------------");
 
             Debug.Log("ANIMATION EAT");
 
-            foodStorage.ReduceFood(1);
+            foodStorage.ReduceFood();
             config.foodIndex += 10; //add value eat (max =100)
 
             Debug.Log("t---------------End logic eat---------------");
