@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.cyborgAssets.inspectorButtonPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.UI;
@@ -22,17 +24,15 @@ public class ConfigAnimal :  MonoBehaviour
         Eat,
         MeetingAnimal,
         MeetingPlayer
-        
     }
+    public GameObject prefabEmoji;
     public STATE_ANIMAL stateAnimal;
     #endregion
     #region COMPONENTS CONTROL
     [HideInInspector] public Animator animator;
     [HideInInspector] public NavMeshAgent agent;
     #endregion
-    #region ACTION
 
-    #endregion
     #region PARAMETER OF ANIMAL
     public int FoodIndex;
     public int foodIndex
@@ -41,21 +41,15 @@ public class ConfigAnimal :  MonoBehaviour
         set
         {
             if (value > 100) FoodIndex = 100;
-            else FoodIndex = value;
+            else FoodIndex = value; 
+
         }
     }
 
-
-    public float rangerInteractWithAnimal;
-    public int TimeCDMeeting;
-    public LayerMask layerAnimalInteract;
     #endregion
     #region BOOLEAN
 
     public bool CanMeetingAnimal = true;
-    #endregion
-    #region List
-
     #endregion
 
     #region LIFE CYCLE & FUNCTION
@@ -79,34 +73,30 @@ public class ConfigAnimal :  MonoBehaviour
         }
     }
   
-    public void ToogleCanMeetingAnimal(int time)
-    {
-        StartCoroutine(CoroutineToogleCanMeetingAnimal(time));
-    }
-    private IEnumerator CoroutineToogleCanMeetingAnimal(int time)
-    {
-        CanMeetingAnimal = false;
-        yield return new WaitForSeconds(time);
-        CanMeetingAnimal = true;
-    }
+
     
     private void Update()
     {
         UpdateStateAnimal();
     }
 
-   protected IEnumerator CDToTime(int timeCD,bool setBool)
-    {
-        yield return new WaitForSeconds(timeCD);
-        CanMeetingAnimal = setBool;
-    }
+  
     #endregion
 
+    public GameObject ObjectEmojiStatus(GameObject _ParentObj)
+    {
+        GameObject newObject = Instantiate(prefabEmoji,_ParentObj.transform);
+ /*       newObject.transform.SetParent(_ParentObj.transform);
+        newObject.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        newObject.transform.position = new Vector3(0, 0, 0);*/
+        //newObject.transform.localScale = Vector3.one; // Reset scale to (1, 1, 1)
 
+        return newObject;
+    }
 
     public void UpdateStateAnimal()
     {
-       // Debug.Log(ZooManager.isDay);
+
         if (!ZooManager.isDay) stateAnimal = STATE_ANIMAL.Sleep;
         else if (foodIndex <= 50) stateAnimal = STATE_ANIMAL.Hungry;
         else if (CanMeetingAnimal) stateAnimal = STATE_ANIMAL.MeetingAnimal;
@@ -126,15 +116,9 @@ public class ConfigAnimal :  MonoBehaviour
         if (other.CompareTag("Animal"))
         {
             CanMeetingAnimal = false;
+            
         }
     }
-    #region DrawRanger
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, rangerInteractWithAnimal); //Gizmos ranger
-    }
-    #endregion
 
 
 

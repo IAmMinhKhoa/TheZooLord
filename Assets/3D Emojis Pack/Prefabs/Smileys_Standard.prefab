@@ -4448,7 +4448,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3529069379879385230}
-  m_Text: Standard
+  m_Text: Emoji
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1

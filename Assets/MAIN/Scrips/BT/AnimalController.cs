@@ -21,8 +21,6 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     public List<Transform> TargetsMove = new List<Transform>();
     
     public GameObject objectStatus;
-
-    public TextMeshProUGUI _textNotiLogger;
     //--- USING LOCAL
     public NodeBase BehaviorTree { get; set; }
     private Coroutine m_BehaviorTreeRoutine;
@@ -55,30 +53,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         ForceDrawingOfTree();
     }
 
-    private void Update()
-    {
-        //show state ra text cho de xem thoi
-        switch (configAnimal.stateAnimal)
-        {
-            case ConfigAnimal.STATE_ANIMAL.Hungry:
-                _textNotiLogger.text = "GO TARGET ->SHOW STATE HUNGRY";
-                break;
-            case ConfigAnimal.STATE_ANIMAL.NotHungry:
-                _textNotiLogger.text = "PLAEYR STAND INTERACT ->CLICK FEED  -> SHOW STATE NO HUNGRY (because foodIndex=100)";
-                break;
-            case ConfigAnimal.STATE_ANIMAL.Sleep:
-                _textNotiLogger.text = "GO TARGET -> SHOW STATE SLEEP";
-                break;
-            case ConfigAnimal.STATE_ANIMAL.Eat:
-                _textNotiLogger.text = "PLAEYR STAND INTERACT ->CLICK FEED -> LOGIC EAT";
-                break;
-            case ConfigAnimal.STATE_ANIMAL.MoveAround:
-                _textNotiLogger.text = "NOTHING -> GO AROUND";
-                break;
-            default:
-                break;
-        }
-    }
+ 
     #region SET UP NODE FOR BEHAVIOR TREE
     private void GenerateBehaviorTree()
     {
@@ -161,7 +136,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal),
                 new GoToTargetNode(configAnimal, otherAnimal),
                 new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, objectStatus),
-                new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, ConfigAnimal.STATE_ANIMAL.None)),
+               new Timer(4f, new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, ConfigAnimal.STATE_ANIMAL.None))),
 
             new Sequence("MOVE AROUND",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround   ),
