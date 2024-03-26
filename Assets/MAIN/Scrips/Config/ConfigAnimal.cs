@@ -5,6 +5,7 @@ using com.cyborgAssets.inspectorButtonPro;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.UI;
@@ -23,10 +24,10 @@ public class ConfigAnimal :  MonoBehaviour
         Sleep,
         Eat,
         MeetingAnimal,
-        MeetingPlayer
     }
-    public GameObject prefabEmoji;
+    public List<SOEmoji> SO_Emojis = new List<SOEmoji>();
     public STATE_ANIMAL stateAnimal;
+    [HideInInspector] public STATE_ANIMAL previousState = STATE_ANIMAL.None;
     #endregion
     #region COMPONENTS CONTROL
     [HideInInspector] public Animator animator;
@@ -83,17 +84,31 @@ public class ConfigAnimal :  MonoBehaviour
   
     #endregion
 
-    public GameObject ObjectEmojiStatus(GameObject _ParentObj)
+    public GameObject ObjectEmojiStatus(STATE_ANIMAL state,GameObject _ParentObj)
     {
-        GameObject newObject = Instantiate(prefabEmoji,_ParentObj.transform);
- /*       newObject.transform.SetParent(_ParentObj.transform);
-        newObject.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        newObject.transform.position = new Vector3(0, 0, 0);*/
-        //newObject.transform.localScale = Vector3.one; // Reset scale to (1, 1, 1)
+        foreach (var emoji in SO_Emojis)
+        {
+            if (emoji.nameEmoji == state.ToString())
+            {
+                GameObject prefabEmoji = emoji.GetPrefabEmoji();
+                GameObject newObject = Instantiate(prefabEmoji, _ParentObj.transform);
+                Debug.Log("Spawn Prefab Emoji" + emoji.nameEmoji);
+                return newObject;
+            }
+        }
+        Debug.LogError("Not have emoji " + state + "in SO_Emojis");
+        return null;
 
-        return newObject;
     }
 
+    
+    public void DestroyChildren(Transform parent)
+    {
+        foreach (Transform child in parent)
+        {
+            Destroy(child.gameObject);
+        }
+    }
     public void UpdateStateAnimal()
     {
 
@@ -122,27 +137,7 @@ public class ConfigAnimal :  MonoBehaviour
 
 
 
-    [ProButton]
-    public void chanegStateHungry()
-    {
-        stateAnimal = ConfigAnimal.STATE_ANIMAL.Hungry;
-    }
-    [ProButton]
-    public void chanegStateSleep()
-    {
-        stateAnimal = ConfigAnimal.STATE_ANIMAL.Sleep;
-    }
-    [ProButton]
-    public void chanegStateWalkAround()
-    {
-        stateAnimal = ConfigAnimal.STATE_ANIMAL.MoveAround;
-    }
-    [ProButton]
-    public void chanegStateMeeting()
-    {
-        stateAnimal = ConfigAnimal.STATE_ANIMAL.MeetingAnimal;
-    }
-   
+ 
     
 
 

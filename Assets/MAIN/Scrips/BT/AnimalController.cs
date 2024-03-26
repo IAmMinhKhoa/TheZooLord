@@ -57,54 +57,6 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     #region SET UP NODE FOR BEHAVIOR TREE
     private void GenerateBehaviorTree()
     {
-
-        /* BehaviorTree = new Selector("ROOT ANIMAL",
-
-              new Sequence("ANIMAL ARE SLEEP",
-                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep), //CHECK CURRENT STATE OF ANIMAL EQUAL SOME STATE_ANIMAL 
-                 new GoToTargetNode(configAnimal, TargetsMove[0]),
-                 new Timer(2f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus)),
-                 new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None)),
-
-
-               new Sequence("SEQUENCE WHEN HUNGRY OF ANIMAL",
-                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
-
-                 new Selector("SELECTOR IF HAVE FOOD IN STORAGE OR NOT",
-
-                     new Sequence("ANIMAL HUNGRY AND HAVE FOOD IN STORAGE",
-                         new StatusFoodStorge(foodStorage), //CHECK IN FOOD  STORAGE ? NULL
-                         new GoToTargetNode(configAnimal, foodStorage.transform),
-                         new EatNode(configAnimal, foodStorage), //DO LOGIC, ANIMATION OF EAT
-                         new Timer(3, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.FeedAnimal, objectStatus)),
-                         new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None)),
-
-                     new Sequence("ANIMAL HUNGRY AND NOT HAVE FOOD",
-                         new GoToTargetNode(configAnimal, TargetsMove[2]),
-                         new Timer(2, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus)))
-                    )
-               ),
-
-               new Sequence("MEETING OTHER ANIMAL",
-                 new MeetingNode(configAnimal, otherAnimal),//CHECK IN ANIMAL CAN MEETING ?
-                 new InRangeNode(configAnimal, otherAnimal, ConfigAnimal.STATE_ANIMAL.Meeting), //CHECK IN AREA ANIMAL MEETING ? 
-                 new GoToTargetNode(configAnimal, otherAnimal),
-                 new Sequence("MEETING OTHER ANIMAL",
-                          new Timer(3f, new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, objectStatus)),
-                          new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Meeting, ConfigAnimal.STATE_ANIMAL.None))),
-
-
-            //MOVE AROUND MAP
-            new Sequence("STATE NONE",
-                     new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.None), //CHECK CURRENT STATE OF ANIMAL EQUAL SOME STATE_ANIMAL 
-                     new RandomSelector("RANDOM MOVING",
-                         new Sequence("GO AROUND",
-                             new GoAroundNode(TargetsMove, configAnimal),
-                             new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround, objectStatus)),
-                         new Sequence("GO TO TARGET IDLE",
-                             new GoToTargetNode(configAnimal, foodStorage.transform),
-                             new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Idle, objectStatus)))));*/
-
         BehaviorTree = new Selector("ROOT ANIMAL",
              new Sequence("ANIMAL ARE SLEEP",
                  new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep), 
@@ -150,12 +102,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
 
     #endregion
 
-   
-
-
-    #region Event Action
-
-    #endregion
+  
 
     #region Default Behavior Tree
     private IEnumerator RunBehaviorTree()
