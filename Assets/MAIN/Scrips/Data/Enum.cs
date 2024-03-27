@@ -1,6 +1,10 @@
 
 public enum EventID
 {
+    //---CAGE---
     OpenInteractCage,
-    CloseInteractCage
+    CloseInteractCage,
+    //---GIFT---
+    OpenInteractGift,
+    CloseInteractGift,
 }

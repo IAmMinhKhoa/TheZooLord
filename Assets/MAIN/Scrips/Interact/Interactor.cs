@@ -25,11 +25,17 @@ public class Interactor : MonoBehaviour
         this.Register(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Register(EventID.CloseInteractCage, OnTriggerExitCage);
     }
+    private void OnDestroy()
+    {
+        this.Unregister(EventID.OpenInteractCage, OnTriggerEnterCage);
+        this.Unregister(EventID.CloseInteractCage, OnTriggerExitCage);
+    }
 
-
+    #region TRIGGER CAGE
     public void OnTriggerEnterCage(object data)
     {
-        configCage = (ConfigCage)data;
+        GameObject temp = (GameObject)data;
+        configCage = temp.GetComponent<ConfigCage>();
         managerUI.OpenModalInteract();
     }
     public void OnTriggerExitCage(object data = null)
@@ -37,6 +43,8 @@ public class Interactor : MonoBehaviour
         configCage = null;
         managerUI.CloseModalInteract();
     }
+    #endregion
+
     #region Event UI Interact Cage
     public void OpenViewAnimals()
     {
@@ -88,9 +96,7 @@ public class Interactor : MonoBehaviour
     [ProButton]
     public void EatFoodAnimal()
     {
-        
-           configCage.foodStorage.SpamwnFood(1);
-        
+        configCage.foodStorage.SpamwnFood(1);  
     }
 
     private void OnDrawGizmos()

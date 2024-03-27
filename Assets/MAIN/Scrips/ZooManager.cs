@@ -31,6 +31,7 @@ public class ZooManager : MonoBehaviour
         UpdateTime();
         UpdateDayNightCycle();
         RotateSkybox();
+        
     }
 
     private void UpdateTime()

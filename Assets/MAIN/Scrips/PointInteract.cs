@@ -6,20 +6,22 @@ using UnityEngine.InputSystem.LowLevel;
 
 public class PointInteract : MonoBehaviour
 {
-    public ConfigCage configCage;
-
+    public GameObject ObjectData;
+    public EventID EventIdOnTrigger;
+    public EventID EventIdExitTrigger;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            this.Broadcast(EventID.OpenInteractCage, configCage);
+            this.Broadcast(EventIdOnTrigger, ObjectData);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            this.Broadcast(EventID.CloseInteractCage);
+            this.Broadcast(EventIdExitTrigger);
         }
     }
+   
 }

@@ -75,8 +75,9 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                         new EatNode(configAnimal, foodStorage)),
 
                     new Sequence("NOT FOOD IN STORAGE",
-                        new GoToTargetNode(configAnimal, TargetsMove[2]),
-                        new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus))
+                     new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus),
+                        new GoToTargetNode(configAnimal, TargetsMove[2]))
+                       
                     )
                 ),
 

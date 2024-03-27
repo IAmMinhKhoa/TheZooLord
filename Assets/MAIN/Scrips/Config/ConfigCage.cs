@@ -14,6 +14,7 @@ public class ConfigCage : MonoBehaviour
     public void OpenViewCage()
     {
         cameraCage.gameObject.SetActive(true);
+        SwitchToNextTarget();
     }
     public void CloseViewCage()
     {

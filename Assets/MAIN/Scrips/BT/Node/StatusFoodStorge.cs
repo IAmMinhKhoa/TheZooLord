@@ -21,7 +21,7 @@ public class StatusFoodStorge : Node
     {
         if(foodStorage!= null)
         {
-            if (foodStorage.Foods.Count != 0) return NodeStatus.Success;
+            if (foodStorage.GetCoutCurrentFoodStorage() != 0) return NodeStatus.Success;
         }
         return NodeStatus.Failure;
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class ListenManager : Singleton<ListenManager>
 {
-    private Dictionary<EventID, Action<object>> listeners = new Dictionary<EventID, Action<object>>();
+    public Dictionary<EventID, Action<object>> listeners = new Dictionary<EventID, Action<object>>();
 
     #region Register, Unregister, Broadcast
     public void Register(EventID id, Action<object> action)
@@ -25,6 +25,7 @@ public class ListenManager : Singleton<ListenManager>
             listeners[id] += action;
         }
     }
+
     public void Unregister(EventID id, Action<object> action)
     {
 

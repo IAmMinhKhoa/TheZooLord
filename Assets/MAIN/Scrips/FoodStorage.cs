@@ -1,5 +1,6 @@
     using System.Collections;
     using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,11 +10,11 @@ using UnityEngine;
         public int maxQuanlityFoodInStorage = 3;
 
         public List<SOFood> SOFoods =new List<SOFood>();
+        
+        protected List<GameObject> Foods = new List<GameObject>();
 
-   // [HideInInspector]
-        public List<GameObject> Foods = new List<GameObject>();
-
-        public void SpamwnFood(int index)
+ 
+    public void SpamwnFood(int index)
         {
             if(Foods.Count<maxQuanlityFoodInStorage)
             {                                                                       
@@ -23,23 +24,24 @@ using UnityEngine;
             }    
         }
 
-        public void ReduceFood()
+        public void ReduceFood(object data = null)
         {
-        if (Foods.Count > 0)
-        {
-            try
+            if (Foods.Count > 0)
             {
-                Destroy(Foods[0]);
-                Foods.RemoveAt(0);
-            }
-            catch
-            {
-                ReduceFood();
+                try
+                {
+                    Destroy(Foods[0]);
+                    Foods.RemoveAt(0);
+                }
+                catch
+                {
+                    ReduceFood();
+                }
             }
         }
-        
-
-
+    public int GetCoutCurrentFoodStorage()
+    {
+        return Foods.Count;
     }
-
+  
     }
