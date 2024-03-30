@@ -21,7 +21,7 @@ public class Puzzle : MonoBehaviour
     private void Awake()
     {
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
-        rightPosition = transform.position;
+        rightPosition = transform.localPosition;
         Instance = this;
     }
 
@@ -34,7 +34,7 @@ public class Puzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, rightPosition) < distanceRight)
+        if (Vector3.Distance(transform.localPosition, rightPosition) < distanceRight)
         {
             if (!selected && !inRightPosition)
             {
@@ -45,13 +45,7 @@ public class Puzzle : MonoBehaviour
             }
         } else
         {
-            
-            transform.position = initialPosition;
+            transform.localPosition = initialPosition;
         }
     }
-
-    //public void SetInitialPosition(Puzzle puzzle, )
-    //{
-    //    puzzle.initialPosition = 
-    //}
 }

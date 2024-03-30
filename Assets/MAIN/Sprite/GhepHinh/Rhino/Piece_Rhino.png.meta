@@ -144,10 +144,10 @@ TextureImporter:
       name: Piece_Rhino_0
       rect:
         serializedVersion: 2
-        x: 492
-        y: 921
-        width: 609
-        height: 1292
+        x: 788
+        y: 884
+        width: 353
+        height: 1152
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,8 +155,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 37558326fda5815468ed892fddebda7b
-      internalID: -895246005
+      spriteID: 3f6c6d11055f1ea47b98b245283e1b84
+      internalID: -350619266
       vertices: []
       indices: 
       edges: []
@@ -165,10 +165,10 @@ TextureImporter:
       name: Piece_Rhino_1
       rect:
         serializedVersion: 2
-        x: 1932
-        y: 1480
-        width: 634
-        height: 923
+        x: 1307
+        y: 824
+        width: 528
+        height: 1373
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,8 +176,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9d9e23c5db90894439ff9e6e47fd778f
-      internalID: -864935365
+      spriteID: e898b4c730d156745b8a0b826623cf32
+      internalID: 2069604562
       vertices: []
       indices: 
       edges: []
@@ -186,10 +186,10 @@ TextureImporter:
       name: Piece_Rhino_2
       rect:
         serializedVersion: 2
-        x: 2848
-        y: 1875
-        width: 250
-        height: 572
+        x: 1976
+        y: 1362
+        width: 620
+        height: 955
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,8 +197,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd2dfa06ff8c5c748928855a20351054
-      internalID: -5369060
+      spriteID: 621ef7510b4edb448a1c30df96ad90b5
+      internalID: 846517759
       vertices: []
       indices: 
       edges: []
@@ -207,10 +207,10 @@ TextureImporter:
       name: Piece_Rhino_3
       rect:
         serializedVersion: 2
-        x: 3233
-        y: 1480
-        width: 207
-        height: 373
+        x: 2826
+        y: 1509
+        width: 240
+        height: 694
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,8 +218,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 00981aef57be9764fa2769d1f32fd42f
-      internalID: -2024407175
+      spriteID: a8053ff0fc2a32742bb495fb38cc4d32
+      internalID: -1329597540
       vertices: []
       indices: 
       edges: []
@@ -228,10 +228,10 @@ TextureImporter:
       name: Piece_Rhino_4
       rect:
         serializedVersion: 2
-        x: 1333
-        y: 426
-        width: 528
-        height: 990
+        x: 2214
+        y: 600
+        width: 297
+        height: 572
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -239,29 +239,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9462e285b9f1f304e9ec890dbe362a20
-      internalID: -1683491517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Piece_Rhino_5
-      rect:
-        serializedVersion: 2
-        x: 2641
-        y: 537
-        width: 418
-        height: 607
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 732a1a3a4c691664abdc8b2858e37a26
-      internalID: 157802528
+      spriteID: f07ac73096f75db4781f94841b1db755
+      internalID: -505991344
       vertices: []
       indices: 
       edges: []
@@ -269,7 +248,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 62fdc9ab2f3c0b144b75255634935f3c
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -277,12 +256,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Piece_Rhino_0: -895246005
-      Piece_Rhino_2: -5369060
-      Piece_Rhino_4: -1683491517
-      Piece_Rhino_5: 157802528
-      Piece_Rhino_1: -864935365
-      Piece_Rhino_3: -2024407175
+      Piece_Rhino_0: -350619266
+      Piece_Rhino_2: 846517759
+      Piece_Rhino_4: -505991344
+      Piece_Rhino_1: 2069604562
+      Piece_Rhino_3: -1329597540
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

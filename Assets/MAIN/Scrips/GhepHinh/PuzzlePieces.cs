@@ -13,6 +13,9 @@ public class PuzzlePieces : MonoBehaviour
     int OIL = 1;
 
     PuzzleManager puzzleManager;
+
+    private RaycastHit2D hit;
+    private Vector3 mousePoint;
     //Hint hint;
 
     private void Awake()
@@ -35,7 +38,7 @@ public class PuzzlePieces : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.transform != null && hit.transform.CompareTag("Puzzle"))
             {
                 if (!hit.transform.GetComponent<Puzzle>().inRightPosition)
@@ -60,8 +63,8 @@ public class PuzzlePieces : MonoBehaviour
 
         if (selectedPiece != null)
         {
-            Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            selectedPiece.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
+            mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            selectedPiece.transform.localPosition = new Vector3(mousePoint.x, mousePoint.y, 0);
         }
     }
 }
