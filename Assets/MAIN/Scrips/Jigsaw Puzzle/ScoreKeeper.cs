@@ -5,7 +5,6 @@ using UnityEngine;
 public class ScoreKeeper : MonoBehaviour
 {
     int correctPieces = 0;
-    [SerializeField] GameObject[] pieces;
     // Start is called before the first frame update
 
     public int GetCorrectPieces()

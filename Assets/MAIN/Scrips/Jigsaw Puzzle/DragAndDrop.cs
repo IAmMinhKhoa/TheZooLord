@@ -23,35 +23,35 @@ public class DragAndDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(scoreKeeper.GetCorrectPieces() == pieces)
+        if (scoreKeeper.GetCorrectPieces() == pieces)
         {
             isComplete = true;
             return;
         }
-        if(Input.GetMouseButtonDown(0) && !isComplete && !hint.isHintActive)
+        if (Input.GetMouseButtonDown(0) && !isComplete && !hint.isHintActive)
         {
             RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if(hit.transform.CompareTag("Puzzle"))
-            {     
-                if(!hit.transform.GetComponent<Piece>().inRightPosition)
+            if (hit.transform.CompareTag("Puzzle"))
+            {
+                if (!hit.transform.GetComponent<Piece>().inRightPosition)
                 {
-                    selectedPiece = hit.transform.gameObject;    
+                    selectedPiece = hit.transform.gameObject;
                     selectedPiece.GetComponent<Piece>().selected = true;
                     selectedPiece.GetComponent<SortingGroup>().sortingOrder = OIL;
                     OIL++;
                 }
             }
         }
-        
-        if(Input.GetMouseButtonUp(0))
+
+        if (Input.GetMouseButtonUp(0))
         {
-            if(selectedPiece != null)
+            if (selectedPiece != null)
             {
                 selectedPiece.GetComponent<Piece>().selected = false;
                 selectedPiece = null;
@@ -63,6 +63,5 @@ public class DragAndDrop : MonoBehaviour
             Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             selectedPiece.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
         }
-
     }
 }

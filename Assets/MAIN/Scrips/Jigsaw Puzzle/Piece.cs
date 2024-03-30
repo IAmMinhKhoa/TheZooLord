@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 public class Piece : MonoBehaviour
 {
     private Vector3 rightPosition;
+
     public bool inRightPosition;
     public bool selected;
 
@@ -14,13 +15,13 @@ public class Piece : MonoBehaviour
     private void Awake()
     {
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+        rightPosition = transform.position;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        rightPosition = transform.position;
-        transform.position = new Vector3(Random.Range(9.6f, 15.5f), Random.Range(-1.59f, -5f));
+        
     }
 
     // Update is called once per frame

@@ -16,7 +16,7 @@ TagManager:
   - enemy
   - Animal
   - Puzzle
-  - 
+  - VFX
   - 
   - 
   - 
@@ -48,4 +48,7 @@ TagManager:
     locked: 0
   - name: Puzzle Image
     uniqueID: 3484500163
+    locked: 0
+  - name: VFX
+    uniqueID: 926123135
     locked: 0
