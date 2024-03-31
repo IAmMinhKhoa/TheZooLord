@@ -12,7 +12,7 @@ public class PuzzlePieces : MonoBehaviour
     [SerializeField] GameObject selectedPiece;
     int OIL = 1;
 
-    PuzzleManager puzzleManager;
+    AnimalManager aniamlManager;
 
     private RaycastHit2D hit;
     private Vector3 mousePoint;
@@ -20,7 +20,7 @@ public class PuzzlePieces : MonoBehaviour
 
     private void Awake()
     {
-        puzzleManager = FindObjectOfType<PuzzleManager>();
+        aniamlManager = FindObjectOfType<AnimalManager>();
         //hint = FindObjectOfType<Hint>();
     }
     // Start is called before the first frame update
@@ -32,7 +32,7 @@ public class PuzzlePieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (puzzleManager.isComplete)
+        if (aniamlManager.isComplete)
         {
             return;
         }
@@ -43,6 +43,7 @@ public class PuzzlePieces : MonoBehaviour
             {
                 if (!hit.transform.GetComponent<Puzzle>().inRightPosition)
                 {
+                    PuzzleManager.instance.PlayPickUp();
                     selectedPiece = hit.transform.gameObject;
                     selectedPiece.GetComponent<Puzzle>().selected = true;
                     selectedPiece.GetComponent<SortingGroup>().sortingOrder = OIL;

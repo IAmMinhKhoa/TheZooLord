@@ -16,6 +16,8 @@ public class Puzzle : MonoBehaviour
     public bool inRightPosition;
     public bool selected;
 
+    private bool soundWrong;
+
     ScoreKeeper scoreKeeper;
 
     private void Awake()
@@ -38,6 +40,7 @@ public class Puzzle : MonoBehaviour
         {
             if (!selected && !inRightPosition)
             {
+                PuzzleManager.instance.PlayDropDownTrue();
                 transform.position = rightPosition;
                 inRightPosition = true;
                 scoreKeeper.IncrementCorrectPieces();
@@ -45,6 +48,10 @@ public class Puzzle : MonoBehaviour
             }
         } else
         {
+            if(!selected && transform.localPosition != initialPosition)
+            {
+                PuzzleManager.instance.PlayDropDownWrong();
+            }
             transform.localPosition = initialPosition;
         }
     }

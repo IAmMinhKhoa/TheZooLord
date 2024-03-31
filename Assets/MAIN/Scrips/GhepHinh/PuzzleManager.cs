@@ -4,93 +4,41 @@ using UnityEngine;
 
 public class PuzzleManager : MonoBehaviour
 {
+    public static PuzzleManager instance;
+
     [SerializeField] ParticleSystem winVFX;
 
-    [SerializeField] GameObject parentPieces;
-    [SerializeField] GameObject parentTarget;
+    [SerializeField] AudioSource SFXSource;
 
 
-    [SerializeField] List<GameObject> listPuzzlePieces;
-    [SerializeField] List<GameObject> listTarget;
-    [SerializeField] GameObject winCanvas;
-
-    [SerializeField] GameObject puzzleImage;
-
-    ScoreKeeper scoreKeeper;
-
-    public bool isComplete = false;
+    [Header("Audio Clip")]
+    [SerializeField] AudioClip pickUp;
+    [SerializeField] AudioClip dropDownTrue;
+    [SerializeField] AudioClip dropDownWrong;
+    [SerializeField] AudioClip clapWin;
 
     private void Awake()
     {
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
-        puzzleImage.SetActive(false);
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        listPuzzlePieces = new List<GameObject>();
-        listTarget = new List<GameObject>();
-        GetPieceFromParent();
-        GetTargetFromParent();
-
-
-        //ShuffleGameObjectList(listPuzzlePieces);
-        ChangePosPiece();
-        winCanvas.SetActive(false);
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayPickUp()
     {
-        if (scoreKeeper.GetCorrectPieces() == listPuzzlePieces.Count)
-        {
-            isComplete = true;
-            //winCanvas.SetActive(true);
-            winVFX.Play();
-            puzzleImage.SetActive(true);
-        }
+        SFXSource.PlayOneShot(pickUp);
     }
 
-    void GetPieceFromParent()
+    public void PlayDropDownTrue()
     {
-        listPuzzlePieces = new List<GameObject>();
-
-        for (int i = 0; i < parentPieces.transform.childCount; i++)
-        {
-            GameObject child = parentPieces.transform.GetChild(i).gameObject;
-            listPuzzlePieces.Add(child);
-        }
+        SFXSource.PlayOneShot(dropDownTrue);
     }
 
-    void GetTargetFromParent()
+    public void PlayDropDownWrong()
     {
-        for (int i = 0; i < parentTarget.transform.childCount; i++)
-        {
-            GameObject child = parentTarget.transform.GetChild(i).gameObject;
-            listTarget.Add(child);
-        }
+        SFXSource.PlayOneShot(dropDownWrong);
     }
 
-    void ChangePosPiece()
-    {
-        for(int i = 0; i < listTarget.Count; i++)
-        {
-            listPuzzlePieces[i].transform.position = listTarget[i].transform.position;
-            listPuzzlePieces[i].GetComponent<Puzzle>().initialPosition = (Vector3)listTarget[i].transform.position;
-        }    
-    }
-
-    private void ShuffleGameObjectList<GameObject>(List<GameObject> list)
-    {
-        
-        int n = list.Count;
-        while (n > 1)
-        {
-            n--;
-            int k = Random.Range(0, n + 1);
-            GameObject temp = list[k];
-            list[k] = list[n];
-            list[n] = temp;
-        }
+    public void PlayClapWin() {
+        winVFX.Play();
+        SFXSource.PlayOneShot(clapWin);
     }
 }
