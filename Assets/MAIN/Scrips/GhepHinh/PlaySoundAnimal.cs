@@ -9,20 +9,43 @@ public class PlaySoundAnimal : MonoBehaviour
     [SerializeField] AudioClip soundName;
     [SerializeField] AudioSource audioSource;
 
+    [SerializeField] GameObject handObject;
+
     Animator animator;
+    Animator handAnimator;
+
+    private bool canClick = true;
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();       
+        animator = GetComponent<Animator>();
+        handAnimator = handObject.GetComponent<Animator>();
     }
     private void Start()
     {
-       
-        StartCoroutine(PlayDelayedSound(2));
+        handObject.SetActive(false);
+        StartCoroutine(PlayDelayedSound(3));
     }
+
+    private void Update()
+    {
+        if (!canClick && !audioSource.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("YourAnimationName"))
+        {
+            canClick = true;
+            handObject.SetActive(true);
+        }
+    }
+
     public void OnMouseDown()
     {
-        audioSource.PlayOneShot(soundAnimal);
+        if (canClick)
+        {
+            handObject.SetActive(false);
+            audioSource.PlayOneShot(soundAnimal);
+            animator.SetTrigger("Complete");
+
+            canClick = false;
+        }
     }
 
     private System.Collections.IEnumerator PlayDelayedSound(float delayTime)
@@ -31,5 +54,6 @@ public class PlaySoundAnimal : MonoBehaviour
 
         audioSource.PlayOneShot(soundName);
         animator.SetTrigger("Complete");
+        handObject.SetActive(true);
     }
 }

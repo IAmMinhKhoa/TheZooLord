@@ -12,15 +12,12 @@ public class PuzzlePieces : MonoBehaviour
     [SerializeField] GameObject selectedPiece;
     int OIL = 1;
 
-    AnimalManager aniamlManager;
-
     private RaycastHit2D hit;
     private Vector3 mousePoint;
     //Hint hint;
 
     private void Awake()
     {
-        aniamlManager = FindObjectOfType<AnimalManager>();
         //hint = FindObjectOfType<Hint>();
     }
     // Start is called before the first frame update
@@ -32,7 +29,7 @@ public class PuzzlePieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (aniamlManager.isComplete)
+        if (AnimalManager.Instance?.isComplete == true)
         {
             return;
         }
@@ -66,6 +63,7 @@ public class PuzzlePieces : MonoBehaviour
         {
             mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             selectedPiece.transform.localPosition = new Vector3(mousePoint.x, mousePoint.y, 0);
+            Debug.Log("dragging");
         }
     }
 }

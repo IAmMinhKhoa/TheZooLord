@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AnimalManager : MonoBehaviour
 {
-    public static AnimalManager Instance;
+    public static AnimalManager Instance { get; private set; }
 
     [SerializeField] GameObject parentPieces;
     [SerializeField] GameObject parentTarget;
@@ -12,7 +12,7 @@ public class AnimalManager : MonoBehaviour
     [SerializeField] List<GameObject> listPuzzlePieces;
     [SerializeField] List<GameObject> listTarget;
 
-    [SerializeField] GameObject puzzleImage;
+    [SerializeField] GameObject completeObject;
 
     ScoreKeeper scoreKeeper;
 
@@ -22,7 +22,7 @@ public class AnimalManager : MonoBehaviour
     {
         Instance = this;
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
-        puzzleImage.SetActive(false);
+        completeObject.SetActive(false);
     }
     // Start is called before the first frame update
     void Start()
@@ -44,7 +44,7 @@ public class AnimalManager : MonoBehaviour
         {
             isComplete = true;
             PuzzleManager.instance.PlayClapWin();
-            puzzleImage.SetActive(true);
+            completeObject.SetActive(true);
         }
     }
 
