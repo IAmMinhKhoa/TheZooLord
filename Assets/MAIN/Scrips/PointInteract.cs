@@ -14,6 +14,7 @@ public class PointInteract : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             this.Broadcast(EventIdOnTrigger, ObjectData);
+            Debug.Log("trigger:" + ObjectData);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -21,6 +22,7 @@ public class PointInteract : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             this.Broadcast(EventIdExitTrigger);
+            Debug.Log("OUT trigger:" + ObjectData);
         }
     }
    

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.cyborgAssets.inspectorButtonPro;
+using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,17 +19,26 @@ public class Interactor : MonoBehaviour
 
     [SerializeField] private int _numFound;
 
-    [HideInInspector]
+ //   [HideInInspector]
     public ConfigCage configCage;
+  //  [HideInInspector]
+    public GiftController giftControl;
     private void Start()
     {
+        //-- INTERACT CAGE --
         this.Register(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Register(EventID.CloseInteractCage, OnTriggerExitCage);
+        //-- INTERACT CAGE --
+        this.Register(EventID.OpenInteractGift, OnTriggerEnterGift);
+        this.Register(EventID.CloseInteractGift, OnTriggerExitGift);
     }
     private void OnDestroy()
     {
         this.Unregister(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Unregister(EventID.CloseInteractCage, OnTriggerExitCage);
+
+        this.Unregister(EventID.OpenInteractGift, OnTriggerEnterGift);
+        this.Unregister(EventID.CloseInteractGift, OnTriggerExitGift);
     }
 
     #region TRIGGER CAGE
@@ -44,6 +54,19 @@ public class Interactor : MonoBehaviour
         managerUI.CloseModalInteract();
     }
     #endregion
+    #region TRIGGER GIFT 
+    public void OnTriggerEnterGift (object data)
+    {
+        GameObject temp = (GameObject)data;
+        giftControl = temp.GetComponent<GiftController>();
+        giftControl.OpenModal();
+    }
+    public void OnTriggerExitGift(object data = null)
+    {
+        giftControl.CloseModal();
+        giftControl = null;
+    }
+    #endregion 
 
     #region Event UI Interact Cage
     public void OpenViewAnimals()
