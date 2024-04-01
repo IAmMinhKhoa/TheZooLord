@@ -14,14 +14,11 @@ public class JigsawGameManager : MonoBehaviour
 
     JigsawPieces jigsawPieces;
 
-    ScoreKeeper scoreKeeper;
-
     public bool isComplete = false;
 
     private void Awake()
     {
         jigsawPieces = FindObjectOfType<JigsawPieces>();
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
     // Start is called before the first frame update
     void Start()
@@ -36,7 +33,7 @@ public class JigsawGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scoreKeeper.GetCorrectPieces() == listJigsawPieces.Count)
+        if (ScoreKeeper.instance.GetCorrectPieces() == listJigsawPieces.Count)
         {
             isComplete = true;
             winCanvas.SetActive(true);

@@ -10,14 +10,12 @@ public class DragAndDrop : MonoBehaviour
 
     [SerializeField] int pieces;
 
-    ScoreKeeper scoreKeeper;
     Hint hint;
 
     public bool isComplete = false;
 
     private void Awake()
     {
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
         hint = FindObjectOfType<Hint>();
     }
     // Start is called before the first frame update
@@ -29,7 +27,7 @@ public class DragAndDrop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (scoreKeeper.GetCorrectPieces() == pieces)
+        if (ScoreKeeper.instance.GetCorrectPieces() == pieces)
         {
             isComplete = true;
             return;

@@ -1,6 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class AnimalManager : MonoBehaviour
 {
@@ -14,37 +15,58 @@ public class AnimalManager : MonoBehaviour
 
     [SerializeField] GameObject completeObject;
 
-    ScoreKeeper scoreKeeper;
+    public bool isComplete = false;   //cần sửa khi thắng
 
-    public bool isComplete = false;
+    ScoreKeeper scoreKeeper;
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+        {
+            Instance = this;
+        } else
+        {
+            Destroy(Instance);
+        }
+        listPuzzlePieces = new List<GameObject>();
+        listTarget = new List<GameObject>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
+    }
+
+    private void OnEnable()
+    {
+        isComplete = false;
         completeObject.SetActive(false);
+        GetPieceFromParent();
+        GetTargetFromParent();
+        ChangePosPiece();
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        listPuzzlePieces = new List<GameObject>();
-        listTarget = new List<GameObject>();
-        GetPieceFromParent();
-        GetTargetFromParent();
+        //listPuzzlePieces = new List<GameObject>();
+        //listTarget = new List<GameObject>();
+        //GetPieceFromParent();
+        //GetTargetFromParent();
 
 
-        //ShuffleGameObjectList(listPuzzlePieces);
-        ChangePosPiece();
+        ////ShuffleGameObjectList(listPuzzlePieces);
+        //ChangePosPiece();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(isComplete);  
         if (scoreKeeper.GetCorrectPieces() == listPuzzlePieces.Count && !isComplete)
         {
             isComplete = true;
             PuzzleManager.instance.PlayClapWin();
             completeObject.SetActive(true);
+            UnlockNewLevel();
+            scoreKeeper.ResetCorrectPieces();
+            
         }
     }
 
@@ -61,6 +83,8 @@ public class AnimalManager : MonoBehaviour
 
     void GetTargetFromParent()
     {
+        listTarget = new List<GameObject>();
+
         for (int i = 0; i < parentTarget.transform.childCount; i++)
         {
             GameObject child = parentTarget.transform.GetChild(i).gameObject;
@@ -72,6 +96,7 @@ public class AnimalManager : MonoBehaviour
     {
         for(int i = 0; i < listTarget.Count; i++)
         {
+            listPuzzlePieces[i].GetComponent<Puzzle>().rightPosition = listPuzzlePieces[i].transform.position;
             listPuzzlePieces[i].transform.position = listTarget[i].transform.position;
             listPuzzlePieces[i].GetComponent<Puzzle>().initialPosition = (Vector3)listTarget[i].transform.position;
         }    
@@ -88,6 +113,19 @@ public class AnimalManager : MonoBehaviour
             GameObject temp = list[k];
             list[k] = list[n];
             list[n] = temp;
+        }
+    }
+
+    void UnlockNewLevel()
+    {
+        string[] levelNumberString = gameObject.name.Split(' ');
+        int levelNumber = int.Parse(levelNumberString[1]);
+        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", levelNumber);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
+
         }
     }
 

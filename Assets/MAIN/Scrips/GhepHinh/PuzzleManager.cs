@@ -22,12 +22,17 @@ public class PuzzleManager : MonoBehaviour
     [Header("Level Manager")]
     [SerializeField] GameObject level;
     private GameObject[] levelAnimalArray;
-    public int levelPress = -1;
 
 
     private void Awake()
     {
-        instance = this;
+        if(instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Destroy(instance);
+        }
         levelAnimalArray = level.GetComponentsInChildren<Transform>(true)
         .Where(obj => obj.CompareTag("Level"))
         .Select(obj => obj.gameObject)
@@ -44,14 +49,7 @@ public class PuzzleManager : MonoBehaviour
 
     private void Update()
     {
-        for (int i = 0; i < levelAnimalArray.Length; i++)
-        {
-            if(i == levelPress)
-            {
-                levelAnimalArray[i].SetActive(true);
-                break;
-            }
-        }
+
     }
 
     public void PlayPickUp()
@@ -72,5 +70,17 @@ public class PuzzleManager : MonoBehaviour
     public void PlayClapWin() {
         winVFX.Play();
         SFXSource.PlayOneShot(clapWin);
+    }
+
+    public void SetActiveLevel(int levelPress)
+    {
+        for (int i = 0; i < levelAnimalArray.Length; i++)
+        {
+            if (i == levelPress)
+            {
+                levelAnimalArray[i].SetActive(true);
+                break;
+            }
+        }
     }
 }

@@ -10,11 +10,9 @@ public class Piece : MonoBehaviour
     public bool inRightPosition;
     public bool selected;
 
-    ScoreKeeper scoreKeeper;
 
     private void Awake()
     {
-        scoreKeeper = FindObjectOfType<ScoreKeeper>();
         rightPosition = transform.position;
     }
 
@@ -33,7 +31,7 @@ public class Piece : MonoBehaviour
             {
                 transform.position = rightPosition;
                 inRightPosition = true;
-                scoreKeeper.IncrementCorrectPieces();
+                ScoreKeeper.instance.IncrementCorrectPieces();
                 GetComponent<SortingGroup>().sortingOrder = 0;
             }
         }        

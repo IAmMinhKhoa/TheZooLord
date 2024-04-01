@@ -29,17 +29,22 @@ public class PuzzlePieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AnimalManager.Instance?.isComplete == true)
-        {
-            return;
+        if (AnimalManager.Instance != null) {
+            if (AnimalManager.Instance.isComplete == true)
+            {
+                Debug.Log(AnimalManager.Instance.isComplete);
+                return;
+            }
         }
         if (Input.GetMouseButtonDown(0))
         {
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.transform != null && hit.transform.CompareTag("Puzzle"))
             {
+                Debug.Log(hit.transform.gameObject.name);
                 if (!hit.transform.GetComponent<Puzzle>().inRightPosition)
                 {
+                    Debug.Log(hit.transform.gameObject.name);   
                     PuzzleManager.instance.PlayPickUp();
                     selectedPiece = hit.transform.gameObject;
                     selectedPiece.GetComponent<Puzzle>().selected = true;

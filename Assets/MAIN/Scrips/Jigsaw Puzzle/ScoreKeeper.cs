@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class ScoreKeeper : MonoBehaviour
 {
+    public static ScoreKeeper instance;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        } else
+        {
+            Destroy(instance);
+        }
+    }
     int correctPieces = 0;
     // Start is called before the first frame update
 
@@ -15,5 +27,10 @@ public class ScoreKeeper : MonoBehaviour
     public void IncrementCorrectPieces()
     {
         correctPieces++;
+    }
+
+    public void ResetCorrectPieces()
+    {
+        correctPieces = 0;
     }
 }
