@@ -6,10 +6,16 @@ using UnityEngine;
 
 public class ConfigCage : MonoBehaviour
 {
+    public SOAnimal SoAnimal;
     public CinemachineFreeLook cameraCage;
     public List<ConfigAnimal> objAnimals;
+    public Transform view_Environment;
+    public Transform view_Foods;
+    public Transform view_Characteristic;
+
+
     public FoodStorage foodStorage;
-    private int currentTargetIndex = 0;
+    private int _currentTargetIndex = 0;
 
     public void OpenViewCage()
     {
@@ -21,26 +27,43 @@ public class ConfigCage : MonoBehaviour
         cameraCage.gameObject.SetActive(false);
     }
 
-    #region Switch Camera to Animals
+    #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
     [ProButton]
+    public void SwitchToViewEnvironment()
+    {
+        SetTartgetCam(view_Environment);
+    }
+    [ProButton]
+    public void SwitchToViewFoods()
+    {
+        SetTartgetCam(view_Foods);
+    }
+    [ProButton]
+    public void SwitchToViewCharacteristic()
+    {
+        SetTartgetCam(view_Characteristic);
+    }
+    #endregion
+
+    #region Switch Camera to Animals
+
     public void SwitchToNextTarget()
     {
-
-        currentTargetIndex++;
-        if (currentTargetIndex >= objAnimals.Count)
+        _currentTargetIndex++;
+        if (_currentTargetIndex >= objAnimals.Count)
         {
-            currentTargetIndex = 0;
+            _currentTargetIndex = 0;
         }
 
         SetCameraTarget();
     }
-    [ProButton]
+    
     public void SwitchToPreviousTarget()
     {
-        currentTargetIndex--;
-        if (currentTargetIndex < 0)
+        _currentTargetIndex--;
+        if (_currentTargetIndex < 0)
         {
-            currentTargetIndex = objAnimals.Count - 1;
+            _currentTargetIndex = objAnimals.Count - 1;
         }
 
         SetCameraTarget();
@@ -48,13 +71,17 @@ public class ConfigCage : MonoBehaviour
 
     private void SetCameraTarget()
     {
-        if (currentTargetIndex >= 0 && currentTargetIndex < objAnimals.Count)
+        if (_currentTargetIndex >= 0 && _currentTargetIndex < objAnimals.Count)
         {
-            Transform targetTransform = objAnimals[currentTargetIndex].transform;
-            cameraCage.Follow = targetTransform;
-            cameraCage.LookAt = targetTransform;
+            Transform targetTransform = objAnimals[_currentTargetIndex].transform;
+            SetTartgetCam(targetTransform);
         }
     }
     #endregion
 
+    public void SetTartgetCam(Transform target)
+    {
+        cameraCage.Follow = target;
+        cameraCage.LookAt = target;
+    }
 }
