@@ -44,7 +44,6 @@ public class PuzzlePieces : MonoBehaviour
                 Debug.Log(hit.transform.gameObject.name);
                 if (!hit.transform.GetComponent<Puzzle>().inRightPosition)
                 {
-                    Debug.Log(hit.transform.gameObject.name);   
                     PuzzleManager.instance.PlayPickUp();
                     selectedPiece = hit.transform.gameObject;
                     selectedPiece.GetComponent<Puzzle>().selected = true;

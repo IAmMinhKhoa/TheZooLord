@@ -21,13 +21,8 @@ public class AnimalManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
-        {
-            Instance = this;
-        } else
-        {
-            Destroy(Instance);
-        }
+        Instance = this;
+
         listPuzzlePieces = new List<GameObject>();
         listTarget = new List<GameObject>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -35,38 +30,34 @@ public class AnimalManager : MonoBehaviour
 
     private void OnEnable()
     {
-        isComplete = false;
+        //isComplete = false;
         completeObject.SetActive(false);
         GetPieceFromParent();
         GetTargetFromParent();
         ChangePosPiece();
 
     }
+
+    private void OnDisable()
+    {
+        isComplete = false;
+        ResetPosPiece();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        //listPuzzlePieces = new List<GameObject>();
-        //listTarget = new List<GameObject>();
-        //GetPieceFromParent();
-        //GetTargetFromParent();
-
-
-        ////ShuffleGameObjectList(listPuzzlePieces);
-        //ChangePosPiece();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isComplete);  
         if (scoreKeeper.GetCorrectPieces() == listPuzzlePieces.Count && !isComplete)
         {
             isComplete = true;
             PuzzleManager.instance.PlayClapWin();
             completeObject.SetActive(true);
             UnlockNewLevel();
-            scoreKeeper.ResetCorrectPieces();
-            
+            scoreKeeper.ResetCorrectPieces();  
         }
     }
 
@@ -96,10 +87,19 @@ public class AnimalManager : MonoBehaviour
     {
         for(int i = 0; i < listTarget.Count; i++)
         {
-            listPuzzlePieces[i].GetComponent<Puzzle>().rightPosition = listPuzzlePieces[i].transform.position;
+            listPuzzlePieces[i].GetComponent<Puzzle>().rightPosition = listPuzzlePieces[i].transform.position; 
             listPuzzlePieces[i].transform.position = listTarget[i].transform.position;
             listPuzzlePieces[i].GetComponent<Puzzle>().initialPosition = (Vector3)listTarget[i].transform.position;
         }    
+    }
+
+    void ResetPosPiece()
+    {
+        for (int i = 0; i < listPuzzlePieces.Count; i++)
+        {
+            listPuzzlePieces[i].transform.position = listPuzzlePieces[i].GetComponent<Puzzle>().rightPosition;
+        }
+        scoreKeeper.ResetCorrectPieces();
     }
 
     private void ShuffleGameObjectList<GameObject>(List<GameObject> list)
@@ -119,10 +119,12 @@ public class AnimalManager : MonoBehaviour
     void UnlockNewLevel()
     {
         string[] levelNumberString = gameObject.name.Split(' ');
-        int levelNumber = int.Parse(levelNumberString[1]);
+        int levelNumber = int.Parse(levelNumberString[1]) - 1;
         if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
         {
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber);
+            Debug.Log(levelNumber);
+            Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
+            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
             PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
             PlayerPrefs.Save();
 

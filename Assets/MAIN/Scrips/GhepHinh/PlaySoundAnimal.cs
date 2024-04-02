@@ -1,5 +1,6 @@
     using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlaySoundAnimal : MonoBehaviour
@@ -9,12 +10,13 @@ public class PlaySoundAnimal : MonoBehaviour
     [SerializeField] AudioClip soundName;
     [SerializeField] AudioSource audioSource;
 
+
     [SerializeField] GameObject handObject;
 
     Animator animator;
     Animator handAnimator;
 
-    private bool canClick = true;
+    private bool canClick;
 
     private void Awake()
     {
@@ -23,29 +25,35 @@ public class PlaySoundAnimal : MonoBehaviour
     }
     private void Start()
     {
-        handObject.SetActive(false);
-        StartCoroutine(PlayDelayedSound(3));
+
+    }
+
+    private void OnEnable()
+    {
+        DisableClickInteraction();
+        StartCoroutine(PlayDelayedSound(5));
     }
 
     private void Update()
     {
-        if (!canClick && !audioSource.isPlaying && !animator.GetCurrentAnimatorStateInfo(0).IsName("YourAnimationName"))
-        {
-            canClick = true;
-            handObject.SetActive(true);
-        }
+        Debug.Log(handObject.activeSelf);
     }
 
-    public void OnMouseDown()
+    public async void OnMouseDown()
     {
         if (canClick)
         {
-            handObject.SetActive(false);
             audioSource.PlayOneShot(soundAnimal);
             animator.SetTrigger("Complete");
+            DisableClickInteraction();
+    
+            await Task.Delay(2500);
 
-            canClick = false;
+            EnableClickInteraction();
+
         }
+
+
     }
 
     private System.Collections.IEnumerator PlayDelayedSound(float delayTime)
@@ -54,6 +62,21 @@ public class PlaySoundAnimal : MonoBehaviour
 
         audioSource.PlayOneShot(soundName);
         animator.SetTrigger("Complete");
+
+        yield return new WaitForSeconds(1.5f);
+
+        EnableClickInteraction();
+    }
+
+    void EnableClickInteraction()
+    {
         handObject.SetActive(true);
+        canClick = true;
+    }
+
+    void DisableClickInteraction()
+    {
+        handObject.SetActive(false);
+        canClick = false;
     }
 }

@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
     public void OpenLevel(int levelId)
     {
         levelCanvas.gameObject.SetActive(false);
-        puzzleManager.SetActiveLevel(levelId - 1);
+        puzzleManager.SetActiveLevel(levelId);
  
     }
 

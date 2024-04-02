@@ -18,7 +18,7 @@ public class Puzzle : MonoBehaviour
     private bool soundWrong;
 
 
-    private void OnEnable()
+    private void OnDisable()
     {
         inRightPosition = false;
         selected = false;
@@ -33,26 +33,24 @@ public class Puzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.localPosition, rightPosition) < distanceRight)
+        if (!selected)
         {
-           
-            
-            if (!selected && !inRightPosition)
+            if (Vector3.Distance(transform.localPosition, rightPosition) < distanceRight)
             {
-                PuzzleManager.instance.PlayDropDownTrue();
-                transform.position = rightPosition;
-                inRightPosition = true;
-                ScoreKeeper.instance.IncrementCorrectPieces();
-                GetComponent<SortingGroup>().sortingOrder = 0;
+                if (!inRightPosition)
+                {
+                    PuzzleManager.instance.PlayDropDownTrue();
+                    transform.position = rightPosition;
+                    inRightPosition = true;
+                    ScoreKeeper.instance.IncrementCorrectPieces();
+                    GetComponent<SortingGroup>().sortingOrder = 0;
+                }
             }
-        } else
-        {
-            if(!selected && transform.localPosition != initialPosition)
+            else if (transform.localPosition != initialPosition)
             {
                 PuzzleManager.instance.PlayDropDownWrong();
-                transform.localPosition = initialPosition; 
+                transform.localPosition = initialPosition;
             }
-            
         }
     }
 }

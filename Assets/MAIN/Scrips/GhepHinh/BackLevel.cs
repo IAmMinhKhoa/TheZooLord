@@ -7,6 +7,8 @@ public class BackLevel : MonoBehaviour
     [SerializeField] Canvas levelCanvas;
     [SerializeField] GameObject parentObject;
 
+    [SerializeField] ParticleSystem winVFX;
+
     private void Awake()
     {
         parentObject = transform.parent.gameObject;
@@ -14,6 +16,8 @@ public class BackLevel : MonoBehaviour
 
     private void OnMouseDown()
     {
+        //winVFX.Stop(); 
+        winVFX.Clear();
         parentObject.SetActive(false); 
         levelCanvas.gameObject.SetActive(true);
     }

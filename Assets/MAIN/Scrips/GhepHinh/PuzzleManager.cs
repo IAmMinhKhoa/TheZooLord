@@ -76,11 +76,20 @@ public class PuzzleManager : MonoBehaviour
     {
         for (int i = 0; i < levelAnimalArray.Length; i++)
         {
-            if (i == levelPress)
+            if (i == levelPress - 1)
             {
                 levelAnimalArray[i].SetActive(true);
                 break;
             }
         }
+    }
+   
+    public bool CheckWinComplete()
+    {
+        if (!SFXSource.isPlaying)
+        {
+            return true;
+        }
+        return false;
     }
 }
