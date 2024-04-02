@@ -28,9 +28,12 @@ public class Interactor : MonoBehaviour
         //-- INTERACT CAGE --
         this.Register(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Register(EventID.CloseInteractCage, OnTriggerExitCage);
-        //-- INTERACT CAGE --
+        //-- INTERACT GIFT --
         this.Register(EventID.OpenInteractGift, OnTriggerEnterGift);
         this.Register(EventID.CloseInteractGift, OnTriggerExitGift);
+        //-- INTERACT DETAIL PANEL ---
+        this.Register(EventID.OpenUiDetailAnimal, OnTriggerOpenDetailPanelAnimal);
+        this.Register(EventID.CloseUiDetailAnimal, OnTriggerExitDetailPanelAnimal);
     }
     private void OnDestroy()
     {
@@ -39,11 +42,29 @@ public class Interactor : MonoBehaviour
 
         this.Unregister(EventID.OpenInteractGift, OnTriggerEnterGift);
         this.Unregister(EventID.CloseInteractGift, OnTriggerExitGift);
+
+        this.Unregister(EventID.OpenUiDetailAnimal, OnTriggerOpenDetailPanelAnimal);
+        this.Unregister(EventID.CloseUiDetailAnimal, OnTriggerExitDetailPanelAnimal);
     }
+    #region TRIGGER DETAIL PANEL ANIMAL
+    public void OnTriggerOpenDetailPanelAnimal(object data)
+    {
+       
+    }
+    public void OnTriggerExitDetailPanelAnimal(object data = null)
+    {
+        
+    }
+    #endregion
 
     #region TRIGGER CAGE
     public void OnTriggerEnterCage(object data)
     {
+        if (data == null)
+        {
+            managerUI.OpenModalInteract();
+            return;
+        }
         GameObject temp = (GameObject)data;
         configCage = temp.GetComponent<ConfigCage>();
         managerUI.OpenModalInteract();

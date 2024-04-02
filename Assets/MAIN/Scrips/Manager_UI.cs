@@ -4,20 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-[System.Serializable]
-public class DataButton
-{
-    public Button btn;
-    public Image icon;
-}
+
 public class Manager_UI : MonoBehaviour
 {
+    public GameObject groupDetailPanelAnimal;
     public GameObject groupViewAnimalsUI;
     public GameObject groupInteractCageUI;
     public GameObject groupOverlayUI;
-    public List<DataButton> dataButtons;
 
-   
+    
+  
+
 
     public void OpenModalInteract()
     {
@@ -42,6 +39,16 @@ public class Manager_UI : MonoBehaviour
         SetModalActive(groupViewAnimalsUI, true);
     }
 
+    public void OpenModalOverView()
+    {
+        CloseAllModal();
+        SetModalActive(groupOverlayUI, true);
+    }
+    public void OpenModalDetailPanel()
+    {
+        CloseAllModal();
+        SetModalActive(groupDetailPanelAnimal, true);
+    }
     protected void SetModalActive(GameObject obj,bool boolean)
     {
         obj.SetActive(boolean);
