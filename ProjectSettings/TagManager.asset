@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Animal
+  - Puzzle
+  - Level
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - UI
   - enemy
   - Animal
-  - 
-  - 
+  - Puzzle
+  - VFX
   - 
   - 
   - 
@@ -41,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Pieces
+    uniqueID: 1232492715
+    locked: 0
+  - name: Puzzle Image
+    uniqueID: 3484500163
+    locked: 0
+  - name: VFX
+    uniqueID: 926123135
     locked: 0
