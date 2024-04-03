@@ -31,9 +31,7 @@ public class Interactor : MonoBehaviour
         //-- INTERACT GIFT --
         this.Register(EventID.OpenInteractGift, OnTriggerEnterGift);
         this.Register(EventID.CloseInteractGift, OnTriggerExitGift);
-        //-- INTERACT DETAIL PANEL ---
-        this.Register(EventID.OpenUiDetailAnimal, OnTriggerOpenDetailPanelAnimal);
-        this.Register(EventID.CloseUiDetailAnimal, OnTriggerExitDetailPanelAnimal);
+      
     }
     private void OnDestroy()
     {
@@ -43,17 +41,13 @@ public class Interactor : MonoBehaviour
         this.Unregister(EventID.OpenInteractGift, OnTriggerEnterGift);
         this.Unregister(EventID.CloseInteractGift, OnTriggerExitGift);
 
-        this.Unregister(EventID.OpenUiDetailAnimal, OnTriggerOpenDetailPanelAnimal);
-        this.Unregister(EventID.CloseUiDetailAnimal, OnTriggerExitDetailPanelAnimal);
+      
     }
     #region TRIGGER DETAIL PANEL ANIMAL
-    public void OnTriggerOpenDetailPanelAnimal(object data)
+    public void OpenDetailPanelAnimal()
     {
-       
-    }
-    public void OnTriggerExitDetailPanelAnimal(object data = null)
-    {
-        
+        managerUI.OpenModalDetailPanel();
+        managerUI.groupDetailPanelAnimal.GetComponent<DetailPanelAnimal>().configCage = configCage;
     }
     #endregion
 

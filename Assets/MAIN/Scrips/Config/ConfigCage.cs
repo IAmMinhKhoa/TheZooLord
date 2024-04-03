@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ConfigCage : MonoBehaviour
 {
+    
+
     public SOAnimal SoAnimal;
     public CinemachineFreeLook cameraCage;
     public List<ConfigAnimal> objAnimals;
@@ -13,19 +15,14 @@ public class ConfigCage : MonoBehaviour
     public Transform view_Foods;
     public Transform view_Characteristic;
 
+    public AudioSource audioClipCage;
 
     public FoodStorage foodStorage;
     private int _currentTargetIndex = 0;
+    #region PLAY SOUND
 
-    public void OpenViewCage()
-    {
-        cameraCage.gameObject.SetActive(true);
-        SwitchToNextTarget();
-    }
-    public void CloseViewCage()
-    {
-        cameraCage.gameObject.SetActive(false);
-    }
+    #endregion
+  
 
     #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
     [ProButton]
@@ -46,7 +43,15 @@ public class ConfigCage : MonoBehaviour
     #endregion
 
     #region Switch Camera to Animals
-
+    public void OpenViewCage()
+    {
+        cameraCage.gameObject.SetActive(true);
+        SwitchToNextTarget();
+    }
+    public void CloseViewCage()
+    {
+        cameraCage.gameObject.SetActive(false);
+    }
     public void SwitchToNextTarget()
     {
         _currentTargetIndex++;
@@ -81,6 +86,7 @@ public class ConfigCage : MonoBehaviour
 
     public void SetTartgetCam(Transform target)
     {
+        cameraCage.gameObject.SetActive(true);
         cameraCage.Follow = target;
         cameraCage.LookAt = target;
     }

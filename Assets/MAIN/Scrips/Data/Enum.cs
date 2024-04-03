@@ -12,7 +12,13 @@ public enum EventID
     //---GIFT---
     OpenInteractGift,
     CloseInteractGift,
-    //--- DETAIL PANEL ANIMAL
-    OpenUiDetailAnimal,
-    CloseUiDetailAnimal
+   
+}
+public enum SoundTypeInCage
+{
+    Chirp,
+    Environment,
+    Food,
+    Characteristic,
+    Conservationlevel
 }
