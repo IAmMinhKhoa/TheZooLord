@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,10 +13,23 @@ public class Manager_UI : MonoBehaviour
     public GameObject groupInteractCageUI;
     public GameObject groupOverlayUI;
 
-    
-  
+    private void Start()
+    {
+        this.Register(EventID.OpenUiOverlay, OpenModalUiOverlay);
+    }
 
-
+    private void OnDestroy()
+    {
+        this.Unregister(EventID.CloseUiOverlay, CloseModalUiOverlay);
+    }
+    public void OpenModalUiOverlay(object data)
+    {
+        SetModalActive(groupOverlayUI, true);
+    }
+    public void CloseModalUiOverlay(object data=null)
+    {
+        SetModalActive(groupOverlayUI, false);
+    }
     public void OpenModalInteract()
     {
         SetModalActive(groupInteractCageUI, true);

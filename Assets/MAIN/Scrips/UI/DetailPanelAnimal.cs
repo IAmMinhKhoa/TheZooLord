@@ -7,30 +7,57 @@ using UnityEngine.UI;
 
 public class DetailPanelAnimal : MonoBehaviour
 {
-    [Header("Button Action")]
-    public Button btnExit;
-    public Button btnDefault;
-    public Button btnEnvironment;
-    public Button btnFoods;
-    public Button btnConservation;
+    [Header("UI Content Detail Element")]
+    public Image imgDefault;
+    public Image imgConservationlevel;
+    //Group UI charactics
+    [Space(10)]
+    [Header("Config Cage")]
+    public ConfigCage configCage;
+    [Space(10)]
     [Header("Detail Panel")]
     public GameObject detailDefault;
     public GameObject detailCharactics;
     public GameObject detailConservationlevel;
 
 
+
+    private void InitResource()
+    {
+
+    }
+    private void ResetUI()
+    {
+
+    }
+
+    #region 5 PANEL BOTTOM
+    public void OpenPanelEnvironment()
+    {
+        CloseAllDetailPanel();
+        configCage.SwitchToViewEnvironment();
+    }
+    public void OpenPanelFoods()
+    {
+        CloseAllDetailPanel();
+        configCage.SwitchToViewFoods();
+    }
     public void OpenPanelCharactics()
     {
         OpenPanel(detailCharactics);
+        configCage.SwitchToViewCharacteristic();
     }
     public void OpenPanelConservationlevel()
     {
         OpenPanel(detailConservationlevel);
     }
+
     public void OpenPanelDefaul()
     {
         OpenPanel(detailDefault);
     }
+    #endregion
+
     private void OpenPanel(GameObject panel)
     {
         CloseAllDetailPanel();
@@ -38,11 +65,13 @@ public class DetailPanelAnimal : MonoBehaviour
     }
     public void TURN_OFF_DETAIL_PANEL()
     {
+        OpenPanelDefaul();
         gameObject.SetActive(false);
+        configCage.cameraCage.gameObject.SetActive(false);
         this.Broadcast(EventID.OpenUiOverlay);
         this.Broadcast(EventID.OpenInteractCage);
     }
-    public void CloseAllDetailPanel()
+    private void CloseAllDetailPanel()
     {
         detailDefault.SetActive(false);
         detailCharactics.SetActive(false);
