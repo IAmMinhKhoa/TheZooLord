@@ -20,7 +20,34 @@ public class ConfigCage : MonoBehaviour
     public FoodStorage foodStorage;
     private int _currentTargetIndex = 0;
     #region PLAY SOUND
-
+    public void PlaySoundType(SoundTypeInCage typeSound)
+    {
+        switch (typeSound)
+        {
+            case SoundTypeInCage.Chirp:
+                setSoundToAudio(SoAnimal.voiceChirp);
+                break;
+            case SoundTypeInCage.Environment:
+                setSoundToAudio(SoAnimal.dataEnvironment.voice);
+                break;
+            case SoundTypeInCage.Food:
+                //FOODS SOUND
+                break;
+            case SoundTypeInCage.Characteristic:
+                setSoundToAudio(SoAnimal.dataCharacteristic.voice);
+                break;
+            case SoundTypeInCage.Conservationlevel:
+                setSoundToAudio(SoAnimal.dataConservationlevel.voice);
+                break;
+            default:
+                break;
+        }
+    }
+    private void setSoundToAudio(AudioClip src)
+    {
+        audioClipCage.clip = src;
+        audioClipCage.Play();
+    }
     #endregion
   
 

@@ -22,3 +22,12 @@ public enum SoundTypeInCage
     Characteristic,
     Conservationlevel
 }
+public enum TypeAnimationAnimal
+{
+    Idle,
+    Run,
+    Walk,
+    Attack,
+    Lie
+
+}
