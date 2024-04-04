@@ -30,6 +30,7 @@ public class DataFoods
 public class DataCharacteristic
 {
     public GameObject PrefabAnimal;
+    public List<TypeAnimation> typeAnimations;
     public AudioClip voice;
 }
 
@@ -38,4 +39,14 @@ public class DataConservationlevel
 {
     public int LevelStart;
     public AudioClip voice;
+}
+
+
+//----------
+
+[System.Serializable]
+public class TypeAnimation
+{
+    public TypeAnimationAnimal type;
+    public string VNTypeAnimation;
 }
