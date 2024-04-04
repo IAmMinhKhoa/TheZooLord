@@ -8,7 +8,7 @@ public class Hint : MonoBehaviour
 {
     [SerializeField] int hintNum;
     [SerializeField] TextMeshProUGUI hintText;
-    [SerializeField] GameObject puzzleImage;
+    [SerializeField] GameObject hintImage;
 
     public bool isHintActive = false;
     // Start is called before the first frame update
@@ -20,12 +20,12 @@ public class Hint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            
+        SetActiveHint(isHintActive, hintImage);        
     }
 
     public void OnSelectHint()
     {
-        if(hintNum > 0)
+        if(hintNum > 0 && !isHintActive)
         {
             StartCoroutine(ActivateAndDeactivateAfterDelay(5f));
             hintNum--;
@@ -40,13 +40,22 @@ public class Hint : MonoBehaviour
     IEnumerator ActivateAndDeactivateAfterDelay(float delay)
     {
         // Kích hoạt puzzleImage
-        puzzleImage.SetActive(true);
         isHintActive = true;
 
         yield return new WaitForSeconds(delay);
 
         // Vô hiệu hóa puzzleImage
-        puzzleImage.SetActive(false);
         isHintActive = false;
+    }
+
+    void SetActiveHint(bool active, GameObject hintImgae)
+    {
+        if(active)
+        {
+            hintImgae.SetActive(active);
+        } else
+        {
+            hintImgae.SetActive(active);
+        }
     }
 }

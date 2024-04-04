@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
-public class AnimalManager : MonoBehaviour
+public class PieceManager : MonoBehaviour
 {
-    public static AnimalManager Instance { get; private set; }
+    public static PieceManager Instance { get; private set; }
 
     [SerializeField] GameObject parentPieces;
     [SerializeField] GameObject parentTarget;
@@ -14,6 +13,9 @@ public class AnimalManager : MonoBehaviour
     [SerializeField] List<GameObject> listTarget;
 
     [SerializeField] GameObject completeObject;
+
+    [SerializeField] GameObject hintCanvas;
+    [SerializeField] GameObject CompleteImage;
 
     public bool isComplete = false;   //cần sửa khi thắng
 
@@ -28,14 +30,32 @@ public class AnimalManager : MonoBehaviour
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
     }
 
-    private void OnEnable()
+    //private void OnEnable()
+    //{
+    //    //isComplete = false;
+    //    completeObject.SetActive(false);
+    //    GetPieceFromParent();
+    //    GetTargetFromParent();
+    //    ChangePosPiece();
+
+    //}
+
+    private void Start()
     {
-        //isComplete = false;
+        gameObject.SetActive(false);
+    }
+
+    // Start is called before the first frame update
+    void OnEnable ()
+    {
+        isComplete = false;
+        completeObject.SetActive(false);
+        hintCanvas.SetActive(false);
         completeObject.SetActive(false);
         GetPieceFromParent();
         GetTargetFromParent();
+        ShuffleGameObjectList<GameObject>(listPuzzlePieces);
         ChangePosPiece();
-
     }
 
     private void OnDisable()
@@ -43,21 +63,17 @@ public class AnimalManager : MonoBehaviour
         isComplete = false;
         ResetPosPiece();
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
         if (scoreKeeper.GetCorrectPieces() == listPuzzlePieces.Count && !isComplete)
         {
             isComplete = true;
-            PuzzleManager.instance.PlayClapWin();
+            JigsawGameManager.instance.PlayClapWin();
             completeObject.SetActive(true);
-            UnlockNewLevel();
-            scoreKeeper.ResetCorrectPieces();  
+            hintCanvas.SetActive(false);
+            //UnlockNewLevel();
+            scoreKeeper.ResetCorrectPieces();
         }
     }
 
@@ -85,26 +101,26 @@ public class AnimalManager : MonoBehaviour
 
     void ChangePosPiece()
     {
-        for(int i = 0; i < listTarget.Count; i++)
+        for (int i = 0; i < listTarget.Count; i++)
         {
-            listPuzzlePieces[i].GetComponent<Puzzle>().rightPosition = listPuzzlePieces[i].transform.localPosition; 
+            listPuzzlePieces[i].GetComponent<Piece>().rightPosition = listPuzzlePieces[i].transform.localPosition;
             listPuzzlePieces[i].transform.localPosition = listTarget[i].transform.localPosition;
-            listPuzzlePieces[i].GetComponent<Puzzle>().initialPosition = (Vector3)listTarget[i].transform.localPosition;
-        }    
+            listPuzzlePieces[i].GetComponent<Piece>().initialPosition = (Vector3)listTarget[i].transform.localPosition;
+        }
     }
 
     void ResetPosPiece()
     {
         for (int i = 0; i < listPuzzlePieces.Count; i++)
         {
-            listPuzzlePieces[i].transform.localPosition = listPuzzlePieces[i].GetComponent<Puzzle>().rightPosition;
+            listPuzzlePieces[i].transform.localPosition = listPuzzlePieces[i].GetComponent<Piece>().rightPosition;
         }
         scoreKeeper.ResetCorrectPieces();
     }
 
     private void ShuffleGameObjectList<GameObject>(List<GameObject> list)
     {
-        
+
         int n = list.Count;
         while (n > 1)
         {
@@ -116,20 +132,20 @@ public class AnimalManager : MonoBehaviour
         }
     }
 
-    void UnlockNewLevel()
-    {
-        string[] levelNumberString = gameObject.name.Split(' ');
-        int levelNumber = int.Parse(levelNumberString[1]) - 1;
-        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
-        {
-            Debug.Log(levelNumber);
-            Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
-            PlayerPrefs.Save();
+    //void UnlockNewLevel()
+    //{
+    //    string[] levelNumberString = gameObject.name.Split(' ');
+    //    int levelNumber = int.Parse(levelNumberString[1]) - 1;
+    //    if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+    //    {
+    //        Debug.Log(levelNumber);
+    //        Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
+    //        PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
+    //        PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+    //        PlayerPrefs.Save();
 
-        }
-    }
+    //    }
+    //}
 
     void PlaySoundWin()
     {
