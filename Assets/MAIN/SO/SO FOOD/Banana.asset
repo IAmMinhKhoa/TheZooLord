@@ -15,4 +15,4 @@ MonoBehaviour:
   nameFood: Banana
   iconFood: {fileID: 21300000, guid: 5631915fb2d441a449a4b985783e67fd, type: 3}
   prefab: {fileID: 7926200977864272703, guid: 7f623ae598c48ea4a8495e5cdcf7829b, type: 3}
-  valueOfFood: 10
+  voice: {fileID: 8300000, guid: c244c3141607649918f54beb8a706957, type: 3}

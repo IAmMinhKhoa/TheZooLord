@@ -13,15 +13,21 @@ MonoBehaviour:
   m_Name: Tirger
   m_EditorClassIdentifier: 
   nameAnimal: "H\u1ED5"
-  defaultImage: {fileID: 0}
-  icon: {fileID: 0}
-  voiceChirp: {fileID: 0}
+  defaultImage: {fileID: 21300000, guid: 6aee499500e280e439bd8323d4c3c3e3, type: 3}
+  icon: {fileID: 21300000, guid: 9abd7791e48a8a14998e66fe49d8a18b, type: 3}
+  voiceChirp: {fileID: 8300000, guid: e75031661a075e446b0d724a4f1dda35, type: 3}
+  PrefabAnimal: {fileID: 1390276149824892, guid: c5e7161780bfc06459e1d0fd1cefd777,
+    type: 3}
   dataEnvironment:
-    voice: {fileID: 0}
+    voice: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
   dataFoods:
-    SoFoods: []
+    SoFoods:
+    - {fileID: 11400000, guid: 4eb1c22c0f2392942a37aed87ab47588, type: 2}
+    - {fileID: 11400000, guid: 2c67ceff2d1767e4782fbdea2fa169f9, type: 2}
   dataCharacteristic:
-    PrefabAnimal: {fileID: 0}
+    typeAnimations:
+    - type: 0
+      VNTypeAnimation: 
     voice: {fileID: 0}
   dataConservationlevel:
     LevelStart: 0
