@@ -8,5 +8,6 @@ public class SOFood : ScriptableObject
     public string nameFood;
 
     public Sprite iconFood;
-    public GameObject prefab;   
+    public GameObject prefab;
+    public AudioClip voice;
 }

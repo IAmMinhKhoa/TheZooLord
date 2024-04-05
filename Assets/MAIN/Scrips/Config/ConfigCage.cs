@@ -43,13 +43,16 @@ public class ConfigCage : MonoBehaviour
                 break;
         }
     }
-    private void setSoundToAudio(AudioClip src)
+    public void setSoundToAudio(AudioClip src)
     {
         audioClipCage.clip = src;
         audioClipCage.Play();
     }
     #endregion
-  
+    public List<SOFood> GetSOfoods()
+    {
+        return SoAnimal.dataFoods.SoFoods;
+    }
 
     #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
     [ProButton]

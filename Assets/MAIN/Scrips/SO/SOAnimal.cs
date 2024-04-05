@@ -9,7 +9,7 @@ public class SOAnimal : ScriptableObject
     public Sprite defaultImage; //image about this type animal, use in main detail information animal
     public Sprite icon;
     public AudioClip voiceChirp;
-
+    public GameObject PrefabAnimal;
     //----DATA----
     public DataEnvironment dataEnvironment;
     public DataFoods dataFoods;
@@ -29,7 +29,6 @@ public class DataFoods
 [System.Serializable]
 public class DataCharacteristic
 {
-    public GameObject PrefabAnimal;
     public List<TypeAnimation> typeAnimations;
     public AudioClip voice;
 }

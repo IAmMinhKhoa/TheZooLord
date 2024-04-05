@@ -9,7 +9,7 @@ public class DetailPanelAnimal : MonoBehaviour
 {
     [Header("UI Content Detail Element")]
     public Image imgDefault;
-    public Image imgConservationlevel;
+    public GameObject PrefabButtonInteract; 
     //Group UI charactics
     [Space(10)]
     [Header("Config Cage")]
@@ -17,18 +17,42 @@ public class DetailPanelAnimal : MonoBehaviour
     [Space(10)]
     [Header("Detail Panel")]
     public GameObject detailDefault;
+    public GameObject detailFoods;
     public GameObject detailCharactics;
     public GameObject detailConservationlevel;
 
+ 
+    private void OnEnable()
+    {
+        InitResource();
+    }
 
-
-    private void InitResource()
+    private void InitResource() //set Init Resource in Detail Panel
     {
 
+        //init element DEFAULT
+        imgDefault.sprite = configCage.SoAnimal.defaultImage;
+        //init element FOODS
+        foreach (var item in configCage.GetSOfoods())
+        {
+            GameObject btnInteract = Instantiate(PrefabButtonInteract, detailFoods.transform);
+
+            //set data to button
+            btnInteract.GetComponent<Image>().sprite = item.iconFood;
+            btnInteract.GetComponent<Button>().onClick.AddListener(() => { configCage.setSoundToAudio(item.voice); });
+        }
+        //init element charactic
+        AnimatorControllerParameter[] parameters =configCage.SoAnimal.PrefabAnimal.GetComponent<Animator>().contro;
+        foreach (var item in parameters)
+        {
+            Debug.Log(item.name);
+        }
     }
     private void ResetUI()
     {
-
+        detailDefault.SetActive(true);
+        //destroy button child 
+        //food
     }
 
     #region 5 PANEL BOTTOM
@@ -36,10 +60,15 @@ public class DetailPanelAnimal : MonoBehaviour
     {
         CloseAllDetailPanel();
         configCage.SwitchToViewEnvironment();
+        StartCoroutine(Common.delayCoroutine(1f, () =>
+        {
+            configCage.PlaySoundType(SoundTypeInCage.Environment);
+
+        }));
     }
     public void OpenPanelFoods()
     {
-        CloseAllDetailPanel();
+        OpenPanel(detailFoods);
         configCage.SwitchToViewFoods();
     }
     public void OpenPanelCharactics()
@@ -55,6 +84,11 @@ public class DetailPanelAnimal : MonoBehaviour
     public void OpenPanelDefaul()
     {
         OpenPanel(detailDefault);
+        StartCoroutine(Common.delayCoroutine(0.5f, () =>
+        {
+            configCage.PlaySoundType(SoundTypeInCage.Chirp);
+
+        }));
     }
     #endregion
 

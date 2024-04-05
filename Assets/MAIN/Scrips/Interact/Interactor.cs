@@ -46,8 +46,9 @@ public class Interactor : MonoBehaviour
     #region TRIGGER DETAIL PANEL ANIMAL
     public void OpenDetailPanelAnimal()
     {
-        managerUI.OpenModalDetailPanel();
+        
         managerUI.groupDetailPanelAnimal.GetComponent<DetailPanelAnimal>().configCage = configCage;
+        managerUI.OpenModalDetailPanel();
     }
     #endregion
 
