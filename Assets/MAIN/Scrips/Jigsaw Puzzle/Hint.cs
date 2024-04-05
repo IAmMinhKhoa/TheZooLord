@@ -3,18 +3,36 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hint : MonoBehaviour
 {
-    [SerializeField] int hintNum;
     [SerializeField] TextMeshProUGUI hintText;
+    [SerializeField] Button hintButton;
+    [SerializeField] Sprite activeSprite;
+    [SerializeField] Sprite deactiveSprite;
+
     [SerializeField] GameObject hintImage;
+
+    int hintNum = 0;
 
     public bool isHintActive = false;
     // Start is called before the first frame update
-    void Start()
+    //void Start()
+    //{
+    //    hintText.text = hintNum.ToString();
+    //}
+
+    private void OnEnable()
     {
-        hintText.text = hintNum.ToString();    
+        hintNum = 3;
+        hintText.text = hintNum.ToString();
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(ActivateAndDeactivateAfterDelay(5f));
+        isHintActive = false;       
     }
 
     // Update is called once per frame
@@ -52,9 +70,11 @@ public class Hint : MonoBehaviour
     {
         if(active)
         {
+            hintButton.GetComponent<Image>().sprite = activeSprite;
             hintImgae.SetActive(active);
         } else
         {
+            hintButton.GetComponent<Image>().sprite = deactiveSprite;
             hintImgae.SetActive(active);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class AnimalManager : MonoBehaviour
 {
@@ -15,14 +16,13 @@ public class AnimalManager : MonoBehaviour
 
     [SerializeField] GameObject completeObject;
 
+
     public bool isComplete = false;   //cần sửa khi thắng
 
     ScoreKeeper scoreKeeper;
 
     private void Awake()
     {
-        Instance = this;
-
         listPuzzlePieces = new List<GameObject>();
         listTarget = new List<GameObject>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -30,7 +30,8 @@ public class AnimalManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //isComplete = false;
+        Instance = this;
+        isComplete = false;
         completeObject.SetActive(false);
         GetPieceFromParent();
         GetTargetFromParent();

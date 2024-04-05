@@ -21,6 +21,8 @@ public class PuzzleManager : MonoBehaviour
 
     [Header("Level Manager")]
     [SerializeField] GameObject level;
+    [SerializeField] GameObject LevelCanvas;
+
     private GameObject[] levelAnimalArray;
 
 
@@ -33,6 +35,7 @@ public class PuzzleManager : MonoBehaviour
         {
             Destroy(instance);
         }
+        LevelCanvas.SetActive(true);
         levelAnimalArray = level.GetComponentsInChildren<Transform>(true)
         .Where(obj => obj.CompareTag("Level"))
         .Select(obj => obj.gameObject)

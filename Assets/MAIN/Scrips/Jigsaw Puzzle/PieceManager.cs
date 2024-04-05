@@ -50,8 +50,7 @@ public class PieceManager : MonoBehaviour
     {
         isComplete = false;
         completeObject.SetActive(false);
-        hintCanvas.SetActive(false);
-        completeObject.SetActive(false);
+        hintCanvas.SetActive(true);
         GetPieceFromParent();
         GetTargetFromParent();
         ShuffleGameObjectList<GameObject>(listPuzzlePieces);
@@ -132,20 +131,20 @@ public class PieceManager : MonoBehaviour
         }
     }
 
-    //void UnlockNewLevel()
-    //{
-    //    string[] levelNumberString = gameObject.name.Split(' ');
-    //    int levelNumber = int.Parse(levelNumberString[1]) - 1;
-    //    if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
-    //    {
-    //        Debug.Log(levelNumber);
-    //        Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
-    //        PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-    //        PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
-    //        PlayerPrefs.Save();
+    void UnlockNewLevel()
+    {
+        string[] levelNumberString = gameObject.name.Split(' ');
+        int levelNumber = int.Parse(levelNumberString[1]) - 1;
+        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            Debug.Log(levelNumber);
+            Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
+            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
 
-    //    }
-    //}
+        }
+    }
 
     void PlaySoundWin()
     {
