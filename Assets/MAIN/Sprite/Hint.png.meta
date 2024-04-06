@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 99a21641ed33f9a448060ffd32ae4cf5
+guid: e5d6a6ae1fca31d4b832393d50753337
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 75
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -141,13 +141,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Piece_0
+      name: "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_0"
       rect:
         serializedVersion: 2
         x: 0
-        y: 245
-        width: 169
-        height: 223
+        y: 0
+        width: 512
+        height: 630
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,20 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d13186b81100bb54a8506096d62b4988
-      internalID: -1526094025
+      spriteID: 40f2e4fac659ff54d98a089d57a903c1
+      internalID: 2136618324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Piece_1
+      name: "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_6"
       rect:
         serializedVersion: 2
-        x: 182
-        y: 289
-        width: 274
-        height: 172
+        x: 615
+        y: 0
+        width: 516
+        height: 630
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,50 +176,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cee6a7b98a0fb5e419fc716358495344
-      internalID: 1409776852
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Piece_2
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 51
-        width: 223
-        height: 172
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 43e45f8e971f6bc4bb114459a45adec7
-      internalID: -1080109488
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Piece_3
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 3
-        width: 172
-        height: 274
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ccca4d122f6b7f47bbd47067e490240
-      internalID: -401838581
+      spriteID: 92dfa83470c8dc349be9ee7ba667fd12
+      internalID: -660592291
       vertices: []
       indices: 
       edges: []
@@ -227,7 +185,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4ec9f3600f7814a4faea6df05a577958
+    spriteID: e5bbfdfe4e7e19a42be40abe503a1ec8
     internalID: 0
     vertices: []
     indices: 
@@ -235,10 +193,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Piece_0: -1526094025
-      Piece_3: -401838581
-      Piece_2: -1080109488
-      Piece_1: 1409776852
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_1": -926534250
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_3": 750898826
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_2": -1237290437
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_5": 659367089
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_0": 2136618324
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_6": -660592291
+      "[DELI YOGA] TH\u1EDCI KHO\xC1 BI\u1EC2U (17)_4": 189427575
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -3,29 +3,47 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hint : MonoBehaviour
 {
-    [SerializeField] int hintNum;
     [SerializeField] TextMeshProUGUI hintText;
-    [SerializeField] GameObject puzzleImage;
+    [SerializeField] Button hintButton;
+    [SerializeField] Sprite activeSprite;
+    [SerializeField] Sprite deactiveSprite;
+
+    [SerializeField] GameObject hintImage;
+
+    int hintNum = 0;
 
     public bool isHintActive = false;
     // Start is called before the first frame update
-    void Start()
+    //void Start()
+    //{
+    //    hintText.text = hintNum.ToString();
+    //}
+
+    private void OnEnable()
     {
-        hintText.text = hintNum.ToString();    
+        hintNum = 3;
+        hintText.text = hintNum.ToString();
+    }
+
+    private void OnDisable()
+    {
+        StopCoroutine(ActivateAndDeactivateAfterDelay(5f));
+        isHintActive = false;       
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        SetActiveHint(isHintActive, hintImage);        
     }
 
     public void OnSelectHint()
     {
-        if(hintNum > 0)
+        if(hintNum > 0 && !isHintActive)
         {
             StartCoroutine(ActivateAndDeactivateAfterDelay(5f));
             hintNum--;
@@ -40,13 +58,24 @@ public class Hint : MonoBehaviour
     IEnumerator ActivateAndDeactivateAfterDelay(float delay)
     {
         // Kích hoạt puzzleImage
-        puzzleImage.SetActive(true);
         isHintActive = true;
 
         yield return new WaitForSeconds(delay);
 
         // Vô hiệu hóa puzzleImage
-        puzzleImage.SetActive(false);
         isHintActive = false;
+    }
+
+    void SetActiveHint(bool active, GameObject hintImgae)
+    {
+        if(active)
+        {
+            hintButton.GetComponent<Image>().sprite = activeSprite;
+            hintImgae.SetActive(active);
+        } else
+        {
+            hintButton.GetComponent<Image>().sprite = deactiveSprite;
+            hintImgae.SetActive(active);
+        }
     }
 }

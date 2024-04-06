@@ -40,7 +40,7 @@ public class Puzzle : MonoBehaviour
                 if (!inRightPosition)
                 {
                     PuzzleManager.instance.PlayDropDownTrue();
-                    transform.position = rightPosition;
+                    transform.localPosition = rightPosition;
                     inRightPosition = true;
                     ScoreKeeper.instance.IncrementCorrectPieces();
                     GetComponent<SortingGroup>().sortingOrder = 0;

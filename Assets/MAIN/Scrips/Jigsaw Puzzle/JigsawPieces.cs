@@ -9,6 +9,9 @@ public class JigsawPieces : MonoBehaviour
     int OIL = 1;
 
     JigsawGameManager jigsawGameManager;
+
+    private RaycastHit2D hit;
+    private Vector3 mousePoint;
     Hint hint;
 
     private void Awake()
@@ -31,11 +34,13 @@ public class JigsawPieces : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && !hint.isHintActive)
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.transform.CompareTag("Puzzle"))
             {
                 if (!hit.transform.GetComponent<Piece>().inRightPosition)
                 {
+                    Debug.Log(hit.transform.gameObject.name);
+                    JigsawGameManager.instance.PlayPickUp();
                     selectedPiece = hit.transform.gameObject;
                     selectedPiece.GetComponent<Piece>().selected = true;
                     selectedPiece.GetComponent<SortingGroup>().sortingOrder = OIL;
@@ -55,8 +60,8 @@ public class JigsawPieces : MonoBehaviour
 
         if (selectedPiece != null)
         {
-            Vector3 mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            selectedPiece.transform.position = new Vector3(mousePoint.x, mousePoint.y, 0);
+            mousePoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            selectedPiece.transform.localPosition = new Vector3(mousePoint.x, mousePoint.y, 0);
         }
     }
 }

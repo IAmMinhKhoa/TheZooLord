@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class JigsawGameManager : MonoBehaviour
 {
+    public static JigsawGameManager instance;
     [SerializeField] List<GameObject> listJigsawPieces;
-    [SerializeField] GameObject winCanvas;
-    [SerializeField] GameObject hintCanvas;
 
-    [SerializeField] GameObject puzzleImage;
+    [SerializeField] ParticleSystem winVFX;
 
-    [SerializeField] float minPosX, maxPosX, minPosY, maxPosY;
+    [SerializeField] AudioSource SFXSource;
+
+
+    [Header("Audio Clip")]
+    [SerializeField] AudioClip pickUp;
+    [SerializeField] AudioClip dropDownTrue;
+    [SerializeField] AudioClip dropDownWrong;
+    [SerializeField] AudioClip clapWin;
 
     JigsawPieces jigsawPieces;
 
@@ -18,32 +24,66 @@ public class JigsawGameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance);
+        }
         jigsawPieces = FindObjectOfType<JigsawPieces>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        foreach (GameObject piece in listJigsawPieces)
-        {
-            RandomPosPiece(piece, minPosX, maxPosX, minPosY, maxPosY);
-        }
-        winCanvas.SetActive(false);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ScoreKeeper.instance.GetCorrectPieces() == listJigsawPieces.Count)
-        {
-            isComplete = true;
-            winCanvas.SetActive(true);
-            puzzleImage.SetActive(true);
-            hintCanvas.SetActive(false);
-        }
     }
 
-    void RandomPosPiece(GameObject piece, float minPosX, float maxPosX, float minPosY, float maxPosY) 
+    public void PlayPickUp()
     {
-        piece.transform.position = new Vector3(Random.Range(minPosX, maxPosX), Random.Range(minPosY, maxPosY));
+        SFXSource.PlayOneShot(pickUp);
+    }
+
+    public void PlayDropDownTrue()
+    {
+        SFXSource.PlayOneShot(dropDownTrue);
+    }
+
+    public void PlayDropDownWrong()
+    {
+        SFXSource.PlayOneShot(dropDownWrong);
+    }
+
+    public void PlayClapWin()
+    {
+        winVFX.Play();
+        SFXSource.PlayOneShot(clapWin);
+    }
+
+    //public void SetActiveLevel(int levelPress)
+    //{
+    //    for (int i = 0; i < levelAnimalArray.Length; i++)
+    //    {
+    //        if (i == levelPress - 1)
+    //        {
+    //            levelAnimalArray[i].SetActive(true);
+    //            break;
+    //        }
+    //    }
+    //}
+
+    public bool CheckWinComplete()
+    {
+        if (!SFXSource.isPlaying)
+        {
+            return true;
+        }
+        return false;
     }
 }

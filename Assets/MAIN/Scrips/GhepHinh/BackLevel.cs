@@ -20,5 +20,6 @@ public class BackLevel : MonoBehaviour
         winVFX.Clear();
         parentObject.SetActive(false); 
         levelCanvas.gameObject.SetActive(true);
+
     }
 }

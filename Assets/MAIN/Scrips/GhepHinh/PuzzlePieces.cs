@@ -32,7 +32,6 @@ public class PuzzlePieces : MonoBehaviour
         if (AnimalManager.Instance != null) {
             if (AnimalManager.Instance.isComplete == true)
             {
-                Debug.Log(AnimalManager.Instance.isComplete);
                 return;
             }
         }

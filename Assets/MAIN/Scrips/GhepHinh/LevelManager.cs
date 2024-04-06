@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager instance;
     [SerializeField] Button[] buttons;
     public GameObject levelButtons;
 
@@ -14,8 +15,18 @@ public class LevelManager : MonoBehaviour
 
     PuzzleManager puzzleManager;
 
+    public int levelActive;
+
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         puzzleManager = FindObjectOfType<PuzzleManager>();
         ButtonsArray();
         PlayerPrefs.DeleteAll();
@@ -42,7 +53,7 @@ public class LevelManager : MonoBehaviour
     {
         levelCanvas.gameObject.SetActive(false);
         puzzleManager.SetActiveLevel(levelId);
- 
+        LevelController.Instance.levelActive = levelId; 
     }
 
     void ButtonsArray()
