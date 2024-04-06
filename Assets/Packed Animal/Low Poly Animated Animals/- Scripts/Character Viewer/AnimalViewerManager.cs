@@ -289,6 +289,7 @@ namespace Polyperfect.Animals
                         {
                             if (parameter.name.Contains(icon.animationNameIdentfier))
                             {
+                                Debug.Log(parameter.name+"/"+ icon.animationNameIdentfier);
                                 newTile.GetComponentsInChildren<Image>().First(x => x.name == "Face Sprite").sprite = icon.iconTexture;
                             }
                         }

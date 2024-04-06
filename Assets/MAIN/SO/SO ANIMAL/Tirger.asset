@@ -30,5 +30,5 @@ MonoBehaviour:
       VNTypeAnimation: 
     voice: {fileID: 0}
   dataConservationlevel:
-    LevelStart: 0
+    LevelStart: 4
     voice: {fileID: 0}

@@ -14,6 +14,7 @@ public class ConfigCage : MonoBehaviour
     public Transform view_Environment;
     public Transform view_Foods;
     public Transform view_Characteristic;
+    public Transform view_Conservation;
 
     public AudioSource audioClipCage;
 
@@ -53,7 +54,26 @@ public class ConfigCage : MonoBehaviour
     {
         return SoAnimal.dataFoods.SoFoods;
     }
-
+    public GameObject InstancePrefab(GameObject prefab, Transform transform)
+    {
+        return Instantiate(prefab, transform);
+    }
+    public void ResetChildObjectView()
+    {
+        DelAllChildObject(view_Foods);
+        DelAllChildObject(view_Conservation);
+        DelAllChildObject(view_Characteristic);
+        DelAllChildObject(view_Environment);
+    }
+    private void DelAllChildObject(Transform parent)
+    {
+        int childCount = parent.childCount;
+        for (int i = childCount - 1; i >= 0; i--)
+        {
+            GameObject childObject = parent.GetChild(i).gameObject;
+            Destroy(childObject);
+        }
+    }
     #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
     [ProButton]
     public void SwitchToViewEnvironment()
@@ -69,6 +89,11 @@ public class ConfigCage : MonoBehaviour
     public void SwitchToViewCharacteristic()
     {
         SetTartgetCam(view_Characteristic);
+    }
+    
+    public void SwitchToViewConservation()
+    {
+        SetTartgetCam(view_Conservation);
     }
     #endregion
 
