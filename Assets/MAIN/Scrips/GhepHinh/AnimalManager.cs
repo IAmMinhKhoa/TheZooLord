@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class AnimalManager : MonoBehaviour
 {
-    public static AnimalManager Instance { get; private set; }
-
     [SerializeField] GameObject parentPieces;
     [SerializeField] GameObject parentTarget;
 
@@ -30,7 +28,6 @@ public class AnimalManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Instance = this;
         isComplete = false;
         completeObject.SetActive(false);
         GetPieceFromParent();

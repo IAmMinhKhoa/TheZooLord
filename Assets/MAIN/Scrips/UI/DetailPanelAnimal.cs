@@ -42,7 +42,7 @@ public class DetailPanelAnimal : MonoBehaviour
             btnInteract.GetComponent<Button>().onClick.AddListener(() => { configCage.setSoundToAudio(item.voice); });
         }
         //init element charactic
-        AnimatorControllerParameter[] parameters =configCage.SoAnimal.PrefabAnimal.GetComponent<Animator>().contro;
+        AnimatorControllerParameter[] parameters =configCage.SoAnimal.PrefabAnimal.GetComponent<Animator>().parameters;
         foreach (var item in parameters)
         {
             Debug.Log(item.name);

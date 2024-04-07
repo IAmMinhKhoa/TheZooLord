@@ -18,6 +18,8 @@ public class LevelController : MonoBehaviour
 
     bool isCompleteLevel;
 
+    AnimalManager animalManager;
+
     private void Awake()
     {
         if (Instance == null)
@@ -33,10 +35,7 @@ public class LevelController : MonoBehaviour
 
     private void Update()
     {
-        if (AnimalManager.Instance != null)
-        {
-            isCompleteLevel = AnimalManager.Instance.isComplete;
-        }
+        isCompleteLevel = PuzzleManager.instance.isCompleteLevel;
         if(levelActive >= levelArray.Length)
         {
             isCompleteLevel = false;
@@ -57,6 +56,7 @@ public class LevelController : MonoBehaviour
     {
         //winVFX.Stop(); 
         winVFX.Clear();
+        PuzzleManager.instance.isCompleteLevel = false;
         levelArray[levelActive-1].SetActive(false);
         levelMenuCanvas.gameObject.SetActive(true);
     }
@@ -64,6 +64,7 @@ public class LevelController : MonoBehaviour
     public void OnNextLevel()
     {
         winVFX.Clear();
+        PuzzleManager.instance.isCompleteLevel = false;
         levelArray[levelActive-1].SetActive(false);
         levelArray[levelActive].SetActive(true);
         levelActive++;
