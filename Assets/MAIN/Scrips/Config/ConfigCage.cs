@@ -11,9 +11,11 @@ public class ConfigCage : MonoBehaviour
     public SOAnimal SoAnimal;
     public CinemachineFreeLook cameraCage;
     public List<ConfigAnimal> objAnimals;
-    public Transform view_Environment;
-    public Transform view_Foods;
-    public Transform view_Characteristic;
+
+    [HideInInspector] public Transform view_Environment;
+    [HideInInspector] public Transform view_Foods;
+    [HideInInspector] public Transform view_Characteristic;
+    [HideInInspector] public Transform view_Conservation;
 
     public AudioSource audioClipCage;
 
@@ -53,7 +55,34 @@ public class ConfigCage : MonoBehaviour
     {
         return SoAnimal.dataFoods.SoFoods;
     }
+    public GameObject InstancePrefab(GameObject prefab, Transform transform)
+    {
+        return Instantiate(prefab, transform);
+    }
+    public void ResetChildObjectView()
+    {
+        DelAllChildObject(view_Foods);
+        DelAllChildObject(view_Conservation);
+        DelAllChildObject(view_Characteristic);
+        DelAllChildObject(view_Environment);
+    }
+    private void DelAllChildObject(Transform parent)
+    {
+        int childCount = parent.childCount;
+        for (int i = childCount - 1; i >= 0; i--)
+        {
+            GameObject childObject = parent.GetChild(i).gameObject;
+            Destroy(childObject);
+        }
+    }
+    public void SetTargetMiniEnvironment(Transform target_1, Transform target_2, Transform target_3, Transform target_4)
+    {
+        view_Environment = target_1;
+        view_Foods = target_2;
+        view_Characteristic = target_3;
+        view_Conservation = target_4;
 
+    }
     #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
     [ProButton]
     public void SwitchToViewEnvironment()
@@ -69,6 +98,11 @@ public class ConfigCage : MonoBehaviour
     public void SwitchToViewCharacteristic()
     {
         SetTartgetCam(view_Characteristic);
+    }
+    
+    public void SwitchToViewConservation()
+    {
+        SetTartgetCam(view_Conservation);
     }
     #endregion
 
