@@ -39,11 +39,11 @@ public class DetailPanelAnimal : MonoBehaviour
     private void InitResource() //set Init Resource in Detail Panel
     {
 
-        //init element DEFAULT
+        /*//init element DEFAULT
         imgDefault.sprite = configCage.SoAnimal.defaultImage;
         //init element FOODS
         GameObject objAnimalFood = configCage.InstancePrefab(configCage.SoAnimal.PrefabAnimal, configCage.view_Foods);
-     
+        objAnimalFood.GetComponent<StatusEmoji>().spawnEmoji("Hungry");
         objAnimalFood.transform.localScale = new Vector3(5, 5, 5);
         foreach (var item in configCage.GetSOfoods())
         {
@@ -87,6 +87,85 @@ public class DetailPanelAnimal : MonoBehaviour
             GameObject objAnimalConservation = configCage.InstancePrefab(configCage.SoAnimal.PrefabAnimal, configCage.view_Conservation);
             int salcePrefab = configCage.SoAnimal.dataConservationlevel.LevelStart+1-i;
             objAnimalConservation.transform.localScale = new Vector3(salcePrefab, salcePrefab, salcePrefab);
+
+            //set status emoji for animal
+            if (configCage.SoAnimal.dataConservationlevel.LevelStart>=3)
+            {
+                objAnimalConservation.GetComponent<StatusEmoji>().spawnEmoji("Eat");
+            }
+            else
+            {
+                objAnimalConservation.GetComponent<StatusEmoji>().spawnEmoji("Sad");
+            }
+        }*/
+        // 1. Meaningful Variable Names and Comments
+        var defaultImage = configCage.SoAnimal.defaultImage; // Use descriptive names
+        var animalPrefab = configCage.SoAnimal.PrefabAnimal;
+        var animalFoods = configCage.GetSOfoods();
+
+        // 2. Consistent Indentation and Formatting
+        // (Assuming 4-space indentation)
+
+        // 3. Element Initialization (DEFAULT, FOODS)
+        imgDefault.sprite = defaultImage;
+
+        GameObject foodObject = configCage.InstancePrefab(animalPrefab, configCage.view_Foods); // Combine for readability
+        foodObject.GetComponent<StatusEmoji>().spawnEmoji("Hungry");
+        foodObject.transform.localScale = new Vector3(5, 5, 5);
+
+        foreach (var foodItem in animalFoods)
+        {
+            GameObject button = Instantiate(PrefabButtonInteract, detailFoods.transform);
+            GameObject fruitObject = configCage.InstancePrefab(foodItem.prefab, configCage.view_Foods);
+
+            button.GetComponent<Image>().sprite = foodItem.iconFood;
+            button.GetComponent<Button>().onClick.AddListener(() => configCage.setSoundToAudio(foodItem.voice));
+        }
+
+        // 4. Element Initialization (CHARACTERISTIC)
+        GameObject animalObject = configCage.InstancePrefab(animalPrefab, configCage.view_Characteristic);
+        animalObject.transform.localScale = new Vector3(5f, 5f, 5f);
+
+        Animator animator = animalObject.GetComponent<Animator>();
+        if (animator != null)
+        {
+            AnimatorController controller = animator.runtimeAnimatorController as AnimatorController;
+            if (controller != null)
+            {
+                foreach (var parameter in controller.parameters)
+                {
+                    foreach (var icon in IconAnimation)
+                    {
+                        if (parameter.name.Contains(icon.animationNameIdentfier))
+                        {
+                            GameObject button = Instantiate(PrefabButtonInteract, detailCharactics.transform);
+                            button.GetComponent<Image>().sprite = icon.iconTexture;
+                            button.GetComponent<Button>().onClick.AddListener(() => SelectAnimation(parameter.name, animator));
+                        }
+                    }
+                }
+            }
+        }
+
+        // 5. Element Initialization (START CONSERVATION LEVEL)
+
+        for (int i = 0; i < configCage.SoAnimal.dataConservationlevel.LevelStart; i++)
+        {
+            iconStart[i].color = new Color(249f / 255f, 8f / 255f, 17f / 255f, 1f);
+
+            GameObject conservationObject = configCage.InstancePrefab(animalPrefab, configCage.view_Conservation);
+            int scaleFactor = configCage.SoAnimal.dataConservationlevel.LevelStart - i;
+            conservationObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+            conservationObject.transform.localPosition = new Vector3(i, 0, 0);
+            if (configCage.SoAnimal.dataConservationlevel.LevelStart >= 3)
+            {
+                conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Eat");
+            }
+            else
+            {
+                conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Sad");
+            }
+  
         }
     }
     private void ResetUI()
