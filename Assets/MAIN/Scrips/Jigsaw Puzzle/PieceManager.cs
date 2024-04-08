@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class PieceManager : MonoBehaviour
 {
-    public static PieceManager Instance { get; private set; }
-
     [SerializeField] GameObject parentPieces;
     [SerializeField] GameObject parentTarget;
 
     [SerializeField] List<GameObject> listPuzzlePieces;
     [SerializeField] List<GameObject> listTarget;
 
-    [SerializeField] GameObject completeObject;
-
     [SerializeField] GameObject hintCanvas;
     [SerializeField] GameObject CompleteImage;
-
-    public bool isComplete = false;   //cần sửa khi thắng
 
     ScoreKeeper scoreKeeper;
 
     private void Awake()
     {
-        Instance = this;
-
         listPuzzlePieces = new List<GameObject>();
         listTarget = new List<GameObject>();
         scoreKeeper = FindObjectOfType<ScoreKeeper>();
@@ -48,8 +40,7 @@ public class PieceManager : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable ()
     {
-        isComplete = false;
-        completeObject.SetActive(false);
+        CompleteImage.SetActive(false);
         hintCanvas.SetActive(true);
         GetPieceFromParent();
         GetTargetFromParent();
@@ -59,19 +50,17 @@ public class PieceManager : MonoBehaviour
 
     private void OnDisable()
     {
-        isComplete = false;
         ResetPosPiece();
     }
     // Update is called once per frame
     void Update()
     {
-        if (scoreKeeper.GetCorrectPieces() == listPuzzlePieces.Count && !isComplete)
+        if (scoreKeeper.GetCorrectPieces() == listPuzzlePieces.Count)
         {
-            isComplete = true;
             JigsawGameManager.instance.PlayClapWin();
-            completeObject.SetActive(true);
+            JigsawGameManager.instance.UnlockNewLevel();
+            CompleteImage.SetActive(true);
             hintCanvas.SetActive(false);
-            //UnlockNewLevel();
             scoreKeeper.ResetCorrectPieces();
         }
     }
@@ -128,21 +117,6 @@ public class PieceManager : MonoBehaviour
             GameObject temp = list[k];
             list[k] = list[n];
             list[n] = temp;
-        }
-    }
-
-    void UnlockNewLevel()
-    {
-        string[] levelNumberString = gameObject.name.Split(' ');
-        int levelNumber = int.Parse(levelNumberString[1]) - 1;
-        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
-        {
-            Debug.Log(levelNumber);
-            Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
-            PlayerPrefs.Save();
-
         }
     }
 

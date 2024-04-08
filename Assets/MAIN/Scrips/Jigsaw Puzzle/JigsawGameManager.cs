@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class JigsawGameManager : MonoBehaviour
 {
@@ -18,7 +19,13 @@ public class JigsawGameManager : MonoBehaviour
     [SerializeField] AudioClip dropDownWrong;
     [SerializeField] AudioClip clapWin;
 
-    JigsawPieces jigsawPieces;
+    [SerializeField] SpriteRenderer completeImage;
+    [SerializeField] SpriteRenderer hintImage;
+
+    [SerializeField] GameObject parentPieces;
+    [SerializeField] List<GameObject> listPuzzlePieces;
+
+    public int levelActive;
 
     public bool isComplete = false;
 
@@ -32,12 +39,11 @@ public class JigsawGameManager : MonoBehaviour
         {
             Destroy(instance);
         }
-        jigsawPieces = FindObjectOfType<JigsawPieces>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        
+        GetPieceFromParent();
     }
 
     // Update is called once per frame
@@ -62,6 +68,7 @@ public class JigsawGameManager : MonoBehaviour
 
     public void PlayClapWin()
     {
+        isComplete = true;
         winVFX.Play();
         SFXSource.PlayOneShot(clapWin);
     }
@@ -77,6 +84,43 @@ public class JigsawGameManager : MonoBehaviour
     //        }
     //    }
     //}
+
+    void GetPieceFromParent()
+    {
+        listPuzzlePieces = new List<GameObject>();
+
+        for (int i = 0; i < parentPieces.transform.childCount; i++)
+        {
+            GameObject child = parentPieces.transform.GetChild(i).gameObject;
+            GameObject piece = child.transform.Find("Piece").gameObject;
+            listPuzzlePieces.Add(piece);
+        }
+    }
+
+    public void SetPuzzlePhoto(Image photo, int levelNumber)
+    {
+        levelActive = levelNumber;
+        isComplete = false;
+        for (int i = 0; i < listPuzzlePieces.Count; i++)
+        {
+            listPuzzlePieces[i].GetComponent<SpriteRenderer>().sprite = photo.sprite;
+            completeImage.sprite = photo.sprite;
+            hintImage.sprite = photo.sprite;
+        }
+        parentPieces.transform.parent.gameObject.SetActive(true);
+    }
+
+    public void UnlockNewLevel()
+    {
+        int levelNumber = levelActive;
+        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
+
+        }
+    }
 
     public bool CheckWinComplete()
     {

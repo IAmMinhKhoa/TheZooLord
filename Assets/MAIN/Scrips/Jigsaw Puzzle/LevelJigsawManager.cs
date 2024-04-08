@@ -14,18 +14,9 @@ public class LevelJigsawManager : MonoBehaviour
     [SerializeField] Canvas levelCanvas;
     int unlockedLevel;
 
-    [SerializeField] SpriteRenderer completeImage;
-    [SerializeField] SpriteRenderer hintImage;
-
-    [SerializeField] GameObject parentPieces;
-    [SerializeField] List<GameObject> listPuzzlePieces;
-
-    PuzzleManager puzzleManager;
-
     private void Awake()
     {
         ButtonsArray();
-        GetPieceFromParent();
         PlayerPrefs.DeleteAll();
         unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
     }
@@ -46,10 +37,6 @@ public class LevelJigsawManager : MonoBehaviour
             buttons[i].interactable = true;
         }
     }
-    public void OpenLevel(int levelId)
-    {
-        levelCanvas.gameObject.SetActive(false);
-    }
 
     void ButtonsArray()
     {
@@ -59,43 +46,12 @@ public class LevelJigsawManager : MonoBehaviour
                 .ToArray();
     }
 
-    void GetPieceFromParent()
-    {
-        listPuzzlePieces = new List<GameObject>();
-
-        for (int i = 0; i < parentPieces.transform.childCount; i++)
-        {
-            GameObject child = parentPieces.transform.GetChild(i).gameObject;
-            GameObject piece = child.transform.Find("Piece").gameObject;
-            listPuzzlePieces.Add(piece);
-        }
-    }
-    public void SetPuzzlePhoto(Image photo)
+    public void OpenLevel(Image photo)
     {
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
-        UnlockNewLevel(buttonName);
-        for (int i = 0; i < listPuzzlePieces.Count; i++)
-        {
-            listPuzzlePieces[i].GetComponent<SpriteRenderer>().sprite = photo.sprite;
-            completeImage.sprite = photo.sprite;
-            hintImage.sprite = photo.sprite;
-        }
-        parentPieces.transform.parent.gameObject.SetActive(true);
-        levelCanvas.gameObject.SetActive(false);
-    }
-
-    void UnlockNewLevel(string levelButton)
-    {
-        string[] levelNumberString = levelButton.Split(' ');
+        string[] levelNumberString = buttonName.Split(' ');
         int levelNumber = int.Parse(levelNumberString[1]) - 1;
-        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
-        {
-            Debug.Log(levelNumber);
-            Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
-            PlayerPrefs.Save();
-
-        }
+        levelCanvas.gameObject.SetActive(false);
+        JigsawGameManager.instance.SetPuzzlePhoto(photo, levelNumber);
     }
 }

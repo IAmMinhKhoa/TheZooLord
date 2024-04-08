@@ -26,6 +26,7 @@ public class PuzzleManager : MonoBehaviour
     private GameObject[] levelAnimalArray;
 
 
+    public bool isCompleteLevel;
     private void Awake()
     {
         if(instance == null)
@@ -71,6 +72,7 @@ public class PuzzleManager : MonoBehaviour
     }
 
     public void PlayClapWin() {
+        isCompleteLevel = true;
         winVFX.Play();
         SFXSource.PlayOneShot(clapWin);
     }
@@ -82,6 +84,7 @@ public class PuzzleManager : MonoBehaviour
             if (i == levelPress - 1)
             {
                 levelAnimalArray[i].SetActive(true);
+                isCompleteLevel = false;
                 break;
             }
         }

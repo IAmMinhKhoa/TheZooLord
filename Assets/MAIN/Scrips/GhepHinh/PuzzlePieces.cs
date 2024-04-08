@@ -29,12 +29,10 @@ public class PuzzlePieces : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (AnimalManager.Instance != null) {
-            if (AnimalManager.Instance.isComplete == true)
-            {
-                return;
-            }
-        }
+        if (PuzzleManager.instance.isCompleteLevel == true)
+        {
+            return;
+        }    
         if (Input.GetMouseButtonDown(0))
         {
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
