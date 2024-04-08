@@ -111,7 +111,7 @@ public class DetailPanelAnimal : MonoBehaviour
 
         GameObject foodObject = configCage.InstancePrefab(animalPrefab, configCage.view_Foods); // Combine for readability
         foodObject.GetComponent<StatusEmoji>().spawnEmoji("Hungry");
-        foodObject.transform.localScale = new Vector3(5, 5, 5);
+        foodObject.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
         foreach (var foodItem in animalFoods)
         {
@@ -124,7 +124,7 @@ public class DetailPanelAnimal : MonoBehaviour
 
         // 4. Element Initialization (CHARACTERISTIC)
         GameObject animalObject = configCage.InstancePrefab(animalPrefab, configCage.view_Characteristic);
-        animalObject.transform.localScale = new Vector3(5f, 5f, 5f);
+        animalObject.transform.localScale = new Vector3(4f, 4f, 4f);
 
         Animator animator = animalObject.GetComponent<Animator>();
         if (animator != null)
@@ -148,15 +148,16 @@ public class DetailPanelAnimal : MonoBehaviour
         }
 
         // 5. Element Initialization (START CONSERVATION LEVEL)
-
-        for (int i = 0; i < configCage.SoAnimal.dataConservationlevel.LevelStart; i++)
+        float ScaleSpawn = 2.5f;
+        for (int i = 1; i <= configCage.SoAnimal.dataConservationlevel.LevelStart; i++)
         {
-            iconStart[i].color = new Color(249f / 255f, 8f / 255f, 17f / 255f, 1f);
-
+            iconStart[i-1].color = new Color(249f / 255f, 8f / 255f, 17f / 255f, 1f);
+            
             GameObject conservationObject = configCage.InstancePrefab(animalPrefab, configCage.view_Conservation);
-            int scaleFactor = configCage.SoAnimal.dataConservationlevel.LevelStart - i;
-            conservationObject.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
-            conservationObject.transform.localPosition = new Vector3(i, 0, 0);
+          //  conservationObject.transform.position = new Vector3(2, conservationObject.transform.position.y, conservationObject.transform.position.z);
+            conservationObject.transform.localScale = new Vector3(ScaleSpawn, ScaleSpawn, ScaleSpawn);
+            ScaleSpawn -= 0.25f;
+            
             if (configCage.SoAnimal.dataConservationlevel.LevelStart >= 3)
             {
                 conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Eat");
@@ -165,7 +166,8 @@ public class DetailPanelAnimal : MonoBehaviour
             {
                 conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Sad");
             }
-  
+
+
         }
     }
     private void ResetUI()
