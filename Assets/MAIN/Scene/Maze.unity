@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085075750}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Maze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,17 +377,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a806677bbd0ae94986df77a4286381f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holep: 0.012
-  w: 3
-  h: 3
-  x: 0
-  y: 0
-  Level: {fileID: 1085075750}
+  vcam: {fileID: 1643723600}
   Player: {fileID: 1153550549}
   Goal: {fileID: 1969410314}
-  Floor: {fileID: 6592905857064843549, guid: fd84fa5498f5d0542a6348053b2df61c, type: 3}
-  Wall: {fileID: 5803537085562380582, guid: c7a7cd2d15ac3d240a38c7f8332eea2f, type: 3}
-  cam: {fileID: 1643723600}
+  Walls: {fileID: 1085075750}
+  WallTemplate: {fileID: 5803537085562380582, guid: c7a7cd2d15ac3d240a38c7f8332eea2f,
+    type: 3}
+  FloorTemplate: {fileID: 6592905857064843549, guid: fd84fa5498f5d0542a6348053b2df61c,
+    type: 3}
+  MovementSmoothing: 10
+  Width: 3
+  Height: 3
+  HoleProbability: 0
+  GoalX: 0
+  GoalY: 0
+  PlayerX: 0
+  PlayerY: 0
 --- !u!114 &1643723600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,7 +415,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1153550549}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4.505144
+    OrthographicSize: 4.072739
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -497,7 +502,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4.505144
+  orthographic size: 4.072739
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -672,7 +677,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1969410312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: -3.45, z: 0}
+  m_LocalPosition: {x: -3.5, y: -1.33, z: 0}
   m_LocalScale: {x: 0.106591836, y: 0.106591836, z: 0.106591836}
   m_ConstrainProportionsScale: 0
   m_Children: []
