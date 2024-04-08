@@ -38,66 +38,6 @@ public class DetailPanelAnimal : MonoBehaviour
 
     private void InitResource() //set Init Resource in Detail Panel
     {
-
-        /*//init element DEFAULT
-        imgDefault.sprite = configCage.SoAnimal.defaultImage;
-        //init element FOODS
-        GameObject objAnimalFood = configCage.InstancePrefab(configCage.SoAnimal.PrefabAnimal, configCage.view_Foods);
-        objAnimalFood.GetComponent<StatusEmoji>().spawnEmoji("Hungry");
-        objAnimalFood.transform.localScale = new Vector3(5, 5, 5);
-        foreach (var item in configCage.GetSOfoods())
-        {
-            GameObject btnInteract = Instantiate(PrefabButtonInteract, detailFoods.transform);
-            GameObject objFruit = configCage.InstancePrefab(item.prefab, configCage.view_Foods);
-            //set data to button
-            btnInteract.GetComponent<Image>().sprite = item.iconFood;
-            btnInteract.GetComponent<Button>().onClick.AddListener(() => { configCage.setSoundToAudio(item.voice); });
-        }
-        //init element charactic
-        GameObject objAnimal = configCage.InstancePrefab(configCage.SoAnimal.PrefabAnimal, configCage.view_Characteristic);
-        objAnimal.transform.localScale = new Vector3(5f, 5f, 5f);
-
-        Animator currentAnimator = objAnimal.GetComponent<Animator>();
-        AnimatorController animatorController = currentAnimator.runtimeAnimatorController as AnimatorController;
-        if (animatorController != null)
-        {
-            foreach (var parameter in animatorController.parameters)
-            {
-                Debug.Log(parameter.name);
-                foreach (var icon in IconAnimation)
-                {
-                    if (parameter.name.Contains(icon.animationNameIdentfier))
-                    {
-                       
-                        GameObject btnInteract = Instantiate(PrefabButtonInteract, detailCharactics.transform);
-
-                        //set data to button
-                        btnInteract.GetComponent<Image>().sprite = icon.iconTexture;
-                        btnInteract.GetComponent<Button>().onClick.AddListener(() => SelectAnimation(parameter.name, currentAnimator));
-                    }
-                }
-            }
-        }
-
-        //init start Conservationlevel
-        for (int i = 0; i < configCage.SoAnimal.dataConservationlevel.LevelStart; i++)
-        {
-            iconStart[i].color = new Color(249f / 255f, 8f / 255f, 17f / 255f, 1f);
-
-            GameObject objAnimalConservation = configCage.InstancePrefab(configCage.SoAnimal.PrefabAnimal, configCage.view_Conservation);
-            int salcePrefab = configCage.SoAnimal.dataConservationlevel.LevelStart+1-i;
-            objAnimalConservation.transform.localScale = new Vector3(salcePrefab, salcePrefab, salcePrefab);
-
-            //set status emoji for animal
-            if (configCage.SoAnimal.dataConservationlevel.LevelStart>=3)
-            {
-                objAnimalConservation.GetComponent<StatusEmoji>().spawnEmoji("Eat");
-            }
-            else
-            {
-                objAnimalConservation.GetComponent<StatusEmoji>().spawnEmoji("Sad");
-            }
-        }*/
         // 1. Meaningful Variable Names and Comments
         var defaultImage = configCage.SoAnimal.defaultImage; // Use descriptive names
         var animalPrefab = configCage.SoAnimal.PrefabAnimal;
