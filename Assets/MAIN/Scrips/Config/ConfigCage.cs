@@ -21,6 +21,12 @@ public class ConfigCage : MonoBehaviour
 
     public FoodStorage foodStorage;
     private int _currentTargetIndex = 0;
+
+    [SerializeField] private SpriteRenderer iconMarkMap;
+    private void Start()
+    {
+        iconMarkMap.sprite = SoAnimal.icon;
+    }
     #region PLAY SOUND
     public void PlaySoundType(SoundTypeInCage typeSound)
     {
