@@ -25,10 +25,10 @@ public class ConfigAnimal :  MonoBehaviour
         Eat,
         MeetingAnimal,
     }
-    public List<SOEmoji> SO_Emojis = new List<SOEmoji>();
     public STATE_ANIMAL stateAnimal;
     [HideInInspector] public STATE_ANIMAL previousState = STATE_ANIMAL.None;
     #endregion
+    public List<SOEmoji> SO_Emojis = new List<SOEmoji>();
     #region COMPONENTS CONTROL
     [HideInInspector] public Animator animator;
     [HideInInspector] public NavMeshAgent agent;
@@ -46,25 +46,19 @@ public class ConfigAnimal :  MonoBehaviour
 
         }
     }
-
-    #endregion
-    #region BOOLEAN
-
     public bool CanMeetingAnimal = true;
     #endregion
+  
 
     #region LIFE CYCLE & FUNCTION
     private void Start()
     {
         StartCoroutine(AutoDecreaseFood());
-
     }
 
     protected IEnumerator AutoDecreaseFood()
     {
         yield return new WaitForSeconds(1f);
-      
-
         while (true)
         {
             yield return new WaitForSeconds(1f); 
@@ -73,7 +67,6 @@ public class ConfigAnimal :  MonoBehaviour
             else foodIndex -= 1;
         }
     }
-  
 
     
     private void Update()
