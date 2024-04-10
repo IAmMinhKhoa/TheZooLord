@@ -1,4 +1,4 @@
-using Cinemachine;
+﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    public static Game Instance;
+
     public CinemachineVirtualCamera vcam;
     public Transform Player;
     public Transform Goal;
@@ -21,6 +23,16 @@ public class Game : MonoBehaviour
     public int GoalX, GoalY;
 
     public int PlayerX, PlayerY;
+
+    public int levelCurrent;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+        else 
+            Destroy(Instance);
+    }
 
     void Start()
     {
@@ -48,7 +60,7 @@ public class Game : MonoBehaviour
                 Width++;
             else
                 Height++;
-
+            UnlockNewLevel();
             StartNext();
         }
         if (Input.GetKeyDown(KeyCode.G))
@@ -62,6 +74,26 @@ public class Game : MonoBehaviour
     public float frand()
     {
         return UnityEngine.Random.value;
+    }
+
+    public void ActiveMaze(int size)
+    {
+        levelCurrent = size;
+        Width = size + 4;
+        Height = size + 4;
+        StartNext();
+    }
+
+    public void UnlockNewLevel()
+    {
+        int levelNumber = levelCurrent;
+        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        {
+            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
+            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.Save();
+
+        }
     }
 
     public void StartNext()
@@ -95,7 +127,7 @@ public class Game : MonoBehaviour
                 Instantiate(FloorTemplate, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity, Walls);
 
         Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
-        Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.25f);
+        Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
 
         vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 0.95f;
     }
