@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
-
+using UnityEngine.UIElements;
 
 public class Manager_UI : MonoBehaviour
 {
+    [Header("MAIN UI CHARACTER")]
     public GameObject groupDetailPanelAnimal;
     public GameObject groupViewAnimalsUI;
     public GameObject groupInteractCageUI;
     public GameObject groupOverlayUI;
+
+    [Header("LIST UI")]
+    public List<GameObject> btnFoods;
+
+   //--- USE IN LOCAL ---
+    private bool toggleBtnFoods=false;
 
     private void Start()
     {
@@ -73,4 +81,27 @@ public class Manager_UI : MonoBehaviour
         groupInteractCageUI.SetActive(false);
         groupOverlayUI.SetActive(false);
     }
+
+    public void animationButtonFood()
+    {
+        foreach (GameObject btn in btnFoods)
+        {
+            Common.PopUpButton(btn,close: toggleBtnFoods);
+        }
+        toggleBtnFoods = !toggleBtnFoods;
+    }
+
+    #region TESTING
+    [ProButton]
+    protected void OpenButtonFood()
+    {
+        animationButtonFood();
+    }
+    [ProButton]
+    protected void CloseButtonFood()
+    {
+        animationButtonFood();
+    }
+    #endregion
+
 }

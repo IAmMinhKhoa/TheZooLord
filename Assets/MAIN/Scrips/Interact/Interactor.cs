@@ -2,22 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using com.cyborgAssets.inspectorButtonPro;
+using Unity.VisualScripting;
 using UnityEditorInternal.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Interactor : MonoBehaviour
 {
-    [SerializeField] private Transform _interactionPoint;
-    [SerializeField] private float _interactionPointRadius;
-    [SerializeField] private LayerMask _interactableMask;
-
-    private readonly Collider[] _collider = new Collider[3];
-    //-----------
-
     public Manager_UI managerUI;
-
-    [SerializeField] private int _numFound;
 
  //   [HideInInspector]
     public ConfigCage configCage;
@@ -62,12 +55,15 @@ public class Interactor : MonoBehaviour
         }
         GameObject temp = (GameObject)data;
         configCage = temp.GetComponent<ConfigCage>();
-        managerUI.OpenModalInteract();
+       managerUI.OpenModalInteract();
+        SetDataToButtonFood();
+       
     }
     public void OnTriggerExitCage(object data = null)
     {
         configCage = null;
         managerUI.CloseModalInteract();
+        ResetDataButtonFood();
     }
     #endregion
     #region TRIGGER GIFT 
@@ -85,7 +81,7 @@ public class Interactor : MonoBehaviour
     #endregion 
 
     #region Event UI Interact Cage
-    public void OpenViewAnimals()
+    public void OpenViewAnimals()//use it for button see detail animal in cage
     {
         managerUI.OpenModalViewAnimals();
         configCage.OpenViewCage();
@@ -103,34 +99,51 @@ public class Interactor : MonoBehaviour
         configCage.CloseViewCage();
     }
     #endregion
-    private void Update()
+
+    #region Set & Refresh Data
+    private void SetDataToButtonFood()
     {
-        _numFound = Physics.OverlapSphereNonAlloc(_interactionPoint.position, _interactionPointRadius, _collider, _interactableMask);
-
-        if (_numFound > 0)
+        try
         {
-            var interactable = _collider[0].GetComponent<IInteractTable>();
+            SOAnimal dataAnimal = configCage.SoAnimal;
 
-            if(interactable!=null && Keyboard.current.eKey.wasPressedThisFrame)
+            for (int i = 0; i < managerUI.btnFoods.Count; i++)
             {
-                interactable.Interact(this);
+                GameObject obj = managerUI.btnFoods[i];
+                //set Icon. Event spam food
+                obj.GetComponent<Image>().sprite = dataAnimal.dataFoods.SoFoods[i].iconFood;
+                obj.GetComponent<Button>().onClick.AddListener(() =>
+                {
+                    configCage.foodStorage.SpamwnFood(i);
+                });
             }
         }
+        catch (Exception)
+        {
+            Debug.LogError("Something wrong in SetDataButtonFood");
+        }
     }
-
-    //function set in button interact when feed for animal
-    public void FeedAnimalInteract(int index)
+    private void ResetDataButtonFood()
     {
-        
-        if (configCage != null)
+        try
         {
-            configCage.foodStorage.SpamwnFood(index);
+            for (int i = 0; i < managerUI.btnFoods.Count; i++)
+            {
+                GameObject obj = managerUI.btnFoods[i];
+                //reset Icon. Event spam food
+                obj.GetComponent<Image>().sprite = null;
+                obj.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
         }
-        else
+        catch (Exception)
         {
-            Debug.Log("Null: " + configCage );
+
+            throw;
         }
     }
+    #endregion
+
+
 
     [ProButton]
     public void EatFoodAnimal()
@@ -138,9 +151,4 @@ public class Interactor : MonoBehaviour
         configCage.foodStorage.SpamwnFood(1);  
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_interactionPoint.position, _interactionPointRadius);
-    }
 }

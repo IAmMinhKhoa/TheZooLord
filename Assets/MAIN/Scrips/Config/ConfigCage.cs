@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ConfigCage : MonoBehaviour
 {
-    
 
     public SOAnimal SoAnimal;
     public CinemachineFreeLook cameraCage;
@@ -21,6 +20,20 @@ public class ConfigCage : MonoBehaviour
 
     public FoodStorage foodStorage;
     private int _currentTargetIndex = 0;
+
+    [SerializeField] private SpriteRenderer iconMarkMap;
+    private void Awake()
+    {
+        foodStorage.SOFoods = SoAnimal.dataFoods.SoFoods;
+    }
+    
+    private void Start()
+    {
+        iconMarkMap.sprite = SoAnimal.icon;
+        //Set target Friend Animal
+        objAnimals[0].GetComponent<AnimalController>().otherAnimal = objAnimals[1].transform;
+        objAnimals[1].GetComponent<AnimalController>().otherAnimal = objAnimals[0].transform;
+    }
     #region PLAY SOUND
     public void PlaySoundType(SoundTypeInCage typeSound)
     {

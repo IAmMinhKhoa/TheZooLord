@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
 public class Common 
@@ -14,6 +15,22 @@ public class Common
     public static IEnumerator Delay(float seconds)
     {
         yield return new WaitForSeconds(seconds);
+    }
+
+    public static void PopUpButton(GameObject obj, float scale = 1, float duration = 0.5f, float delay=0,bool close=false)
+    {
+        if (!close)//OPEN POPUP
+        {
+            obj.transform.DOScale(Vector3.one * scale, duration)
+               .SetEase(Ease.InBounce)
+               .SetDelay(delay);
+        }
+        else //CLOSE
+        {
+            obj.transform.DOScale(Vector3.one * 0, 0.5f)
+               .SetEase(Ease.InBounce);
+        }
+        
     }
     
 }

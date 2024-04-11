@@ -7,7 +7,6 @@ TagManager:
   - Animal
   - Puzzle
   - Level
-  - Wall
   layers:
   - Default
   - TransparentFX
@@ -19,7 +18,7 @@ TagManager:
   - Animal
   - Puzzle
   - VFX
-  - Wall
+  - Mark
   - 
   - 
   - 
