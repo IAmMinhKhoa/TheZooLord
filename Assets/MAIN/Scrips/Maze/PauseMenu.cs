@@ -12,6 +12,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] float tweenDuration;
     [SerializeField] CanvasGroup canvasGroup;
 
+    private void Start()
+    {
+        pauseMenu.SetActive(false);
+    }
 
     public void OnPauseButtonn()
     {
@@ -27,12 +31,16 @@ public class PauseMenu : MonoBehaviour
 
     public void OnBackButton(GameObject levelMenu)
     {
+        canvasGroup.DOFade(0, tweenDuration);
+        pausePanelRect.DOAnchorPosY(topPosY, tweenDuration);
+        pauseButtonRect.DOAnchorPosX(-185, tweenDuration);
         pauseMenu.SetActive(false);
         levelMenu.SetActive(true);
     }
 
-    public void OnAgainButton()
+    public async void OnAgainButton()
     {
+        await PausePanelOutro();
         pauseMenu.SetActive(false);
         Game.Instance.StartNext(Game.Instance.levelCurrent);
     }
@@ -40,15 +48,15 @@ public class PauseMenu : MonoBehaviour
     void PausePanelIntro()
     {
         canvasGroup.DOFade(1, tweenDuration);
-        pausePanelRect.DOAnchorPosY(middlePosY, tweenDuration);
-        pauseButtonRect.DOAnchorPosX(80, tweenDuration);
+        pausePanelRect.DOAnchorPosY(middlePosY, tweenDuration).SetEase(Ease.OutElastic);
+        pauseButtonRect.DOAnchorPosX(185, tweenDuration).SetEase(Ease.InQuint);
 
     }
 
     async Task PausePanelOutro()
     {
         canvasGroup.DOFade(0, tweenDuration);
-        await pausePanelRect.DOAnchorPosY(topPosY, tweenDuration).AsyncWaitForCompletion();
-        pauseButtonRect.DOAnchorPosX(-80, tweenDuration);
+        await pausePanelRect.DOAnchorPosY(topPosY, tweenDuration).SetEase(Ease.InQuint).AsyncWaitForCompletion();
+        pauseButtonRect.DOAnchorPosX(-185, tweenDuration);
     }
 }

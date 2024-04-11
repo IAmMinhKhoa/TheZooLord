@@ -30,14 +30,14 @@ public class LevelManager : MonoBehaviour
         puzzleManager = FindObjectOfType<PuzzleManager>();
         ButtonsArray();
         PlayerPrefs.DeleteAll();
-        unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
     }
 
     private void OnEnable()
     {
-        if (PlayerPrefs.GetInt("UnlockedLevel", 1) <= buttons.Length)
+        if (PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1) <= buttons.Length)
         {
-            unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+            unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
         }
         for (int i = 0; i < buttons.Length; i++)
         {

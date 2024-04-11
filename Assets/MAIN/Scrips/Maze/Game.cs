@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using GG.Infrastructure.Utils.Swipe;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
 
+    [SerializeField] private SwipeListener swipeListener;
     public CinemachineVirtualCamera vcam;
     public Transform Player;
     public Transform Goal;
@@ -45,29 +47,64 @@ public class Game : MonoBehaviour
     void Start()
     {
         StartNext(0);
+        swipeListener.OnSwipe.AddListener(OnSwipe);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
-            PlayerX--;
-        if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
-            PlayerX++;
-        if (Input.GetKeyDown(KeyCode.W) && !VWalls[PlayerX, PlayerY + 1])
-            PlayerY++;
-        if (Input.GetKeyDown(KeyCode.S) && !VWalls[PlayerX, PlayerY])
-            PlayerY--;
+        Debug.Log(levelCurrent);
+        //if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
+        //    PlayerX--;
+        //if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
+        //    PlayerX++;
+        //if (Input.GetKeyDown(KeyCode.W) && !VWalls[PlayerX, PlayerY + 1])
+        //    PlayerY++;
+        //if (Input.GetKeyDown(KeyCode.S) && !VWalls[PlayerX, PlayerY])
+        //    PlayerY--;
+
+        //Vector3 target = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
+
+        //Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
+
+        //if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
+        //{
+        //    NextLevel();
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //    StartNext();
+    }
+
+    private void OnSwipe(string swipe)
+    {
+        Debug.Log(swipe);
+        switch (swipe)
+        {
+            case "Left":
+                if (!HWalls[PlayerX, PlayerY])
+                    PlayerX--;
+                break;
+            case "Right":
+                if (!HWalls[PlayerX + 1, PlayerY])
+                    PlayerX++;
+                break;
+            case "Up":
+                if (!VWalls[PlayerX, PlayerY + 1])
+                    PlayerY++;
+                break;
+            case "Down":
+                if (!VWalls[PlayerX, PlayerY])
+                    PlayerY--;
+                break;
+        }
 
         Vector3 target = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
 
-        Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
-
+        //Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
+        Player.transform.position = target;
         if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
         {
             NextLevel();
         }
-        //if (Input.GetKeyDown(KeyCode.G))
-        //    StartNext();
     }
 
     public int Rand(int max)

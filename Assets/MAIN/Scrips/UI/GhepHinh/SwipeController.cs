@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using GG.Infrastructure.Utils.Swipe;
+using System;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 
-public class SwipeController : MonoBehaviour , IEndDragHandler
+public class SwipeController : MonoBehaviour, IEndDragHandler
 {
     [SerializeField] int maxPage;
     int currentPage;
@@ -26,6 +29,7 @@ public class SwipeController : MonoBehaviour , IEndDragHandler
 
     private void Awake()
     {
+
         currentPage = 1;
         targetPos = levelPagesRect.localPosition;
         dragThreshould = Screen.width / 15;
@@ -61,21 +65,22 @@ public class SwipeController : MonoBehaviour , IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if(Mathf.Abs(eventData.position.x - eventData.pressPosition.x) > dragThreshould)
-        {
-            if (eventData.position.x > eventData.pressPosition.x)
-            {
-                Previous();
-            }
-            else
-            {
-                Next();
-            }
-        }
-        else
-        {
-            MovePage(); 
-        }
+        //if (Mathf.Abs(eventData.position.x - eventData.pressPosition.x) > dragThreshould)
+        //{
+        //    if (eventData.position.x > eventData.pressPosition.x)
+        //    {
+        //        Previous();
+        //    }
+        //    else
+        //    {
+        //        Next();
+        //    }
+        //}
+        //else
+        //{
+        //    MovePage();
+        //}
+        UpdateArrowButton();
     }
 
     void UpdateBar()

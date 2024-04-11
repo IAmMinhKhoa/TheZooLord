@@ -18,14 +18,14 @@ public class LevelJigsawManager : MonoBehaviour
     {
         ButtonsArray();
         PlayerPrefs.DeleteAll();
-        unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        unlockedLevel = PlayerPrefs.GetInt("UnlockedJigsawLevel", 1);
     }
 
     private void OnEnable()
     {
-        if (PlayerPrefs.GetInt("UnlockedLevel", 1) <= buttons.Length)
+        if (PlayerPrefs.GetInt("UnlockedJigsawLevel", 1) <= buttons.Length)
         {
-            unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+            unlockedLevel = PlayerPrefs.GetInt("UnlockedJigsawLevel", 1);
         }
         for (int i = 0; i < buttons.Length; i++)
         {

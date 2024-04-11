@@ -6664,7 +6664,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &259968306
 RectTransform:
@@ -10526,6 +10526,7 @@ MonoBehaviour:
   clapWin: {fileID: 8300000, guid: 807ee76a2d3f81a478a14f112b758ec1, type: 3}
   level: {fileID: 1643860902}
   LevelCanvas: {fileID: 259968302}
+  isCompleteLevel: 0
 --- !u!1 &1111809636
 GameObject:
   m_ObjectHideFlags: 0
@@ -11493,7 +11494,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxPage: 3
-  pageStep: {x: -800, y: 0, z: 0}
+  pageStep: {x: -804, y: 0, z: 0}
   levelPagesRect: {fileID: 115336221}
   tweenTime: 0.4
   tweenType: 6
