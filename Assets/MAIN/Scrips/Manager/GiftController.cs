@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class GiftController : MonoBehaviour
+public class GiftController : MonoBehaviour,IPointerClickHandler
 {
     public GameObject mainCanvas;
     public List<SOQuestion> SoQuests;
@@ -152,6 +153,7 @@ public class GiftController : MonoBehaviour
         GenerateQuest();
         //Default start question -> emoji default
         ActiveEmojiQuest(0);
+        
     }
     public void CloseModal()
     {
@@ -161,6 +163,11 @@ public class GiftController : MonoBehaviour
             canvasGroup.blocksRaycasts = false;
         });
         ClearUI();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("egeg");
     }
     #endregion
 }

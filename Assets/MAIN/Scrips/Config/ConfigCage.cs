@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class ConfigCage : MonoBehaviour
 {
-    
 
     public SOAnimal SoAnimal;
     public CinemachineFreeLook cameraCage;
@@ -23,6 +22,11 @@ public class ConfigCage : MonoBehaviour
     private int _currentTargetIndex = 0;
 
     [SerializeField] private SpriteRenderer iconMarkMap;
+    private void Awake()
+    {
+        foodStorage.SOFoods = SoAnimal.dataFoods.SoFoods;
+    }
+    
     private void Start()
     {
         iconMarkMap.sprite = SoAnimal.icon;
