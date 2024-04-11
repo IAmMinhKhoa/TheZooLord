@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class Game : MonoBehaviour
 {
@@ -24,7 +26,13 @@ public class Game : MonoBehaviour
 
     public int PlayerX, PlayerY;
 
+    public int baseSize = 3; // Kích thước mê cung cơ bản
+    public int sizeIncrement = 1; // Số lượng ô tăng thêm cho mỗi cấp độ
     public int levelCurrent;
+
+    [SerializeField] TextMeshProUGUI levelText;
+
+    public bool isBack = false;
 
     private void Awake()
     {
@@ -36,7 +44,7 @@ public class Game : MonoBehaviour
 
     void Start()
     {
-        StartNext();
+        StartNext(0);
     }
 
     void Update()
@@ -56,15 +64,10 @@ public class Game : MonoBehaviour
 
         if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
         {
-            if (Rand(25) < 15)
-                Width++;
-            else
-                Height++;
-            UnlockNewLevel();
-            StartNext();
+            NextLevel();
         }
-        if (Input.GetKeyDown(KeyCode.G))
-            StartNext();
+        //if (Input.GetKeyDown(KeyCode.G))
+        //    StartNext();
     }
 
     public int Rand(int max)
@@ -78,29 +81,37 @@ public class Game : MonoBehaviour
 
     public void ActiveMaze(int size)
     {
-        levelCurrent = size;
-        Width = size + 4;
-        Height = size + 4;
-        StartNext();
+        levelCurrent = size;           
+        StartNext(levelCurrent);
+    }
+
+    void NextLevel()
+    {
+        UnlockNewLevel();
+        levelCurrent++;
+        levelText.text = "Level " + levelCurrent;
+        StartNext(levelCurrent);
     }
 
     public void UnlockNewLevel()
     {
-        int levelNumber = levelCurrent;
-        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        if ((levelCurrent) >= PlayerPrefs.GetInt("MazeReachedIndex"))
         {
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.SetInt("MazeReachedIndex", levelCurrent + 1);
+            PlayerPrefs.SetInt("UnlockedMazeLevel", PlayerPrefs.GetInt("UnlockedMazeLevel", 1) + 1);
             PlayerPrefs.Save();
 
         }
     }
 
-    public void StartNext()
+    public void StartNext(int level)
     {
         foreach (Transform child in Walls)
             Destroy(child.gameObject);
 
+        int mazeSize = baseSize + (level / 2) * sizeIncrement;
+        Width = mazeSize;
+        Height = mazeSize;  
         (HWalls, VWalls) = GenerateLevel(Width, Height);
         PlayerX = Rand(Width);
         PlayerY = Rand(Height);
@@ -129,7 +140,7 @@ public class Game : MonoBehaviour
         Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
         Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
 
-        vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 0.95f;
+        vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 1f;
     }
 
     public (bool[,], bool[,]) GenerateLevel(int w, int h)

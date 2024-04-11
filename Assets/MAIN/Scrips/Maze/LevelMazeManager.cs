@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class LevelMazeManager : MonoBehaviour
     [SerializeField] Canvas levelCanvas;
     int unlockedLevel;
 
+    [SerializeField] TextMeshProUGUI levelText;
     public int levelActive;
 
     private void Awake()
@@ -25,16 +27,16 @@ public class LevelMazeManager : MonoBehaviour
             Destroy(gameObject);
         }
         ButtonsArray();
-        PlayerPrefs.DeleteAll();
-        unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+        //PlayerPrefs.DeleteAll();
+        unlockedLevel = PlayerPrefs.GetInt("UnlockedMazeLevel", 1);
     }
 
     private void OnEnable()
     {
-        Debug.Log(PlayerPrefs.GetInt("UnlockedLevel", 1));
-        if (PlayerPrefs.GetInt("UnlockedLevel", 1) <= buttons.Length)
+        Debug.Log(PlayerPrefs.GetInt("UnlockedMazeLevel", 1));
+        if (PlayerPrefs.GetInt("UnlockedMazeLevel", 1) <= buttons.Length)
         {
-            unlockedLevel = PlayerPrefs.GetInt("UnlockedLevel", 1);
+            unlockedLevel = PlayerPrefs.GetInt("UnlockedMazeLevel", 1);
         }
         for (int i = 0; i < buttons.Length; i++)
         {
@@ -48,6 +50,7 @@ public class LevelMazeManager : MonoBehaviour
     }
     public void OpenLevel(int sizeMaze)
     {
+        levelText.text = "Level " + sizeMaze;
         levelCanvas.gameObject.SetActive(false);
         Game.Instance.ActiveMaze(sizeMaze);
     }
