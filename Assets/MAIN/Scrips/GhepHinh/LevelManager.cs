@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
     [SerializeField] Button[] buttons;
-    public GameObject levelButtons;
+    public GameObject levelPages;
 
     [SerializeField] Canvas levelCanvas;
     int unlockedLevel;
@@ -49,8 +49,10 @@ public class LevelManager : MonoBehaviour
             buttons[i].interactable = true;
         }
     }
-    public void OpenLevel(int levelId)
+    public void OpenLevel(Button btn)
     {
+        string[] btnName = btn.transform.name.Split(' ');
+        int levelId = int.Parse(btnName[1]);
         levelCanvas.gameObject.SetActive(false);
         puzzleManager.SetActiveLevel(levelId);
         LevelController.Instance.levelActive = levelId; 
@@ -58,10 +60,9 @@ public class LevelManager : MonoBehaviour
 
     void ButtonsArray()
     {
-        int childCount = levelButtons.transform.childCount;
-        buttons = new Button[childCount];
-        for (int i = 0; i < childCount; i++) {
-            buttons[i] = levelButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
-        }
+        buttons = levelPages.GetComponentsInChildren<Transform>(true)
+                .Where(obj => obj.CompareTag("Level"))
+                .Select(obj => obj.gameObject.GetComponent<Button>())
+                .ToArray();
     }
 }

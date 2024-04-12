@@ -1,13 +1,13 @@
-using DG.Tweening;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SwipeMenu : MonoBehaviour
+public class Swipe : MonoBehaviour
 {
-    public GameObject scrollbar;
+    public Sprite[] sprites;
+    public GameObject scrollbar, imageContent;
     [SerializeField] Button previousBtn, nextBtn;
     int currentPage = 0;
     private float scroll_pos = 0;
@@ -67,6 +67,29 @@ public class SwipeMenu : MonoBehaviour
             }
         }
         UpdateArrowButton();
+
+
+        for (int i = 0; i < pos.Length; i++)
+        {
+            if (scroll_pos < pos[i] + (distance / 2) && scroll_pos > pos[i] - (distance / 2))
+            {
+                Debug.LogWarning("Current Selected Level" + i);
+                transform.GetChild(i).localScale = Vector2.Lerp(transform.GetChild(i).localScale, new Vector2(1f, 1f), 0.1f);
+                imageContent.transform.GetChild(i).localScale = Vector2.Lerp(imageContent.transform.GetChild(i).localScale, new Vector2(1.2f, 1.2f), 0.1f);
+                imageContent.transform.GetChild(i).GetComponent<Image>().sprite = sprites[1];
+                for (int j = 0; j < pos.Length; j++)
+                {
+                    if (j != i)
+                    {
+                        imageContent.transform.GetChild(j).GetComponent<Image>().sprite = sprites[0];
+                        imageContent.transform.GetChild(j).localScale = Vector2.Lerp(imageContent.transform.GetChild(j).localScale, new Vector2(0.8f, 0.8f), 0.1f);
+                        transform.GetChild(j).localScale = Vector2.Lerp(transform.GetChild(j).localScale, new Vector2(0.8f, 0.8f), 0.1f);
+                    }
+                }
+            }
+        }
+
+
     }
 
     private void GecisiDuzenle(float distance, float[] pos, Button btn)
@@ -87,6 +110,21 @@ public class SwipeMenu : MonoBehaviour
             btn.transform.name = ".";
         }
 
+    }
+    public void WhichBtnClicked(Button btn)
+    {
+        btn.transform.name = "clicked";
+        for (int i = 0; i < btn.transform.parent.transform.childCount; i++)
+        {
+            if (btn.transform.parent.transform.GetChild(i).transform.name == "clicked")
+            {
+                btnNumber = i;
+                takeTheBtn = btn;
+                time = 0;
+                scroll_pos = (pos[btnNumber]);
+                runIt = true;
+            }
+        }
     }
 
     public void Next()
@@ -121,5 +159,10 @@ public class SwipeMenu : MonoBehaviour
         {
             nextBtn.interactable = false;
         }
+    }
+    public void OpenScence(string scene)
+    {
+        string name = scene;
+        SceneManager.LoadScene(name);
     }
 }
