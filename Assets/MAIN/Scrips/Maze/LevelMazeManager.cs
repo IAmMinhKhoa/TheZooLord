@@ -1,20 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelManager : MonoBehaviour
+public class LevelMazeManager : MonoBehaviour
 {
-    public static LevelManager instance;
+    public static LevelMazeManager instance;
     [SerializeField] Button[] buttons;
     public GameObject levelPages;
 
     [SerializeField] Canvas levelCanvas;
     int unlockedLevel;
 
-    PuzzleManager puzzleManager;
-
+    [SerializeField] TextMeshProUGUI levelText;
     public int levelActive;
 
     private void Awake()
@@ -27,23 +27,23 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        puzzleManager = FindObjectOfType<PuzzleManager>();
         ButtonsArray();
-        PlayerPrefs.DeleteAll();
-        unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
+        //PlayerPrefs.DeleteAll();
+        unlockedLevel = PlayerPrefs.GetInt("UnlockedMazeLevel", 1);
     }
 
     private void OnEnable()
     {
-        if (PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1) <= buttons.Length)
+        Debug.Log(PlayerPrefs.GetInt("UnlockedMazeLevel", 1));
+        if (PlayerPrefs.GetInt("UnlockedMazeLevel", 1) <= buttons.Length)
         {
-            unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
+            unlockedLevel = PlayerPrefs.GetInt("UnlockedMazeLevel", 1);
         }
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].interactable = false;
         }
-       
+
         for (int i = 0; i < unlockedLevel; i++)
         {
             buttons[i].interactable = true;
@@ -53,9 +53,9 @@ public class LevelManager : MonoBehaviour
     {
         string[] btnName = btn.transform.name.Split(' ');
         int levelId = int.Parse(btnName[1]);
+        levelText.text = "Level " + levelId;
         levelCanvas.gameObject.SetActive(false);
-        puzzleManager.SetActiveLevel(levelId);
-        LevelController.Instance.levelActive = levelId; 
+        Game.Instance.ActiveMaze(levelId);
     }
 
     void ButtonsArray()

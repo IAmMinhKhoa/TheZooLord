@@ -1,11 +1,17 @@
-using Cinemachine;
+﻿using Cinemachine;
+using GG.Infrastructure.Utils.Swipe;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class Game : MonoBehaviour
 {
+    public static Game Instance;
+
+    [SerializeField] private SwipeListener swipeListener;
     public CinemachineVirtualCamera vcam;
     public Transform Player;
     public Transform Goal;
@@ -22,37 +28,83 @@ public class Game : MonoBehaviour
 
     public int PlayerX, PlayerY;
 
+    public int baseSize = 3; // Kích thước mê cung cơ bản
+    public int sizeIncrement = 1; // Số lượng ô tăng thêm cho mỗi cấp độ
+    public int levelCurrent;
+
+    [SerializeField] TextMeshProUGUI levelText;
+
+    public bool isBack = false;
+
+    private void Awake()
+    {
+        if(Instance == null)
+            Instance = this;
+        else 
+            Destroy(Instance);
+    }
+
     void Start()
     {
-        StartNext();
+        StartNext(0);
+        swipeListener.OnSwipe.AddListener(OnSwipe);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
-            PlayerX--;
-        if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
-            PlayerX++;
-        if (Input.GetKeyDown(KeyCode.W) && !VWalls[PlayerX, PlayerY + 1])
-            PlayerY++;
-        if (Input.GetKeyDown(KeyCode.S) && !VWalls[PlayerX, PlayerY])
-            PlayerY--;
+        Debug.Log(levelCurrent);
+        //if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
+        //    PlayerX--;
+        //if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
+        //    PlayerX++;
+        //if (Input.GetKeyDown(KeyCode.W) && !VWalls[PlayerX, PlayerY + 1])
+        //    PlayerY++;
+        //if (Input.GetKeyDown(KeyCode.S) && !VWalls[PlayerX, PlayerY])
+        //    PlayerY--;
+
+        //Vector3 target = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
+
+        //Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
+
+        //if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
+        //{
+        //    NextLevel();
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //    StartNext();
+    }
+
+    private void OnSwipe(string swipe)
+    {
+        Debug.Log(swipe);
+        switch (swipe)
+        {
+            case "Left":
+                if (!HWalls[PlayerX, PlayerY])
+                    PlayerX--;
+                break;
+            case "Right":
+                if (!HWalls[PlayerX + 1, PlayerY])
+                    PlayerX++;
+                break;
+            case "Up":
+                if (!VWalls[PlayerX, PlayerY + 1])
+                    PlayerY++;
+                break;
+            case "Down":
+                if (!VWalls[PlayerX, PlayerY])
+                    PlayerY--;
+                break;
+        }
 
         Vector3 target = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
 
-        Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
-
+        //Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
+        Player.transform.position = target;
         if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
         {
-            if (Rand(25) < 15)
-                Width++;
-            else
-                Height++;
-
-            StartNext();
+            NextLevel();
         }
-        if (Input.GetKeyDown(KeyCode.G))
-            StartNext();
     }
 
     public int Rand(int max)
@@ -64,11 +116,39 @@ public class Game : MonoBehaviour
         return UnityEngine.Random.value;
     }
 
-    public void StartNext()
+    public void ActiveMaze(int size)
+    {
+        levelCurrent = size;           
+        StartNext(levelCurrent);
+    }
+
+    void NextLevel()
+    {
+        UnlockNewLevel();
+        levelCurrent++;
+        levelText.text = "Level " + levelCurrent;
+        StartNext(levelCurrent);
+    }
+
+    public void UnlockNewLevel()
+    {
+        if ((levelCurrent) >= PlayerPrefs.GetInt("MazeReachedIndex"))
+        {
+            PlayerPrefs.SetInt("MazeReachedIndex", levelCurrent + 1);
+            PlayerPrefs.SetInt("UnlockedMazeLevel", PlayerPrefs.GetInt("UnlockedMazeLevel", 1) + 1);
+            PlayerPrefs.Save();
+
+        }
+    }
+
+    public void StartNext(int level)
     {
         foreach (Transform child in Walls)
             Destroy(child.gameObject);
 
+        int mazeSize = baseSize + (level / 2) * sizeIncrement;
+        Width = mazeSize;
+        Height = mazeSize;  
         (HWalls, VWalls) = GenerateLevel(Width, Height);
         PlayerX = Rand(Width);
         PlayerY = Rand(Height);
@@ -95,9 +175,9 @@ public class Game : MonoBehaviour
                 Instantiate(FloorTemplate, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity, Walls);
 
         Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
-        Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.25f);
+        Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
 
-        vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 0.95f;
+        vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 1f;
     }
 
     public (bool[,], bool[,]) GenerateLevel(int w, int h)

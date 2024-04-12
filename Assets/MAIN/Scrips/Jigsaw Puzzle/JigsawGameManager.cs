@@ -113,10 +113,10 @@ public class JigsawGameManager : MonoBehaviour
     public void UnlockNewLevel()
     {
         int levelNumber = levelActive;
-        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        if ((levelNumber) >= PlayerPrefs.GetInt("JigsawReachedIndex"))
         {
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            PlayerPrefs.SetInt("JigsawReachedIndex", levelNumber + 1);
+            PlayerPrefs.SetInt("UnlockedJigsawLevel", PlayerPrefs.GetInt("UnlockedJigsawLevel", 1) + 1);
             PlayerPrefs.Save();
 
         }

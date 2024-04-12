@@ -118,12 +118,12 @@ public class AnimalManager : MonoBehaviour
     {
         string[] levelNumberString = gameObject.name.Split(' ');
         int levelNumber = int.Parse(levelNumberString[1]) - 1;
-        if ((levelNumber) >= PlayerPrefs.GetInt("ReachedIndex"))
+        if ((levelNumber) >= PlayerPrefs.GetInt("PuzzleReachedIndex"))
         {
             Debug.Log(levelNumber);
-            Debug.Log(PlayerPrefs.GetInt("ReachedIndex"));
-            PlayerPrefs.SetInt("ReachedIndex", levelNumber + 1);
-            PlayerPrefs.SetInt("UnlockedLevel", PlayerPrefs.GetInt("UnlockedLevel", 1) + 1);
+            Debug.Log(PlayerPrefs.GetInt("PuzzleReachedIndex"));
+            PlayerPrefs.SetInt("PuzzleReachedIndex", levelNumber + 1);
+            PlayerPrefs.SetInt("UnlockedPuzzleLevel", PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1) + 1);
             PlayerPrefs.Save();
 
         }
