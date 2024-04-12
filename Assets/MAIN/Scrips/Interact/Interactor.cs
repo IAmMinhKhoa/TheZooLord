@@ -13,17 +13,13 @@ public class Interactor : MonoBehaviour
     public Manager_UI managerUI;
 
  //   [HideInInspector]
-    public ConfigCage configCage;
-  //  [HideInInspector]
-    public GiftController giftControl;
+    public ConfigCage configCage;   
     private void Start()
     {
         //-- INTERACT CAGE --
         this.Register(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Register(EventID.CloseInteractCage, OnTriggerExitCage);
-        //-- INTERACT GIFT --
-        this.Register(EventID.OpenInteractGift, OnTriggerEnterGift);
-        this.Register(EventID.CloseInteractGift, OnTriggerExitGift);
+
       
     }
     private void OnDestroy()
@@ -31,8 +27,7 @@ public class Interactor : MonoBehaviour
         this.Unregister(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Unregister(EventID.CloseInteractCage, OnTriggerExitCage);
 
-        this.Unregister(EventID.OpenInteractGift, OnTriggerEnterGift);
-        this.Unregister(EventID.CloseInteractGift, OnTriggerExitGift);
+
 
       
     }
@@ -66,19 +61,7 @@ public class Interactor : MonoBehaviour
         ResetDataButtonFood();
     }
     #endregion
-    #region TRIGGER GIFT 
-    public void OnTriggerEnterGift (object data)
-    {
-        GameObject temp = (GameObject)data;
-        giftControl = temp.GetComponent<GiftController>();
-        giftControl.OpenModal();
-    }
-    public void OnTriggerExitGift(object data = null)
-    {
-        giftControl.CloseModal();
-        giftControl = null;
-    }
-    #endregion 
+    
 
     #region Event UI Interact Cage
     public void OpenViewAnimals()//use it for button see detail animal in cage

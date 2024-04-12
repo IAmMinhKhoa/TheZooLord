@@ -9,8 +9,8 @@ using UnityEngine.UI;
 public class GiftController : MonoBehaviour,IPointerClickHandler
 {
     public GameObject mainCanvas;
-    public List<SOQuestion> SoQuests;
-
+    [SerializeField] private float CD_Gift = 5;
+    [SerializeField] private bool CanGift = true;
     #region UI ELEMENT OF QUESTION
     public TMP_Text textScrip;
     public AudioSource audioSouce;
@@ -18,11 +18,13 @@ public class GiftController : MonoBehaviour,IPointerClickHandler
     public GameObject buttonAnswerPrefab;
     public List<Image> startDifficults;
     #endregion
-    #region 3 TYPE OF QUESTION
+    #region List
     public List<GameObject> emojiQuests; //0: default , 1: rightAnswer, 2: NotAxactly
+    public List<SOQuestion> SoQuests; //Data SO question
+    private List<GameObject> CurrentObjAnswers = new List<GameObject>();// Prefab Answer
     #endregion
-    private List<GameObject> CurrentObjAnswers =new List<GameObject>();
-    private SOQuestion currentSoQuest;
+
+    
 
     protected CanvasGroup canvasGroup;
 
@@ -32,14 +34,11 @@ public class GiftController : MonoBehaviour,IPointerClickHandler
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-
-
-        
     }
 
     public void GenerateQuest()
     {
-        currentSoQuest = RandomQuestion();
+        SOQuestion currentSoQuest = RandomQuestion();
         SetDataToUi(currentSoQuest);
         foreach (var data in currentSoQuest.dataAnswers)
         {
@@ -55,52 +54,36 @@ public class GiftController : MonoBehaviour,IPointerClickHandler
     protected void ActionRightAnswer()
     {
         ActiveEmojiQuest(1);
+        LockButtonAnswer();
         StartCoroutine(Common.delayCoroutine(2f, () =>
         {
             CloseModal();
+            StartCoroutine(CdResetGift(CD_Gift));
 
         }));
     }
     protected void ActionNotRightAnswer()
     {
         ActiveEmojiQuest(2);
+        LockButtonAnswer();
         StartCoroutine(Common.delayCoroutine(2f, () =>
         {
             CloseModal();
-
+            StartCoroutine(CdResetGift(CD_Gift));
         }));
     }
-    private void OnButtonClick(bool rightAnswer)
+    private void LockButtonAnswer()
     {
-        
-        if (rightAnswer)
+        foreach (var item in CurrentObjAnswers)
         {
-            Debug.Log(rightAnswer);
-         
-            for (int i = 0; i < currentSoQuest.dataAnswers.Count; i++)
-            {
-                if (!currentSoQuest.dataAnswers[i].rightAnswer)
-                {
-                    CurrentObjAnswers[i].GetComponent<Button>().interactable = false;
-                }
-            }
-            ActiveEmojiQuest(1);
-            StartCoroutine(Common.delayCoroutine(2f, () =>
-            {
-                CloseModal();
-    
-            }));
+            item.GetComponent<Button>().interactable = false;
         }
-        else
-        {
-
-            ActiveEmojiQuest(2);
-            StartCoroutine(Common.delayCoroutine(2f, () =>
-            {
-                CloseModal();
-
-            }));
-        }
+    }
+    private IEnumerator CdResetGift(float initTime)
+    {
+        CanGift = false;
+        yield return new WaitForSeconds(initTime);
+        CanGift = true;
     }
     protected void SetDataToUi(SOQuestion data)
     {
@@ -167,7 +150,10 @@ public class GiftController : MonoBehaviour,IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("egeg");
+        if (CanGift)
+        {
+            OpenModal();
+        }
     }
     #endregion
 }
