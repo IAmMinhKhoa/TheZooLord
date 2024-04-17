@@ -9,12 +9,24 @@ using UnityEngine.UIElements;
 
 public class Manager_UI : MonoBehaviour
 {
+    
+
+
+    #region singleton
+    public static Manager_UI Instance
+    {
+        get;
+        private set;
+    }
+    #endregion
     [Header("MAIN UI CHARACTER")]
     public GameObject groupDetailPanelAnimal;
     public GameObject groupViewAnimalsUI;
     public GameObject groupInteractCageUI;
     public GameObject groupOverlayUI;
-
+    //---UI child in InteractCage
+    public GameObject GroupInteractDefault;
+    public GameObject GroupInteractToOpenCage;
     [Header("LIST UI")]
     public List<GameObject> btnFoods;
 
@@ -75,12 +87,7 @@ public class Manager_UI : MonoBehaviour
     {
         obj.SetActive(boolean);
     }
-    public void CloseAllModal()
-    {
-        groupViewAnimalsUI.SetActive(false);
-        groupInteractCageUI.SetActive(false);
-        groupOverlayUI.SetActive(false);
-    }
+   
 
     public void animationButtonFood()
     {
@@ -103,5 +110,37 @@ public class Manager_UI : MonoBehaviour
         animationButtonFood();
     }
     #endregion
+
+
+
+
+    //-------------- refactory UI -------
+    public void OpenViewDetailAnimal()
+    {
+        CloseAllModal();
+        SetModalActive(groupDetailPanelAnimal, true);
+    }
+    public void OpenViewAnimal()
+    {
+        CloseAllModal();
+        SetModalActive(groupViewAnimalsUI, true);
+    }
+    public void OpenInteractCage()
+    {
+        CloseAllModal();
+        SetModalActive(groupInteractCageUI, true);
+    }
+    public void OpenOverlay()
+    {
+        CloseAllModal();
+        SetModalActive(groupOverlayUI, true);
+    }
+    
+    public void CloseAllModal()
+    {
+        groupViewAnimalsUI.SetActive(false);
+        groupInteractCageUI.SetActive(false);
+        groupOverlayUI.SetActive(false);
+    }
 
 }

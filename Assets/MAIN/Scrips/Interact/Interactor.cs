@@ -41,6 +41,28 @@ public class Interactor : MonoBehaviour
     #endregion
 
     #region TRIGGER CAGE
+    public void OpenQuestToOpenCage()
+    {
+        QuestController.Instance.OpenModal(
+        () =>//affter success
+        {
+            configCage.SoAnimal.IsLock = false;
+            setUIcageInteract();
+            configCage.UnClockCage();
+            Debug.Log("OPEN SUCCESS CAGE ANIMAL :" + configCage.SoAnimal.name);
+        },
+        () =>//affter failed
+        {
+            
+        }
+        );
+    }
+    private void setUIcageInteract()
+    {
+        bool isCageLocked = configCage.SoAnimal.IsLock;
+        managerUI.GroupInteractToOpenCage.SetActive(isCageLocked);
+        managerUI.GroupInteractDefault.SetActive(!isCageLocked);
+    }
     public void OnTriggerEnterCage(object data)
     {
         if (data == null)
@@ -50,7 +72,8 @@ public class Interactor : MonoBehaviour
         }
         GameObject temp = (GameObject)data;
         configCage = temp.GetComponent<ConfigCage>();
-       managerUI.OpenModalInteract();
+        managerUI.OpenModalInteract();
+        setUIcageInteract();
         SetDataToButtonFood();
        
     }
