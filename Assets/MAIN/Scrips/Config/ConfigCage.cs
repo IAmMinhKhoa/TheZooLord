@@ -26,7 +26,13 @@ public class ConfigCage : MonoBehaviour
     {
         foodStorage.SOFoods = SoAnimal.dataFoods.SoFoods;
     }
-    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            setSoundToAudio(SoAnimal.voiceChirp);
+        }
+    }
     private void Start()
     {
         iconMarkMap.sprite = SoAnimal.icon;
@@ -58,6 +64,10 @@ public class ConfigCage : MonoBehaviour
                 break;
         }
     }
+    /// <summary>
+    /// Set audioClip and Play it
+    /// </summary>
+    /// <param name="src"></param>
     public void setSoundToAudio(AudioClip src)
     {
         audioClipCage.clip = src;

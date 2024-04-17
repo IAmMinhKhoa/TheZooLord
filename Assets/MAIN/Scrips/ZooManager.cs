@@ -8,7 +8,11 @@ using UnityEngine;
 
 public class ZooManager : MonoBehaviour
 {
-    public static bool isDay=true;
+    public bool isDay = true;
+    #region SINGLOTEN
+    public static ZooManager Instance { get; private set; }
+    #endregion
+    #region VARIABLE DAY ENVIRONMENT
     public float TimeLoopDayNight = 60f;
 
     private float currentTime = 0;
@@ -25,25 +29,42 @@ public class ZooManager : MonoBehaviour
     [SerializeField] private float rotationSpeed = 1f;
 
     float sunPosition = 0;
+    #endregion
+    #region VARIABLE MANAGER SOUND OF ZOO
+    public List<AudioSource> audioSources = new List<AudioSource>();
+    #endregion
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Persist across scenes if needed
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate instances
+        }
+    }
     private void Update()
     {
+        //Update Day Environment
         UpdateTime();
         UpdateDayNightCycle();
         RotateSkybox();
-        
     }
 
+    #region DAY AND NIGHT
     private void UpdateTime()
     {
         currentTime += Time.deltaTime / TimeLoopDayNight;
         currentTime = Mathf.Repeat(currentTime, 1f);
-        if(currentTime>=0.25f &&currentTime<0.7f)
+        if (currentTime >= 0.25f && currentTime < 0.7f)
         {
             isDay = false;
         }
-        else if(currentTime>0.7f)
-        { 
+        else if (currentTime > 0.7f)
+        {
             isDay = true;
         }
         if (!isDay) currentTime += Time.deltaTime / 20;
@@ -70,6 +91,8 @@ public class ZooManager : MonoBehaviour
     {
         skyboxMaterial.SetColor("_Tint", new Color(0.5f, 0.5f, 0.5f));
     }
+    #endregion
+
 
 
 

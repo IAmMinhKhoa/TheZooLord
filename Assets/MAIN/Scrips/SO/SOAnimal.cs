@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Aimal")]
 public class SOAnimal : ScriptableObject
 {
+    public bool clock=true;
     public string nameAnimal;
     public Sprite defaultImage; //image about this type animal, use in main detail information animal
     public Sprite icon;

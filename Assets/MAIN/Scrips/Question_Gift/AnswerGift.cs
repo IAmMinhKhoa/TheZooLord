@@ -27,7 +27,7 @@ public class AnswerGift : MonoBehaviour
         ActionExactly = Right;
         ActionNotExactly = NotRight;
     }
-    public void ShowResult()
+    public void ShowResult()//Set in button anwser  
     {
         if (ExactlyAnswer)
         {
