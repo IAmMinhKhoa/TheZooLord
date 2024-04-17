@@ -6629,7 +6629,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1875468041, guid: fc4eb0d55d938444a83a11028f764580, type: 3}
+  m_Sprite: {fileID: -992912282, guid: da3239c8ac6f44b4cb4420d865fbae56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -6648,8 +6648,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153550547}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4, y: -0.51, z: 0}
-  m_LocalScale: {x: 0.25754, y: 0.25754, z: 0.25754}
+  m_LocalPosition: {x: -1.462, y: -0.519, z: 0}
+  m_LocalScale: {x: 0.8749579, y: 0.9020305, z: 0.25754}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6663,7 +6663,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153550547}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -9389,18 +9389,19 @@ MonoBehaviour:
   Player: {fileID: 1153550549}
   Goal: {fileID: 1969410314}
   Walls: {fileID: 1085075750}
-  WallTemplate: {fileID: 5803537085562380582, guid: c7a7cd2d15ac3d240a38c7f8332eea2f,
+  WallTemplate: {fileID: 7169015042104218089, guid: 463fc371e32d54443ac98fe8f7a80bd5,
     type: 3}
   FloorTemplate: {fileID: 6592905857064843549, guid: fd84fa5498f5d0542a6348053b2df61c,
     type: 3}
   MovementSmoothing: 10
+  listSOAnimal:
+  - {fileID: 11400000, guid: 6879d2bd5dfdb4948bda971e823aa8d3, type: 2}
+  - {fileID: 11400000, guid: a9fcd2e2c3b26494a88dbb4f05a596e3, type: 2}
   Width: 3
   Height: 3
   HoleProbability: 0
   GoalX: 0
   GoalY: 0
-  PlayerX: 0
-  PlayerY: 0
   baseSize: 3
   sizeIncrement: 1
   levelCurrent: 0
@@ -9428,7 +9429,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1153550549}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 2.639016
+    OrthographicSize: 2.157669
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -9452,7 +9453,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643723598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4, y: -0.51, z: -10}
+  m_LocalPosition: {x: -1.462, y: -0.519, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10382,7 +10383,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.639016
+  orthographic size: 2.157669
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10406,7 +10407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1765401814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4, y: -0.51, z: -10}
+  m_LocalPosition: {x: -1.462, y: -0.519, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -12,6 +12,8 @@ public class Game : MonoBehaviour
     public static Game Instance;
 
     [SerializeField] private SwipeListener swipeListener;
+
+    [Header("Gameobject")]
     public CinemachineVirtualCamera vcam;
     public Transform Player;
     public Transform Goal;
@@ -20,16 +22,21 @@ public class Game : MonoBehaviour
     public GameObject FloorTemplate;
     public float MovementSmoothing;
 
+    [Header("List Animal SO")]
+    [SerializeField] List<SOAnimal> listSOAnimal;
+    int animalSOIndex;
+
+    [Header("Maze Size")]
     public int Width = 3;
     public int Height = 3;
     public bool[,] HWalls, VWalls;
     public float HoleProbability;
     public int GoalX, GoalY;
 
-    public int PlayerX, PlayerY;
+    private int PlayerX, PlayerY;
 
-    public int baseSize = 3; // Kích thước mê cung cơ bản
-    public int sizeIncrement = 1; // Số lượng ô tăng thêm cho mỗi cấp độ
+    [SerializeField] private int baseSize = 3; // Kích thước mê cung cơ bản
+    [SerializeField] private int sizeIncrement = 1; // Số lượng ô tăng thêm cho mỗi cấp độ
     public int levelCurrent;
 
     [SerializeField] TextMeshProUGUI levelText;
@@ -48,11 +55,11 @@ public class Game : MonoBehaviour
     {
         StartNext(0);
         swipeListener.OnSwipe.AddListener(OnSwipe);
+        animalSOIndex = 0;
     }
 
     void Update()
     {
-        Debug.Log(levelCurrent);
         //if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
         //    PlayerX--;
         //if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
@@ -107,6 +114,28 @@ public class Game : MonoBehaviour
         }
     }
 
+    void SetIcon()
+    {
+        if(animalSOIndex > listSOAnimal.Count - 1) 
+        {
+            animalSOIndex = 0;
+        }
+        for(int i = 0; i < listSOAnimal.Count; i++) 
+        {
+            
+            if (i == animalSOIndex)
+            {
+                Sprite iconAnimal = listSOAnimal[i].icon;   
+                Sprite iconFood = listSOAnimal[i].dataFoods.SoFoods[Random.Range(0, 2)].iconFood;
+
+                Player.gameObject.GetComponent<SpriteRenderer>().sprite = iconAnimal;
+                Goal.gameObject.GetComponent<SpriteRenderer>().sprite = iconFood;
+                animalSOIndex = i + 1;
+                break;
+            }
+        }    
+    }
+
     public int Rand(int max)
     {
         return UnityEngine.Random.Range(0, max);
@@ -143,6 +172,7 @@ public class Game : MonoBehaviour
 
     public void StartNext(int level)
     {
+        SetIcon();
         foreach (Transform child in Walls)
             Destroy(child.gameObject);
 
