@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class Interactor : MonoBehaviour
 {
-    public Manager_UI managerUI;
 
  //   [HideInInspector]
     public ConfigCage configCage;   
@@ -26,17 +25,11 @@ public class Interactor : MonoBehaviour
     {
         this.Unregister(EventID.OpenInteractCage, OnTriggerEnterCage);
         this.Unregister(EventID.CloseInteractCage, OnTriggerExitCage);
-
-
-
-      
     }
     #region TRIGGER DETAIL PANEL ANIMAL
     public void OpenDetailPanelAnimal()
     {
-        
-        managerUI.groupDetailPanelAnimal.GetComponent<DetailPanelAnimal>().configCage = configCage;
-        managerUI.OpenModalDetailPanel();
+        Manager_UI.Instance.OpenViewDetailAnimal(configCage);
     }
     #endregion
 
@@ -46,10 +39,14 @@ public class Interactor : MonoBehaviour
         QuestController.Instance.OpenModal(
         () =>//affter success
         {
-            configCage.SoAnimal.IsLock = false;
-            setUIcageInteract();
-            configCage.UnClockCage();
-            Debug.Log("OPEN SUCCESS CAGE ANIMAL :" + configCage.SoAnimal.name);
+            StartCoroutine(Common.delayCoroutine(1f, () =>
+            {
+                configCage.SoAnimal.IsLock = false;
+                setUIcageInteract();
+                configCage.UnClockCage();
+                Debug.Log("OPEN SUCCESS CAGE ANIMAL :" + configCage.SoAnimal.name);
+            }));
+            
         },
         () =>//affter failed
         {
@@ -60,19 +57,23 @@ public class Interactor : MonoBehaviour
     private void setUIcageInteract()
     {
         bool isCageLocked = configCage.SoAnimal.IsLock;
-        managerUI.GroupInteractToOpenCage.SetActive(isCageLocked);
-        managerUI.GroupInteractDefault.SetActive(!isCageLocked);
+        
+        if (isCageLocked)
+            Manager_UI.Instance.OpenUnClockCage();
+        else
+            Manager_UI.Instance.OpenInteractCage();
+
+
     }
     public void OnTriggerEnterCage(object data)
     {
         if (data == null)
         {
-            managerUI.OpenModalInteract();
+            Debug.LogError("NOT FOUND SO CONFIG CAGE");
             return;
         }
         GameObject temp = (GameObject)data;
         configCage = temp.GetComponent<ConfigCage>();
-        managerUI.OpenModalInteract();
         setUIcageInteract();
         SetDataToButtonFood();
        
@@ -80,7 +81,7 @@ public class Interactor : MonoBehaviour
     public void OnTriggerExitCage(object data = null)
     {
         configCage = null;
-        managerUI.CloseModalInteract();
+        Manager_UI.Instance.CloseAllModal();
         ResetDataButtonFood();
     }
     #endregion
@@ -89,8 +90,8 @@ public class Interactor : MonoBehaviour
     #region Event UI Interact Cage
     public void OpenViewAnimals()//use it for button see detail animal in cage
     {
-        managerUI.OpenModalViewAnimals();
-        configCage.OpenViewCage();
+        Manager_UI.Instance.OpenViewAnimal();
+        configCage.OpenViewCage(); //turn on cammera in cage
     }
     #endregion
     #region Event UI View Animals
@@ -101,8 +102,8 @@ public class Interactor : MonoBehaviour
         configCage.SwitchToPreviousTarget();
     }
     public void OutViewAnimal() {
-        managerUI.CloseModalViewAnimals();
-        configCage.CloseViewCage();
+        Manager_UI.Instance.CloseModalViewAnimals();
+        configCage.CloseViewCage(); //turn off cammera in cagef
     }
     #endregion
 
@@ -112,15 +113,16 @@ public class Interactor : MonoBehaviour
         try
         {
             SOAnimal dataAnimal = configCage.SoAnimal;
-
-            for (int i = 0; i < managerUI.btnFoods.Count; i++)
+            
+            for (int i = 0; i < Manager_UI.Instance.btnFoods.Count; i++)
             {
-                GameObject obj = managerUI.btnFoods[i];
+                int currenIndex = i;
                 //set Icon. Event spam food
-                obj.GetComponent<Image>().sprite = dataAnimal.dataFoods.SoFoods[i].iconFood;
-                obj.GetComponent<Button>().onClick.AddListener(() =>
+                Manager_UI.Instance.btnFoods[i].GetComponent<Image>().sprite = dataAnimal.dataFoods.SoFoods[i].iconFood;
+                Manager_UI.Instance.btnFoods[i].GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    configCage.foodStorage.SpamwnFood(i);
+                    
+                    configCage.foodStorage.SpamwnFood(currenIndex);
                 });
             }
         }
@@ -133,9 +135,9 @@ public class Interactor : MonoBehaviour
     {
         try
         {
-            for (int i = 0; i < managerUI.btnFoods.Count; i++)
+            for (int i = 0; i < Manager_UI.Instance.btnFoods.Count; i++)
             {
-                GameObject obj = managerUI.btnFoods[i];
+                GameObject obj = Manager_UI.Instance.btnFoods[i];
                 //reset Icon. Event spam food
                 obj.GetComponent<Image>().sprite = null;
                 obj.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -152,7 +154,7 @@ public class Interactor : MonoBehaviour
 
 
     [ProButton]
-    public void EatFoodAnimal()
+    public void EatFoodAnimal() //DEBUG BUTTON
     {
         configCage.foodStorage.SpamwnFood(1);  
     }

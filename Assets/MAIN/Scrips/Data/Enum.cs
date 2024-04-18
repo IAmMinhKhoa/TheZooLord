@@ -35,3 +35,10 @@ public enum TypeAnimationAnimal
     Lie
 
 }
+public enum TypeAnimationMove
+{
+    up,
+    down,
+    left,
+    right
+}
