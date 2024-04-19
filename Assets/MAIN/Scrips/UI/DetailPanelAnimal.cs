@@ -32,7 +32,7 @@ public class DetailPanelAnimal : MonoBehaviour
 
  
     private void OnEnable()
-    {
+    {        
         InitResource();
     }
 
@@ -203,10 +203,9 @@ public class DetailPanelAnimal : MonoBehaviour
     public void TURN_OFF_DETAIL_PANEL() //Use in button EXIT in detail panels
     {
         ResetUI();
-        gameObject.SetActive(false);
-        configCage.cameraCage.gameObject.SetActive(false);
-        this.Broadcast(EventID.OpenUiOverlay);
-        this.Broadcast(EventID.OpenInteractCage);
+        Manager_UI.Instance.CloseModalViewDetailAnimal();
+        configCage.cameraCage.gameObject.SetActive(false); //turn off cammera of cage -> refund camera follow player
+        
     }
     private void CloseAllDetailPanel()
     {

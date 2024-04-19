@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +11,16 @@ using UnityEngine.UI;
 
 public class QuestController : MonoBehaviour
 {
-    private GameObject mainCanvas;
+
+    #region singleton
+    public static QuestController Instance
+    {
+        get;
+        private set;
+    }
+    #endregion
+
+    [SerializeField] protected CanvasGroup canvasGroup;
 
     #region UI ELEMENT OF QUESTION
     public TMP_Text textScrip;
@@ -30,16 +40,28 @@ public class QuestController : MonoBehaviour
     public event Action affterFail;
     #endregion
 
-    protected CanvasGroup canvasGroup;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+       
+    }
 
     private void Start()
-    {
-        canvasGroup = mainCanvas.GetComponent<CanvasGroup>();
+    {  
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+    
     }
-
+    
     public void GenerateQuest()
     {
         SOQuestion currentSoQuest = RandomQuestion();
@@ -105,6 +127,9 @@ public class QuestController : MonoBehaviour
             Destroy(child);
         }
         ResetEmojiObject();
+        //reset Action affter answer question
+        affterFail=null;
+        affterSuccess = null;
     }
 
     private void ActiveEmojiQuest(int i)
@@ -128,8 +153,11 @@ public class QuestController : MonoBehaviour
     }
 
     #region UI
-    public void OpenModal()
+
+    public  void OpenModal(Action affterSuccess=null,Action affterFailed=null)
     {
+        this.affterSuccess= affterSuccess;
+        this.affterFail = affterFailed;
         canvasGroup.DOFade(1f, 0.2f).OnStart(() =>
         {
             canvasGroup.interactable = true;

@@ -9,7 +9,7 @@ public class ConfigCage : MonoBehaviour
 
     public SOAnimal SoAnimal;
     public CinemachineFreeLook cameraCage;
-    public List<ConfigAnimal> objAnimals;
+    public List<ConfigAnimal> Animals;
 
     [HideInInspector] public Transform view_Environment;
     [HideInInspector] public Transform view_Foods;
@@ -17,6 +17,8 @@ public class ConfigCage : MonoBehaviour
     [HideInInspector] public Transform view_Conservation;
 
     public AudioSource audioClipCage;
+    [SerializeField] GameObject objBlockCage;
+    [SerializeField] GameObject objMain;
 
     public FoodStorage foodStorage;
     private int _currentTargetIndex = 0;
@@ -37,8 +39,18 @@ public class ConfigCage : MonoBehaviour
     {
         iconMarkMap.sprite = SoAnimal.icon;
         //Set target Friend Animal
-        objAnimals[0].GetComponent<AnimalController>().otherAnimal = objAnimals[1].transform;
-        objAnimals[1].GetComponent<AnimalController>().otherAnimal = objAnimals[0].transform;
+        Animals[0].GetComponent<AnimalController>().otherAnimal = Animals[1].transform;
+        Animals[1].GetComponent<AnimalController>().otherAnimal = Animals[0].transform;
+        //set state of cage is lock or not
+        if(SoAnimal.IsLock)
+        {
+            objBlockCage.SetActive(true);
+            objMain.SetActive(false);
+        }
+        else
+        {
+            UnClockCage();
+        }
     }
     #region PLAY SOUND
     public void PlaySoundType(SoundTypeInCage typeSound)
@@ -142,7 +154,7 @@ public class ConfigCage : MonoBehaviour
     public void SwitchToNextTarget()
     {
         _currentTargetIndex++;
-        if (_currentTargetIndex >= objAnimals.Count)
+        if (_currentTargetIndex >= Animals.Count)
         {
             _currentTargetIndex = 0;
         }
@@ -155,7 +167,7 @@ public class ConfigCage : MonoBehaviour
         _currentTargetIndex--;
         if (_currentTargetIndex < 0)
         {
-            _currentTargetIndex = objAnimals.Count - 1;
+            _currentTargetIndex = Animals.Count - 1;
         }
 
         SetCameraTarget();
@@ -163,14 +175,18 @@ public class ConfigCage : MonoBehaviour
 
     private void SetCameraTarget()
     {
-        if (_currentTargetIndex >= 0 && _currentTargetIndex < objAnimals.Count)
+        if (_currentTargetIndex >= 0 && _currentTargetIndex < Animals.Count)
         {
-            Transform targetTransform = objAnimals[_currentTargetIndex].transform;
+            Transform targetTransform = Animals[_currentTargetIndex].transform;
             SetTartgetCam(targetTransform);
         }
     }
     #endregion
-
+    public void UnClockCage()
+    {
+        objBlockCage.gameObject.SetActive(false);
+        objMain.SetActive(true);
+    }
     public void SetTartgetCam(Transform target)
     {
         cameraCage.gameObject.SetActive(true);

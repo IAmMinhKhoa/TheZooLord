@@ -9,99 +9,124 @@ using UnityEngine.UIElements;
 
 public class Manager_UI : MonoBehaviour
 {
+    #region singleton
+    public static Manager_UI Instance
+    {
+        get;
+        private set;
+    }
+    #endregion
     [Header("MAIN UI CHARACTER")]
     public GameObject groupDetailPanelAnimal;
     public GameObject groupViewAnimalsUI;
     public GameObject groupInteractCageUI;
     public GameObject groupOverlayUI;
-
+    //---UI child in InteractCage
+    public GameObject GroupUnClockCage;
+    public GameObject GroupInteractToOpenCage;
     [Header("LIST UI")]
     public List<GameObject> btnFoods;
 
    //--- USE IN LOCAL ---
     private bool toggleBtnFoods=false;
+    private bool toggleBtnMiniMap = false;
+    public GameObject temp;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    private void Start()
-    {
-        this.Register(EventID.OpenUiOverlay, OpenModalUiOverlay);
     }
-
-    private void OnDestroy()
-    {
-        this.Unregister(EventID.CloseUiOverlay, CloseModalUiOverlay);
-    }
-    public void OpenModalUiOverlay(object data)
-    {
-        SetModalActive(groupOverlayUI, true);
-    }
-    public void CloseModalUiOverlay(object data=null)
-    {
-        SetModalActive(groupOverlayUI, false);
-    }
-    public void OpenModalInteract()
-    {
-        SetModalActive(groupInteractCageUI, true);
-    }
-    public void CloseModalInteract()
-    {
-        SetModalActive(groupInteractCageUI, false);
-    }
-
-
-    public void CloseModalViewAnimals()
-    {
-        CloseAllModal();
-        SetModalActive(groupOverlayUI, true);
-        SetModalActive(groupInteractCageUI, true);
-    }
-
-    public void OpenModalViewAnimals()
-    {
-        CloseAllModal();
-        SetModalActive(groupViewAnimalsUI, true);
-    }
-
-    public void OpenModalOverView()
-    {
-        CloseAllModal();
-        SetModalActive(groupOverlayUI, true);
-    }
-    public void OpenModalDetailPanel()
-    {
-        CloseAllModal();
-        SetModalActive(groupDetailPanelAnimal, true);
-    }
+   
     protected void SetModalActive(GameObject obj,bool boolean)
     {
         obj.SetActive(boolean);
     }
-    public void CloseAllModal()
-    {
-        groupViewAnimalsUI.SetActive(false);
-        groupInteractCageUI.SetActive(false);
-        groupOverlayUI.SetActive(false);
-    }
+   
 
-    public void animationButtonFood()
+  
+    #region TESTING
+    
+    #endregion
+
+
+
+
+    //-------------- refactory UI ---------------
+
+    #region CLOSE MODAL
+    public void CloseModalViewAnimals()
+    {
+        CloseAllModal();
+        SetModalActive(groupInteractCageUI, true);
+    }
+    public void CloseModalViewDetailAnimal()
+    {
+        CloseAllModal();
+        SetModalActive(groupInteractCageUI, true);
+    }
+    #endregion
+
+    #region OPEN MODAL
+    public void OpenViewDetailAnimal(ConfigCage configCage)
+    {
+       
+        CloseAllModal(true);
+        if (configCage != null) groupDetailPanelAnimal.GetComponent<DetailPanelAnimal>().configCage = configCage;
+        SetModalActive(groupDetailPanelAnimal, true);
+    }
+    public void OpenViewAnimal()
+    {
+        CloseAllModal(true); //accept close overlay UI
+        SetModalActive(groupViewAnimalsUI, true);
+    }
+    public void OpenUnClockCage()
+    {
+        CloseAllModal();
+        SetModalActive(GroupUnClockCage, true);
+    }
+    public void OpenInteractCage()
+    {
+        CloseAllModal();
+        SetModalActive(groupInteractCageUI, true);
+    }
+    public void OpenOverlay()
+    {
+        CloseAllModal();
+        SetModalActive(groupOverlayUI, true);
+    }
+    #endregion
+    #region ANIMATION
+    public IEnumerator ToggleFood()//use in button food in interact cage 
     {
         foreach (GameObject btn in btnFoods)
         {
-            Common.PopUpButton(btn,close: toggleBtnFoods);
+            Common.PopUpButton(btn, close: toggleBtnFoods);
+            yield return new WaitForSeconds(0.5f);
         }
+        
         toggleBtnFoods = !toggleBtnFoods;
     }
+    public void ToggleMiniMap(int pos)//use in button toggle MiniMap
+    {
+        Common.MoveObject(temp, 2f, pos);
+    }
+    #endregion 
 
-    #region TESTING
-    [ProButton]
-    protected void OpenButtonFood()
+    public void CloseAllModal(bool Overlay=false)
     {
-        animationButtonFood();
+        groupViewAnimalsUI.SetActive(false);
+        groupInteractCageUI.SetActive(false);
+        GroupUnClockCage.SetActive(false);
+        groupDetailPanelAnimal.SetActive(false);
+        groupOverlayUI.SetActive(!Overlay);    
     }
-    [ProButton]
-    protected void CloseButtonFood()
-    {
-        animationButtonFood();
-    }
-    #endregion
 
 }

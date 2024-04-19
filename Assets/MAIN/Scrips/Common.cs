@@ -32,5 +32,25 @@ public class Common
         }
         
     }
-    
+    public static void MoveObject( GameObject objectToMove, float duration, float endPos, TypeAnimationMove type = TypeAnimationMove.right)
+    {
+        // Move the object to the specified end position 
+        switch (type)
+        {
+            case TypeAnimationMove.up:
+                break;
+            case TypeAnimationMove.down:
+                
+                break;
+            case TypeAnimationMove.left:
+                break;
+            case TypeAnimationMove.right:
+                objectToMove.GetComponent<RectTransform>().DOAnchorPosX(endPos, duration, false);
+                break;
+            default:
+                break;
+        }
+        
+    }
+
 }

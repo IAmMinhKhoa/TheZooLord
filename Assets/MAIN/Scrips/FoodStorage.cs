@@ -15,30 +15,31 @@ using UnityEngine;
 
  
     public void SpamwnFood(int index)
+    {
+        if(Foods.Count<maxQuanlityFoodInStorage)
         {
-            if(Foods.Count<maxQuanlityFoodInStorage)
-            {                                                                       
+            Debug.Log("khoa:" + SOFoods[index].name);
             GameObject foodObj = Instantiate(SOFoods[index].prefab, poinSpawn.position, Quaternion.identity);
-                foodObj.transform.parent = poinSpawn;
-                Foods.Add(foodObj);
-            }    
-        }
+            foodObj.transform.parent = poinSpawn;
+            Foods.Add(foodObj);
+        }    
+    }
 
-        public void ReduceFood(object data = null)
+    public void ReduceFood(object data = null)
+    {
+        if (Foods.Count > 0)
         {
-            if (Foods.Count > 0)
+            try
             {
-                try
-                {
-                    Destroy(Foods[0]);
-                    Foods.RemoveAt(0);
-                }
-                catch
-                {
-                    ReduceFood();
-                }
+                Destroy(Foods[0]);
+                Foods.RemoveAt(0);
+            }
+            catch
+            {
+                ReduceFood();
             }
         }
+    }
     public int GetCoutCurrentFoodStorage()
     {
         return Foods.Count;
