@@ -37,8 +37,6 @@ public enum TypeAnimationAnimal
 }
 public enum TypeAnimationMove
 {
-    up,
-    down,
-    left,
-    right
+    horizontal,
+    vertical
 }
