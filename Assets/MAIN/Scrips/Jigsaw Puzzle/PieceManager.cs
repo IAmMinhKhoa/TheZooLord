@@ -93,6 +93,8 @@ public class PieceManager : MonoBehaviour
         {
             listPuzzlePieces[i].GetComponent<Piece>().rightPosition = listPuzzlePieces[i].transform.localPosition;
             listPuzzlePieces[i].transform.localPosition = listTarget[i].transform.localPosition;
+            listPuzzlePieces[i].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
             listPuzzlePieces[i].GetComponent<Piece>().initialPosition = (Vector3)listTarget[i].transform.localPosition;
         }
     }

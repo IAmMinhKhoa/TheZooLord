@@ -53,6 +53,7 @@ public class Piece : MonoBehaviour
             {
                 JigsawGameManager.instance.PlayDropDownWrong();
                 transform.localPosition = initialPosition;
+                transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             }
         }
     }

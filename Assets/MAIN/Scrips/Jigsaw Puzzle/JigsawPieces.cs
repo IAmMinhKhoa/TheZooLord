@@ -40,6 +40,7 @@ public class JigsawPieces : MonoBehaviour
                 if (!hit.transform.GetComponent<Piece>().inRightPosition)
                 {
                     Debug.Log(hit.transform.gameObject.name);
+                    hit.transform.localScale = new Vector3(1f,1f, 1f);
                     JigsawGameManager.instance.PlayPickUp();
                     selectedPiece = hit.transform.gameObject;
                     selectedPiece.GetComponent<Piece>().selected = true;
