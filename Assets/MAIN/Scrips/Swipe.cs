@@ -165,4 +165,9 @@ public class Swipe : MonoBehaviour
         string name = scene;
         SceneManager.LoadScene(name);
     }
+
+    public void LoadSceneByIndex(int sceneIndex)
+    {
+        SceneManager.LoadScene(sceneIndex);
+    }
 }
