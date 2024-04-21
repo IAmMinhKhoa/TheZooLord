@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Tirger
   m_EditorClassIdentifier: 
-  IsLock: 0
+  IsLock: 1
   nameAnimal: "H\u1ED5"
   defaultImage: {fileID: 21300000, guid: d414247c9636d954a9881ffb8d2089cd, type: 3}
-  icon: {fileID: 21300000, guid: 9abd7791e48a8a14998e66fe49d8a18b, type: 3}
+  icon: {fileID: 21300000, guid: f8c9467a892580344bb697526dac0d13, type: 3}
   voiceChirp: {fileID: 8300000, guid: e75031661a075e446b0d724a4f1dda35, type: 3}
   PrefabAnimal: {fileID: 1390276149824892, guid: c5e7161780bfc06459e1d0fd1cefd777,
     type: 3}
@@ -26,9 +26,6 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 4eb1c22c0f2392942a37aed87ab47588, type: 2}
     - {fileID: 11400000, guid: 2c67ceff2d1767e4782fbdea2fa169f9, type: 2}
   dataCharacteristic:
-    typeAnimations:
-    - type: 0
-      VNTypeAnimation: 
     voice: {fileID: 0}
   dataConservationlevel:
     LevelStart: 5

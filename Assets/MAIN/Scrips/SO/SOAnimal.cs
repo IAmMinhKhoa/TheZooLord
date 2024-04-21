@@ -16,6 +16,7 @@ public class SOAnimal : ScriptableObject
     public DataFoods dataFoods;
     public DataCharacteristic dataCharacteristic;
     public DataConservationlevel dataConservationlevel;
+    public DataStorySpecial dataStorySpecial;
 }
 [System.Serializable]
 public class DataEnvironment{
@@ -30,7 +31,6 @@ public class DataFoods
 [System.Serializable]
 public class DataCharacteristic
 {
-    public List<TypeAnimation> typeAnimations;
     public AudioClip voice;
 }
 
@@ -40,13 +40,12 @@ public class DataConservationlevel
     public int LevelStart;
     public AudioClip voice;
 }
-
+[System.Serializable]
+public class DataStorySpecial
+{
+    public Sprite imgStory;
+    public AudioClip voice;
+}
 
 //----------
 
-[System.Serializable]
-public class TypeAnimation
-{
-    public TypeAnimationAnimal type;
-    public string VNTypeAnimation;
-}

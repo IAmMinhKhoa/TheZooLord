@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Common 
 {
@@ -54,6 +55,12 @@ public class Common
             Debug.LogError("SOMETHING WRONG IN MOVE OBJECT");
             throw;
         }
+    }
+
+    public static void LoadScene(GameScenes scene)
+    {
+        //do something before load next scenes
+        SceneManager.LoadScene(scene.ToString());
     }
 
 }

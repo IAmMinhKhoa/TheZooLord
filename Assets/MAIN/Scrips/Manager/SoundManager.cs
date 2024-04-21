@@ -6,8 +6,7 @@ using UnityEngine;
 public enum AudioSingle
 {
     BackGround,
-    Cage,
-    Question
+    Global
 }
 public enum SoundType
 {
@@ -50,11 +49,12 @@ public class SoundManager : MonoBehaviour
     public List<Sound> sounds;
 
     private Dictionary<SoundType, AudioSource> audioSources;//use for SFX
+    private Dictionary<AudioSingle, AudioSource> audioSourcesSingle;//use for single 
 
     #region AUDIO SOURCE SINGLE
     [SerializeField] AudioSource AS_BackGround;
-    [SerializeField] AudioSource AS_Cage;
-    [SerializeField] AudioSource AS_Question;
+    [SerializeField] AudioSource AS_Global;
+
 
 
 
@@ -67,6 +67,7 @@ public class SoundManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -85,7 +86,12 @@ public class SoundManager : MonoBehaviour
             source.loop = sound.loop;
             audioSources.Add(sound.name, source);
         }
-       
+
+        audioSourcesSingle = new Dictionary<AudioSingle, AudioSource>();
+        audioSourcesSingle.Add(AudioSingle.BackGround,AS_BackGround);
+        audioSourcesSingle.Add(AudioSingle.Global, AS_Global);
+      
+
     }
 
     public void PlaySound(SoundType soundType)
@@ -123,16 +129,9 @@ public class SoundManager : MonoBehaviour
      
     }
     #region AUDIO SINGLE
-    public void PlayAudioSingle(AudioSingle type,AudioClip src)
+    public void PlayAudioSingle(AudioClip src, AudioSingle type = AudioSingle.Global)
     {
-        Dictionary<AudioSingle, AudioSource> audioSourceMap = new Dictionary<AudioSingle, AudioSource>()
-        {
-            { AudioSingle.BackGround, AS_BackGround },
-            { AudioSingle.Cage, AS_Cage },
-            { AudioSingle.Question, AS_Question }
-        };
-        // Play the audio based on the type and handle potential missing entries
-        if (audioSourceMap.TryGetValue(type, out AudioSource audioSource))
+        if (audioSourcesSingle.TryGetValue(type, out AudioSource audioSource))
         {
             audioSource.clip = src;
             audioSource.Play();

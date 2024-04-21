@@ -24,7 +24,7 @@ public class Manager_UI : MonoBehaviour
     //---UI child in InteractCage
     public GameObject GroupUnClockCage;
     public GameObject GroupInteractToOpenCage;
-    [Header("LIST UI")]
+    [Header("LIST UI BUTTON OF INTERACT")]
     public List<GameObject> btnFoods;
 
    //--- USE IN LOCAL ---
@@ -124,7 +124,7 @@ public class Manager_UI : MonoBehaviour
         toggleBtnMiniMap = !toggleBtnMiniMap;
 
         // Use ternary operator for concise animation call
-        Common.MoveObjectUI(obj, 1.5f, toggleBtnMiniMap ? 185f : -185f);
+        Common.MoveObjectUI(obj, 0.4f, toggleBtnMiniMap ? 185f : -185f);
     }
 
     #endregion 

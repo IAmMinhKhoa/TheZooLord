@@ -16,7 +16,7 @@ public class ConfigCage : MonoBehaviour
     [HideInInspector] public Transform view_Characteristic;
     [HideInInspector] public Transform view_Conservation;
 
-    public AudioSource audioClipCage;
+    
     [SerializeField] GameObject objBlockCage;
     [SerializeField] GameObject objMain;
 
@@ -32,7 +32,8 @@ public class ConfigCage : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            setSoundToAudio(SoAnimal.voiceChirp);
+           
+            SoundManager.instance.PlayAudioSingle(SoAnimal.voiceChirp);
         }
     }
     private void Start()
@@ -58,33 +59,29 @@ public class ConfigCage : MonoBehaviour
         switch (typeSound)
         {
             case SoundTypeInCage.Chirp:
-                setSoundToAudio(SoAnimal.voiceChirp);
+                SoundManager.instance.PlayAudioSingle(SoAnimal.voiceChirp);
                 break;
             case SoundTypeInCage.Environment:
-                setSoundToAudio(SoAnimal.dataEnvironment.voice);
+                
+                SoundManager.instance.PlayAudioSingle(SoAnimal.dataEnvironment.voice);
                 break;
             case SoundTypeInCage.Food:
                 //FOODS SOUND
                 break;
             case SoundTypeInCage.Characteristic:
-                setSoundToAudio(SoAnimal.dataCharacteristic.voice);
+                SoundManager.instance.PlayAudioSingle(SoAnimal.dataCharacteristic.voice);
                 break;
             case SoundTypeInCage.Conservationlevel:
-                setSoundToAudio(SoAnimal.dataConservationlevel.voice);
+                SoundManager.instance.PlayAudioSingle(SoAnimal.dataConservationlevel.voice);
+                break;
+            case SoundTypeInCage.StorySpecial:
+                SoundManager.instance.PlayAudioSingle(SoAnimal.dataStorySpecial.voice);
                 break;
             default:
                 break;
         }
     }
-    /// <summary>
-    /// Set audioClip and Play it
-    /// </summary>
-    /// <param name="src"></param>
-    public void setSoundToAudio(AudioClip src)
-    {
-        audioClipCage.clip = src;
-        audioClipCage.Play();
-    }
+  
     #endregion
     public List<SOFood> GetSOfoods()
     {
