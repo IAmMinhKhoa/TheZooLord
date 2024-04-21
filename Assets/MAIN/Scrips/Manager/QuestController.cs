@@ -24,7 +24,7 @@ public class QuestController : MonoBehaviour
 
     #region UI ELEMENT OF QUESTION
     public TMP_Text textScrip;
-    public AudioSource audioSouce;
+    public Button btnSound;
     public GameObject parentAnswer;
     public GameObject buttonAnswerPrefab;
     public List<Image> startDifficults;
@@ -82,7 +82,7 @@ public class QuestController : MonoBehaviour
         ActiveEmojiQuest(1);
         LockButtonAnswer();
         //need sound FX success
-        StartCoroutine(Common.delayCoroutine(2f, () =>
+        StartCoroutine(Common.delayCoroutine(1f, () =>
         {
             CloseModal();
         }));
@@ -93,7 +93,7 @@ public class QuestController : MonoBehaviour
         ActiveEmojiQuest(2);
         LockButtonAnswer();
         //need sound FX fail
-        StartCoroutine(Common.delayCoroutine(2f, () =>
+        StartCoroutine(Common.delayCoroutine(1f, () =>
         {
             CloseModal();
           
@@ -111,7 +111,7 @@ public class QuestController : MonoBehaviour
     protected void SetDataToUi(SOQuestion data)
     {
         textScrip.text = data.scripQuestion;
-        audioSouce.clip = data.voiceQuest;
+        btnSound.onClick.AddListener(() => { SoundManager.instance.PlayAudioSingle(data.voiceQuest); });
         for (int i = 0; i < data.typeDiff; i++) startDifficults[i].color = new Color(250, 255, 0, 255);
     }
     protected void ClearUI()

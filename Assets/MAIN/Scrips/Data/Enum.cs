@@ -24,21 +24,19 @@ public enum SoundTypeInCage
     Environment,
     Food,
     Characteristic,
-    Conservationlevel
+    Conservationlevel,
+    StorySpecial
 }
-public enum TypeAnimationAnimal
-{
-    Idle,
-    Run,
-    Walk,
-    Attack,
-    Lie
 
-}
 public enum TypeAnimationMove
 {
-    up,
-    down,
-    left,
-    right
+    horizontal,
+    vertical
+}
+
+public enum GameScenes
+{
+    MainMenu,
+    ChooseZoo,
+    MapZoo1
 }

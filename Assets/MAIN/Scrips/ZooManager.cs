@@ -30,9 +30,7 @@ public class ZooManager : MonoBehaviour
 
     float sunPosition = 0;
     #endregion
-    #region VARIABLE MANAGER SOUND OF ZOO
-    public List<AudioSource> audioSources = new List<AudioSource>();
-    #endregion
+   
 
     private void Awake()
     {

@@ -17,6 +17,7 @@ public class DetailPanelAnimal : MonoBehaviour
     public List<IconsAnimation> IconAnimation;
     [Header("UI Content Detail Element")]
     public Image imgDefault;
+    public Image imgStory;
     public GameObject PrefabButtonInteract;
     public List<Image> iconStart;
     //Group UI charactics
@@ -29,8 +30,9 @@ public class DetailPanelAnimal : MonoBehaviour
     public GameObject detailFoods;
     public GameObject detailCharactics;
     public GameObject detailConservationlevel;
+    public GameObject detailStorySpecial;
 
- 
+
     private void OnEnable()
     {        
         InitResource();
@@ -42,7 +44,7 @@ public class DetailPanelAnimal : MonoBehaviour
         var defaultImage = configCage.SoAnimal.defaultImage; // Use descriptive names
         var animalPrefab = configCage.SoAnimal.PrefabAnimal;
         var animalFoods = configCage.GetSOfoods();
-
+        var storyImage = configCage.SoAnimal.dataStorySpecial.imgStory;
         // 2. Consistent Indentation and Formatting
         // (Assuming 4-space indentation)
 
@@ -59,7 +61,7 @@ public class DetailPanelAnimal : MonoBehaviour
             GameObject fruitObject = configCage.InstancePrefab(foodItem.prefab, configCage.view_Foods);
 
             button.GetComponent<Image>().sprite = foodItem.iconFood;
-            button.GetComponent<Button>().onClick.AddListener(() => configCage.setSoundToAudio(foodItem.voice));
+            button.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlayAudioSingle(foodItem.voice));
         }
 
         // 4. Element Initialization (CHARACTERISTIC)
@@ -106,9 +108,9 @@ public class DetailPanelAnimal : MonoBehaviour
             {
                 conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Sad");
             }
-
-
         }
+        //6. sotry special of animal
+        imgStory.sprite = storyImage;
     }
     private void ResetUI()
     {
@@ -193,6 +195,15 @@ public class DetailPanelAnimal : MonoBehaviour
 
         }));
     }
+    public void OpenPanelStorySpecial()
+    {
+        OpenPanel(detailStorySpecial);
+        StartCoroutine(Common.delayCoroutine(0.5f, () =>
+        {
+            configCage.PlaySoundType(SoundTypeInCage.StorySpecial);
+
+        }));
+    }
     #endregion
 
     private void OpenPanel(GameObject panel)
@@ -213,5 +224,6 @@ public class DetailPanelAnimal : MonoBehaviour
         detailCharactics.SetActive(false);
         detailConservationlevel.SetActive(false);
         detailFoods.SetActive(false);
+        detailStorySpecial.SetActive(false);
     }
 }

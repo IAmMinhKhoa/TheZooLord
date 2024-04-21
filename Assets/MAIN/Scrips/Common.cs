@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Common 
 {
@@ -28,29 +29,38 @@ public class Common
         else //CLOSE
         {
             obj.transform.DOScale(Vector3.one * 0, 0.5f)
-               .SetEase(Ease.InBounce);
+               .SetEase(Ease.InOutBack);
         }
         
     }
-    public static void MoveObject( GameObject objectToMove, float duration, float endPos, TypeAnimationMove type = TypeAnimationMove.right)
+    public static void MoveObjectUI(GameObject objectToMove, float duration, float endPos, TypeAnimationMove type = TypeAnimationMove.horizontal, Ease ease = Ease.Linear)
     {
-        // Move the object to the specified end position 
-        switch (type)
+        // Move the object with additional effects
+        try
         {
-            case TypeAnimationMove.up:
-                break;
-            case TypeAnimationMove.down:
-                
-                break;
-            case TypeAnimationMove.left:
-                break;
-            case TypeAnimationMove.right:
-                objectToMove.GetComponent<RectTransform>().DOAnchorPosX(endPos, duration, false);
-                break;
-            default:
-                break;
+            switch (type)
+            {
+                case TypeAnimationMove.horizontal:
+                    objectToMove.GetComponent<RectTransform>().DOAnchorPosX(endPos, duration, false).SetEase(ease);
+                    break;
+                case TypeAnimationMove.vertical:
+                    objectToMove.GetComponent<RectTransform>().DOAnchorPosY(endPos, duration, false).SetEase(ease);
+                    break;
+                default:
+                    break;
+            }
         }
-        
+        catch (Exception)
+        {
+            Debug.LogError("SOMETHING WRONG IN MOVE OBJECT");
+            throw;
+        }
+    }
+
+    public static void LoadScene(GameScenes scene)
+    {
+        //do something before load next scenes
+        SceneManager.LoadScene(scene.ToString());
     }
 
 }
