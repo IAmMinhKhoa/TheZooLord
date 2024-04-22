@@ -122,4 +122,10 @@ public class SwipeMenu : MonoBehaviour
             nextBtn.interactable = false;
         }
     }
+
+    public void OpenScence(string scene)
+    {
+        string name = scene;
+        SceneManager.LoadScene(name);
+    }
 }

@@ -41,7 +41,7 @@ public class LevelController : MonoBehaviour
             isCompleteLevel = false;
         }
         SetActiveObject(isCompleteLevel, nextButton);
-        Debug.Log(levelActive);
+        //Debug.Log(levelActive);
     }
 
     void GetLevelFromParent()

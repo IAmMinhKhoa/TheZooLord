@@ -12,6 +12,8 @@ public class Game : MonoBehaviour
     public static Game Instance;
 
     [SerializeField] private SwipeListener swipeListener;
+
+    [Header("Gameobject")]
     public CinemachineVirtualCamera vcam;
     public Transform Player;
     public Transform Goal;
@@ -20,16 +22,21 @@ public class Game : MonoBehaviour
     public GameObject FloorTemplate;
     public float MovementSmoothing;
 
+    [Header("List Animal SO")]
+    [SerializeField] List<SOAnimal> listSOAnimal;
+    int animalSOIndex;
+
+    [Header("Maze Size")]
     public int Width = 3;
     public int Height = 3;
     public bool[,] HWalls, VWalls;
     public float HoleProbability;
     public int GoalX, GoalY;
 
-    public int PlayerX, PlayerY;
+    private int PlayerX, PlayerY;
 
-    public int baseSize = 3; // Kích thước mê cung cơ bản
-    public int sizeIncrement = 1; // Số lượng ô tăng thêm cho mỗi cấp độ
+    [SerializeField] private int baseSize = 3; // Kích thước mê cung cơ bản
+    [SerializeField] private int sizeIncrement = 1; // Số lượng ô tăng thêm cho mỗi cấp độ
     public int levelCurrent;
 
     [SerializeField] TextMeshProUGUI levelText;
@@ -48,11 +55,11 @@ public class Game : MonoBehaviour
     {
         StartNext(0);
         swipeListener.OnSwipe.AddListener(OnSwipe);
+        animalSOIndex = 0;
     }
 
     void Update()
     {
-        Debug.Log(levelCurrent);
         //if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
         //    PlayerX--;
         //if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
@@ -107,6 +114,28 @@ public class Game : MonoBehaviour
         }
     }
 
+    void SetIcon()
+    {
+        if(animalSOIndex > listSOAnimal.Count - 1) 
+        {
+            animalSOIndex = 0;
+        }
+        for(int i = 0; i < listSOAnimal.Count; i++) 
+        {
+            
+            if (i == animalSOIndex)
+            {
+                Sprite iconAnimal = listSOAnimal[i].icon;   
+                Sprite iconFood = listSOAnimal[i].dataFoods.SoFoods[Random.Range(0, 2)].iconFood;
+
+                Player.gameObject.GetComponent<SpriteRenderer>().sprite = iconAnimal;
+                Goal.gameObject.GetComponent<SpriteRenderer>().sprite = iconFood;
+                animalSOIndex = i + 1;
+                break;
+            }
+        }    
+    }
+
     public int Rand(int max)
     {
         return UnityEngine.Random.Range(0, max);
@@ -143,6 +172,7 @@ public class Game : MonoBehaviour
 
     public void StartNext(int level)
     {
+        SetIcon();
         foreach (Transform child in Walls)
             Destroy(child.gameObject);
 
@@ -150,17 +180,18 @@ public class Game : MonoBehaviour
         Width = mazeSize;
         Height = mazeSize;  
         (HWalls, VWalls) = GenerateLevel(Width, Height);
-        PlayerX = Rand(Width);
-        PlayerY = Rand(Height);
+        int cornerIndex = Random.Range(0, 4);
+        //PlayerX = Rand(Width);
+        //PlayerY = Rand(Height);
 
-        int minDiff = Mathf.Max(Width, Height) / 2;
-        while (true)
-        {
-            GoalX = Rand(Width);
-            GoalY = Rand(Height);
-            if (Mathf.Abs(GoalX - PlayerX) >= minDiff) break;
-            if (Mathf.Abs(GoalY - PlayerY) >= minDiff) break;
-        }
+        //int minDiff = Mathf.Max(Width, Height) / 2;
+        //while (true)
+        //{
+        //    GoalX = Rand(Width);
+        //    GoalY = Rand(Height);
+        //    if (Mathf.Abs(GoalX - PlayerX) >= minDiff) break;
+        //    if (Mathf.Abs(GoalY - PlayerY) >= minDiff) break;
+        //}
 
         for (int x = 0; x < Width + 1; x++)
             for (int y = 0; y < Height; y++)
@@ -174,8 +205,43 @@ public class Game : MonoBehaviour
             for (int y = 0; y < Height; y++)
                 Instantiate(FloorTemplate, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity, Walls);
 
-        Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
-        Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
+        //Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
+        //Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
+        switch (cornerIndex)
+        {
+            case 0: // Góc trên bên trái
+                Player.transform.position = new Vector3(0.5f, 0.5f);
+                PlayerX = 0;
+                PlayerY = 0;
+                Goal.transform.position = new Vector3(Width - 0.5f, Height - 0.5f);
+                GoalX = Width - 1;
+                GoalY = Height - 1;
+                break;
+            case 1: // Góc trên bên phải
+                Player.transform.position = new Vector3(Width - 0.5f, 0.5f);
+                PlayerX = Width - 1;
+                PlayerY = 0;
+                Goal.transform.position = new Vector3(0.5f, Height - 0.5f);
+                GoalX = 0;
+                GoalY = Height - 1;
+                break;
+            case 2: // Góc dưới bên trái
+                Player.transform.position = new Vector3(0.5f, Height - 0.5f);
+                PlayerX = 0;
+                PlayerY = Height - 1;
+                Goal.transform.position = new Vector3(Width - 0.5f, 0.5f);
+                GoalX = Width - 1;
+                GoalY = 0;
+                break;
+            case 3: // Góc dưới bên phải
+                Player.transform.position = new Vector3(Width - 0.5f, Height - 0.5f);
+                PlayerX = Width - 1;
+                PlayerY = Height - 1;
+                Goal.transform.position = new Vector3(0.5f, 0.5f);
+                GoalX = 0;
+                GoalY = 0;
+                break;
+        }
 
         vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 1f;
     }

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
+  m_Name: Elephant
+  m_EditorClassIdentifier: 
+  nameAnimal: Elephant
+  defaultImage: {fileID: 21300000, guid: d414247c9636d954a9881ffb8d2089cd, type: 3}
+  icon: {fileID: 62204486, guid: da3239c8ac6f44b4cb4420d865fbae56, type: 3}
+  voiceChirp: {fileID: 8300000, guid: e75031661a075e446b0d724a4f1dda35, type: 3}
+  PrefabAnimal: {fileID: 1390276149824892, guid: c5e7161780bfc06459e1d0fd1cefd777,
+    type: 3}
+  dataEnvironment:
+    voice: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
+  dataFoods:
+    SoFoods:
+    - {fileID: 11400000, guid: 4eb1c22c0f2392942a37aed87ab47588, type: 2}
+    - {fileID: 11400000, guid: 2c67ceff2d1767e4782fbdea2fa169f9, type: 2}
+  dataCharacteristic:
+    typeAnimations:
+    - type: 0
+      VNTypeAnimation: 
+    voice: {fileID: 0}
+  dataConservationlevel:
+    LevelStart: 5
+    voice: {fileID: 0}
