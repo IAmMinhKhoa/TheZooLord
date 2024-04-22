@@ -188,8 +188,8 @@ public class Game : MonoBehaviour
         {
             GoalX = Rand(Width);
             GoalY = Rand(Height);
-            if (Mathf.Abs(GoalX - PlayerX) >= minDiff) break;
-            if (Mathf.Abs(GoalY - PlayerY) >= minDiff) break;
+            if (Mathf.Abs(GoalX - PlayerX) > minDiff) break;
+            if (Mathf.Abs(GoalY - PlayerY) > minDiff) break;
         }
 
         for (int x = 0; x < Width + 1; x++)

@@ -6,63 +6,18 @@ using UnityEngine;
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField] MazeNode nodePrefab;
-    [SerializeField] PlayerMaze playerPrefab;
-
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float nodeSize;
 
-    [SerializeField] CinemachineVirtualCamera vcam;
-    [SerializeField] Transform Player;
-    [SerializeField] Transform Goal;
-    [SerializeField] Transform mazeTransform;
-
-    public float MovementSmoothing;
-
-    public int GoalX, GoalY;
-    public int PlayerX, PlayerY;
-    public Vector2 currentPlayerPosition;
-
-
     private void Start()
     {
-        //GenerateMazeInstant(mazeSize);
+        GenerateMazeInstant(mazeSize);
         //StartCoroutine(GenerateMaze(mazeSize));
-        StartNext(mazeSize);
     }
 
     private void Update()
     {
             
-    }
-
-    public int Rand(int max)
-    {
-        return UnityEngine.Random.Range(0, max);
-    }
-
-    public void StartNext(Vector2Int size)
-    {
-        foreach (Transform child in mazeTransform)
-            Destroy(child.gameObject);
-        PlayerX = Rand(size.x);
-        PlayerY = Rand(size.y);
-
-        int minDiff = Mathf.Max(size.x, size.y) / 2;
-        while (true)
-        {
-            GoalX = Rand(size.x);
-            GoalY = Rand(size.y);
-            if (Mathf.Abs(GoalX - PlayerX) >= minDiff) break;
-            if (Mathf.Abs(GoalY - PlayerY) >= minDiff) break;
-        }
-
-        GenerateMazeInstant(size);
-
-        Player.transform.position = new Vector3(PlayerX - (size.x / 2f), PlayerY - (size.y / 2f), -1);
-        //PlayerMaze playerMaze = Instantiate(playerPrefab, playerPos, Quaternion.identity, transform);
-        Goal.transform.position = new Vector3(GoalX - (size.x / 2f), GoalY - (size.y / 2f), -1);
-
-        vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(size.x / 1.5f, size.y), 0.70f) * 0.95f;
     }
 
     void GenerateMazeInstant(Vector2Int size)
@@ -74,8 +29,8 @@ public class MazeGenerator : MonoBehaviour
         {
             for (int y = 0; y < size.y; y++)    //Tạo từ dưới lên trên, trái qua phải
             {
-                Vector3 nodePos = new Vector3(x - (size.x / 2f), y - (size.y / 2f), 0);   //Lấy vị trí để tạo node 
-                MazeNode newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, mazeTransform);
+                Vector3 nodePos = new Vector3(x - (size.x / 2f), 0, y - (size.y / 2f));   //Lấy vị trí để tạo node 
+                MazeNode newNode = Instantiate(nodePrefab, nodePos, Quaternion.identity, transform);
                 nodes.Add(newNode);
             }
         }
