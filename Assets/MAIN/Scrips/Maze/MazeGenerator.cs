@@ -1,23 +1,35 @@
 ﻿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class MazeGenerator : MonoBehaviour
 {
     [SerializeField] MazeNode nodePrefab;
+    [SerializeField] GameObject player;
     [SerializeField] Vector2Int mazeSize;
     [SerializeField] float nodeSize;
 
     private void Start()
     {
-        GenerateMazeInstant(mazeSize);
+        StartNext();
+        //GenerateMazeInstant(mazeSize);
         //StartCoroutine(GenerateMaze(mazeSize));
     }
 
     private void Update()
     {
             
+    }
+
+    public void StartNext()
+    {
+        foreach (Transform child in transform)
+            Destroy(child.gameObject);
+        GenerateMazeInstant(mazeSize);
+        player.transform.position = new Vector3(0 - (mazeSize.x / 2f), 1, 0 - (mazeSize.y / 2f));
     }
 
     void GenerateMazeInstant(Vector2Int size)

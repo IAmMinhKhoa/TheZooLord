@@ -180,17 +180,18 @@ public class Game : MonoBehaviour
         Width = mazeSize;
         Height = mazeSize;  
         (HWalls, VWalls) = GenerateLevel(Width, Height);
-        PlayerX = Rand(Width);
-        PlayerY = Rand(Height);
+        int cornerIndex = Random.Range(0, 4);
+        //PlayerX = Rand(Width);
+        //PlayerY = Rand(Height);
 
-        int minDiff = Mathf.Max(Width, Height) / 2;
-        while (true)
-        {
-            GoalX = Rand(Width);
-            GoalY = Rand(Height);
-            if (Mathf.Abs(GoalX - PlayerX) > minDiff) break;
-            if (Mathf.Abs(GoalY - PlayerY) > minDiff) break;
-        }
+        //int minDiff = Mathf.Max(Width, Height) / 2;
+        //while (true)
+        //{
+        //    GoalX = Rand(Width);
+        //    GoalY = Rand(Height);
+        //    if (Mathf.Abs(GoalX - PlayerX) >= minDiff) break;
+        //    if (Mathf.Abs(GoalY - PlayerY) >= minDiff) break;
+        //}
 
         for (int x = 0; x < Width + 1; x++)
             for (int y = 0; y < Height; y++)
@@ -204,8 +205,43 @@ public class Game : MonoBehaviour
             for (int y = 0; y < Height; y++)
                 Instantiate(FloorTemplate, new Vector3(x + 0.5f, y + 0.5f), Quaternion.identity, Walls);
 
-        Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
-        Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
+        //Player.transform.position = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
+        //Goal.transform.position = new Vector3(GoalX + 0.5f, GoalY + 0.5f);
+        switch (cornerIndex)
+        {
+            case 0: // Góc trên bên trái
+                Player.transform.position = new Vector3(0.5f, 0.5f);
+                PlayerX = 0;
+                PlayerY = 0;
+                Goal.transform.position = new Vector3(Width - 0.5f, Height - 0.5f);
+                GoalX = Width - 1;
+                GoalY = Height - 1;
+                break;
+            case 1: // Góc trên bên phải
+                Player.transform.position = new Vector3(Width - 0.5f, 0.5f);
+                PlayerX = Width - 1;
+                PlayerY = 0;
+                Goal.transform.position = new Vector3(0.5f, Height - 0.5f);
+                GoalX = 0;
+                GoalY = Height - 1;
+                break;
+            case 2: // Góc dưới bên trái
+                Player.transform.position = new Vector3(0.5f, Height - 0.5f);
+                PlayerX = 0;
+                PlayerY = Height - 1;
+                Goal.transform.position = new Vector3(Width - 0.5f, 0.5f);
+                GoalX = Width - 1;
+                GoalY = 0;
+                break;
+            case 3: // Góc dưới bên phải
+                Player.transform.position = new Vector3(Width - 0.5f, Height - 0.5f);
+                PlayerX = Width - 1;
+                PlayerY = Height - 1;
+                Goal.transform.position = new Vector3(0.5f, 0.5f);
+                GoalX = 0;
+                GoalY = 0;
+                break;
+        }
 
         vcam.m_Lens.OrthographicSize = Mathf.Pow(Mathf.Max(Width / 1.5f, Height), 0.70f) * 1f;
     }
