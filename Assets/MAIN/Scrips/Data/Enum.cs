@@ -38,5 +38,6 @@ public enum GameScenes
 {
     MainMenu,
     ChooseZoo,
+    ChooseMinigame,
     MapZoo1
 }
