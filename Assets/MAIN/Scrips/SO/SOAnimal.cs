@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Video;
 [CreateAssetMenu(menuName = "Aimal")]
 public class SOAnimal : ScriptableObject
 {
@@ -43,7 +44,7 @@ public class DataConservationlevel
 [System.Serializable]
 public class DataStorySpecial
 {
-    public Sprite imgStory;
+    public VideoClip clipAnimalSpecial;
     public AudioClip voice;
 }
 
