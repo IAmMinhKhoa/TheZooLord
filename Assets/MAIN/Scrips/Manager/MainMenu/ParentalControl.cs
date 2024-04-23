@@ -56,9 +56,9 @@ public class ParentalControl : MonoBehaviour
         txtAnwser.text =key.ToString();
         if(answer==key)
         {
-            Debug.Log("dung roi clmm");
-            
+            ClosePanel();
             afterCorrect?.Invoke();
+
             yield return null;
         }
        
