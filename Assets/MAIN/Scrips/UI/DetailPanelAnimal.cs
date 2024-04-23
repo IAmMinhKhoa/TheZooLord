@@ -5,6 +5,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
+using UnityEngine.Video;
 [System.Serializable]
 public class IconsAnimation
 {
@@ -17,7 +18,7 @@ public class DetailPanelAnimal : MonoBehaviour
     public List<IconsAnimation> IconAnimation;
     [Header("UI Content Detail Element")]
     public Image imgDefault;
-    public Image imgStory;
+    public VideoPlayer videoSpecialStory;
     public GameObject PrefabButtonInteract;
     public List<Image> iconStart;
     //Group UI charactics
@@ -44,7 +45,7 @@ public class DetailPanelAnimal : MonoBehaviour
         var defaultImage = configCage.SoAnimal.defaultImage; // Use descriptive names
         var animalPrefab = configCage.SoAnimal.PrefabAnimal;
         var animalFoods = configCage.GetSOfoods();
-        var storyImage = configCage.SoAnimal.dataStorySpecial.imgStory;
+        var animalClip = configCage.SoAnimal.dataStorySpecial.clipAnimalSpecial;
         // 2. Consistent Indentation and Formatting
         // (Assuming 4-space indentation)
 
@@ -110,7 +111,7 @@ public class DetailPanelAnimal : MonoBehaviour
             }
         }
         //6. sotry special of animal
-        imgStory.sprite = storyImage;
+        videoSpecialStory.clip = animalClip;
     }
     private void ResetUI()
     {
