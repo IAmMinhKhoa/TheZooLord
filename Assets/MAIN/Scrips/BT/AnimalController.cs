@@ -20,7 +20,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     public FoodStorage foodStorage;
     public List<Transform> TargetsMove = new List<Transform>();
     
-    public GameObject objectStatus;
+    
     //--- USING LOCAL
     public NodeBase BehaviorTree { get; set; }
     private Coroutine m_BehaviorTreeRoutine;
@@ -60,7 +60,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
         BehaviorTree = new Selector("ROOT ANIMAL",
              new Sequence("ANIMAL ARE SLEEP",
                  new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep), 
-                 new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep, objectStatus),
+                 new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Sleep),
                  new GoToTargetNode(configAnimal, TargetsMove[0])),
 
 
@@ -71,11 +71,11 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
                     new Sequence("HAVE FOOD IN STORAGE",
                         new StatusFoodStorge(foodStorage),
                         new GoToTargetNode(configAnimal, foodStorage.transform),
-                        new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Eat, objectStatus),
+                        new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Eat),
                         new EatNode(configAnimal, foodStorage)),
 
                     new Sequence("NOT FOOD IN STORAGE",
-                     new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry, objectStatus),
+                     new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.Hungry),
                         new GoToTargetNode(configAnimal, TargetsMove[2]))
                        
                     )
@@ -88,13 +88,13 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
             new Sequence("MEETING ANIMAL",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal),
                 new GoToTargetNode(configAnimal, otherAnimal),
-                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, objectStatus),
+                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal),
                new Timer(4f, new NavigationNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MeetingAnimal, ConfigAnimal.STATE_ANIMAL.None))),
 
             new Sequence("MOVE AROUND",
                 new CheckPointNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround   ),
                 new GoAroundNode(TargetsMove, configAnimal),
-                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround, objectStatus))
+                new ShowStatusNode(configAnimal, ConfigAnimal.STATE_ANIMAL.MoveAround))
             );
 
 
