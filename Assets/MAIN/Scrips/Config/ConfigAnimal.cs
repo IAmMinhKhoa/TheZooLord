@@ -32,6 +32,7 @@ public class ConfigAnimal :  MonoBehaviour
     #region COMPONENTS CONTROL
     [HideInInspector] public Animator animator;
     [HideInInspector] public NavMeshAgent agent;
+    public Transform _pointStatus;
     #endregion
 
     #region PARAMETER OF ANIMAL
@@ -77,14 +78,15 @@ public class ConfigAnimal :  MonoBehaviour
   
     #endregion
 
-    public GameObject ObjectEmojiStatus(STATE_ANIMAL state,GameObject _ParentObj)
+    public GameObject ObjectEmojiStatus(STATE_ANIMAL state)
     {
+        DestroyChildren(_pointStatus);
         foreach (var emoji in SO_Emojis)
         {
             if (emoji.nameEmoji == state.ToString())
             {
                 GameObject prefabEmoji = emoji.GetPrefabEmoji();
-                GameObject newObject = Instantiate(prefabEmoji, _ParentObj.transform);
+                GameObject newObject = Instantiate(prefabEmoji, _pointStatus);
                 Debug.Log("Spawn Prefab Emoji" + emoji.nameEmoji);
                 return newObject;
             }
@@ -93,8 +95,20 @@ public class ConfigAnimal :  MonoBehaviour
         return null;
 
     }
+    public void spawnEmoji(string nameEmoji, float scalseObj = 0)
+    {
+        DestroyChildren(_pointStatus);
+        foreach (var obj in SO_Emojis)
+        {
+            if (obj.nameEmoji == nameEmoji)
+            {
+                GameObject emojiPrefab = Instantiate(obj.GetPrefabEmoji(), _pointStatus);
+                if (scalseObj != 0) emojiPrefab.transform.localScale = new Vector3(scalseObj, scalseObj, scalseObj);
+            }
+        }
+    }
 
-    
+
     public void DestroyChildren(Transform parent)
     {
         foreach (Transform child in parent)

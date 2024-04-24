@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
 using UnityEditor.Animations;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -46,14 +47,21 @@ public class DetailPanelAnimal : MonoBehaviour
         var animalPrefab = configCage.SoAnimal.PrefabAnimal;
         var animalFoods = configCage.GetSOfoods();
         var animalClip = configCage.SoAnimal.dataStorySpecial.clipAnimalSpecial;
-        // 2. Consistent Indentation and Formatting
-        // (Assuming 4-space indentation)
+        Debug.Log("khoa :" + animalPrefab);
+        BoxCollider coll = animalPrefab.GetComponent<BoxCollider>();
+        coll.isTrigger = false;
+        coll.size = new Vector3(1f, 1f, 1f);
+        Rigidbody rigid= animalPrefab.GetComponent<Rigidbody>();
+        rigid.freezeRotation = true;
+        rigid.useGravity = true;
+        DestroyImmediate(animalPrefab.GetComponent<NavMeshAgent>(),true);
+        DestroyImmediate(animalPrefab.GetComponent<AnimalController>(),true);
 
         // 3. Element Initialization (DEFAULT, FOODS)
         imgDefault.sprite = defaultImage;
 
         GameObject foodObject = configCage.InstancePrefab(animalPrefab, configCage.view_Foods); // Combine for readability
-        foodObject.GetComponent<StatusEmoji>().spawnEmoji("Hungry");
+        foodObject.GetComponent<ConfigAnimal>().spawnEmoji("Hungry");
         foodObject.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
         foreach (var foodItem in animalFoods)
@@ -97,17 +105,18 @@ public class DetailPanelAnimal : MonoBehaviour
             iconStart[i-1].color = new Color(249f / 255f, 8f / 255f, 17f / 255f, 1f);
             
             GameObject conservationObject = configCage.InstancePrefab(animalPrefab, configCage.view_Conservation);
-          //  conservationObject.transform.position = new Vector3(2, conservationObject.transform.position.y, conservationObject.transform.position.z);
+           
+            //  conservationObject.transform.position = new Vector3(2, conservationObject.transform.position.y, conservationObject.transform.position.z);
             conservationObject.transform.localScale = new Vector3(ScaleSpawn, ScaleSpawn, ScaleSpawn);
             ScaleSpawn -= 0.25f;
             
             if (configCage.SoAnimal.dataConservationlevel.LevelStart >= 3)
             {
-                conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Eat");
+                conservationObject.GetComponent<ConfigAnimal>().spawnEmoji("Eat");
             }
             else
             {
-                conservationObject.GetComponent<StatusEmoji>().spawnEmoji("Sad");
+                conservationObject.GetComponent<ConfigAnimal>().spawnEmoji("Sad");
             }
         }
         //6. sotry special of animal
