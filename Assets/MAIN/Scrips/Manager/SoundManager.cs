@@ -128,6 +128,20 @@ public class SoundManager : MonoBehaviour
         }
      
     }
+    [ProButton]
+    public void AdjustValueSFX(float value=0)
+    {
+        foreach (KeyValuePair<SoundType, AudioSource> entry in audioSources)
+        {
+            entry.Value.volume = value;
+        }
+    }
+    [ProButton]
+    public void AdjustValueMusic(float value = 0)
+    {
+        AS_BackGround.volume = value;
+        AS_Global.volume = value;
+    }
     #region AUDIO SINGLE
     public void PlayAudioSingle(AudioClip src, AudioSingle type = AudioSingle.Global)
     {
