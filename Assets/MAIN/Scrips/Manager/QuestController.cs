@@ -62,13 +62,17 @@ public class QuestController : MonoBehaviour
     
     }
     
-    public void GenerateQuest()
+    public IEnumerator GenerateQuest()
     {
         SOQuestion currentSoQuest = RandomQuestion();
         SetDataToUi(currentSoQuest);
         foreach (var data in currentSoQuest.dataAnswers)
         {
             GameObject objAnswer = Instantiate(buttonAnswerPrefab, parentAnswer.transform);
+            //-> animation <-
+            objAnswer.transform.DOScale(Vector3.one, 0.5f);
+            yield return new WaitForSeconds(0.2f);
+
             CurrentObjAnswers.Add(objAnswer);
 
             AnswerGift answerGift = objAnswer.GetComponent<AnswerGift>();
@@ -112,7 +116,18 @@ public class QuestController : MonoBehaviour
     {
         textScrip.text = data.scripQuestion;
         btnSound.onClick.AddListener(() => { SoundManager.instance.PlayAudioSingle(data.voiceQuest); });
+        float delay = 0.5f;
         for (int i = 0; i < data.typeDiff; i++) startDifficults[i].color = new Color(250, 255, 0, 255);
+
+        for (int i = 0; i < startDifficults.Count; i++)
+        {
+
+            startDifficults[i].transform.localScale = Vector3.zero; // ??t scale ban ??u là 0
+
+            // S? d?ng DOTween ?? scale t? giá tr? ban ??u ??n giá tr? mong mu?n trong kho?ng th?i gian nh?t ??nh
+            startDifficults[i].transform.DOScale(Vector3.one, 0.5f).SetDelay(delay);
+            delay += 0.5f;
+        }
     }
     protected void ClearUI()
     {
@@ -163,7 +178,7 @@ public class QuestController : MonoBehaviour
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
         });
-        GenerateQuest();
+        StartCoroutine(GenerateQuest());
         //Default start question -> emoji default
         ActiveEmojiQuest(0);
 
