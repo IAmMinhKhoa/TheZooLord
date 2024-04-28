@@ -16,6 +16,11 @@ public class GiftConfig : MonoBehaviour
     [SerializeField] private bool CanGift = true;
     #endregion
 
+    #region Effect
+    [SerializeField] GameObject areaFX;
+    [SerializeField] GameObject chillParticle;
+    #endregion
+    [SerializeField] Animator animator;
     [SerializeField] private Button Btn_Confirm;
 
  
@@ -47,14 +52,20 @@ public class GiftConfig : MonoBehaviour
 
     private void AffterFailQuest()
     {
-         StartCoroutine(CdResetGift(CD_Gift));       
+         StartCoroutine(CdResetGift(CD_Gift));
         //do something if have
+        areaFX.SetActive(false);
+        chillParticle.SetActive(false);
+        animator.SetTrigger("Off");
     }
     private void AffterSuccesQuest()
     {
       
         StartCoroutine(CdResetGift(CD_Gift));
         //do something like : add money . . .
+        areaFX.SetActive(false);
+        chillParticle.SetActive(false);
+        animator.SetTrigger("Off");
     }
     private IEnumerator CdResetGift(float initTime)
     {
@@ -63,6 +74,11 @@ public class GiftConfig : MonoBehaviour
         yield return new WaitForSeconds(initTime);
         Btn_Confirm.interactable = true;
         CanGift = true;
+
+        //turn on FX
+        areaFX.SetActive(true);
+        chillParticle.SetActive(true);
+        animator.SetTrigger("Off");
     }
 
  

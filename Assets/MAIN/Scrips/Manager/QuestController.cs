@@ -39,6 +39,10 @@ public class QuestController : MonoBehaviour
     public event Action affterSuccess;
     public event Action affterFail;
     #endregion
+    #region FX
+    public GameObject correctFX;
+    public GameObject wrongFX;
+    #endregion
 
     private void Awake()
     {
@@ -83,10 +87,11 @@ public class QuestController : MonoBehaviour
     }
     protected void ActionSuccessAnswer()
     {
+        correctFX.SetActive(true);
         ActiveEmojiQuest(1);
         LockButtonAnswer();
         //need sound FX success
-        StartCoroutine(Common.delayCoroutine(1f, () =>
+        StartCoroutine(Common.delayCoroutine(3f, () =>
         {
             CloseModal();
         }));
@@ -94,10 +99,11 @@ public class QuestController : MonoBehaviour
     }
     protected void ActionFailedAnswer()
     {
+        wrongFX.SetActive(true);
         ActiveEmojiQuest(2);
         LockButtonAnswer();
         //need sound FX fail
-        StartCoroutine(Common.delayCoroutine(1f, () =>
+        StartCoroutine(Common.delayCoroutine(3f, () =>
         {
             CloseModal();
           
@@ -145,6 +151,9 @@ public class QuestController : MonoBehaviour
         //reset Action affter answer question
         affterFail=null;
         affterSuccess = null;
+        //turn off all FX
+        correctFX.SetActive(false);
+        wrongFX.SetActive(false);
     }
 
     private void ActiveEmojiQuest(int i)
@@ -173,7 +182,7 @@ public class QuestController : MonoBehaviour
     {
         this.affterSuccess= affterSuccess;
         this.affterFail = affterFailed;
-        canvasGroup.DOFade(1f, 0.2f).OnStart(() =>
+        canvasGroup.DOFade(1f, 0.4f).OnStart(() =>
         {
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
@@ -185,7 +194,7 @@ public class QuestController : MonoBehaviour
     }
     public void CloseModal()
     {
-        canvasGroup.DOFade(0f, 0.2f).OnComplete(() =>
+        canvasGroup.DOFade(0f, 0.3f).OnComplete(() =>
         {
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;

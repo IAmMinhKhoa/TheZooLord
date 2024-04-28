@@ -124,7 +124,7 @@ public class Manager_UI : MonoBehaviour
         toggleBtnMiniMap = !toggleBtnMiniMap;
 
         // Use ternary operator for concise animation call
-        Common.MoveObjectUI(obj, 0.4f, toggleBtnMiniMap ? 185f : -185f);
+        Common.MoveObjectUI(obj, 0.2f, toggleBtnMiniMap ? 185f : -185f);
     }
 
     #endregion 
