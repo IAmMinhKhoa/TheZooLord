@@ -45,7 +45,7 @@ public class ConfigCage : MonoBehaviour
         //set state of cage is lock or not
         if(SoAnimal.IsLock)
         {
-            objBlockCage.SetActive(true);
+            objBlockCage?.SetActive(true);
             objMain.SetActive(false);
         }
         else
@@ -181,13 +181,36 @@ public class ConfigCage : MonoBehaviour
     #endregion
     public void UnClockCage()
     {
-        objBlockCage.gameObject.SetActive(false);
-        objMain.SetActive(true);
+        objMain.SetActive(true);// open detail in cage
+        objBlockCage?.SetActive(false);
+
+    }
+    public void logicOpenCage()
+    {
+        //---logic heli---
+        HeliController.Instance.init(
+        () =>//start
+        {
+            Manager_UI.Instance.CloseAllModal(true);
+            SetTartgetCam(HeliController.Instance.transform);
+            objMain.SetActive(true);
+        },
+        () => //end
+        {
+            Manager_UI.Instance.OpenInteractCage();
+            UnSetTargetCam();
+        },objBlockCage.transform);
     }
     public void SetTartgetCam(Transform target)
     {
         cameraCage.gameObject.SetActive(true);
         cameraCage.Follow = target;
         cameraCage.LookAt = target;
+    }
+    public void UnSetTargetCam()
+    {
+        cameraCage.gameObject.SetActive(false);
+        cameraCage.Follow = null;
+        cameraCage.LookAt = null;
     }
 }
