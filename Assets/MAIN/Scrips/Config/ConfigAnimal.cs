@@ -119,7 +119,7 @@ public class ConfigAnimal :  MonoBehaviour
     public void UpdateStateAnimal()
     {
 
-        if (!ZooManager.Instance.isDay) stateAnimal = STATE_ANIMAL.Sleep;
+        if (!DayNightCycle.Instance.isDay) stateAnimal = STATE_ANIMAL.Sleep;
         else if (foodIndex <= 50) stateAnimal = STATE_ANIMAL.Hungry;
         else if (CanMeetingAnimal) stateAnimal = STATE_ANIMAL.MeetingAnimal;
         else stateAnimal = STATE_ANIMAL.MoveAround;
