@@ -39,11 +39,11 @@ public class Interactor : MonoBehaviour
         QuestController.Instance.OpenModal(
         () =>//affter success
         {
-            StartCoroutine(Common.delayCoroutine(1f, () =>
+            StartCoroutine(Common.delayCoroutine(3f, () =>
             {
                 configCage.SoAnimal.IsLock = false;
-                setUIcageInteract();
-                configCage.UnClockCage();
+               
+                configCage.logicOpenCage();
                 Debug.Log("OPEN SUCCESS CAGE ANIMAL :" + configCage.SoAnimal.name);
             }));
             

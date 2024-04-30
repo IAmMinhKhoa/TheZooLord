@@ -7,9 +7,10 @@ using UnityEngine.UI;
 
 public class SettingGame : MonoBehaviour
 {
-    //---slider sound---
+    //---slider---
     [SerializeField] Slider _sliderSFX;
     [SerializeField] Slider _sliderMusic;
+    [SerializeField] Slider _sliderLimitPlay;
     //---toggle sound---
     [SerializeField] Toggle _toggleSFX;
     [SerializeField] Toggle _toggleMusic;
@@ -29,12 +30,23 @@ public class SettingGame : MonoBehaviour
             SoundManager.instance.AdjustValueMusic(v);
             if (v > 0) _toggleMusic.isOn = true;
         });
+        _sliderLimitPlay.onValueChanged.AddListener((v) =>
+        {
+            Game_Manager.Instance.currenTime=v* Game_Manager.Instance.maxTime;
+            if (Game_Manager.Instance.currenTime > 0)
+            {
+                Time.timeScale = 1;
+            }
+        });
 
         //----------EVENT TOGGLE-----------
         _toggleSFX.onValueChanged.AddListener(toggleSFX);
         _toggleMusic.onValueChanged.AddListener(toggleMusic);
     }
-
+    private void Update()
+    {
+        _sliderLimitPlay.value = Game_Manager.Instance.currenTime / Game_Manager.Instance.maxTime;
+    }
     public void SelectSetting()//use this event to button setting in main screen
     {
         _parentalControl.OpenPanel();
