@@ -192,7 +192,7 @@ public class ConfigCage : MonoBehaviour
         () =>//start
         {
             Manager_UI.Instance.CloseAllModal(true);
-            SetTartgetCam(HeliController.Instance.transform);
+            SetTartgetCam(objBlockCage.transform);
             objMain.SetActive(true);
         },
         () => //end
