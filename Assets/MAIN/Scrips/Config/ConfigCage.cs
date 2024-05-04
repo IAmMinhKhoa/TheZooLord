@@ -15,8 +15,10 @@ public class ConfigCage : MonoBehaviour
     [HideInInspector] public Transform view_Foods;
     [HideInInspector] public Transform view_Characteristic;
     [HideInInspector] public Transform view_Conservation;
+    [HideInInspector] public Transform[] view_Storage;
 
-    
+
+
     [SerializeField] GameObject objBlockCage;
     [SerializeField] GameObject objMain;
 
@@ -107,12 +109,14 @@ public class ConfigCage : MonoBehaviour
             Destroy(childObject);
         }
     }
-    public void SetTargetMiniEnvironment(Transform target_1, Transform target_2, Transform target_3, Transform target_4)
+    public void SetTargetMiniEnvironment(Transform target_1, Transform target_2, Transform target_3, Transform target_4, Transform[] target_5)
     {
         view_Environment = target_1;
         view_Foods = target_2;
         view_Characteristic = target_3;
         view_Conservation = target_4;
+        view_Storage = target_5;
+
 
     }
     #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
@@ -192,7 +196,7 @@ public class ConfigCage : MonoBehaviour
         () =>//start
         {
             Manager_UI.Instance.CloseAllModal(true);
-            SetTartgetCam(objBlockCage.transform);
+            SetTartgetCam(HeliController.Instance.transform);
             objMain.SetActive(true);
         },
         () => //end

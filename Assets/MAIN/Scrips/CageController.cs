@@ -10,11 +10,14 @@ public class CageController : MonoBehaviour
     public Transform view_Foods;
     public Transform view_Characteristic;
     public Transform view_Conservation;
+    //--storage food--
+    public Transform[] view_Storage;
+
     private void Awake()
     {
         foreach (var config in configCages)
         {
-            config.SetTargetMiniEnvironment(view_Environment, view_Foods, view_Characteristic, view_Conservation);
+            config.SetTargetMiniEnvironment(view_Environment, view_Foods, view_Characteristic, view_Conservation, view_Storage);
         }
     }
 }
