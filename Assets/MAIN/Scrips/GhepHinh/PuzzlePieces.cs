@@ -10,6 +10,8 @@ using UnityEngine.Rendering;
 public class PuzzlePieces : MonoBehaviour
 {
     [SerializeField] GameObject selectedPiece;
+    [SerializeField] GameObject handTutorial;
+
     int OIL = 1;
 
     private RaycastHit2D hit;
@@ -38,6 +40,11 @@ public class PuzzlePieces : MonoBehaviour
             hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
             if (hit.transform != null && hit.transform.CompareTag("Puzzle"))
             {
+                if(handTutorial != null)
+                {
+                    Debug.Log("h");
+                    handTutorial.SetActive(false);
+                }
                 Debug.Log(hit.transform.gameObject.name);
                 if (!hit.transform.GetComponent<Puzzle>().inRightPosition)
                 {
@@ -47,7 +54,6 @@ public class PuzzlePieces : MonoBehaviour
                     selectedPiece.GetComponent<SortingGroup>().sortingOrder = OIL;
                     OIL++;
                 }
-
             }
         }
 
@@ -55,6 +61,10 @@ public class PuzzlePieces : MonoBehaviour
         {
             if (selectedPiece != null)
             {
+                if (handTutorial != null)
+                {
+                    handTutorial.SetActive(true);
+                }
                 selectedPiece.GetComponent<Puzzle>().selected = false;
                 selectedPiece = null;
             }
