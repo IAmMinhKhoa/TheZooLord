@@ -18,5 +18,9 @@ public class MainMenuController : MonoBehaviour
     {
         Common.LoadScene(GameScenes.ChooseMinigame);
     }
+    public void GoToSceneMainMenu()
+    {
+        Common.LoadScene(GameScenes.MainMenu);
+    }
     #endregion
 }
