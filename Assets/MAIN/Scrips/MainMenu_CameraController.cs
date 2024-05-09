@@ -79,7 +79,14 @@ public class MainMenu_CameraController : MonoBehaviour
     {
         isPlayingMinigame = false;
         isPlayingZoo = false;
-        player.SetActive(true);
+        if(player.activeSelf)
+        {
+            player.SetActive(false);
+            player.SetActive(true);
+        } else
+        {
+            player.SetActive(true);
+        }
  
         player.transform.position = startPos;
         player.transform.rotation = Quaternion.Euler(0, -90, 0);
@@ -105,8 +112,8 @@ public class MainMenu_CameraController : MonoBehaviour
         {
             activeCutScenceZoo = true;
             cutScenceChooseZooTimeLine.SetActive(true);
+            StartCoroutine(FinishZooCut());
         }
-        StartCoroutine(FinishZooCut());
         isPlayingZoo = true;
         currentCamera.Priority++;
     }
@@ -124,8 +131,8 @@ public class MainMenu_CameraController : MonoBehaviour
         {
             activeCutScenceMinigame = true;
             cutScenceMiniGameTimeLine.SetActive(true);
+            StartCoroutine(FinishMinigameCut());
         }
-        StartCoroutine(FinishMinigameCut());
         isPlayingMinigame = true;
         currentCamera.Priority++;
     }
