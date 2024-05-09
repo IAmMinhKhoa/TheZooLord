@@ -88,6 +88,20 @@ public class Common
     {
         //do something before load next scenes
         SceneManager.LoadScene(scene.ToString());
+        //do something after load next scenes
+    }
+    public static IEnumerator LoadSceneAsync(GameScenes scene)
+    {
+        // B?t ??u quá trình t?i scene
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.ToString());
+
+        // Ch? cho ??n khi quá trình t?i hoàn thành
+        while (!asyncLoad.isDone)
+        {
+            // Có th? th?c hi?n các hành ??ng khác trong quá trình t?i ? ?ây (ví d?: hi?n th? thanh ti?n trình)
+
+            yield return null;
+        }
     }
 
 }

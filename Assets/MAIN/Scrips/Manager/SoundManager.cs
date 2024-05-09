@@ -157,9 +157,9 @@ public class SoundManager : MonoBehaviour
     }
     #endregion
 
-    [ProButton]
+ /*   [ProButton]
     public void playFX(SoundType type)
     {
         PlaySound(type);
-    }
+    }*/
 }
