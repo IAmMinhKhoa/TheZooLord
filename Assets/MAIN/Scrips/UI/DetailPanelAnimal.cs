@@ -73,6 +73,8 @@ public class DetailPanelAnimal : MonoBehaviour
             GameObject button = Instantiate(PrefabButtonInteract, detailFoods.transform);
             GameObject fruitObject = configCage.InstancePrefab(foodItem.prefab, configCage.view_Foods);
             fruitObject.transform.localScale = new Vector3(_ScaleFood, _ScaleFood, _ScaleFood);
+            Debug.Log("khoa count" + _indexStorage+"/"+ configCage.view_Storage.Length);
+            Debug.Log("khoa:" + configCage.view_Storage[_indexStorage]);
             fruitObject.transform.position = configCage.view_Storage[_indexStorage].position;
 
             button.GetComponent<Image>().sprite = foodItem.iconFood;

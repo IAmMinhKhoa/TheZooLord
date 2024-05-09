@@ -10211,7 +10211,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.005273719, y: 0}
+  m_AnchoredPosition: {x: -0.005439961, y: 0}
   m_SizeDelta: {x: 0, y: 979}
   m_Pivot: {x: 0, y: 1}
 --- !u!4 &714365767 stripped
@@ -13555,7 +13555,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 982407469}
-  m_LocalRotation: {x: 0.02111139, y: 0.7134529, z: -0.02151544, w: 0.7000546}
+  m_LocalRotation: {x: 0.021111367, y: 0.7134529, z: -0.021515416, w: 0.7000546}
   m_LocalPosition: {x: -2.971, y: 3.359, z: 28.575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14442,7 +14442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1060336846
 Transform:
   m_ObjectHideFlags: 0
@@ -14471,7 +14471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8775a802c617c47b9d46045e5a76f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 8
+  maxTime: 9999
   limitPlay: 0
   currenTime: 0
   togglePause: 0
@@ -19889,7 +19889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1402558923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27973,7 +27973,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 70
+    FieldOfView: 25
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -27997,15 +27997,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005547004}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 2.4826908, y: -2.6550572, z: 9.915543}
+  m_LocalRotation: {x: 0.021113442, y: 0.71345186, z: -0.02151747, w: 0.70005554}
+  m_LocalPosition: {x: 1.3338, y: -2.5088, z: 9.9166}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 121917055}
   m_Father: {fileID: 1389056819}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 3.455, y: 91.086, z: 0}
 --- !u!4 &2012120600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6544627254421525702, guid: 19cf7c2c56fd68545a31c378b59a6b92,

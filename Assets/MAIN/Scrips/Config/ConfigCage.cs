@@ -115,8 +115,9 @@ public class ConfigCage : MonoBehaviour
         view_Foods = target_2;
         view_Characteristic = target_3;
         view_Conservation = target_4;
+     
         view_Storage = target_5;
-
+        Debug.Log("cc" + view_Storage.Length);
 
     }
     #region SWITCH CAMRERA TO POINT MINI ENVIRONMENT
