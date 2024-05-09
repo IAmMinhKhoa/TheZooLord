@@ -102,7 +102,7 @@ public class MainMenu_CameraController : MonoBehaviour
 
     public async void ChangeChooseZooCamera()
     {
-        ActiveAnimationChangeCam();
+        //ActiveAnimationChangeCam();
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
         currentCamera.Priority--;
 
@@ -120,7 +120,7 @@ public class MainMenu_CameraController : MonoBehaviour
 
     public async void ChangeMinigameCamera()
     {
-        ActiveAnimationChangeCam();
+        //ActiveAnimationChangeCam();
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
 
         currentCamera.Priority--;
