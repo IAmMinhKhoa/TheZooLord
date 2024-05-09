@@ -53,7 +53,12 @@ public class PuzzleManager : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerPrefs.HasKey("IsPlayingMiniGame"))
+        {
+            Debug.Log("Có");
 
+            
+        }
     }
 
     public void PlayPickUp()
