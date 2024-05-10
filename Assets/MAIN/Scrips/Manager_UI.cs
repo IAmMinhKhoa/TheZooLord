@@ -5,7 +5,6 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class Manager_UI : MonoBehaviour
 {
@@ -24,9 +23,13 @@ public class Manager_UI : MonoBehaviour
     //---UI child in InteractCage
     public GameObject GroupUnClockCage;
     public GameObject GroupInteractToOpenCage;
+    public GameObject GroupButtonEat;
     [Header("LIST UI BUTTON OF INTERACT")]
     public List<GameObject> btnFoods;
-
+    //--element UI interact---
+    public Button BtnMiniMap;
+    public GameObject ObjminiMap;
+    
    //--- USE IN LOCAL ---
     private bool toggleBtnFoods=false;
     private bool toggleBtnMiniMap = false;
@@ -43,7 +46,13 @@ public class Manager_UI : MonoBehaviour
         }
 
     }
-   
+
+    private void Start()
+    {
+        BtnMiniMap.onClick.AddListener(()=> {
+            ToggleMiniMap(ObjminiMap);
+        });
+    }
     protected void SetModalActive(GameObject obj,bool boolean)
     {
         obj.SetActive(boolean);
@@ -110,12 +119,16 @@ public class Manager_UI : MonoBehaviour
     }
     public IEnumerator ToggleFood()//use in button food in interact cage 
     {
+        if (!toggleBtnFoods) GroupButtonEat.SetActive(true); else
+        {
+            GroupButtonEat.SetActive(false);
+        }
         foreach (GameObject btn in btnFoods)
         {
             Common.PopUpButton(btn, close: toggleBtnFoods);
             yield return new WaitForSeconds(0.2f);
         }
-        
+      
         toggleBtnFoods = !toggleBtnFoods;
     }
     public void ToggleMiniMap(GameObject obj) //set this event in button turn off minimap
@@ -123,8 +136,14 @@ public class Manager_UI : MonoBehaviour
         // Toggle the MiniMap visibility and animate its position
         toggleBtnMiniMap = !toggleBtnMiniMap;
 
+        //roation icon 
+        int tempRoation = toggleBtnMiniMap == true ? 180 : 0;
+        BtnMiniMap.gameObject.GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, tempRoation), 0.3f).SetEase(Ease.OutQuint);
         // Use ternary operator for concise animation call
-        Common.MoveObjectUI(obj, 0.2f, toggleBtnMiniMap ? 185f : -185f);
+        Common.MoveObjectUI(obj, 0.2f, toggleBtnMiniMap ? 185f : -300);
+
+        
+
     }
 
     #endregion 
@@ -135,7 +154,9 @@ public class Manager_UI : MonoBehaviour
         groupInteractCageUI.SetActive(false);
         GroupUnClockCage.SetActive(false);
         groupDetailPanelAnimal.SetActive(false);
-        groupOverlayUI.SetActive(!Overlay);    
+        groupOverlayUI.SetActive(!Overlay);
+        GroupButtonEat.SetActive(false);
+        toggleBtnFoods = false;//reset popUp Button eat default
     }
 
 }
