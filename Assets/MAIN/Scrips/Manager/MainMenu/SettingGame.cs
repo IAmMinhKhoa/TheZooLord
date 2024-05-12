@@ -19,16 +19,18 @@ public class SettingGame : MonoBehaviour
     [SerializeField] GameObject _mainSetting;
     private void Start()
     {
+        _toggleSFX.isOn = false;
+        _toggleMusic.isOn = false;
         //------------EVENT SLIDER---------
         _sliderSFX.onValueChanged.AddListener((v) =>
         {
             SoundManager.instance.AdjustValueSFX(v);
-            if(v>0) _toggleSFX.isOn=true;
+            if(v>0) _toggleSFX.isOn=false;
         });
         _sliderMusic.onValueChanged.AddListener((v) =>
         {
             SoundManager.instance.AdjustValueMusic(v);
-            if (v > 0) _toggleMusic.isOn = true;
+            if (v > 0) _toggleMusic.isOn = false;
         });
         _sliderLimitPlay.onValueChanged.AddListener((v) =>
         {
@@ -66,11 +68,11 @@ public class SettingGame : MonoBehaviour
         // Handle the toggle value change
         if (isOn)
         {
-            _sliderSFX.value = 1f;
+            _sliderSFX.value = 0f;
         }
         else
         {
-            _sliderSFX.value = 0f;
+            _sliderSFX.value = 1f;
         }
     }
     private void toggleMusic(bool isOn)
@@ -78,11 +80,11 @@ public class SettingGame : MonoBehaviour
         // Handle the toggle value change
         if (isOn)
         {
-            _sliderMusic.value = 1f;
+            _sliderMusic.value = 0f;
         }
         else
         {
-            _sliderMusic.value = 0f;
+            _sliderMusic.value = 1f;
         }
     }
     #endregion
