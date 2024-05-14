@@ -56,6 +56,7 @@ public class LevelController : MonoBehaviour
     {
         //winVFX.Stop(); 
         winVFX.Clear();
+        PuzzleManager.instance.StopSFX();
         PuzzleManager.instance.isCompleteLevel = false;
         levelArray[levelActive-1].SetActive(false);
         levelMenuCanvas.gameObject.SetActive(true);
@@ -64,6 +65,7 @@ public class LevelController : MonoBehaviour
     public void OnNextLevel()
     {
         winVFX.Clear();
+        PuzzleManager.instance.StopSFX();
         PuzzleManager.instance.isCompleteLevel = false;
         levelArray[levelActive-1].SetActive(false);
         levelArray[levelActive].SetActive(true);

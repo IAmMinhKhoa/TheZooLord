@@ -15,6 +15,11 @@ public class MainMenu_CameraController : MonoBehaviour
 
     Vector3 startPos;
 
+    [SerializeField] GameObject buttonPlay;
+    private Animator animator;
+    public float delayTime = 2f;
+
+
 
     public CinemachineVirtualCamera currentCamera;
     [SerializeField] CinemachineVirtualCamera mainMenuCamera;
@@ -68,11 +73,30 @@ public class MainMenu_CameraController : MonoBehaviour
         currentCamera.Priority++;
         cutScenceChooseZooTimeLine.SetActive(false);
         cutScenceMiniGameTimeLine.SetActive(false);
+
+        animator = buttonPlay.GetComponent<Animator>();
+        StartCoroutine(PlayAnimationWithDelay());
+
     }
 
     private void Update()
     {
 
+    }
+
+    private IEnumerator PlayAnimationWithDelay()
+    {
+        while (true)
+        {
+            // Chờ một khoảng thời gian
+            yield return new WaitForSeconds(delayTime);
+
+            // Kích hoạt animation
+            animator.SetTrigger("Play");
+
+            // Chờ cho đến khi animation kết thúc
+            yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        }
     }
 
     public void BackMainMenu(CinemachineVirtualCamera target)
@@ -96,6 +120,7 @@ public class MainMenu_CameraController : MonoBehaviour
         currentCamera = target;
 
         currentCamera.Priority++;
+        buttonPlay.SetActive(true);
         panelMainMenu.DOAnchorPosY(middlePosY, tweenDuration).SetEase(easeInType);
 
     }
@@ -104,6 +129,7 @@ public class MainMenu_CameraController : MonoBehaviour
     {
         //ActiveAnimationChangeCam();
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
+        buttonPlay.SetActive(false);
         currentCamera.Priority--;
 
         currentCamera = chooseZooCamera;
@@ -122,6 +148,7 @@ public class MainMenu_CameraController : MonoBehaviour
     {
         //ActiveAnimationChangeCam();
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
+        buttonPlay.SetActive(false);
 
         currentCamera.Priority--;
 
@@ -153,5 +180,5 @@ public class MainMenu_CameraController : MonoBehaviour
     {
         yield return new WaitForSeconds(19f);
         player.SetActive(false);
-    }
+    }          
 }
