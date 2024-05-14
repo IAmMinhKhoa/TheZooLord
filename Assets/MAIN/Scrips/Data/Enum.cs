@@ -39,7 +39,11 @@ public enum GameScenes
     MainMenu,
     ChooseZoo,
     ChooseMinigame,
-    MapZoo1
+    MapZoo1,
+    BuildMap,
+    AnimalPuzzle,
+    JigsawPuzzle,
+    Maze
 }
 public enum SpeciesAnimal
 {

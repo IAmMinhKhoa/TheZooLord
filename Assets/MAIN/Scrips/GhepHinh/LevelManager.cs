@@ -29,7 +29,6 @@ public class LevelManager : MonoBehaviour
         }
         puzzleManager = FindObjectOfType<PuzzleManager>();
         ButtonsArray();
-        PlayerPrefs.DeleteAll();
         unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
     }
 

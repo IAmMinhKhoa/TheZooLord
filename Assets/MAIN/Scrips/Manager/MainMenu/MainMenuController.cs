@@ -22,5 +22,23 @@ public class MainMenuController : MonoBehaviour
     {
         Common.LoadScene(GameScenes.MainMenu);
     }
+    public void GoToSceneMap1()
+    {
+        Common.LoadScene(GameScenes.BuildMap);
+    }
+
+    //Minigame
+    public void GoToSceneAnimalPuzzle()
+    {
+        Common.LoadScene(GameScenes.AnimalPuzzle);
+    }
+    public void GoToSceneJigsawPuzzle()
+    {
+        Common.LoadScene(GameScenes.JigsawPuzzle);
+    }
+    public void GoToSceneMaze()
+    {
+        Common.LoadScene(GameScenes.Maze);
+    }
     #endregion
 }
