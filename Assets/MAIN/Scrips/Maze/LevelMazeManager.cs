@@ -12,6 +12,8 @@ public class LevelMazeManager : MonoBehaviour
     public GameObject levelPages;
 
     [SerializeField] Canvas levelCanvas;
+    [SerializeField] Sprite levelUnlock;
+    [SerializeField] Sprite currentLevelImage; 
     int unlockedLevel;
 
     [SerializeField] TextMeshProUGUI levelText;
@@ -39,6 +41,7 @@ public class LevelMazeManager : MonoBehaviour
         {
             unlockedLevel = PlayerPrefs.GetInt("UnlockedMazeLevel", 1);
         }
+
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i].interactable = false;
@@ -46,7 +49,16 @@ public class LevelMazeManager : MonoBehaviour
 
         for (int i = 0; i < unlockedLevel; i++)
         {
+            Transform imageLockTransform = buttons[i].transform.Find("ImageLock");
             buttons[i].interactable = true;
+            imageLockTransform.gameObject.SetActive(false);
+            if(i+1 == unlockedLevel)
+            {
+                buttons[i].image.sprite =  currentLevelImage;
+            } else
+            {
+                buttons[i].image.sprite = levelUnlock;
+            }
         }
     }
     public void OpenLevel(Button btn)
@@ -62,6 +74,13 @@ public class LevelMazeManager : MonoBehaviour
     {
         buttons = levelPages.GetComponentsInChildren<Transform>(true)
                 .Where(obj => obj.CompareTag("Level"))
+                .Select(obj => obj.gameObject.GetComponent<Button>())
+                .ToArray();
+    }
+
+    void ImageButtonArray()
+    {
+        buttons = levelPages.GetComponentsInChildren<Transform>(true)
                 .Select(obj => obj.gameObject.GetComponent<Button>())
                 .ToArray();
     }

@@ -82,6 +82,11 @@ public class PuzzleManager : MonoBehaviour
         SFXSource.PlayOneShot(clapWin);
     }
 
+    public void StopSFX()
+    {
+        SFXSource.Stop();
+    }
+
     public void SetActiveLevel(int levelPress)
     {
         for (int i = 0; i < levelAnimalArray.Length; i++)
