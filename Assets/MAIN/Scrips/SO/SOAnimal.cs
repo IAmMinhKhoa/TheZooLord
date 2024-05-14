@@ -7,6 +7,7 @@ using UnityEngine.Video;
 public class SOAnimal : ScriptableObject
 {
     public bool IsLock=true;
+    public SpeciesAnimal species;
     public string nameAnimal;
     public Sprite defaultImage; //image about this type animal, use in main detail information animal
     public Sprite icon;
@@ -18,6 +19,7 @@ public class SOAnimal : ScriptableObject
     public DataCharacteristic dataCharacteristic;
     public DataConservationlevel dataConservationlevel;
     public DataStorySpecial dataStorySpecial;
+
 }
 [System.Serializable]
 public class DataEnvironment{

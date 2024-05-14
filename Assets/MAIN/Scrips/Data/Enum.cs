@@ -41,3 +41,8 @@ public enum GameScenes
     ChooseMinigame,
     MapZoo1
 }
+public enum SpeciesAnimal
+{
+    Forset,
+    Meadow
+}
