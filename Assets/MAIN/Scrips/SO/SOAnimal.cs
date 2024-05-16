@@ -19,6 +19,8 @@ public class SOAnimal : ScriptableObject
     public DataCharacteristic dataCharacteristic;
     public DataConservationlevel dataConservationlevel;
     public DataStorySpecial dataStorySpecial;
+    //----Question to open cage---
+    public SOQuestion soQuestionToOpenCage;
 
 }
 [System.Serializable]

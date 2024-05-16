@@ -36,7 +36,7 @@ public class Interactor : MonoBehaviour
     #region TRIGGER CAGE
     public void OpenQuestToOpenCage()
     {
-        QuestController.Instance.OpenModal(
+        QuestController.Instance.OpenModal(configCage.SoAnimal.soQuestionToOpenCage,
         () =>//affter success
         {
             StartCoroutine(Common.delayCoroutine(3f, () =>

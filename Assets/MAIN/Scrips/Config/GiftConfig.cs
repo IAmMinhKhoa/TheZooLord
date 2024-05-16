@@ -39,7 +39,7 @@ public class GiftConfig : MonoBehaviour
    
     public void OpenGift()
     {
-        QuestController.Instance.OpenModal(
+        QuestController.Instance.OpenModal(null,
         ()=> {
             AffterSuccesQuest();
         },

@@ -11,7 +11,7 @@ public class InformationBook : MonoBehaviour
     public TMP_Text textName;
     public SOAnimal dataAnimal;
     public Action<SOAnimal> OnSelect;
-
+    public GameObject objLock;
 
 
     public void Select()

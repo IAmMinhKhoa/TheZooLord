@@ -66,9 +66,11 @@ public class QuestController : MonoBehaviour
     
     }
     
-    public IEnumerator GenerateQuest()
+    public IEnumerator GenerateQuest(SOQuestion soQuest=null)
     {
-        SOQuestion currentSoQuest = RandomQuestion();
+        SOQuestion currentSoQuest;
+        if (soQuest != null) currentSoQuest = soQuest;
+        else currentSoQuest= RandomQuestion();
         SetDataToUi(currentSoQuest);
         foreach (var data in currentSoQuest.dataAnswers)
         {
@@ -178,7 +180,7 @@ public class QuestController : MonoBehaviour
 
     #region UI
 
-    public  void OpenModal(Action affterSuccess=null,Action affterFailed=null)
+    public  void OpenModal(SOQuestion soQuest=null,Action affterSuccess=null,Action affterFailed=null)
     {
         this.affterSuccess= affterSuccess;
         this.affterFail = affterFailed;
@@ -187,7 +189,7 @@ public class QuestController : MonoBehaviour
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
         });
-        StartCoroutine(GenerateQuest());
+        StartCoroutine(GenerateQuest(soQuest));
         //Default start question -> emoji default
         ActiveEmojiQuest(0);
 
