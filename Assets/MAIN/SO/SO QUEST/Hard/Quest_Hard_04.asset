@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2879a718b4d7cf045a795c16f963bc26, type: 3}
-  m_Name: Quest_01
+  m_Name: Quest_Hard_04
   m_EditorClassIdentifier: 
-  scripQuestion: "con ch\xF3 m\xE0u g\xEC ?"
-  voiceQuest: {fileID: 8300000, guid: 13a58eb5deb3e46599037ffb43ae7600, type: 3}
+  scripQuestion: "\u0110\xE2u l\xE0 m\xF4i tr\u01B0\u1EDDng s\u1ED1ng c\u1EE7a c\xE1c
+    b\u1EA1n ng\u1EF1a ?"
+  voiceQuest: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
   dataAnswers:
-  - img: {fileID: 21300000, guid: 43ad51e043491b94d8f6c62d55ac5ede, type: 3}
+  - img: {fileID: 21300000, guid: 05a6c50fbf05a184380243745a3ec1b6, type: 3}
     rightAnswer: 0
-  - img: {fileID: 21300000, guid: 0f061b4bd0275bc4eb60f2af31e7375a, type: 3}
+  - img: {fileID: 21300000, guid: 3f3ef5a424e472d49b6e0e9f2081ad92, type: 3}
     rightAnswer: 1
-  - img: {fileID: 21300000, guid: 9e9474494461bd048803b48e391ef0f6, type: 3}
+  - img: {fileID: 21300000, guid: dbe53f162cd89f8448cf3b936765a92c, type: 3}
     rightAnswer: 0
   typeDiff: 3
   reward: 0

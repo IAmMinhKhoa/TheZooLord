@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2879a718b4d7cf045a795c16f963bc26, type: 3}
-  m_Name: Quest_02
+  m_Name: Quest_Hard_01
   m_EditorClassIdentifier: 
-  scripQuestion: "con m\xE8o m\xE0u g\xEC ?"
+  scripQuestion: "\u0110\xE2u l\xE0 lo\xE0i \u0111\u1ED9ng v\u1EADt c\xF3 th\u1EC3
+    \u0103n nh\u1EEFng chi\u1EBFc l\xE1 \u1EDF tr\xEAn c\xE2y cao ?"
   voiceQuest: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
   dataAnswers:
-  - img: {fileID: 21300000, guid: 43ad51e043491b94d8f6c62d55ac5ede, type: 3}
+  - img: {fileID: 21300000, guid: 86a6d3d8318829d419dce8f70667e6b6, type: 3}
     rightAnswer: 0
-  - img: {fileID: 21300000, guid: 0f061b4bd0275bc4eb60f2af31e7375a, type: 3}
+  - img: {fileID: 21300000, guid: 5d42792f3a2013f479300f93969a33dd, type: 3}
     rightAnswer: 1
-  - img: {fileID: 21300000, guid: 9e9474494461bd048803b48e391ef0f6, type: 3}
+  - img: {fileID: 21300000, guid: fd299224cb024234091fb9d62bbd8d83, type: 3}
     rightAnswer: 0
-  typeDiff: 1
+  typeDiff: 3
   reward: 0

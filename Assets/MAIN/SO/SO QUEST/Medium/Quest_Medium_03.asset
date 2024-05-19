@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2879a718b4d7cf045a795c16f963bc26, type: 3}
+  m_Name: Quest_Medium_03
+  m_EditorClassIdentifier: 
+  scripQuestion: "B\u1EA1n n\xE0o ch\u1EA1y nhanh nh\u1EA5t ?"
+  voiceQuest: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
+  dataAnswers:
+  - img: {fileID: 21300000, guid: 363ddbd1de0187e4f9f85b8b4f960e2d, type: 3}
+    rightAnswer: 0
+  - img: {fileID: 21300000, guid: 8f267b8a99b669d45961a8dc5a0452c0, type: 3}
+    rightAnswer: 1
+  - img: {fileID: 21300000, guid: a73adab5c68020743bd63330f0d9bcbf, type: 3}
+    rightAnswer: 0
+  typeDiff: 2
+  reward: 0
