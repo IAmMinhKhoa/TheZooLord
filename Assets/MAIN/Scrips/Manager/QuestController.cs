@@ -43,7 +43,7 @@ public class QuestController : MonoBehaviour
     public GameObject correctFX;
     public GameObject wrongFX;
     #endregion
-
+    SOQuestion currentSoQuest;
     private void Awake()
     {
         if (Instance == null)
@@ -68,7 +68,7 @@ public class QuestController : MonoBehaviour
     
     public IEnumerator GenerateQuest(SOQuestion soQuest=null)
     {
-        SOQuestion currentSoQuest;
+        
         if (soQuest != null) currentSoQuest = soQuest;
         else currentSoQuest= RandomQuestion();
         SetDataToUi(currentSoQuest);
@@ -179,10 +179,17 @@ public class QuestController : MonoBehaviour
     }
 
     #region UI
-
-    public  void OpenModal(SOQuestion soQuest=null,Action affterSuccess=null,Action affterFailed=null)
+    private void FXAddCoin()
     {
-        this.affterSuccess= affterSuccess;
+        CoinManager.Instance.AddCoins(currentSoQuest.reward);
+    }
+    public  void OpenModal(SOQuestion soQuest=null,Action affterSuccess=null,Action affterFailed=null, bool isAddCoin=false)
+    {
+        this.affterSuccess = () =>
+        {
+            affterSuccess?.Invoke();
+            if (isAddCoin) StartCoroutine(Common.delayCoroutine(3.5f, FXAddCoin)); 
+        };
         this.affterFail = affterFailed;
         canvasGroup.DOFade(1f, 0.4f).OnStart(() =>
         {

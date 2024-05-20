@@ -114,6 +114,8 @@ public class BookAnimals : MonoBehaviour
     }
     public void toggleBook(bool status)
     {
+        if(status) Manager_UI.Instance?.CloseAllModal(true);
+        else Manager_UI.Instance?.OpenOverlay();
         objMainBook.SetActive(status);
     }
 }
