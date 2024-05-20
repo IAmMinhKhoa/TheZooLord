@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Apple
   m_EditorClassIdentifier: 
   nameFood: Apple
-  iconFood: {fileID: 21300000, guid: 5631915fb2d441a449a4b985783e67fd, type: 3}
+  iconFood: {fileID: 21300000, guid: 4613ac92256ec364ebf5540e07f7b896, type: 3}
   prefab: {fileID: 6160875126217808698, guid: b8adc77319ded7a4499edc162faf977e, type: 3}
   voice: {fileID: 8300000, guid: a63e9f3704ea34881a61eaaed67c4ccc, type: 3}

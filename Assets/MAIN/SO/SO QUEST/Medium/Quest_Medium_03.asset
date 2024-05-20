@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2879a718b4d7cf045a795c16f963bc26, type: 3}
-  m_Name: Quest_01
+  m_Name: Quest_Medium_03
   m_EditorClassIdentifier: 
-  scripQuestion: "con ch\xF3 m\xE0u g\xEC ?"
-  voiceQuest: {fileID: 8300000, guid: 13a58eb5deb3e46599037ffb43ae7600, type: 3}
+  scripQuestion: "B\u1EA1n n\xE0o ch\u1EA1y nhanh nh\u1EA5t ?"
+  voiceQuest: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
   dataAnswers:
-  - img: {fileID: 21300000, guid: 43ad51e043491b94d8f6c62d55ac5ede, type: 3}
+  - img: {fileID: 21300000, guid: 363ddbd1de0187e4f9f85b8b4f960e2d, type: 3}
     rightAnswer: 0
-  - img: {fileID: 21300000, guid: 0f061b4bd0275bc4eb60f2af31e7375a, type: 3}
+  - img: {fileID: 21300000, guid: 8f267b8a99b669d45961a8dc5a0452c0, type: 3}
     rightAnswer: 1
-  - img: {fileID: 21300000, guid: 9e9474494461bd048803b48e391ef0f6, type: 3}
+  - img: {fileID: 21300000, guid: a73adab5c68020743bd63330f0d9bcbf, type: 3}
     rightAnswer: 0
-  typeDiff: 3
-  reward: 10
+  typeDiff: 2
+  reward: 0
