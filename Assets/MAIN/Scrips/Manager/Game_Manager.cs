@@ -11,8 +11,12 @@ public class Game_Manager : MonoBehaviour
     public float currenTime = 0;
     #endregion
     #region Toggle
-    [SerializeField] bool togglePause;
+     bool togglePause;
     #endregion
+    public SOGame DataGame;
+
+    
+
 
     private void Awake()
     {

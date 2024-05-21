@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
 using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using WUG.BehaviorTreeVisualizer;
 
 public class GiftConfig : MonoBehaviour
 {
@@ -42,11 +43,12 @@ public class GiftConfig : MonoBehaviour
         QuestController.Instance.OpenModal(null,
         ()=> {
             AffterSuccesQuest();
+        
         },
         ()=>
         {
             AffterFailQuest();
-        });   
+        }, isAddCoin: true);  
     }
 
 
@@ -66,6 +68,7 @@ public class GiftConfig : MonoBehaviour
         areaFX.SetActive(false);
         chillParticle.SetActive(false);
         animator.SetTrigger("Off");
+      
     }
     private IEnumerator CdResetGift(float initTime)
     {
@@ -80,6 +83,10 @@ public class GiftConfig : MonoBehaviour
         chillParticle.SetActive(true);
         animator.SetTrigger("Off");
     }
+    [ProButton]
+    public void test()
+    {
+        CoinManager.Instance. AddCoins( 7);
+    }
 
- 
 }
