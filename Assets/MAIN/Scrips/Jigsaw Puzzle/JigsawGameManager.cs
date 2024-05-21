@@ -73,6 +73,13 @@ public class JigsawGameManager : MonoBehaviour
         SFXSource.PlayOneShot(clapWin);
     }
 
+    public void BackMenu()
+    {
+        isComplete = false;
+        winVFX.Clear();
+        SFXSource.Stop();
+    }
+
     //public void SetActiveLevel(int levelPress)
     //{
     //    for (int i = 0; i < levelAnimalArray.Length; i++)
@@ -108,7 +115,7 @@ public class JigsawGameManager : MonoBehaviour
             hintImage.sprite = photo.sprite;
         }
         parentPieces.transform.parent.gameObject.SetActive(true);
-    }
+    }          
 
     public void UnlockNewLevel()
     {

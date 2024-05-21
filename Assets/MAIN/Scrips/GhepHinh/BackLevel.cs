@@ -5,20 +5,16 @@ using UnityEngine;
 public class BackLevel : MonoBehaviour
 {
     [SerializeField] Canvas levelCanvas;
-    [SerializeField] GameObject parentObject;
-
-    [SerializeField] ParticleSystem winVFX;
 
     private void Awake()
     {
-        parentObject = transform.parent.gameObject;
     }
 
     private void OnMouseDown()
     {
         //winVFX.Stop(); 
-        winVFX.Clear();
-        parentObject.SetActive(false); 
+        JigsawGameManager.instance.BackMenu();
+        transform.parent.gameObject.SetActive(false); 
         levelCanvas.gameObject.SetActive(true);
 
     }

@@ -17,7 +17,6 @@ public class LevelJigsawManager : MonoBehaviour
     private void Awake()
     {
         ButtonsArray();
-        PlayerPrefs.DeleteAll();
         unlockedLevel = PlayerPrefs.GetInt("UnlockedJigsawLevel", 1);
     }
 
