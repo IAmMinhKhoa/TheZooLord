@@ -128,6 +128,11 @@ public class MainMenu_CameraController : MonoBehaviour
     public async void ChangeChooseZooCamera()
     {
         //ActiveAnimationChangeCam();
+        if(Game_Manager.Instance.togglePause)
+        {
+            //open modal warning over time
+            return;
+        }
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
         buttonPlay.SetActive(false);
         currentCamera.Priority--;
@@ -147,6 +152,11 @@ public class MainMenu_CameraController : MonoBehaviour
     public async void ChangeMinigameCamera()
     {
         //ActiveAnimationChangeCam();
+        if (Game_Manager.Instance.togglePause)
+        {
+            //open modal warning over time
+            return;
+        }
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
         buttonPlay.SetActive(false);
 

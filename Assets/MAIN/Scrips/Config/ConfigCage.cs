@@ -34,8 +34,12 @@ public class ConfigCage : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-           
-            SoundManager.instance.PlayAudioSingle(SoAnimal.voiceChirp);
+
+            if (Common.rateRandom(0.5f))
+            {
+                SoundManager.instance.PlayAudioSingle(SoAnimal.voiceChirp); //rate random 50% when player in area cage -> sound chirp
+                ShakeCamera.Instance.Shake(2);
+            }
         }
     }
     private void Start()

@@ -68,7 +68,8 @@ public class CoinManager : MonoBehaviour
     }
     private void Start()
     {
-        coinUIText.text = Game_Manager.Instance.DataGame.GetCoint().ToString();
+        Coins = Game_Manager.Instance.DataGame.GetCoint();
+        coinUIText.text = Coins.ToString();
     }
     void PrepareCoins()
     {

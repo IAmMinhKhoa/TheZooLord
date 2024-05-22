@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1130984497608231616}
   - component: {fileID: 1078155482719200116}
-  - component: {fileID: 942661351263673076}
-  - component: {fileID: 1078155482719200117}
-  - component: {fileID: 1078155482719200118}
+  - component: {fileID: -6888678056608932998}
+  - component: {fileID: 1784651973203143227}
+  - component: {fileID: 8666850167941738830}
   m_Layer: 7
   m_Name: Rhino
   m_TagString: Animal
@@ -57,7 +57,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &942661351263673076
+--- !u!114 &-6888678056608932998
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,10 +79,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efe043d0a1deb244d9313f5dae47dcd5, type: 2}
   animator: {fileID: 0}
   agent: {fileID: 0}
-  _pointStatus: {fileID: 4155267009831126657}
+  _pointStatus: {fileID: 4155267009831126657, guid: c6216541f51940041b48878e863056d1,
+    type: 3}
   FoodIndex: 99
   CanMeetingAnimal: 1
---- !u!65 &1078155482719200117
+--- !u!65 &1784651973203143227
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +94,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.49, z: 0.11037574}
---- !u!54 &1078155482719200118
+  m_Size: {x: 1.55, y: 1.49, z: 3.18}
+  m_Center: {x: 0, y: 0.75, z: 0}
+--- !u!54 &8666850167941738830
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,7 +136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4155267009831126656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.59, z: 0}
+  m_LocalPosition: {x: 0, y: 2.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

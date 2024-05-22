@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1130984497608231616}
   - component: {fileID: 1078155482719200116}
-  - component: {fileID: 942661351263673076}
-  - component: {fileID: 1078155482719200117}
-  - component: {fileID: 1078155482719200118}
+  - component: {fileID: -360235139973401285}
+  - component: {fileID: 1417540921409991519}
+  - component: {fileID: 3155508227979408630}
   m_Layer: 7
   m_Name: Boar
   m_TagString: Animal
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 1127756225578624590}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.5441592, y: 2.5441592, z: 2.5441592}
+  m_LocalScale: {x: 3.56, y: 3.56, z: 3.56}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4155267009831126657}
@@ -57,7 +57,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &942661351263673076
+--- !u!114 &-360235139973401285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,18 +71,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateAnimal: 0
   previousState: 0
-  SO_Emojis:
-  - {fileID: 11400000, guid: 35b9a0923be56644aacda7de2c185f76, type: 2}
-  - {fileID: 11400000, guid: f697e15363ee0344b95478c9c8bc1580, type: 2}
-  - {fileID: 11400000, guid: 7c6a17251f376a84e823e3d2a72c5025, type: 2}
-  - {fileID: 11400000, guid: 0b0b595a69349204a9b4bc06f13a15d1, type: 2}
-  - {fileID: 11400000, guid: efe043d0a1deb244d9313f5dae47dcd5, type: 2}
+  SO_Emojis: []
   animator: {fileID: 0}
   agent: {fileID: 0}
-  _pointStatus: {fileID: 4155267009831126657}
-  FoodIndex: 99
+  _pointStatus: {fileID: 0}
+  FoodIndex: 0
   CanMeetingAnimal: 1
---- !u!65 &1078155482719200117
+--- !u!65 &1417540921409991519
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +88,9 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.49, z: 0.11037574}
---- !u!54 &1078155482719200118
+  m_Size: {x: 0.76, y: 0.45, z: 1}
+  m_Center: {x: 0.08, y: 0.22, z: 0.11}
+--- !u!54 &3155508227979408630
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

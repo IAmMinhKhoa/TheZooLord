@@ -42,18 +42,21 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
     }
     private void Start()
     {
+       
+    }
+    private void OnEnable()
+    {
         //Init Function
         GenerateBehaviorTree();
-       
+
         //Other
         if (m_BehaviorTreeRoutine == null && BehaviorTree != null)
         {
-            m_BehaviorTreeRoutine = StartCoroutine(RunBehaviorTree());  
+            m_BehaviorTreeRoutine = StartCoroutine(RunBehaviorTree());
         }
         ForceDrawingOfTree();
     }
 
- 
     #region SET UP NODE FOR BEHAVIOR TREE
     private void GenerateBehaviorTree()
     {

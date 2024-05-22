@@ -80,14 +80,16 @@ public class BookAnimals : MonoBehaviour
     {
         Debug.Log("con cac" + so.name);
         DelAllChildObject(parentObject3D);
-        var animalPrefab = so.PrefabAnimal;
+      
+        var animalPrefab=Instantiate(so.PrefabAnimal, parentObject3D);
+
         DestroyImmediate(animalPrefab.GetComponent<NavMeshAgent>(), true);
         DestroyImmediate(animalPrefab.GetComponent<AnimalController>(), true);
         DestroyImmediate(animalPrefab.GetComponent<Rigidbody>(), true);
         DestroyImmediate(animalPrefab.GetComponent<Collider>(), true);
         DestroyImmediate(animalPrefab.GetComponent<ConfigAnimal>(), true);
 
-        Instantiate(animalPrefab, parentObject3D) ;
+
     }
     private void DelAllChildObject(Transform parent)
     {
@@ -114,8 +116,8 @@ public class BookAnimals : MonoBehaviour
     }
     public void toggleBook(bool status)
     {
-        if(status) Manager_UI.Instance?.CloseAllModal(true);
-        else Manager_UI.Instance?.OpenOverlay();
+      //  if(status) Manager_UI.Instance?.CloseAllModal(true);
+      //  else Manager_UI.Instance?.OpenOverlay();
         objMainBook.SetActive(status);
     }
 }
