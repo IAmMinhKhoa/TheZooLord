@@ -1,4 +1,5 @@
-    using System.Collections;
+using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -16,6 +17,10 @@ public class PlaySoundAnimal : MonoBehaviour
     Animator animator;
     Animator handAnimator;
 
+    private Vector3 _originalScale;
+    private Vector3 _scaleTo;
+    public float scaleSpeed;
+
     private bool canClick;
 
     private void Awake()
@@ -25,7 +30,8 @@ public class PlaySoundAnimal : MonoBehaviour
     }
     private void Start()
     {
-
+        _originalScale = transform.localScale;
+        _scaleTo = _originalScale * 1.2f;
     }
 
     private void OnEnable()
@@ -39,17 +45,22 @@ public class PlaySoundAnimal : MonoBehaviour
         Debug.Log(handObject.activeSelf);
     }
 
-    public async void OnMouseDown()
+    public void OnMouseDown()
     {
         if (canClick)
         {
             audioSource.PlayOneShot(soundAnimal);
-            animator.SetTrigger("Complete");
             DisableClickInteraction();
-    
-            await Task.Delay(2500);
-
-            EnableClickInteraction();
+            transform.DOScale(_scaleTo, scaleSpeed)
+                .SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                {
+                    transform.DOScale(_originalScale, scaleSpeed)
+                    .OnComplete(() =>
+                    {
+                        EnableClickInteraction();
+                    });
+                });
 
         }
 
@@ -61,7 +72,14 @@ public class PlaySoundAnimal : MonoBehaviour
         yield return new WaitForSeconds(delayTime);
 
         audioSource.PlayOneShot(soundName);
-        animator.SetTrigger("Complete");
+
+        transform.DOScale(_scaleTo, scaleSpeed)
+            .SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+            {
+                transform.DOScale(_originalScale, scaleSpeed);
+
+            });
 
         yield return new WaitForSeconds(1.5f);
 
