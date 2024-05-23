@@ -37,6 +37,7 @@ public class SettingGame : MonoBehaviour
             Game_Manager.Instance.currenTime=v* Game_Manager.Instance.maxTime;
             if (Game_Manager.Instance.currenTime > 0)
             {
+                Game_Manager.Instance.togglePause = false;
                 Time.timeScale = 1;
             }
         });

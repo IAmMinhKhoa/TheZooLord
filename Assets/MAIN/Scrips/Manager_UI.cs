@@ -140,7 +140,7 @@ public class Manager_UI : MonoBehaviour
         int tempRoation = toggleBtnMiniMap == true ? 180 : 0;
         BtnMiniMap.gameObject.GetComponent<RectTransform>().DORotate(new Vector3(0f, 0f, tempRoation), 0.3f).SetEase(Ease.OutQuint);
         // Use ternary operator for concise animation call
-        Common.MoveObjectUI(obj, 0.2f, toggleBtnMiniMap ? 185f : -300);
+        Common.MoveObjectUI(obj, 0.2f, toggleBtnMiniMap ? 300 : -185);
 
         
 

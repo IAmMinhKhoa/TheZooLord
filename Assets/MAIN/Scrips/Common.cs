@@ -2,11 +2,19 @@
 using System;
 using System.Collections;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class Common 
 {
+    public static bool rateRandom(float valueRate)
+    {
+        float randomValue = Random.value;
+        if (randomValue <= valueRate) return true;
+        else return false;
+    }
     public static IEnumerator delayCoroutine(float delay, Action action)
     {
         yield return Delay(delay);
@@ -84,21 +92,18 @@ public class Common
     #endregion
 
 
-    public static void LoadScene(GameScenes scene)
-    {
-        //do something before load next scenes
-        SceneManager.LoadScene(scene.ToString());
-        //do something after load next scenes
-    }
+
     public static IEnumerator LoadSceneAsync(GameScenes scene)
     {
-        // B?t ??u quá trình t?i scene
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.ToString());
 
-        // Ch? cho ??n khi quá trình t?i hoàn thành
+        Game_Manager.Instance.LoadingCanvas();
+        yield return new WaitForSeconds(0.3f);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.ToString());
+       
+     
         while (!asyncLoad.isDone)
         {
-            // Có th? th?c hi?n các hành ??ng khác trong quá trình t?i ? ?ây (ví d?: hi?n th? thanh ti?n trình)
 
             yield return null;
         }

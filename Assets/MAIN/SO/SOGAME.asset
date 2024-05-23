@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0272343eb3113a045930fa2d150d525d, type: 3}
   m_Name: SOGAME
   m_EditorClassIdentifier: 
-  Coin: 0
+  Coin: 40
+  zooMeadow:
+    index: 0
+    costOpen: 100
+    isActive: 0
+    nameZoo: 

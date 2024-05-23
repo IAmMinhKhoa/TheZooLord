@@ -54,9 +54,12 @@ public class ConfigAnimal :  MonoBehaviour
     #region LIFE CYCLE & FUNCTION
     private void Start()
     {
+      
+    }
+    private void OnEnable()
+    {
         StartCoroutine(AutoDecreaseFood());
     }
-
     protected IEnumerator AutoDecreaseFood()
     {
         yield return new WaitForSeconds(1f);

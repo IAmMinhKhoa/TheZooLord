@@ -6,6 +6,7 @@ using UnityEngine;
 public class SOGame : ScriptableObject
 {
     [SerializeField]private int Coin;
+    public inforZoo zooMeadow;
 
     public void SubtractCoin(int value)
     {
@@ -16,4 +17,13 @@ public class SOGame : ScriptableObject
         Coin += value;
     }
     public int GetCoint() { return Coin; }
+}
+
+
+[System.Serializable]
+public class inforZoo{
+    public int index=0;
+    public int costOpen;
+    public bool isActive;
+    public string nameZoo;
 }

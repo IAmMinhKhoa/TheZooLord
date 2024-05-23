@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/MAIN/Scene/MainMenu.unity
     guid: 494a564e3f56a244786c7872de1453d4
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/MAIN/Scene/BuildMap.unity
+    guid: 6d184c79c1a5ffd47bdbbfebfb3ea7f6
   - enabled: 1
     path: Assets/MAIN/Scene/AnimalPuzzle.unity
     guid: b1451891b1a335f4b95d1e4623507c12

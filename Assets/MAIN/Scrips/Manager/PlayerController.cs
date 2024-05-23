@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     PlayerInput playerInput;
     public CharacterController characterController;
     public Animator animator;
-
+    public FixedJoystick joystick;
 
     int isRunningHash;
     int isJumpingHash;
@@ -114,10 +114,14 @@ public class PlayerController : MonoBehaviour
         currentRunMovement.x = currentMovementInput.x ;
         currentRunMovement.z = currentMovementInput.y;
         isMovementPressed = currentMovementInput.x != 0 || currentMovementInput.y != 0;
-        
     }
 
-
+    private void onMoveJoyStick()
+    {
+        currentRunMovement.x = joystick.Horizontal;
+        currentRunMovement.z = joystick.Vertical;
+        isMovementPressed = joystick.Horizontal != 0 || joystick.Vertical != 0;
+    }
 
     private void onJump(InputAction.CallbackContext context)
     {
@@ -188,6 +192,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
+        #if UNITY_ANDROID
+        onMoveJoyStick();
+        #endif
+        onMoveJoyStick();
         handleRotation();   
         handleAnimation();
 
@@ -196,6 +204,7 @@ public class PlayerController : MonoBehaviour
 
         handleGravity();
         handleJump();
+     
     }
 
     private void OnEnable()

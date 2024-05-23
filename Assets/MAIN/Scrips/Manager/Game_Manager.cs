@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
 
 public class Game_Manager : MonoBehaviour
@@ -7,28 +8,23 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager Instance;
     #region Timing Game
     public float maxTime = 0;
-    [SerializeField] bool limitPlay = false;
     public float currenTime = 0;
     #endregion
     #region Toggle
-     bool togglePause;
+    public bool togglePause;
     #endregion
     public SOGame DataGame;
+    public Animator animatorLoading;
+
+
 
     
 
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        DontDestroyOnLoad(gameObject);
+        Instance = this;
         //--init data--
         currenTime = maxTime;
     }
@@ -41,7 +37,6 @@ public class Game_Manager : MonoBehaviour
             if (currenTime <= 0)
             {
                 currenTime = 0;
-                limitPlay = true;
                 TogglePauseGame(true);
             }
         }
@@ -58,5 +53,16 @@ public class Game_Manager : MonoBehaviour
         if(togglePause) Time.timeScale = 0;
         else Time.timeScale = 1;
         togglePause = !togglePause;
+    }
+
+    [ProButton]
+    public void LoadingCanvas()
+    {
+        Debug.Log("Trigger loading");
+        animatorLoading.SetTrigger("trigger");
+        StartCoroutine(Common.delayCoroutine(2f, () =>
+        {
+            animatorLoading.SetTrigger("trigger");
+        }));
     }
 }
