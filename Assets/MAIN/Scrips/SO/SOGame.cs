@@ -6,6 +6,8 @@ using UnityEngine;
 public class SOGame : ScriptableObject
 {
     [SerializeField]private int Coin;
+    public float CDTimerPlay;
+    public bool CanPlay;
     public inforZoo zooMeadow;
 
     public void SubtractCoin(int value)
