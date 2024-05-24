@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 53888469}
   - component: {fileID: 53888468}
   m_Layer: 0
-  m_Name: Level 2
+  m_Name: Level 8
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
         m_MethodName: OpenLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 53888469}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4682888e56955848835e8e4010d0c71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d81daff28a3a5c468366afc830da40a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -752,7 +752,7 @@ GameObject:
   - component: {fileID: 231306943}
   - component: {fileID: 231306942}
   m_Layer: 0
-  m_Name: Level 1
+  m_Name: Level 7
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -827,7 +827,7 @@ MonoBehaviour:
         m_MethodName: OpenLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 231306943}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -854,7 +854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf5a8358da8710c4a9c9219cb6e90d67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 749d51b765af66a418793ec229ed0c4f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1013,7 +1013,7 @@ GameObject:
   - component: {fileID: 340076784}
   - component: {fileID: 340076783}
   m_Layer: 0
-  m_Name: Level 1
+  m_Name: Level 4
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,7 +1088,7 @@ MonoBehaviour:
         m_MethodName: OpenLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 340076784}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -1115,7 +1115,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: bf5a8358da8710c4a9c9219cb6e90d67, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da82b74aa2ee41f4faa4a2877e6caa2a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3583,7 +3583,7 @@ GameObject:
   - component: {fileID: 727935631}
   - component: {fileID: 727935630}
   m_Layer: 0
-  m_Name: Level 3
+  m_Name: Level 9
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3658,7 +3658,7 @@ MonoBehaviour:
         m_MethodName: OpenLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 727935631}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3685,7 +3685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0b382c35115f2394eb991e306f24ba41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5c2dc171a1bd7b94abe4e86dd9b84ecc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5315,7 +5315,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelCanvas: {fileID: 578768255}
   parentObject: {fileID: 0}
-  winVFX: {fileID: 1841220429}
 --- !u!61 &1207035593
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5764,7 +5763,7 @@ GameObject:
   - component: {fileID: 1384106123}
   - component: {fileID: 1384106122}
   m_Layer: 0
-  m_Name: Level 2
+  m_Name: Level 5
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5839,7 +5838,7 @@ MonoBehaviour:
         m_MethodName: OpenLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1384106123}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -5866,7 +5865,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e4682888e56955848835e8e4010d0c71, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 006e213d9cfa12d44bd061f1793688af, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6390,7 +6389,7 @@ GameObject:
   - component: {fileID: 1666583016}
   - component: {fileID: 1666583015}
   m_Layer: 0
-  m_Name: Level 3
+  m_Name: Level 6
   m_TagString: Level
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6465,7 +6464,7 @@ MonoBehaviour:
         m_MethodName: OpenLevel
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgument: {fileID: 1666583016}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -6492,7 +6491,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0b382c35115f2394eb991e306f24ba41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 48c9c33dad2eaf1468f69284455284d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

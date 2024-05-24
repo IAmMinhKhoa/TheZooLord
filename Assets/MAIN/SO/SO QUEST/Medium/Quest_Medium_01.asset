@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2879a718b4d7cf045a795c16f963bc26, type: 3}
   m_Name: Quest_Medium_01
   m_EditorClassIdentifier: 
-  scripQuestion: "B\u1EA1n n\xE0o c\xF3 c\u1ED5 d\xE0i nh\u1EA5t?"
-  voiceQuest: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
+  scripQuestion: "B\u1EA1n \u0111\u1ED9ng v\u1EADt n\xE0o c\xF3 c\u1ED5 d\xE0i nh\u1EA5t
+    ?"
+  voiceQuest: {fileID: 8300000, guid: 87aad341303c4984eb74c3b6da8fb4f0, type: 3}
   dataAnswers:
   - img: {fileID: 21300000, guid: 8f267b8a99b669d45961a8dc5a0452c0, type: 3}
     rightAnswer: 0
