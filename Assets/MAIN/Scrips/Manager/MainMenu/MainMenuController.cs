@@ -11,6 +11,8 @@ public class MainMenuController : MonoBehaviour
     private void Start()
     {
         initDataButtonMapZoo();
+        SoundManager.instance.PlayRandomSound_BR();
+        Game_Manager.Instance.triggerOverTime();
     }
     private void initDataButtonMapZoo()
     {
@@ -64,28 +66,44 @@ public class MainMenuController : MonoBehaviour
     }
     public void GoToSceneMainMenu()
     {
-        
-
         StartCoroutine(Common.LoadSceneAsync(GameScenes.MainMenu));
     }
     public void GoToSceneMap1()
     {
+        if (!Game_Manager.Instance.triggerOverTime())
+        {
+            Game_Manager.Instance.ActiveWarningTimerPlay(true);
+            return;
+        }
         StartCoroutine(Common.LoadSceneAsync(GameScenes.BuildMap));
     }
 
     //Minigame
     public void GoToSceneAnimalPuzzle()
     {
-       
+        if (!Game_Manager.Instance.triggerOverTime())
+        {
+            Game_Manager.Instance.ActiveWarningTimerPlay(true);
+            return;
+        }
         StartCoroutine(Common.LoadSceneAsync(GameScenes.AnimalPuzzle));
     }
     public void GoToSceneJigsawPuzzle()
     {
-        
+        if (!Game_Manager.Instance.triggerOverTime())
+        {
+            Game_Manager.Instance.ActiveWarningTimerPlay(true);
+            return;
+        }
         StartCoroutine(Common.LoadSceneAsync(GameScenes.JigsawPuzzle));
     }
     public void GoToSceneMaze()
     {
+        if (!Game_Manager.Instance.triggerOverTime())
+        {
+            Game_Manager.Instance.ActiveWarningTimerPlay(true);
+            return;
+        }
         StartCoroutine(Common.LoadSceneAsync(GameScenes.Maze));
     }
     #endregion

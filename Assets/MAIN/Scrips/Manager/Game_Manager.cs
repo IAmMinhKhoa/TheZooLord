@@ -46,6 +46,7 @@ public class Game_Manager : MonoBehaviour
 
     private void Update()
     {
+       // Debug.Log("cccc");
         if (currenTime > 0)
         {
             currenTime -= Time.deltaTime;
@@ -53,8 +54,8 @@ public class Game_Manager : MonoBehaviour
             {
                 currenTime = 0;
                 CanPlay = false;
-                if (!DataGame.CanPlay && SceneManager.GetActiveScene().name != "MainMenu") ActiveWarningTimerPlay(true);
-                else ActiveWarningTimerPlay(false);
+                Debug.Log(DataGame.CanPlay + "/" + SceneManager.GetActiveScene().name != "MainMenu");
+                triggerOverTime();
             }
         }
     }
@@ -82,8 +83,15 @@ public class Game_Manager : MonoBehaviour
     }
     public void LoadSceneMainMenu()
     {
+        if (!triggerOverTime()) return;
         StartCoroutine(Common.LoadSceneAsync(GameScenes.MainMenu));
-        if (!DataGame.CanPlay && SceneManager.GetActiveScene().name != "MainMenu") ActiveWarningTimerPlay(true);
+       
+    }
+    public bool triggerOverTime()
+    {
+        if (!CanPlay && SceneManager.GetActiveScene().name != "MainMenu") ActiveWarningTimerPlay(true);
         else ActiveWarningTimerPlay(false);
+        if (CanPlay) return true;
+        return false;
     }
 }

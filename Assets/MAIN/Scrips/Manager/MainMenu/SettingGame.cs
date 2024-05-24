@@ -17,6 +17,7 @@ public class SettingGame : MonoBehaviour
     //---Parentail Control---
     [SerializeField] ParentalControl _parentalControl;
     [SerializeField] GameObject _mainSetting;
+    
     private void Start()
     {
         _toggleSFX.isOn = false;
@@ -29,7 +30,7 @@ public class SettingGame : MonoBehaviour
         });
         _sliderMusic.onValueChanged.AddListener((v) =>
         {
-            SoundManager.instance.AdjustValueMusic(v);
+            SoundManager.instance.AdjustValueBR(v);
             if (v > 0) _toggleMusic.isOn = false;
         });
         _sliderLimitPlay.onValueChanged.AddListener((v) =>

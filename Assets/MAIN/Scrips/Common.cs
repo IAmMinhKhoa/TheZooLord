@@ -95,13 +95,12 @@ public class Common
 
     public static IEnumerator LoadSceneAsync(GameScenes scene)
     {
-
         Game_Manager.Instance.LoadingCanvas();
         yield return new WaitForSeconds(0.3f);
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.ToString());
+
        
-     
         while (!asyncLoad.isDone)
         {
 
