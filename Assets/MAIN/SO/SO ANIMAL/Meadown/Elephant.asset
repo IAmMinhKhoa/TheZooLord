@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
+  m_Name: Elephant
+  m_EditorClassIdentifier: 
+  IsLock: 1
+  species: 1
+  nameAnimal: Voi
+  defaultImage: {fileID: 21300000, guid: d2fc36e75abc6cd469677c6025294207, type: 3}
+  icon: {fileID: 21300000, guid: 78d47f2ca0db7d747a1cf770ff021784, type: 3}
+  voiceChirp: {fileID: 8300000, guid: 60655ce86d41bbe49a1e7c3b99a39fb8, type: 3}
+  PrefabAnimal: {fileID: 1390276149824892, guid: c5e7161780bfc06459e1d0fd1cefd777,
+    type: 3}
+  dataEnvironment:
+    voice: {fileID: 8300000, guid: 0eb1fe9ab8d2f9648b58eba1b9b681e3, type: 3}
+  dataFoods:
+    SoFoods:
+    - {fileID: 0}
+    - {fileID: 0}
+  dataCharacteristic:
+    voice: {fileID: 8300000, guid: 9ed8ddb0004419a43bfbb6a52cd4aec6, type: 3}
+  dataConservationlevel:
+    LevelStart: 5
+    voice: {fileID: 8300000, guid: 36dd3e81f333d6f44bdfb6ddca58312f, type: 3}
+  dataStorySpecial:
+    clipAnimalSpecial: {fileID: 32900000, guid: 0b8a033a6e1ff194f81448bf38001bdf,
+      type: 3}
+    voice: {fileID: 8300000, guid: a2886c8f21a0dba47ad0738760eabfb8, type: 3}
+  soQuestionToOpenCage: {fileID: 0}

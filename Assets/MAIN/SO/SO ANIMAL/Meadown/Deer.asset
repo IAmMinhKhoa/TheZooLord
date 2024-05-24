@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
+  m_Name: Deer
+  m_EditorClassIdentifier: 
+  IsLock: 1
+  species: 1
+  nameAnimal: "Hu\u01A1u"
+  defaultImage: {fileID: 21300000, guid: a356e70c3bac00440bfb09a96eb9ff56, type: 3}
+  icon: {fileID: 21300000, guid: 3f12c82ff1d9ea847bbff353d14cba13, type: 3}
+  voiceChirp: {fileID: 8300000, guid: d6f8f83832edb554cb64de2a257757e1, type: 3}
+  PrefabAnimal: {fileID: 1390276149824892, guid: c5e7161780bfc06459e1d0fd1cefd777,
+    type: 3}
+  dataEnvironment:
+    voice: {fileID: 8300000, guid: 8ec91bd975b262949916d84a685a3401, type: 3}
+  dataFoods:
+    SoFoods:
+    - {fileID: 0}
+    - {fileID: 0}
+  dataCharacteristic:
+    voice: {fileID: 8300000, guid: 83edfaa1e0859ad47ba6e3cb82983d71, type: 3}
+  dataConservationlevel:
+    LevelStart: 4
+    voice: {fileID: 8300000, guid: 3e6ccb4da1c31434e8a83ce822872bb7, type: 3}
+  dataStorySpecial:
+    clipAnimalSpecial: {fileID: 32900000, guid: 838dfdc8b7cce4f448a1d40cf06437b2,
+      type: 3}
+    voice: {fileID: 8300000, guid: 04e31b957144fa3479faebadae2812cd, type: 3}
+  soQuestionToOpenCage: {fileID: 0}

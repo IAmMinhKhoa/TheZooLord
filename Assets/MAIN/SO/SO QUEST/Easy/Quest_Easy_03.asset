@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Quest_Easy_03
   m_EditorClassIdentifier: 
   scripQuestion: "B\u1EA1n h\u1ED5 n\xE0o c\xF3 \u0111u\xF4i d\xE0i nh\u1EA5t ?"
-  voiceQuest: {fileID: 8300000, guid: 13a58eb5deb3e46599037ffb43ae7600, type: 3}
+  voiceQuest: {fileID: 8300000, guid: e49857bc97a458a4da0ca994cc874457, type: 3}
   dataAnswers:
   - img: {fileID: 21300000, guid: 3d488ca64ad5f09469fb63bf64c9852d, type: 3}
     rightAnswer: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scripQuestion: "B\u1EA1n \u0111\xE0 \u0111i\u1EC3u n\xE0o c\xF3 c\u1ED5 ng\u1EAFn
     nh\u1EA5t ?"
-  voiceQuest: {fileID: 8300000, guid: 13a58eb5deb3e46599037ffb43ae7600, type: 3}
+  voiceQuest: {fileID: 8300000, guid: 25c1558df1a69344bb03494bfe4db966, type: 3}
   dataAnswers:
   - img: {fileID: 21300000, guid: 4c23381811003c24ea6c6603ac51bde7, type: 3}
     rightAnswer: 0

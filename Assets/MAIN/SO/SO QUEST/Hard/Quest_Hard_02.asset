@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2879a718b4d7cf045a795c16f963bc26, type: 3}
   m_Name: Quest_Hard_02
   m_EditorClassIdentifier: 
-  scripQuestion: "\u0110\xE2u l\xE0 lo\u1EA1i lo\xE0i \u0111\u1ED9ng v\u1EADt \u0103n
-    th\u1ECBt ?"
-  voiceQuest: {fileID: 8300000, guid: 0f9731ce1b920410ca371556bbc29202, type: 3}
+  scripQuestion: "H\xECnh n\xE0o l\xE0 lo\xE0i \u0111\u1ED9ng v\u1EADt \u0103n th\u1ECBt
+    ?"
+  voiceQuest: {fileID: 8300000, guid: 3e1eb2cb9d1208e40b97f140fc01b3bb, type: 3}
   dataAnswers:
   - img: {fileID: 21300000, guid: 86a6d3d8318829d419dce8f70667e6b6, type: 3}
     rightAnswer: 1
