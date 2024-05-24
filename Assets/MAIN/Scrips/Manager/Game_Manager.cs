@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class Game_Manager : MonoBehaviour
     public float currenTime = 0;
     #endregion
     #region Toggle
-    public bool togglePause;
+    public bool CanPlay;//true when over time
     #endregion
     public SOGame DataGame;
     public Animator animatorLoading;
-
+    public GameObject warningTimer;
 
 
     
@@ -23,10 +24,24 @@ public class Game_Manager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         //--init data--
-        currenTime = maxTime;
+        currenTime = DataGame.CDTimerPlay;
+        CanPlay = DataGame.CanPlay;
+    }
+    private void Start()
+    {
+       
+        Debug.Log(SceneManager.GetActiveScene().name);
     }
 
     private void Update()
@@ -37,23 +52,19 @@ public class Game_Manager : MonoBehaviour
             if (currenTime <= 0)
             {
                 currenTime = 0;
-                TogglePauseGame(true);
+                CanPlay = false;
+                if (!DataGame.CanPlay && SceneManager.GetActiveScene().name != "MainMenu") ActiveWarningTimerPlay(true);
+                else ActiveWarningTimerPlay(false);
             }
         }
     }
 
-    public void TogglePauseGame(bool force=false)
+    private void OnDestroy()
     {
-        if (force)
-        {
-            Time.timeScale = 0;
-            togglePause = !togglePause;
-            return;
-        }
-        if(togglePause) Time.timeScale = 0;
-        else Time.timeScale = 1;
-        togglePause = !togglePause;
+        DataGame.CDTimerPlay = currenTime;
+        DataGame.CanPlay = CanPlay;
     }
+ 
 
     [ProButton]
     public void LoadingCanvas()
@@ -64,5 +75,15 @@ public class Game_Manager : MonoBehaviour
         {
             animatorLoading.SetTrigger("trigger");
         }));
+    }
+    public void ActiveWarningTimerPlay(bool status)
+    {
+        warningTimer.SetActive(status);
+    }
+    public void LoadSceneMainMenu()
+    {
+        StartCoroutine(Common.LoadSceneAsync(GameScenes.MainMenu));
+        if (!DataGame.CanPlay && SceneManager.GetActiveScene().name != "MainMenu") ActiveWarningTimerPlay(true);
+        else ActiveWarningTimerPlay(false);
     }
 }
