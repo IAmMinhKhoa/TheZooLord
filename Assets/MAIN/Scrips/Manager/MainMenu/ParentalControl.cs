@@ -35,6 +35,7 @@ public class ParentalControl : MonoBehaviour
    
     public void Init()
     {
+        txtAnwser.text = "";
         do
         {
             a = UnityEngine.Random.Range(1, 5);
