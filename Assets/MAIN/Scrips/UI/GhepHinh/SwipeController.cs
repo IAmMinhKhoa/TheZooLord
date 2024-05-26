@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using GG.Infrastructure.Utils.Swipe;
 using System;
-using static UnityEditor.Experimental.GraphView.GraphView;
+
 
 
 public class SwipeController : MonoBehaviour, IEndDragHandler

@@ -88,7 +88,7 @@ namespace WUG.BehaviorTreeVisualizer
                 $"Behavior tree is null - nothing to draw.".BTDebugLog();
             }
 
-            BehaviorTreeGraphWindow.DrawBehaviorTree(BehaviorTree, true);
+         //   BehaviorTreeGraphWindow.DrawBehaviorTree(BehaviorTree, true);
         }
                 
     }

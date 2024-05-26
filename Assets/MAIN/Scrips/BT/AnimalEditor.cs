@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+#if UNITY_EDITOR // => Ignore from here to next endif if not in editor
 using UnityEditor;
+#endif
 using UnityEngine;
-using WUG.BehaviorTreeVisualizer;
 
-[CustomEditor(typeof(AnimalController))]
-public class AnimalEditor : UnityEditor.Editor
+public class AnimalEditor 
 {
-    //Store a reference to the instance of the class
+  /*  //Store a reference to the instance of the class
     private AnimalController m_NPC;
 
     private void OnEnable()
@@ -37,5 +34,5 @@ public class AnimalEditor : UnityEditor.Editor
             //The method that is run if the button is pushed
             m_NPC.ForceDrawingOfTree();
         }
-    }
+    }*/
 }

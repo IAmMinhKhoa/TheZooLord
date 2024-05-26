@@ -26,13 +26,22 @@ ModelImporter:
     second: Panda_Run to Idle
   - first:
       74: 7409155945997325142
-    second: Panda_Attack
+    second: Attack
   - first:
       74: -6652636998670752486
     second: Panda_Death
   - first:
       74: 9008865750628439879
     second: Panda_Idle2
+  - first:
+      74: -3100369314251171874
+    second: Idle
+  - first:
+      74: 2667949614841947897
+    second: Walk
+  - first:
+      74: 5522812681064789136
+    second: Run
   externalObjects: {}
   materials:
     materialImportMode: 0
@@ -63,7 +72,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Panda_Idle
+      name: Idle
       takeName: Panda_Idle
       internalID: 0
       firstFrame: 0
@@ -121,7 +130,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Panda_Walk
+      name: Walk
       takeName: Panda_Walk
       internalID: 0
       firstFrame: 110
@@ -208,7 +217,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Panda_Run
+      name: Run
       takeName: Panda_Run
       internalID: 0
       firstFrame: 230
@@ -266,7 +275,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Panda_Attack
+      name: Attack
       takeName: Panda_Attack
       internalID: 0
       firstFrame: 300

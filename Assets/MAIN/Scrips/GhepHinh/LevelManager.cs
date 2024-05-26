@@ -29,8 +29,11 @@ public class LevelManager : MonoBehaviour
         }
         puzzleManager = FindObjectOfType<PuzzleManager>();
         ButtonsArray();
-       // PlayerPrefs.SetInt("UnlockedPuzzleLevel", 1);
+        // PlayerPrefs.SetInt("UnlockedPuzzleLevel", 1);
+      /*  PlayerPrefs.DeleteKey("PuzzleReachedIndex");
+        PlayerPrefs.DeleteKey("UnlockedPuzzleLevel");*/
         unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
+        Debug.Log("khoa puz a:" + unlockedLevel);
     }
 
     private void OnEnable()
@@ -48,6 +51,7 @@ public class LevelManager : MonoBehaviour
         {
             buttons[i].interactable = true;
         }
+        Debug.Log("khoa puz s:" + unlockedLevel);
     }
     public void OpenLevel(Button btn)
     {

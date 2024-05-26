@@ -132,7 +132,7 @@ public class AnimalController : MonoBehaviour, IBehaviorTree
             $"Behavior tree is null - nothing to draw.".BTDebugLog();
         }
         //Tell the tool to draw the referenced behavior tree. The 'true' parameter tells it to give focus to the window. 
-        BehaviorTreeGraphWindow.DrawBehaviorTree(BehaviorTree, true);
+      //  BehaviorTreeGraphWindow.DrawBehaviorTree(BehaviorTree, true);
     }
     #endregion
 

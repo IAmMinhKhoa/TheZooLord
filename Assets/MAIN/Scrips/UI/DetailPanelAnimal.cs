@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using UnityEditor.Animations;
+
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 using UnityEngine.Video;
 [System.Serializable]
@@ -89,10 +87,10 @@ public class DetailPanelAnimal : MonoBehaviour
         Animator animator = animalObject.GetComponent<Animator>();
         if (animator != null)
         {
-            AnimatorController controller = animator.runtimeAnimatorController as AnimatorController;
+            RuntimeAnimatorController controller = animator.runtimeAnimatorController as RuntimeAnimatorController;
             if (controller != null)
             {
-                foreach (var parameter in controller.parameters)
+                foreach (var parameter in controller.animationClips)
                 {
                     foreach (var icon in IconAnimation)
                     {
@@ -158,12 +156,13 @@ public class DetailPanelAnimal : MonoBehaviour
     }
     void SelectAnimation(string name, Animator animator)
     {
-        AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+        RuntimeAnimatorController animatorController = animator.runtimeAnimatorController as RuntimeAnimatorController;
 
         if (animatorController != null)
         {
-            foreach (var param in animatorController.parameters)
+            foreach (var param in animatorController.animationClips)
             {
+                Debug.Log("khoa ngu:" + param.name+ animatorController.animationClips);
                 animator.SetBool(param.name, false);
             }
 
