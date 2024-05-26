@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SOGAME
   m_EditorClassIdentifier: 
   Coin: 40
-  CDTimerPlay: 0
-  CanPlay: 0
+  CDTimerPlay: 2689.3362
+  CanPlay: 1
   zooMeadow:
     index: 0
     costOpen: 100

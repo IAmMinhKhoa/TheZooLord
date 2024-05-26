@@ -56,6 +56,7 @@ public class ParentalControl : MonoBehaviour
         txtAnwser.text =key.ToString();
         if(answer==key)
         {
+            SoundManager.instance.PlaySound(SoundType.Success);
             ClosePanel();
             afterCorrect?.Invoke();
 
@@ -64,7 +65,11 @@ public class ParentalControl : MonoBehaviour
        
 
         limitCount++;
-        if (limitCount < 3) yield return Common.ShakeObject(mainFrame);
+        if (limitCount < 3)
+        {
+            SoundManager.instance.PlaySound(SoundType.Failed);
+            yield return Common.ShakeObject(mainFrame);
+        }
         else ClosePanel();
 
         yield return null;

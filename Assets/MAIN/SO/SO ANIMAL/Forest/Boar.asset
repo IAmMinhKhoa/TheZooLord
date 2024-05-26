@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Boar
   m_EditorClassIdentifier: 
-  IsLock: 0
+  IsLock: 1
   species: 0
   nameAnimal: "Heo R\u1EEBng"
   defaultImage: {fileID: 21300000, guid: 92a28e42398fe0b44bed0d027e852e14, type: 3}

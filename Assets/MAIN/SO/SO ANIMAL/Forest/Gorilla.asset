@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Gorilla
   m_EditorClassIdentifier: 
-  IsLock: 0
+  IsLock: 1
   species: 0
   nameAnimal: "Kh\u1EC9 \u0110\u1ED9t"
   defaultImage: {fileID: 21300000, guid: 0bf5f151f5f836948b6ca6e4d64ab7b3, type: 3}

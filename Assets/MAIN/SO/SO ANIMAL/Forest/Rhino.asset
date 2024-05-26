@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Rhino
   m_EditorClassIdentifier: 
-  IsLock: 0
+  IsLock: 1
   species: 0
   nameAnimal: "T\xEA Gi\xE1c"
   defaultImage: {fileID: 21300000, guid: e0f40dbf5c0783e4d886b41db1afda02, type: 3}
