@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
         }
         puzzleManager = FindObjectOfType<PuzzleManager>();
         ButtonsArray();
+       // PlayerPrefs.SetInt("UnlockedPuzzleLevel", 1);
         unlockedLevel = PlayerPrefs.GetInt("UnlockedPuzzleLevel", 1);
     }
 
@@ -55,6 +56,7 @@ public class LevelManager : MonoBehaviour
         levelCanvas.gameObject.SetActive(false);
         puzzleManager.SetActiveLevel(levelId);
         LevelController.Instance.levelActive = levelId; 
+        SoundManager.instance.PlaySound(SoundType.ClickButton);
     }
 
     void ButtonsArray()

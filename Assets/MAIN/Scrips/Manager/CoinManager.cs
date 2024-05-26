@@ -109,6 +109,7 @@ public class CoinManager : MonoBehaviour
                         // Executes whenever the coin reaches the target position
                         coin.SetActive(false);
                         coinsQueue.Enqueue(coin);
+                        SoundManager.instance.PlaySound(SoundType.Collect);
                         this.gameObject.transform.DOScale(1.3f, 0.1f).OnComplete(ResizeScale) ;
                         Coins++;
                     });

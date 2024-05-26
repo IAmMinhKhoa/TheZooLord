@@ -57,6 +57,7 @@ namespace GG.Infrastructure.Utils.Swipe
 
         private void Start()
         {
+            SoundManager.instance.PlayRandomSound_MiniGame();
             UpdateSensetivity();
 
             if (SwipeDetectionMode != SwipeDetectionMode.Custom)
@@ -109,12 +110,14 @@ namespace GG.Infrastructure.Utils.Swipe
 
         private void CheckSwipe()
         {
+         
             _offset = Input.mousePosition - _swipeStartPoint;
             if (_offset.magnitude >= _minMoveDistance)
             {
                 OnSwipe?.Invoke(_directions.GetSwipeId(_offset));
                 if (!_continuousDetection)
                 {
+                    SoundManager.instance.PlaySound(SoundType.ClickButton);
                     _waitForSwipe = false;
                 }
                 SampleSwipeStart();

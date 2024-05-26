@@ -31,6 +31,7 @@ public class DataEnvironment{
 [System.Serializable]
 public class DataFoods
 {
+    public AudioClip voice;
     public List<SOFood> SoFoods;
 }
 [System.Serializable]

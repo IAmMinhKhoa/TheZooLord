@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameFood: "S\xE2u"
   iconFood: {fileID: 21300000, guid: 16b2ab048c92cb84eb8797e5f8f80ed1, type: 3}
-  prefab: {fileID: 0}
-  voice: {fileID: 0}
+  prefab: {fileID: 3902454711636510515, guid: 7a049b9cf0d7de1478a27f08ddd7f1ac, type: 3}

@@ -29,6 +29,7 @@ public class ZooManager : MonoBehaviour
     private void Start()
     {
         BtnOutZoo.actionAfterCD += GoToMainMenu;
+        
     }
     private void OnDestroy()
     {

@@ -129,6 +129,7 @@ public class Swipe : MonoBehaviour
 
     public void Next()
     {
+        SoundManager.instance.PlaySound(SoundType.ClickButton);
         if (currentPage < pos.Length - 1)
         {
             currentPage += 1;
@@ -139,6 +140,7 @@ public class Swipe : MonoBehaviour
 
     public void Previous()
     {
+        SoundManager.instance.PlaySound(SoundType.ClickButton); 
         if (currentPage > 0)
         {
             currentPage -= 1;
@@ -162,6 +164,7 @@ public class Swipe : MonoBehaviour
     }
     public void OpenScence(string scene)
     {
+        SoundManager.instance.PlaySound(SoundType.ClickButton);
         string name = scene;
         SceneManager.LoadScene(name);
     }

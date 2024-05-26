@@ -131,9 +131,13 @@ public class MainMenu_CameraController : MonoBehaviour
         if(!Game_Manager.Instance.CanPlay)
         {
             //open modal warning over time
+            SoundManager.instance.PlaySound(SoundType.Failed);
             Game_Manager.Instance.ActiveWarningTimerPlay(true);
             return;
         }
+
+        SoundManager.instance.PlaySound(SoundType.hightEngery);
+
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
         buttonPlay.SetActive(false);
         currentCamera.Priority--;
@@ -156,9 +160,13 @@ public class MainMenu_CameraController : MonoBehaviour
         if (!Game_Manager.Instance.CanPlay)
         {
             //open modal warning over time
+            SoundManager.instance.PlaySound(SoundType.Failed);
             Game_Manager.Instance.ActiveWarningTimerPlay(true);
             return;
         }
+
+        SoundManager.instance.PlaySound(SoundType.hightEngery);
+
         await panelMainMenu.DOAnchorPosY(topPosY, tweenDuration).SetEase(easeOutType).AsyncWaitForCompletion();
         buttonPlay.SetActive(false);
 

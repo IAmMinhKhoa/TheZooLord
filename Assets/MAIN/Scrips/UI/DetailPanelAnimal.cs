@@ -37,7 +37,7 @@ public class DetailPanelAnimal : MonoBehaviour
     //---Scale obejct---
     float _ScaleAnimalInFood = 8f;
     float _ScaleAnimalInCharactic = 8f;
-    float _ScaleFood = 3f;
+    float _ScaleFood = 7f;
 
     private void OnEnable()
     {        
@@ -78,7 +78,7 @@ public class DetailPanelAnimal : MonoBehaviour
             fruitObject.transform.position = configCage.view_Storage[_indexStorage].position;
 
             button.GetComponent<Image>().sprite = foodItem.iconFood;
-            button.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlayAudioSingle(foodItem.voice));
+            //button.GetComponent<Button>().onClick.AddListener(() => SoundManager.instance.PlayAudioSingle(foodItem.voice));
             _indexStorage++;
         }
 
@@ -175,7 +175,7 @@ public class DetailPanelAnimal : MonoBehaviour
     {
         CloseAllDetailPanel();
         configCage.SwitchToViewEnvironment();
-        StartCoroutine(Common.delayCoroutine(0.5f, () =>
+        StartCoroutine(Common.delayCoroutine(0.2f, () =>
         {
             configCage.PlaySoundType(SoundTypeInCage.Environment);
 
@@ -185,12 +185,17 @@ public class DetailPanelAnimal : MonoBehaviour
     {
         OpenPanel(detailFoods);
         configCage.SwitchToViewFoods();
+        StartCoroutine(Common.delayCoroutine(0.2f, () =>
+        {
+            configCage.PlaySoundType(SoundTypeInCage.Food);
+
+        }));
     }
     public void OpenPanelCharactics()
     {
         OpenPanel(detailCharactics);
         configCage.SwitchToViewCharacteristic();
-        StartCoroutine(Common.delayCoroutine(0.5f, () =>
+        StartCoroutine(Common.delayCoroutine(0.2f, () =>
         {
             configCage.PlaySoundType(SoundTypeInCage.Characteristic);
 
@@ -200,7 +205,7 @@ public class DetailPanelAnimal : MonoBehaviour
     {
         OpenPanel(detailConservationlevel);
         configCage.SwitchToViewConservation();
-        StartCoroutine(Common.delayCoroutine(0.5f, () =>
+        StartCoroutine(Common.delayCoroutine(0.2f, () =>
         {
             configCage.PlaySoundType(SoundTypeInCage.Conservationlevel);
 

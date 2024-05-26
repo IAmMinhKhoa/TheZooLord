@@ -177,14 +177,23 @@ public class PlayerController : MonoBehaviour
             currentRunMovement.y = nextYVelocity;
         }
     }
+    bool flagSoundMove = false;
     private void handleMove()
     {
-        
+
+        if (isMovementPressed && !flagSoundMove) {
+            SoundManager.instance.PlaySound(SoundType.footSteps);
+            flagSoundMove = true;
+        }
+        else if (!isMovementPressed)
+        {
+            SoundManager.instance.StopSound(SoundType.footSteps);
+            flagSoundMove = false;
+        }
+
         Vector3 moveDirection_temp = orientation.right * currentRunMovement.x + orientation.forward *currentRunMovement.z;
         Vector3 moveDirection = new Vector3(moveDirection_temp.x * speed, currentRunMovement.y, moveDirection_temp.z * speed);
-
-        
-
+     
         characterController.Move(moveDirection * Time.deltaTime);
         
         

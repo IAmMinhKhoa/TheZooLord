@@ -25,7 +25,7 @@ public class PuzzlePieces : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        SoundManager.instance.PlayRandomSound_MiniGame();
     }
 
     // Update is called once per frame

@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using com.cyborgAssets.inspectorButtonPro;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum AudioSingle
 {
-    BackGround,
     Global
 }
 public enum SoundType
 {
     ClickButton,
     Success,
-    Failed,
+    Failed, 
     PickUp,
     DropDownTrue,
     DropDownWrong,
-    ClapWin
-
+    ClapWin,
+    footSteps,
+    hightEngery,
+    Collect,
+    hellicoper
+    
 }
 public enum SoundBr
 {
@@ -25,6 +29,18 @@ public enum SoundBr
     MainMenu_2,
     MainMenu_3,
     MainMenu_4,
+
+    dayForest,
+    dayMeadow,
+
+    nightForest,
+    nightMeadow,
+
+    miniGame_1,
+    miniGame_2,
+    miniGame_3,
+    miniGame_4,
+    miniGame_5,
 }
 
 [System.Serializable]
@@ -126,7 +142,6 @@ public class SoundManager : MonoBehaviour
             audioSourcesBr.Add(sound.name, source);
         }
         audioSourcesSingle = new Dictionary<AudioSingle, AudioSource>();
-        audioSourcesSingle.Add(AudioSingle.BackGround,AS_BackGround);
         audioSourcesSingle.Add(AudioSingle.Global, AS_Global);
       
 
@@ -135,6 +150,10 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(SoundBr soundType)
     {
+        foreach (KeyValuePair<SoundBr, AudioSource> entry in audioSourcesBr)
+        {
+            entry.Value.Stop();
+        }
         if (audioSourcesBr.ContainsKey(soundType))
         {
             audioSourcesBr[soundType].Play();
@@ -143,10 +162,52 @@ public class SoundManager : MonoBehaviour
     [ProButton]
     public void PlayRandomSound_BR()
     {
-        SoundBr randomSound = (SoundBr)Random.Range(0, System.Enum.GetValues(typeof(SoundBr)).Length);
-        PlaySound(randomSound);
-    }
+  
+        int randomeSoundBRMainMenu = Random.Range(1, 5);
 
+        switch (randomeSoundBRMainMenu)
+        {
+            case 1:
+                PlaySound(SoundBr.MainMenu_1);
+                break;
+            case 2:
+                PlaySound(SoundBr.MainMenu_2);
+                break;
+            case 3:
+                PlaySound(SoundBr.MainMenu_3);
+                break;
+            case 4:
+                PlaySound(SoundBr.MainMenu_4);
+                break;
+
+        }
+    }
+    public void PlayRandomSound_MiniGame()
+    {
+
+        int randomeSoundBRMainMenu = Random.Range(1, 7);
+
+        switch (randomeSoundBRMainMenu)
+        {
+            case 1:
+                PlaySound(SoundBr.miniGame_1);
+                break;
+            case 2:
+                PlaySound(SoundBr.miniGame_2);
+                break;
+            case 3:
+                PlaySound(SoundBr.miniGame_3);
+                break;
+            case 4:
+                PlaySound(SoundBr.miniGame_4);
+                break;
+            case 5:
+                PlaySound(SoundBr.miniGame_5);
+                break;
+    
+
+        }
+    }
     public void PlaySound(SoundType soundType)
     {
         if (audioSources.ContainsKey(soundType))
@@ -162,7 +223,13 @@ public class SoundManager : MonoBehaviour
             audioSources[soundType].Stop();
         }
     }
-
+    public void StopSoundBG(SoundBr soundType)
+    {
+        if (audioSourcesBr.ContainsKey(soundType))
+        {
+            audioSourcesBr[soundType].Stop();
+        }
+    }
 
     public void PauseSound()
     {
@@ -203,9 +270,10 @@ public class SoundManager : MonoBehaviour
         AS_BackGround.volume = value;
         AS_Global.volume = value;
     }
-    #region AUDIO SINGLE
+    #region AUDIO SINGLE USE TO VOICE DETAIL ANIMAL CAGE
     public void PlayAudioSingle(AudioClip src, AudioSingle type = AudioSingle.Global)
     {
+        StopAllSoundsSingle();
         if (audioSourcesSingle.TryGetValue(type, out AudioSource audioSource))
         {
             audioSource.clip = src;
@@ -216,11 +284,19 @@ public class SoundManager : MonoBehaviour
             Debug.LogError($"PlayAudioSingle: Unknown AudioSingle type: {type}");
         }
     }
+    public void StopAllSoundsSingle()
+    {
+        foreach (KeyValuePair<AudioSingle, AudioSource> kvp in audioSourcesSingle)
+        {
+            AudioSource audioSource = kvp.Value;
+            audioSource.Stop();
+        }
+    }
     #endregion
 
- /*   [ProButton]
-    public void playFX(SoundType type)
-    {
-        PlaySound(type);
-    }*/
+    /*   [ProButton]
+       public void playFX(SoundType type)
+       {
+           PlaySound(type);
+       }*/
 }

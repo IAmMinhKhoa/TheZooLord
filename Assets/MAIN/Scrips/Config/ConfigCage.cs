@@ -72,7 +72,7 @@ public class ConfigCage : MonoBehaviour
                 SoundManager.instance.PlayAudioSingle(SoAnimal.dataEnvironment.voice);
                 break;
             case SoundTypeInCage.Food:
-                //FOODS SOUND
+                SoundManager.instance.PlayAudioSingle(SoAnimal.dataFoods.voice);
                 break;
             case SoundTypeInCage.Characteristic:
                 SoundManager.instance.PlayAudioSingle(SoAnimal.dataCharacteristic.voice);
@@ -200,12 +200,14 @@ public class ConfigCage : MonoBehaviour
         HeliController.Instance.init(
         () =>//start
         {
+            SoundManager.instance.PlaySound(SoundType.hellicoper);
             Manager_UI.Instance.CloseAllModal(true);
             SetTartgetCam(HeliController.Instance.transform);
             objMain.SetActive(true);
         },
         () => //end
         {
+            SoundManager.instance.StopSound(SoundType.hellicoper);
             Manager_UI.Instance.OpenInteractCage();
             UnSetTargetCam();
         },objBlockCage.transform);

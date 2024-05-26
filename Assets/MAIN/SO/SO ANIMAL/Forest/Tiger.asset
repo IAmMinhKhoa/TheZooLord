@@ -23,9 +23,10 @@ MonoBehaviour:
   dataEnvironment:
     voice: {fileID: 8300000, guid: 8ec6dda519332d745b3eaaa2210adf8e, type: 3}
   dataFoods:
+    voice: {fileID: 8300000, guid: 57145d899879aa448b890591549eb9c7, type: 3}
     SoFoods:
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 11400000, guid: 40ff30488f85e9d4aa787c571af14fd5, type: 2}
+    - {fileID: 11400000, guid: 4748be9240229d7459a150f966e58718, type: 2}
   dataCharacteristic:
     voice: {fileID: 8300000, guid: 1b43c226c9fc00a44892d0f72c4b49cb, type: 3}
   dataConservationlevel:

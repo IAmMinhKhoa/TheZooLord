@@ -7,7 +7,7 @@ public class CustomButton : UnityEngine.UI.Button
     {
         base.OnPointerClick(eventData);
 
-        //Play your sound default here
+        SoundManager.instance.PlaySound(SoundType.ClickButton);
         print("click");
     }
 }

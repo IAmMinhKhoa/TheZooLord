@@ -110,6 +110,7 @@ public class Game : MonoBehaviour
         Player.transform.position = target;
         if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
         {
+            SoundManager.instance.PlaySound(SoundType.Success);
             NextLevel();
         }
     }

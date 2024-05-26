@@ -9,5 +9,4 @@ public class SOFood : ScriptableObject
 
     public Sprite iconFood;
     public GameObject prefab;
-    public AudioClip voice;
 }

@@ -93,6 +93,7 @@ public class QuestController : MonoBehaviour
         ActiveEmojiQuest(1);
         LockButtonAnswer();
         //need sound FX success
+        SoundManager.instance.PlaySound(SoundType.Success);
         StartCoroutine(Common.delayCoroutine(3f, () =>
         {
             CloseModal();
@@ -105,6 +106,7 @@ public class QuestController : MonoBehaviour
         ActiveEmojiQuest(2);
         LockButtonAnswer();
         //need sound FX fail
+        SoundManager.instance.PlaySound(SoundType.Failed);
         StartCoroutine(Common.delayCoroutine(3f, () =>
         {
             CloseModal();

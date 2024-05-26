@@ -22,7 +22,9 @@ public class DayNightCycle : MonoBehaviour
     [SerializeField] private Gradient equatorColor;
     [SerializeField] private Gradient sunColor;
     #endregion
-
+    public SpeciesAnimal typeZoo;
+    private bool isNightSoundPlayed = false;
+    private bool isDaySoundPlayed = false;
     private void Awake()
     {
         if (Instance == null)
@@ -46,9 +48,35 @@ public class DayNightCycle : MonoBehaviour
         if(timeOfDay >= 6 && timeOfDay < 19)
         {
             isDay = true;
+            isNightSoundPlayed = false; // Reset the flag when it becomes day
+            if (!isDaySoundPlayed)
+            {
+                if (typeZoo == SpeciesAnimal.Forset)
+                {
+                    SoundManager.instance.PlaySound(SoundBr.dayForest);
+                }
+                if (typeZoo == SpeciesAnimal.Meadow)
+                {
+                    SoundManager.instance.PlaySound(SoundBr.dayForest);
+                }
+                isDaySoundPlayed = true; // Set the flag to indicate that the sound has been played
+            }
         } else
         {
             isDay = false;
+            isDaySoundPlayed = false;
+            if (!isNightSoundPlayed)
+            {
+                if (typeZoo == SpeciesAnimal.Forset)
+                {
+                    SoundManager.instance.PlaySound(SoundBr.nightForest);
+                }
+                if (typeZoo == SpeciesAnimal.Meadow)
+                {
+                    SoundManager.instance.PlaySound(SoundBr.nightMeadow);
+                }
+                isNightSoundPlayed = true; // Set the flag to indicate that the sound has been played
+            }
         }
         UpdateSunRotation();
         UpdateLighting();

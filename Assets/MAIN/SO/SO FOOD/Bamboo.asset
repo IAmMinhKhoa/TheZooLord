@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameFood: Tre
   iconFood: {fileID: 21300000, guid: a0e8048ca3f5f444aa30d62f2a5bb03e, type: 3}
-  prefab: {fileID: 0}
-  voice: {fileID: 0}
+  prefab: {fileID: 1830115047457074, guid: 65c8cd2a6c9b02249a7c9a14f5f64c97, type: 3}

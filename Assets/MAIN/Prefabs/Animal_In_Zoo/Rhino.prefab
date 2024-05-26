@@ -79,8 +79,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: efe043d0a1deb244d9313f5dae47dcd5, type: 2}
   animator: {fileID: 0}
   agent: {fileID: 0}
-  _pointStatus: {fileID: 4155267009831126657, guid: c6216541f51940041b48878e863056d1,
-    type: 3}
+  _pointStatus: {fileID: 4155267009831126657}
   FoodIndex: 99
   CanMeetingAnimal: 1
 --- !u!65 &1784651973203143227
