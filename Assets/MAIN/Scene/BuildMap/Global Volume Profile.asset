@@ -148,7 +148,7 @@ MonoBehaviour:
   active: 1
   mode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 1
 --- !u!114 &8860771078928528853
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -170,7 +170,7 @@ MonoBehaviour:
     m_Value: 0
   redOutBlueIn:
     m_OverrideState: 1
-    m_Value: -10
+    m_Value: 0
   greenOutRedIn:
     m_OverrideState: 0
     m_Value: 0
