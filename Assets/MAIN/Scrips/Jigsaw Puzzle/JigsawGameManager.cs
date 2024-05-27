@@ -18,6 +18,11 @@ public class JigsawGameManager : MonoBehaviour
     [SerializeField] AudioClip dropDownTrue;
     [SerializeField] AudioClip dropDownWrong;
     [SerializeField] AudioClip clapWin;
+    [SerializeField] AudioClip hintOn;
+    [SerializeField] AudioClip hintOff;
+    [SerializeField] AudioClip hintCant;
+
+
 
     [SerializeField] SpriteRenderer completeImage;
     [SerializeField] SpriteRenderer hintImage;
@@ -65,6 +70,20 @@ public class JigsawGameManager : MonoBehaviour
     {
         SFXSource.PlayOneShot(dropDownWrong);
     }
+    public void PlayHintOn()
+    {
+        SFXSource.PlayOneShot(hintOn);
+    }
+
+    public void PlayHintOff()
+    {
+        SFXSource.PlayOneShot(hintOff);
+    }
+
+    public void PlayHintCant()
+    {
+        SFXSource.PlayOneShot(hintCant);
+    }
 
     public void PlayClapWin()
     {
@@ -99,7 +118,7 @@ public class JigsawGameManager : MonoBehaviour
         for (int i = 0; i < parentPieces.transform.childCount; i++)
         {
             GameObject child = parentPieces.transform.GetChild(i).gameObject;
-            GameObject piece = child.transform.Find("Piece").gameObject;
+            GameObject piece = child.transform.Find("PieceImage").gameObject;
             listPuzzlePieces.Add(piece);
         }
     }

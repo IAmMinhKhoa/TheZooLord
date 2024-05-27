@@ -45,13 +45,14 @@ public class Hint : MonoBehaviour
     {
         if(hintNum > 0 && !isHintActive)
         {
+            JigsawGameManager.instance.PlayHintOn();
             StartCoroutine(ActivateAndDeactivateAfterDelay(5f));
             hintNum--;
             hintText.text = hintNum.ToString();
         }
         else
         {
-            Debug.Log("Hết lượt");
+            JigsawGameManager.instance.PlayHintCant();
         }
 
     }
@@ -61,6 +62,7 @@ public class Hint : MonoBehaviour
         isHintActive = true;
 
         yield return new WaitForSeconds(delay);
+        JigsawGameManager.instance.PlayHintOff();
 
         // Vô hiệu hóa puzzleImage
         isHintActive = false;
