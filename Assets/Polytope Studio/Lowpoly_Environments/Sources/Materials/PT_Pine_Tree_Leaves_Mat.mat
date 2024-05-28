@@ -23,7 +23,6 @@ Material:
   m_Name: PT_Pine_Tree_Leaves_Mat
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
-  - _ALPHAPREMULTIPLY_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _CUSTOMCOLORSTINTING_ON
@@ -109,7 +108,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _Blend: 1
+    - _Blend: 0
     - _BumpScale: 1
     - _CUSTOMCOLORSTINTING: 1
     - _CUSTOMWIND: 1
@@ -143,7 +142,7 @@ Material:
     - _SnowCoverage: 0.453
     - _SnowGradient: 0.446
     - _SpecularHighlights: 1
-    - _SrcBlend: 1
+    - _SrcBlend: 5
     - _Surface: 1
     - _TRANSLUCENCYONOFF: 1
     - _TransAmbient: 0.7
