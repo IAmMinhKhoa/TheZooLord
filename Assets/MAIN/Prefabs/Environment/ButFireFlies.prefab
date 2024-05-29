@@ -558,7 +558,7 @@ PrefabInstance:
     - target: {fileID: 2093536952935118864, guid: 41a2e620dcf9dc945a6d55fc7e32c7a3,
         type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 2093536952935118865, guid: 41a2e620dcf9dc945a6d55fc7e32c7a3,
         type: 3}
