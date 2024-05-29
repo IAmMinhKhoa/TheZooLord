@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Tiger
   m_EditorClassIdentifier: 
-  IsLock: 0
+  IsLock: 1
   species: 0
   nameAnimal: "H\u1ED5"
   defaultImage: {fileID: 21300000, guid: 8ffa31df10ccc7d42a2cffe55c4f36e3, type: 3}

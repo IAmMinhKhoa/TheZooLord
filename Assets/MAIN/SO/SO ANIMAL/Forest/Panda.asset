@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Panda
   m_EditorClassIdentifier: 
-  IsLock: 0
+  IsLock: 1
   species: 0
   nameAnimal: "G\u1EA5u Tr\xFAc"
   defaultImage: {fileID: 21300000, guid: 84d24c09293c14e42aafdcc86ccd4109, type: 3}
