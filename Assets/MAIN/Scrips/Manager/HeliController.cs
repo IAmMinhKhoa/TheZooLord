@@ -60,7 +60,7 @@ public class HeliController : MonoBehaviour
         {
             target.transform.parent = this.transform;
            
-            target.DOMoveY(transform.position.y-30f, 2f).OnComplete(() =>
+            target.DOMoveY(transform.position.y-18f, 2f).OnComplete(() =>
             {
                 Vector3 targetPosition = transform.position + transform.forward * 200;
                 transform.DOMove(targetPosition, 5f).OnComplete(() =>
