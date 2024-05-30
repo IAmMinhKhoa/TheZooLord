@@ -16,7 +16,7 @@ public class CooldownButton : MonoBehaviour
     private void Select()
     {
         countClick++;
-        this.transform.DOScale(1.2f, 0.5f);
+        this.transform.DOScale(1.6f, 0.5f);
         if (countClick >= 2)
         {
             //do something

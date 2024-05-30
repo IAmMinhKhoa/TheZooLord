@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public CharacterController characterController;
     public Animator animator;
     public FixedJoystick joystick;
-
+    public CinemachineFreeLook cameraFreeLock;
     int isRunningHash;
     int isJumpingHash;
 
@@ -118,6 +119,14 @@ public class PlayerController : MonoBehaviour
 
     private void onMoveJoyStick()
     {
+        if(joystick.Horizontal!=0 || joystick.Vertical != 0)
+        {
+            cameraFreeLock.m_XAxis.m_MaxSpeed = 50;
+        }
+        else
+        {
+            cameraFreeLock.m_XAxis.m_MaxSpeed = 120;
+        }
         currentRunMovement.x = joystick.Horizontal;
         currentRunMovement.z = joystick.Vertical;
         isMovementPressed = joystick.Horizontal != 0 || joystick.Vertical != 0;

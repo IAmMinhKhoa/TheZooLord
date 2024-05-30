@@ -6,7 +6,7 @@ public class LampLight : MonoBehaviour
 {
     [SerializeField] GameObject lampDefault;
     [SerializeField] GameObject lampLight;
-
+    bool temp = true;
     private void Start()
     {
         SetLampDay();
@@ -14,12 +14,14 @@ public class LampLight : MonoBehaviour
     }
     private void Update()
     {
-        if(DayNightCycle.Instance.isDay)
+        if(DayNightCycle.Instance.isDay&& temp==true)
         {
             SetLampDay();
-        } else
+            temp = false;
+        } else if(!DayNightCycle.Instance.isDay && temp == false)
         {
             SetLampNight();
+            temp = true;
         }
     }
 
