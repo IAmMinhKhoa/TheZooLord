@@ -121,11 +121,11 @@ public class PlayerController : MonoBehaviour
     {
         if(joystick.Horizontal!=0 || joystick.Vertical != 0)
         {
-            cameraFreeLock.m_XAxis.m_MaxSpeed = 50;
+            cameraFreeLock.m_XAxis.m_MaxSpeed = 30;
         }
         else
         {
-            cameraFreeLock.m_XAxis.m_MaxSpeed = 120;
+            cameraFreeLock.m_XAxis.m_MaxSpeed = 180;
         }
         currentRunMovement.x = joystick.Horizontal;
         currentRunMovement.z = joystick.Vertical;
