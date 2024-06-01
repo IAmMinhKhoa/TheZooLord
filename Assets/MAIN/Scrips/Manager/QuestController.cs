@@ -63,7 +63,7 @@ public class QuestController : MonoBehaviour
         canvasGroup.alpha = 0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-    
+      
     }
     
     public IEnumerator GenerateQuest(SOQuestion soQuest=null)
@@ -83,8 +83,8 @@ public class QuestController : MonoBehaviour
 
             AnswerGift answerGift = objAnswer.GetComponent<AnswerGift>();
             answerGift.Init(data.img, data.rightAnswer, ActionSuccessAnswer, ActionFailedAnswer);
-
         }
+        SoundManager.instance.PlayAudioSingle(currentSoQuest.voiceQuest);
 
     }
     protected void ActionSuccessAnswer()
