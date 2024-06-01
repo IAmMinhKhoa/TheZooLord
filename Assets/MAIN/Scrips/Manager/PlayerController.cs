@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool isPC;
     PlayerInput playerInput;
     public CharacterController characterController;
     public Animator animator;
@@ -210,10 +211,10 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        #if UNITY_ANDROID
-        onMoveJoyStick();
-        #endif
-        onMoveJoyStick();
+        
+        if(isPC) onMoveJoyStick();
+        
+     
         handleRotation();   
         handleAnimation();
 
