@@ -17,7 +17,7 @@ MonoBehaviour:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
       - m_Id: cefea8df6ee6b59498b331ff46f13f9b
         m_Value: ServerData/[BuildTarget]
       - m_Id: fc7f6ff1a641d6e40bac1fa98fa817d8
-        m_Value: http://[PrivateIpAddress]:[HostingServicePort]
+        m_Value: https://8665d22e-e39a-4ed1-b448-3aff33e88811.client-api.unity3dusercontent.com/client_api/v1/environments/zoo/buckets/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/releases/6bdc7af6-8bfd-4ef8-b5ac-553f0ddf87a3/entry_by_path/content/?path=
     m_ProfileEntryNames:
     - m_Id: 94d153ee21fe79b4783f7073520321ec
       m_Name: BuildTarget

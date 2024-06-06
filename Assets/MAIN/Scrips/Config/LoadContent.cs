@@ -28,13 +28,15 @@ public class LoadContent : MonoBehaviour
             yield return null;
         }
 
-        
+        // Download completed, get bundle version
+        yield return downloadHandle;
         // Get bundle version
         string bundleVersion = Addressables.GetDownloadSizeAsync("Scene").Result.ToString();
-
-        
         yield return downloadHandle.IsDone;
-        Common.LoadSceneAsync(GameScenes.MainMenu);
+        Debug.Log("concac:" + bundleVersion);
+        // Common.LoadSceneAsync(GameScenes.MainMenu);
+        Addressables.LoadSceneAsync("MainMenu");
+       
     }
 
 }
