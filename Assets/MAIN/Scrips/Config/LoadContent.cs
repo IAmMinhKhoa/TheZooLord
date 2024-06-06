@@ -8,7 +8,7 @@ public class LoadContent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      
+        Caching.ClearCache();
     }
     public void cc()
     {
