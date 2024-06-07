@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: b22878db17ab48144ac36e57bd7a61a3
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 24ff05a73de24a5002bf0e48e1f1848b
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 1
   m_BundleLocalCatalog: 0
@@ -33,7 +33,7 @@ MonoBehaviour:
   m_ShaderBundleCustomNaming: 
   m_MonoScriptBundleNaming: 0
   m_CheckForContentUpdateRestrictionsOption: 0
-  m_BuildAndReleaseBinFileOption: 0
+  m_BuildAndReleaseBinFileOption: 1
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
     m_Id: cefea8df6ee6b59498b331ff46f13f9b
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_GroupAssets:
   - {fileID: 11400000, guid: 55569ae558dfb994eb4c3e3bf7361e50, type: 2}
   - {fileID: 11400000, guid: 42c440846444d7143b2f0f6cf7104da3, type: 2}
+  - {fileID: 11400000, guid: f32cdd8e943e42543ac99ad32d723240, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -65,7 +66,7 @@ MonoBehaviour:
       - m_Id: f33c94f0b01853a4d94d08433fc52201
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: cefea8df6ee6b59498b331ff46f13f9b
-        m_Value: ServerData/[BuildTarget]
+        m_Value: CCDBuildData/07432213-47c2-4e3e-9e9d-1100d314e499/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/latest
       - m_Id: fc7f6ff1a641d6e40bac1fa98fa817d8
         m_Value: https://8665d22e-e39a-4ed1-b448-3aff33e88811.client-api.unity3dusercontent.com/client_api/v1/environments/zoo/buckets/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/release_by_badge/latest/entry_by_path/content/?path=
     - m_InheritedParent: 
@@ -79,9 +80,9 @@ MonoBehaviour:
       - m_Id: f33c94f0b01853a4d94d08433fc52201
         m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
       - m_Id: cefea8df6ee6b59498b331ff46f13f9b
-        m_Value: ServerData/[BuildTarget]
+        m_Value: CCDBuildData/07432213-47c2-4e3e-9e9d-1100d314e499/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/latest
       - m_Id: fc7f6ff1a641d6e40bac1fa98fa817d8
-        m_Value: https://8665d22e-e39a-4ed1-b448-3aff33e88811.client-api.unity3dusercontent.com/client_api/v1/environments/zoo/buckets/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/releases/d07b911b-daff-4af9-8f36-321947e007f3/entry_by_path/content/?path=
+        m_Value: https://8665d22e-e39a-4ed1-b448-3aff33e88811.client-api.unity3dusercontent.com/client_api/v1/environments/zoo/buckets/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/release_by_badge/latest/entry_by_path/content/?path=
     m_ProfileEntryNames:
     - m_Id: 94d153ee21fe79b4783f7073520321ec
       m_Name: BuildTarget
@@ -134,7 +135,7 @@ MonoBehaviour:
           m_Key: HostingServiceUploadSpeed
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.String
-          m_Data: Library/com.unity.addressables/aa/Android/Android
+          m_Data: Library/com.unity.addressables/aa/Android/Android;CCDBuildData/07432213-47c2-4e3e-9e9d-1100d314e499/f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df/latest
           m_Key: ContentRoot
         - m_AssemblyName: mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
           m_ClassName: System.Boolean
@@ -154,8 +155,8 @@ MonoBehaviour:
     - UnityEditor.AddressableAssets.HostingServices.HttpHostingService, Unity.Addressables.Editor
     m_PingTimeoutInMilliseconds: 5000
   m_CcdManagedData:
-    EnvironmentId: 
-    EnvironmentName: 
-    BucketId: 
-    Badge: 
+    EnvironmentId: 07432213-47c2-4e3e-9e9d-1100d314e499
+    EnvironmentName: zoo
+    BucketId: f75a6bf6-3fc2-43aa-a6ee-1ee2ebf2d5df
+    Badge: latest
     State: 0

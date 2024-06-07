@@ -8,7 +8,7 @@ public class LoadContent : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Caching.ClearCache();
+      
     }
     public void cc()
     {
@@ -16,7 +16,7 @@ public class LoadContent : MonoBehaviour
     }
     private IEnumerator DownloadScenes()
     {
-        AsyncOperationHandle downloadHandle = Addressables.DownloadDependenciesAsync("Scene", true);
+        AsyncOperationHandle downloadHandle = Addressables.DownloadDependenciesAsync("MainMenu", true);
 
         while (!downloadHandle.IsDone)
         {
@@ -31,9 +31,9 @@ public class LoadContent : MonoBehaviour
         // Download completed, get bundle version
         yield return downloadHandle;
         // Get bundle version
-        string bundleVersion = Addressables.GetDownloadSizeAsync("Scene").Result.ToString();
+        string bundleVersion = Addressables.GetDownloadSizeAsync("MainMenu").Result.ToString();
         yield return downloadHandle.IsDone;
-        Debug.Log("concac:" + bundleVersion);
+
         // Common.LoadSceneAsync(GameScenes.MainMenu);
         Addressables.LoadSceneAsync("MainMenu");
        
