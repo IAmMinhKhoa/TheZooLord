@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Panda
   m_EditorClassIdentifier: 
-  IsLock: 1
+  IsLock: 0
   species: 0
   nameAnimal: "G\u1EA5u Tr\xFAc"
   defaultImage: {fileID: 21300000, guid: 84d24c09293c14e42aafdcc86ccd4109, type: 3}
@@ -23,17 +23,17 @@ MonoBehaviour:
   dataEnvironment:
     voice: {fileID: 8300000, guid: 47a0ff9755c3e6340a98c6d2c57c6f54, type: 3}
   dataFoods:
-    voice: {fileID: 8300000, guid: 2d610c9523396b4428a423d54e96ffc4, type: 3}
+    voice: {fileID: 8300000, guid: aaed795c2b8bb19409ea26e53e5718b6, type: 3}
     SoFoods:
     - {fileID: 11400000, guid: edb51efa34abdda4f8027e6546c6d9a9, type: 2}
     - {fileID: 11400000, guid: 4eb1c22c0f2392942a37aed87ab47588, type: 2}
   dataCharacteristic:
-    voice: {fileID: 8300000, guid: 6ed1f99658a8e124f8508c574ce4adea, type: 3}
+    voice: {fileID: 8300000, guid: 46814ccf0f28c3f4f806afb72db3cfbe, type: 3}
   dataConservationlevel:
     LevelStart: 5
-    voice: {fileID: 8300000, guid: ce49541d0629f0b4ca9bbc344d2b9a1a, type: 3}
+    voice: {fileID: 8300000, guid: e3172f57adfbbb941957c906dea9dd02, type: 3}
   dataStorySpecial:
     clipAnimalSpecial: {fileID: 32900000, guid: 9427e3d421479b443a692538eb3c0718,
       type: 3}
-    voice: {fileID: 8300000, guid: 579d51c30f7c00d47a3daed92634db9b, type: 3}
+    voice: {fileID: 8300000, guid: 5617dde1ef1807e428d517877b7a241c, type: 3}
   soQuestionToOpenCage: {fileID: 0}

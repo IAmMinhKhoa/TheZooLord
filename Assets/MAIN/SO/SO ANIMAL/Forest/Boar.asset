@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Boar
   m_EditorClassIdentifier: 
-  IsLock: 1
+  IsLock: 0
   species: 0
   nameAnimal: "Heo R\u1EEBng"
   defaultImage: {fileID: 21300000, guid: 92a28e42398fe0b44bed0d027e852e14, type: 3}
@@ -23,15 +23,15 @@ MonoBehaviour:
   dataEnvironment:
     voice: {fileID: 8300000, guid: b67ce097a1cb039498855ada9fa4fda6, type: 3}
   dataFoods:
-    voice: {fileID: 8300000, guid: 5eb2ffb8fd6aea8469a19d706fb33170, type: 3}
+    voice: {fileID: 8300000, guid: 4ef065e11bf84884bab6552e9e762f56, type: 3}
     SoFoods:
     - {fileID: 11400000, guid: 4eb1c22c0f2392942a37aed87ab47588, type: 2}
     - {fileID: 11400000, guid: d1d07fd558782394ba3837dab105e66f, type: 2}
   dataCharacteristic:
-    voice: {fileID: 8300000, guid: 12ecb3632cf91644099ff751d30605bc, type: 3}
+    voice: {fileID: 8300000, guid: 05dd3884e4d49fe4d95419caac091de6, type: 3}
   dataConservationlevel:
     LevelStart: 5
-    voice: {fileID: 8300000, guid: 13239b29dde6e43439baac07cebb6970, type: 3}
+    voice: {fileID: 8300000, guid: 5ee89369a817fbb48ae77a274ebdadc3, type: 3}
   dataStorySpecial:
     clipAnimalSpecial: {fileID: 32900000, guid: 738a07c0473dcec48a9322ebe2f14b23,
       type: 3}

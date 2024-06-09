@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Gorilla
   m_EditorClassIdentifier: 
-  IsLock: 1
+  IsLock: 0
   species: 0
   nameAnimal: "Kh\u1EC9 \u0110\u1ED9t"
   defaultImage: {fileID: 21300000, guid: 0bf5f151f5f836948b6ca6e4d64ab7b3, type: 3}
@@ -23,15 +23,15 @@ MonoBehaviour:
   dataEnvironment:
     voice: {fileID: 8300000, guid: 686b01cfc2344244d9fc4d71c2da5e83, type: 3}
   dataFoods:
-    voice: {fileID: 8300000, guid: a2d32b5e2bab73a4db8b301e18e1cb28, type: 3}
+    voice: {fileID: 8300000, guid: b50bbfa6c5d24fd4ab8ae8876a377859, type: 3}
     SoFoods:
     - {fileID: 11400000, guid: 2c67ceff2d1767e4782fbdea2fa169f9, type: 2}
     - {fileID: 11400000, guid: 55a5b09ec76c652438a45482b4f83cb7, type: 2}
   dataCharacteristic:
-    voice: {fileID: 8300000, guid: 130fbb7a55454bb47b1953fdedd0c038, type: 3}
+    voice: {fileID: 8300000, guid: 828e5fe14bce0d44c90bb59bcf00b2e2, type: 3}
   dataConservationlevel:
     LevelStart: 5
-    voice: {fileID: 8300000, guid: 765927e613201b44b999d2bfada14618, type: 3}
+    voice: {fileID: 8300000, guid: 6e270f92b7af34740b6c00d467a67a16, type: 3}
   dataStorySpecial:
     clipAnimalSpecial: {fileID: 32900000, guid: 7bd06e3c457f95e4bbb538b1f40af42a,
       type: 3}

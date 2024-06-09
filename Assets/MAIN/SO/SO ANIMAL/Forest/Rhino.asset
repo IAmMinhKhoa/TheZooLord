@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a068d349c09e14693bc3cb787f8446, type: 3}
   m_Name: Rhino
   m_EditorClassIdentifier: 
-  IsLock: 1
+  IsLock: 0
   species: 0
   nameAnimal: "T\xEA Gi\xE1c"
   defaultImage: {fileID: 21300000, guid: e0f40dbf5c0783e4d886b41db1afda02, type: 3}
@@ -23,15 +23,15 @@ MonoBehaviour:
   dataEnvironment:
     voice: {fileID: 8300000, guid: 64fda15be326a944eba9e5086c0294c0, type: 3}
   dataFoods:
-    voice: {fileID: 8300000, guid: c8d0d9f4947618d459de21efaf7e4395, type: 3}
+    voice: {fileID: 8300000, guid: 5683cc6cfecbf9d49847620879ef85b3, type: 3}
     SoFoods:
     - {fileID: 11400000, guid: 4eb1c22c0f2392942a37aed87ab47588, type: 2}
     - {fileID: 11400000, guid: 55a5b09ec76c652438a45482b4f83cb7, type: 2}
   dataCharacteristic:
-    voice: {fileID: 8300000, guid: dec6704654fbabd468fb049b5a181fb0, type: 3}
+    voice: {fileID: 8300000, guid: 7a94903e15013a1418d298097b0e9023, type: 3}
   dataConservationlevel:
     LevelStart: 5
-    voice: {fileID: 8300000, guid: 7a64ff5a38c5ff049938a2de9633bc86, type: 3}
+    voice: {fileID: 8300000, guid: aa41856a47e87474b86d5cfd9bd8f195, type: 3}
   dataStorySpecial:
     clipAnimalSpecial: {fileID: 32900000, guid: 7fd6b3a88f563f046a467e437b1bd117,
       type: 3}
