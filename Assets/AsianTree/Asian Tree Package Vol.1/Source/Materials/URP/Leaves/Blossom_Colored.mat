@@ -47,10 +47,10 @@ Material:
   - _DOUBLESIDED_ON
   - _ENABLE_FOG_ON_TRANSPARENT
   - _SURFACE_TYPE_TRANSPARENT
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 1
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -93,13 +93,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_07f7bfc681604ba8a1041aa20f0da95d: 0
+    - Vector1_07f7bfc681604ba8a1041aa20f0da95d: 1
     - Vector1_0fb587ac4ebf4295848ede2e10a1ea76: 1
     - Vector1_1d80f3fcf5df43dfbe7f3577893a8a7a: 0.2
     - Vector1_2366f028872548cca586a80231f9449e: 1
-    - Vector1_7befe60a42be40dcaffc92d4b5e4e74e: 0.2
+    - Vector1_7befe60a42be40dcaffc92d4b5e4e74e: 0
     - Vector1_97390a94d66b40a1a826d031b9c68e87: 1
-    - Vector1_d69206dc4fba4596b4f269babfaf4cc1: 0.6
+    - Vector1_d69206dc4fba4596b4f269babfaf4cc1: 0
     - Vector1_f47f81ec635e453c8ca9794d4793a782: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0

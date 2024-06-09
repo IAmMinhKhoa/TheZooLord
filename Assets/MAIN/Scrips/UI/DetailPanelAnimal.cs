@@ -239,6 +239,7 @@ public class DetailPanelAnimal : MonoBehaviour
     public void TURN_OFF_DETAIL_PANEL() //Use in button EXIT in detail panels
     {
         ResetUI();
+        SoundManager.instance.StopAllSoundsSingle();
         Manager_UI.Instance.CloseModalViewDetailAnimal();
         configCage.cameraCage.gameObject.SetActive(false); //turn off cammera of cage -> refund camera follow player
         
