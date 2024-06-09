@@ -6,6 +6,7 @@ using com.cyborgAssets.inspectorButtonPro;
 using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class ZooManager : MonoBehaviour
 {
@@ -37,7 +38,8 @@ public class ZooManager : MonoBehaviour
     }
     public void GoToMainMenu()
     {
-        StartCoroutine(Common.LoadSceneAsync(GameScenes.MainMenu));
+        //StartCoroutine(Common.LoadSceneAsync(GameScenes.MainMenu));
+        Addressables.LoadSceneAsync("MainMenu");
     }
 
   
