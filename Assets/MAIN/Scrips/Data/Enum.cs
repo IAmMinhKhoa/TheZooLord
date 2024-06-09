@@ -40,6 +40,7 @@ public enum GameScenes
     ChooseZoo,
     ChooseMinigame,
     MapZoo1,
+    Map2,
     BuildMap,
     AnimalPuzzle,
     JigsawPuzzle,

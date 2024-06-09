@@ -77,7 +77,15 @@ public class MainMenuController : MonoBehaviour
         }
         StartCoroutine(Common.LoadSceneAsync(GameScenes.BuildMap));
     }
-
+    public void GoToSceneMap2()
+    {
+        if (!Game_Manager.Instance.triggerOverTime())
+        {
+            Game_Manager.Instance.ActiveWarningTimerPlay(true);
+            return;
+        }
+        StartCoroutine(Common.LoadSceneAsync(GameScenes.Map2));
+    }
     //Minigame
     public void GoToSceneAnimalPuzzle()
     {

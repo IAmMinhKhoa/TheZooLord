@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0272343eb3113a045930fa2d150d525d, type: 3}
   m_Name: SOGAME
   m_EditorClassIdentifier: 
-  Coin: 40
+  Coin: 999
   CDTimerPlay: 2689.3362
   CanPlay: 1
   zooMeadow:
