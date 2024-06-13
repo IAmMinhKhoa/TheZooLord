@@ -60,25 +60,27 @@ public class Game : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
-        //    PlayerX--;
-        //if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
-        //    PlayerX++;
-        //if (Input.GetKeyDown(KeyCode.W) && !VWalls[PlayerX, PlayerY + 1])
-        //    PlayerY++;
-        //if (Input.GetKeyDown(KeyCode.S) && !VWalls[PlayerX, PlayerY])
-        //    PlayerY--;
+        if (Input.GetKeyDown(KeyCode.A) && !HWalls[PlayerX, PlayerY])
+            PlayerX--;
+        if (Input.GetKeyDown(KeyCode.D) && !HWalls[PlayerX + 1, PlayerY])
+            PlayerX++;
+        if (Input.GetKeyDown(KeyCode.W) && !VWalls[PlayerX, PlayerY + 1])
+            PlayerY++;
+        if (Input.GetKeyDown(KeyCode.S) && !VWalls[PlayerX, PlayerY])
+            PlayerY--;
 
-        //Vector3 target = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
+        Vector3 target = new Vector3(PlayerX + 0.5f, PlayerY + 0.5f);
 
         //Player.transform.position = Vector3.Lerp(Player.transform.position, target, Time.deltaTime * MovementSmoothing);
+        Player.transform.position = target;
+        if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
+        {
+            SoundManager.instance.PlaySound(SoundType.Success);
 
-        //if (Vector3.Distance(Player.transform.position, new Vector3(GoalX + 0.5f, GoalY + 0.5f)) < 0.12f)
-        //{
-        //    NextLevel();
-        //}
-        //if (Input.GetKeyDown(KeyCode.G))
-        //    StartNext();
+            NextLevel();
+
+
+        }
     }
 
     private void OnSwipe(string swipe)
