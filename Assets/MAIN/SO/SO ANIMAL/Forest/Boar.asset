@@ -17,7 +17,7 @@ MonoBehaviour:
   nameAnimal: "Heo R\u1EEBng"
   defaultImage: {fileID: 21300000, guid: 92a28e42398fe0b44bed0d027e852e14, type: 3}
   icon: {fileID: 21300000, guid: 897267e38d4b3204cb00772370178b22, type: 3}
-  voiceChirp: {fileID: 8300000, guid: b4206286abb2ea548b4c670c22d9ef9e, type: 3}
+  voiceChirp: {fileID: 8300000, guid: 442ec4c3873d1b540a82668a71d8e7dc, type: 3}
   PrefabAnimal: {fileID: 1127756225578624590, guid: c615e5bb0e595a340a4545e3ced9bc5d,
     type: 3}
   dataEnvironment:

@@ -35,5 +35,5 @@ MonoBehaviour:
   dataStorySpecial:
     clipAnimalSpecial: {fileID: 32900000, guid: 9427e3d421479b443a692538eb3c0718,
       type: 3}
-    voice: {fileID: 8300000, guid: 5617dde1ef1807e428d517877b7a241c, type: 3}
+    voice: {fileID: 8300000, guid: 5145a86d397b0fd4aa5f851e768c9e44, type: 3}
   soQuestionToOpenCage: {fileID: 0}
