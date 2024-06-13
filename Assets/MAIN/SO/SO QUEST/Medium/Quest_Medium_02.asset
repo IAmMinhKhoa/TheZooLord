@@ -15,11 +15,11 @@ MonoBehaviour:
   scripQuestion: "B\u1EA1n d\u1ED9ng v\u1EADt n\xE0o to nh\u1EA5t ?"
   voiceQuest: {fileID: 8300000, guid: c204677f6f5be12458ebb1a397357142, type: 3}
   dataAnswers:
-  - img: {fileID: 21300000, guid: a73adab5c68020743bd63330f0d9bcbf, type: 3}
+  - img: {fileID: 21300000, guid: 944d9f02a6f04f84786d52c387f78cf0, type: 3}
     rightAnswer: 1
   - img: {fileID: 21300000, guid: b9fa269c44ab289428b28be6f0f15f22, type: 3}
     rightAnswer: 0
   - img: {fileID: 21300000, guid: e1859e2a7c12f1b46b4e4eafcdc5a61e, type: 3}
     rightAnswer: 0
   typeDiff: 2
-  reward: 0
+  reward: 10

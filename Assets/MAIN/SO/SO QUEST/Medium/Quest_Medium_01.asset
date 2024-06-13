@@ -23,4 +23,4 @@ MonoBehaviour:
   - img: {fileID: 21300000, guid: a963f33dc8d3a3c4c9751249de549aaa, type: 3}
     rightAnswer: 1
   typeDiff: 2
-  reward: 0
+  reward: 10

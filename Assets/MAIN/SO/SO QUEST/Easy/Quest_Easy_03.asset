@@ -22,4 +22,4 @@ MonoBehaviour:
   - img: {fileID: 21300000, guid: afe013c38a51e9f4fae95221db3e8b52, type: 3}
     rightAnswer: 1
   typeDiff: 1
-  reward: 10
+  reward: 5
